@@ -1,24 +1,18 @@
 <script setup lang="ts">
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
+
+const model = defineModel({
+  type: Boolean,
 })
-const emits = defineEmits(["update:modelValue"])
-const toggleCheckbox = () => {
-  emits("update:modelValue", !props.modelValue);
-};
 
 </script>
 
 <template>
-  <div class="checkbox" :class="{ 'checkbox--checked': modelValue }" @click="toggleCheckbox"></div>
+  <div class="AppCheckbox" :class="{ 'AppCheckbox--checked': model }" @click="model = !model"></div>
 </template>
 <style scoped lang="scss">
-.checkbox {
+.AppCheckbox {
   border-radius: vw(4);
-  background-color: var(--color-gray-300);
+  background-color: var(--color-gray-100);
   border: vw(1) solid var(--color-gray-400);
   min-height: vw(20);
   width: vw(20);
@@ -26,13 +20,13 @@ const toggleCheckbox = () => {
   cursor: pointer;
 }
 
-.checkbox--checked {
+.AppCheckbox--checked {
   background-color: var(--color-primary-600);
   border-color: var(--color-primary-600);
   position: relative;
 }
 
-.checkbox--checked::after {
+.AppCheckbox--checked::after {
   content: "";
   position: absolute;
   top: vw(3);

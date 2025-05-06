@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import UserManagementView from '@/views/UserManagementView.vue'
+import ManagementView from '@/views/ManagementView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: UserManagementView,
+      component: ManagementView,
     },
   ],
 })

@@ -13,9 +13,7 @@
             <span class="subcategory-title">🎭 Культура и творчество</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/d120d173784c19fbd1937ca48f459558bf71f54c?placeholderIfAbsent=true"
-              alt=""
-              class="arrow-icon"
-            />
+              alt="" class="arrow-icon" />
           </div>
 
           <div class="subcategory-items">
@@ -27,9 +25,7 @@
             <label class="category-item selected">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/2bf4b50e06316a1d63c5e47816fef7d900fdf977?placeholderIfAbsent=true"
-                alt=""
-                class="check-icon"
-              />
+                alt="" class="check-icon" />
               <span class="item-text">Театр</span>
             </label>
 
@@ -60,25 +56,17 @@
             <span class="subcategory-title">🎨 Хобби и креатив</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
-              alt=""
-              class="arrow-icon"
-            />
+              alt="" class="arrow-icon" />
           </div>
         </div>
 
         <!-- Additional subcategories -->
-        <div
-          class="subcategory"
-          v-for="category in additionalCategories"
-          :key="category.title"
-        >
+        <div class="subcategory" v-for="category in additionalCategories" :key="category.title">
           <div class="subcategory-header">
             <span class="subcategory-title">{{ category.title }}</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
-              alt=""
-              class="arrow-icon"
-            />
+              alt="" class="arrow-icon" />
           </div>
         </div>
       </div>
@@ -91,22 +79,16 @@
             <span class="subcategory-title">🧠 Образование и развитие</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
-              alt=""
-              class="arrow-icon"
-            />
+              alt="" class="arrow-icon" />
           </div>
         </div>
 
         <div class="subcategory">
           <div class="subcategory-header">
-            <span class="subcategory-title"
-              >🤝 Нетворкинг и профессиональные события</span
-            >
+            <span class="subcategory-title">🤝 Нетворкинг и профессиональные события</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/5a0ce6b165b7f9cc892cf0a91bc9352353f5b435?placeholderIfAbsent=true"
-              alt=""
-              class="arrow-icon"
-            />
+              alt="" class="arrow-icon" />
           </div>
         </div>
 
@@ -115,9 +97,7 @@
             <span class="subcategory-title">⚖️ Сферы деятельности</span>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
-              alt=""
-              class="arrow-icon"
-            />
+              alt="" class="arrow-icon" />
           </div>
         </div>
       </div>
@@ -135,93 +115,120 @@ const additionalCategories = ref([
   { title: "🎉 Развлечения и вечеринки" },
 ]);
 </script>
-
-<style scoped>
+<style scoped lang="scss">
 .categories-section {
-  border-radius: 20px;
-  box-shadow: 0px 5px 15px 0px rgba(39, 18, 47, 0.1);
-  min-width: 240px;
+  border-radius: vw(20);
+  /* заменено на vw */
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  /* заменено на vw */
+  min-width: vw(240);
+  /* заменено на vw */
   overflow: hidden;
-  width: 430px;
-  background-color: #fff;
+  width: vw(430);
+  /* заменено на vw */
+  background-color: var(--color-white);
+  /* заменено на var(--color-white) */
 }
 
 .section-header {
-  background-color: rgba(237, 234, 238, 1);
-  padding: 10px 20px;
+  background-color: var(--color-gray-100);
+  /* заменено на var(--color-gray-100) */
+  padding: vw(10) vw(20);
+  /* заменено на vw */
 }
 
 .section-title {
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
-  font-size: 18px;
-  color: #242125;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: vw(18);
+  /* заменено на vw */
+  color: var(--color-gray-1000);
+  /* заменено на var(--color-gray-1000) */
   font-weight: 600;
 }
 
 .section-content {
-  padding: 20px;
+  padding: vw(20);
+  /* заменено на vw */
 }
 
 .category-group {
-  margin-bottom: 20px;
+  margin-bottom: vw(20);
+  /* заменено на vw */
 }
 
 .category-title {
-  color: rgba(68, 65, 69, 1);
-  font-size: 16px;
+  color: var(--color-gray-900);
+  /* заменено на var(--color-gray-900) */
+  font-size: vw(16);
+  /* заменено на vw */
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: vw(5);
+  /* заменено на vw */
 }
 
 .subcategory {
-  margin-top: 10px;
+  margin-top: vw(10);
+  /* заменено на vw */
 }
 
 .subcategory-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #767377;
-  font-size: 16px;
-  padding: 5px 0;
+  color: var(--color-gray-700);
+  /* заменено на var(--color-gray-700) */
+  font-size: vw(16);
+  /* заменено на vw */
+  padding: vw(5) 0;
+  /* заменено на vw */
 }
 
 .arrow-icon {
-  width: 20px;
-  height: 20px;
+  width: vw(20);
+  /* заменено на vw */
+  height: vw(20);
+  /* заменено на vw */
 }
 
 .subcategory-items {
-  margin-top: 10px;
-  padding-left: 20px;
+  margin-top: vw(10);
+  /* заменено на vw */
+  padding-left: vw(20);
+  /* заменено на vw */
 }
 
 .category-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 5px 0;
+  gap: vw(10);
+  /* заменено на vw */
+  padding: vw(5) 0;
+  /* заменено на vw */
   cursor: pointer;
-  color: rgba(36, 33, 37, 1);
-  font-size: 16px;
+  color: var(--color-gray-1000);
+  /* заменено на var(--color-gray-1000) */
+  font-size: vw(16);
+  /* заменено на vw */
 }
 
 .checkbox {
-  width: 20px;
-  height: 20px;
-  border-radius: 6px;
-  border: 1px solid var(--Gray-300, #d0d5dd);
-  background-color: #fff;
+  width: vw(20);
+  /* заменено на vw */
+  height: vw(20);
+  /* заменено на vw */
+  border-radius: vw(6);
+  /* заменено на vw */
+  border: 1px solid var(--color-gray-300);
+  /* заменено на var(--color-gray-300) */
+  background-color: var(--color-white);
+  /* заменено на var(--color-white) */
 }
 
 .check-icon {
-  width: 20px;
-  height: 20px;
+  width: vw(20);
+  /* заменено на vw */
+  height: vw(20);
+  /* заменено на vw */
 }
 
 .item-text {

@@ -24,62 +24,75 @@ import { ref } from "vue";
 const title = ref("");
 const description = ref("");
 </script>
-
-<style scoped>
+<style scoped lang="scss">
 .content-section {
-  border-radius: 20px;
-  box-shadow: 0px 5px 15px 0px rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
+  /* заменено на vw */
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  /* заменено на vw */
   width: 100%;
   overflow: hidden;
-  background-color: #fff;
-  margin-top: 20px;
+  background-color: var(--color-white);
+  /* заменено на var(--color-white) */
+  margin-top: vw(20);
+  /* заменено на vw */
 }
 
 .section-header {
-  background-color: rgba(237, 234, 238, 1);
-  padding: 10px 20px;
+  background-color: var(--color-gray-100);
+  /* заменено на var(--color-gray-100) */
+  padding: vw(10) vw(20);
+  /* заменено на vw */
 }
 
 .section-title {
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
-  font-size: 18px;
-  color: #242125;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: vw(18);
+  /* заменено на vw */
+  color: var(--color-gray-1000);
+  /* заменено на var(--color-gray-1000) */
   font-weight: 600;
 }
 
 .section-content {
-  padding: 20px;
+  padding: vw(20);
+  /* заменено на vw */
 }
 
 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: vw(10);
+  /* заменено на vw */
 }
 
 .form-label {
-  color: rgba(68, 65, 69, 1);
-  font-size: 16px;
+  color: var(--color-gray-900);
+  /* заменено на var(--color-gray-900) */
+  font-size: vw(16);
+  /* заменено на vw */
   font-weight: 500;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: vw(5);
+  /* заменено на vw */
 }
 
 .form-input,
 .form-textarea {
-  border-radius: 10px;
-  background-color: rgba(249, 246, 250, 1);
-  border: 1px solid rgba(237, 234, 238, 1);
-  padding: 10px;
+  border-radius: vw(10);
+  /* заменено на vw */
+  background-color: var(--color-gray-100);
+  /* заменено на var(--color-gray-100) */
+  border: 1px solid var(--color-gray-200);
+  /* заменено на var(--color-gray-200) */
+  padding: vw(10);
+  /* заменено на vw */
   width: 100%;
-  font-size: 18px;
+  font-size: vw(18);
+  /* заменено на vw */
 }
 
 .form-textarea {
-  min-height: 120px;
+  min-height: vw(120);
+  /* заменено на vw */
   resize: vertical;
 }
 

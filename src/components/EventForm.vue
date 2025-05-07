@@ -35,12 +35,15 @@ const handleSubmit = () => {
 
 <style scoped>
 .event-form {
-  background-color: rgba(249, 246, 250, 1);
+  background-color: var(--color-gray-100);
+  /* заменено на var(--color-gray-100) */
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: vw(20);
+  /* заменено на vw */
   align-items: start;
-  gap: 20px;
+  gap: vw(20);
+  /* заменено на vw */
   overflow: hidden;
   justify-content: start;
   flex-wrap: wrap;

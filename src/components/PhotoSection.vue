@@ -13,24 +13,15 @@
           <button class="delete-btn">
             <img
               src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/24e0392bbc33a7d9e489af789945c6f801393f99?placeholderIfAbsent=true"
-              alt="Delete"
-              class="delete-icon"
-            />
+              alt="Delete" class="delete-icon" />
           </button>
         </div>
 
         <label class="upload-btn">
-          <input
-            type="file"
-            accept="image/*"
-            @change="handlePhotoUpload"
-            class="file-input"
-          />
+          <input type="file" accept="image/*" @change="handlePhotoUpload" class="file-input" />
           <img
             src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/2af0401ca9c4aed8362cf80ec6bc2b6920a279c1?placeholderIfAbsent=true"
-            alt=""
-            class="upload-icon"
-          />
+            alt="" class="upload-icon" />
           <span class="upload-text">+ Фото</span>
         </label>
       </div>
@@ -58,20 +49,19 @@ const handlePhotoUpload = (event: Event) => {
   }
 };
 </script>
-
-<style scoped>
+<style scoped lang="scss">
 .photo-section {
-  border-radius: 20px;
-  box-shadow: 0px 5px 15px 0px rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
   width: 100%;
   overflow: hidden;
-  background-color: #fff;
-  margin-top: 20px;
+  background-color: var(--color-white);
+  margin-top: vw(20);
 }
 
 .section-header {
-  background-color: rgba(237, 234, 238, 1);
-  padding: 10px 20px;
+  background-color: var(--color-gray-300);
+  padding: vw(10) vw(20);
 }
 
 .section-title {
@@ -81,34 +71,34 @@ const handlePhotoUpload = (event: Event) => {
     Roboto,
     Helvetica,
     sans-serif;
-  font-size: 18px;
-  color: #242125;
+  font-size: vw(18);
+  color: var(--color-gray-1000);
   font-weight: 600;
 }
 
 .section-content {
-  padding: 20px;
+  padding: vw(20);
 }
 
 .upload-text {
-  color: rgba(68, 65, 69, 1);
-  font-size: 18px;
+  color: var(--color-gray-900);
+  font-size: vw(18);
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: vw(5);
 }
 
 .photos-container {
   display: flex;
-  gap: 20px;
+  gap: vw(20);
   flex-wrap: wrap;
-  margin-top: 5px;
+  margin-top: vw(5);
 }
 
 .photo-preview {
   position: relative;
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
+  width: vw(200);
+  height: vw(200);
+  border-radius: vw(10);
   overflow: hidden;
 }
 
@@ -120,13 +110,13 @@ const handlePhotoUpload = (event: Event) => {
 
 .delete-btn {
   position: absolute;
-  top: 10px;
-  right: 5px;
-  background-color: #fff;
-  border: 1px solid rgba(237, 234, 238, 1);
-  border-radius: 10px;
-  width: 40px;
-  height: 40px;
+  top: vw(10);
+  right: vw(5);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+  border-radius: vw(10);
+  width: vw(40);
+  height: vw(40);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,16 +124,16 @@ const handlePhotoUpload = (event: Event) => {
 }
 
 .delete-icon {
-  width: 20px;
-  height: 20px;
+  width: vw(20);
+  height: vw(20);
 }
 
 .upload-btn {
-  border-radius: 10px;
-  background-color: rgba(249, 246, 250, 1);
-  border: 2px dashed rgba(227, 155, 253, 1);
-  width: 200px;
-  height: 200px;
+  border-radius: vw(10);
+  background-color: var(--color-gray-100);
+  border: vw(2) dashed var(--color-primary-300);
+  width: vw(200);
+  height: vw(200);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,9 +146,9 @@ const handlePhotoUpload = (event: Event) => {
 }
 
 .upload-icon {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 10px;
+  width: vw(30);
+  height: vw(30);
+  margin-bottom: vw(10);
 }
 
 .upload-text {
@@ -168,8 +158,8 @@ const handlePhotoUpload = (event: Event) => {
     Roboto,
     Helvetica,
     sans-serif;
-  font-size: 14px;
-  color: rgba(68, 65, 69, 1);
+  font-size: vw(14);
+  color: var(--color-gray-900);
   font-weight: 500;
 }
 

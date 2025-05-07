@@ -37,68 +37,68 @@ defineProps<{
 }>();
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .row {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 10px;
+  background-color: var(--color-white);
+  border-radius: vw(20);
+  padding: vw(10);
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: vw(10);
   font-family:
     Inter,
     -apple-system,
     Roboto,
     Helvetica,
     sans-serif;
-  font-size: 16px;
-  color: rgba(68, 65, 69, 1);
+  font-size: vw(16);
+  color: var(--color-gray-900);
   font-weight: 400;
   line-height: 1;
 }
 
 .cell {
-  padding: 10px;
+  padding: vw(10);
   display: flex;
   align-items: center;
 }
 
 .id-cell {
-  width: 40px;
+  width: vw(40);
   justify-content: center;
 }
 
 .checkbox-cell {
-  width: 66px;
+  width: vw(66);
   justify-content: center;
 }
 
 .user-id-cell {
-  width: 73px;
+  width: vw(73);
 }
 
 .email-cell {
-  width: 235px;
+  width: vw(235);
 }
 
 .title-cell {
   flex: 1;
-  min-width: 240px;
+  min-width: vw(240);
 }
 
 .date-cell {
-  width: 155px;
+  width: vw(155);
 }
 
 .action-cell {
-  width: 40px;
+  width: vw(40);
   display: flex;
   justify-content: center;
 }
 
 .action-icon {
-  width: 20px;
-  height: 20px;
+  width: vw(20);
+  height: vw(20);
   object-fit: contain;
 }
 

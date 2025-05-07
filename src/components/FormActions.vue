@@ -25,8 +25,8 @@ const handleSave = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .form-actions {
-  background-color: #fff;
+  background-color: var(--color-white);
 }
 </style>

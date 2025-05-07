@@ -22,10 +22,10 @@ import FormActions from "./FormActions.vue";
 const emit = defineEmits(['changeMode'])
 
 </script>
-
-<style scoped>
+<style scoped lang="scss">
 .event-creation {
-  background-color: rgba(73, 24, 92, 1);
+  background-color: var(--color-primary-700);
+  /* заменено на var(--color-primary-700) */
   display: flex;
   align-items: stretch;
   overflow: hidden;
@@ -34,42 +34,48 @@ const emit = defineEmits(['changeMode'])
 }
 
 .event-content {
-  min-width: 240px;
+  min-width: vw(240);
+  /* заменено на vw */
   margin-top: auto;
   margin-bottom: auto;
-  padding-top: 20px;
+  padding-top: vw(20);
+  /* заменено на vw */
   flex: 1;
   flex-shrink: 1;
-  flex-basis: 60px;
+  flex-basis: vw(60);
+  /* заменено на vw */
 }
 
 .event-header {
-  border-radius: 40px 0 0 0;
-  background-color: #fff;
+  border-radius: vw(40) 0 0 0;
+  /* заменено на vw */
+  background-color: var(--color-white);
+  /* заменено на var(--color-white) */
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: vw(20);
+  /* заменено на vw */
   align-items: center;
-  gap: 20px;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+  gap: vw(20);
+  /* заменено на vw */
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .header-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  width: 30px;
+  width: vw(30);
+  /* заменено на vw */
 }
 
 .header-title {
-  font-size: 30px;
-  color: #000;
+  font-size: vw(30);
+  /* заменено на vw */
+  color: var(--color-gray-900);
+  /* заменено на var(--color-gray-900) */
   font-weight: 700;
-  letter-spacing: 0.3px;
+  letter-spacing: vw(0.3);
+  /* заменено на vw */
   flex: 1;
 }
 

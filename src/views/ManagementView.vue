@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import SidebarMenu from '@/components/SidebarMenu.vue';
-import UserTable from '@/components/UserTable.vue';
+import EventsDashboard from '@/components/EventsDashboard.vue';
 import { shallowRef, type Component } from 'vue';
 
-const currentMode = shallowRef<Component>(UserTable)
+const currentMode = shallowRef<Component>(EventsDashboard)
 
 const updateView = (newView: Component) => currentMode.value = newView
 </script>

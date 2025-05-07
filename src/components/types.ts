@@ -19,3 +19,21 @@ export interface Event {
     title: string,
     startDate: string,
 }
+
+export interface EventFormData {
+  city: string;
+  startDate: string;
+  endDate: string;
+  price: number;
+  isFree: boolean;
+  title: string;
+  description: string;
+  photos: string[];
+  categories: string[];
+}
+
+export interface NavigationItem {
+  icon: string;
+  title: string;
+  isActive?: boolean;
+}

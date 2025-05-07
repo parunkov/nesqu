@@ -1,14 +1,11 @@
 <template>
-  <main class="event-creation-page">
-    <SideNavigation />
-    <section class="main-content">
-      <header class="page-header">
-        <img
+  <main class="event-creation">
+    <section class="event-content">
+      <header class="event-header">
+        <img @click="() => emit('changeMode')"
           src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/753b3f4ef1c20af83a91234be20f8554883918ba?placeholderIfAbsent=true"
-          alt="New Event Icon"
-          class="header-icon"
-        />
-        <h1 class="page-title">Новое Мероприятие</h1>
+          alt="" class="header-icon" />
+        <h1 class="header-title">Новое Мероприятие</h1>
       </header>
       <div class="divider"></div>
       <EventForm />
@@ -18,16 +15,17 @@
 </template>
 
 <script setup lang="ts">
-import SideNavigation from "./SideNavigation.vue";
 import EventForm from "./EventForm.vue";
 import FormActions from "./FormActions.vue";
+
+
+const emit = defineEmits(['changeMode'])
+
 </script>
 
-<style scoped lang="scss">
-@import "./_colors.scss";
-
-.event-creation-page {
-  background-color: $primary-purple;
+<style scoped>
+.event-creation {
+  background-color: rgba(73, 24, 92, 1);
   display: flex;
   align-items: stretch;
   overflow: hidden;
@@ -35,7 +33,7 @@ import FormActions from "./FormActions.vue";
   flex-wrap: wrap;
 }
 
-.main-content {
+.event-content {
   min-width: 240px;
   margin-top: auto;
   margin-bottom: auto;
@@ -43,15 +41,11 @@ import FormActions from "./FormActions.vue";
   flex: 1;
   flex-shrink: 1;
   flex-basis: 60px;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
 }
 
-.page-header {
+.event-header {
   border-radius: 40px 0 0 0;
-  background-color: $bg-white;
+  background-color: #fff;
   display: flex;
   width: 100%;
   padding: 20px;
@@ -63,50 +57,34 @@ import FormActions from "./FormActions.vue";
     Roboto,
     Helvetica,
     sans-serif;
-  font-size: 30px;
-  color: $text-black;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  line-height: 1;
-  justify-content: start;
-  flex-wrap: wrap;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
 }
 
 .header-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  object-position: center;
   width: 30px;
-  align-self: stretch;
-  margin: auto 0;
-  flex-shrink: 0;
 }
 
-.page-title {
-  align-self: stretch;
-  margin: auto 0;
+.header-title {
+  font-size: 30px;
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.3px;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
 }
 
 .divider {
   aspect-ratio: 1000;
   object-fit: contain;
-  object-position: center;
   width: 100%;
-  background-color: $border-gray;
-  height: 1px;
+}
 
-  @media (max-width: 991px) {
+@media (max-width: 991px) {
+  .event-content {
+    max-width: 100%;
+  }
+
+  .event-header {
     max-width: 100%;
   }
 }

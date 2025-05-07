@@ -1,181 +1,215 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import type { Event } from './types';
-import AppCheckbox from "./AppCheckbox.vue"
+<template>
+  <header class="controls">
+    <div class="search-group">
+      <div class="search-bar">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/981f964299c01baddccd8cc7df57a5a2bbec607c?placeholderIfAbsent=true"
+          alt="Search" class="search-icon" />
+        <input type="text" placeholder="Поиск по e-mail" class="search-input" />
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4558a1360aa665253428547f6febb46927b3fec5?placeholderIfAbsent=true"
+          alt="Clear" class="clear-icon" />
+      </div>
+      <div class="active-filter">
+        <span class="filter-text">Только активные</span>
+        <Toggle />
+      </div>
+    </div>
+    <button @click="addEvent" class="create-button">+ Создать Мероприятие</button>
+  </header>
+  <section class="table-container">
+    <header class="table-header">
+      <div class="header-row">
+        <div class="header-cell id-cell">ID</div>
+        <div class="header-cell checkbox-cell">Active</div>
+        <div class="header-cell checkbox-cell">Топ</div>
+        <div class="header-cell">user_id</div>
+        <div class="header-cell email-cell">E-mail</div>
+        <div class="header-cell title-cell">Название</div>
+        <div class="header-cell date-cell">Дата начала</div>
+      </div>
+    </header>
 
-const tableData = ref<Event[]>([
+    <div class="table-body">
+      <TableRow v-for="row in tableData" :key="row.id" :row-data="row" />
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import TableRow from "./TableRow.vue";
+
+const emit = defineEmits(['changeMode'])
+
+interface EventRow {
+  id: number;
+  active: boolean;
+  top: boolean;
+  userId: number;
+  email: string;
+  title: string;
+  date: string;
+}
+
+const addEvent = () => emit('changeMode')
+
+const tableData = ref<EventRow[]>([
   {
     id: 1,
     active: false,
     top: false,
     userId: 10,
-    email: 'username@mail.com',
-    title: 'Быстрые свидания в Москве',
-    startDate: '15.04.2025',
+    email: "username@mail.com",
+    title: "Быстрые свидания в Москве",
+    date: "15.04.2025",
   },
   {
     id: 2,
     active: false,
     top: false,
     userId: 12,
-    email: 'username@mail.com',
-    title: 'Быстрые свидания в Москве',
-    startDate: '15.04.2025',
+    email: "username@mail.com",
+    title: "Быстрые свидания в Москве",
+    date: "15.04.2025",
   },
   {
     id: 3,
     active: false,
     top: false,
     userId: 13,
-    email: 'username@mail.com',
-    title: 'Быстрые свидания в Москве',
-    startDate: '15.04.2025',
-  }
+    email: "username@mail.com",
+    title: "Быстрые свидания в Москве",
+    date: "15.04.2025",
+  },
 ]);
 </script>
 
-<template>
-  <div class="table-container">
-    <div class="table-wrapper">
-      <!-- Header Row -->
-      <div class="table-row header-row">
-        <div class="cell id-cell">
-          <div class="cell-content">ID</div>
-        </div>
-        <div class="cell active-cell">
-          <div class="cell-content">Active</div>
-        </div>
-        <div class="cell top-cell">
-          <div class="cell-content">Топ</div>
-        </div>
-        <div class="cell userid-cell">
-          <div class="cell-content">user_id</div>
-        </div>
-        <div class="cell email-cell">
-          <div class="cell-content">E-mail</div>
-        </div>
-        <div class="cell title-cell">
-          <div class="cell-content">Название</div>
-        </div>
-        <div class="cell date-cell">
-          <div class="cell-content">Дата начала</div>
-        </div>
-      </div>
-
-      <!-- Data Rows -->
-      <div class="table-body">
-        <div v-for="row in tableData" :key="row.id" class="table-row data-row">
-          <div class="cell id-cell">
-            <div class="cell-content">{{ row.id }}</div>
-          </div>
-
-          <AppCheckbox v-model="row.active" />
-          <AppCheckbox v-model="row.top" />
-
-          <div class="cell userid-cell">
-            <div class="cell-content">{{ row.userId }}</div>
-          </div>
-
-          <div class="cell email-cell">
-            <div class="cell-content">{{ row.email }}</div>
-          </div>
-
-          <div class="cell title-cell">
-            <div class="cell-content">{{ row.title }}</div>
-          </div>
-
-          <div class="cell date-cell">
-            <div class="cell-content">{{ row.startDate }}</div>
-          </div>
-
-          <div class="cell action-cell">
-            <div class="action-content">
-              <img src="/icons/delete.png" class="action-icon" alt="Action" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 <style scoped lang="scss">
+.controls {
+  background-color: var(--color-white);
+  border-radius: vw(20) 0 0 0;
+  padding: vw(20);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: vw(20);
+}
+
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: vw(20);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: vw(10);
+  padding: vw(10);
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-gray-300);
+  border-radius: vw(10);
+  width: vw(235);
+}
+
+.search-input {
+  border: none;
+  background: none;
+  flex: 1;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: vw(16);
+  color: var(--color-gray-900);
+}
+
+.search-input::placeholder {
+  color: var(--color-gray-900);
+}
+
+.search-icon,
+.clear-icon {
+  width: vw(20);
+  height: vw(20);
+  object-fit: contain;
+}
+
+.active-filter {
+  display: flex;
+  align-items: center;
+  gap: vw(10);
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: vw(16);
+  color: var(--color-gray-900);
+}
+
+.create-button {
+  background-color: var(--color-primary-700);
+  color: var(--color-white);
+  border: none;
+  border-radius: vw(10);
+  padding: vw(10);
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: vw(18);
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .table-container {
   background-color: var(--color-gray-100);
-  display: flex;
-  padding: vw(20);
-  align-items: start;
-  gap: vw(20);
-  overflow: hidden;
-  justify-content: start;
-  height: 100%;
-}
-
-.table-wrapper {
-  border-radius: vw(10);
-  min-width: vw(240);
-  width: 100%;
   overflow: hidden;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
 }
 
-.table-row {
-  display: flex;
-  width: 100%;
-  align-items: stretch;
-  overflow: hidden;
-  justify-content: start;
-  flex-wrap: wrap;
-  padding: vw(10);
+.table-header {
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: vw(15);
+  color: var(--color-black);
+  font-weight: 500;
+  line-height: 1;
 }
 
 .header-row {
-  border-radius: vw(10);
-  border: 1px solid var(--color-gray-400);
-  background-color: var(--color-gray-300);
-}
-
-.data-row {
-  border-radius: vw(20);
-  background-color: var(--color-white);
-  margin-top: vw(10);
-}
-
-.cell {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: vw(16);
-  color: var(--color-gray-900);
-  font-weight: 400;
-  white-space: nowrap;
-  line-height: 1;
-  justify-content: center;
+  border: 1px solid var(--color-gray-400);
 }
 
-.cell-content {
-  align-self: stretch;
-  flex: 1;
-  width: 100%;
+.header-cell {
+  background-color: var(--color-gray-300);
   padding: vw(10);
-  gap: vw(10);
-  overflow: hidden;
+  border-left: 1px solid var(--color-gray-400);
+  display: flex;
+  align-items: center;
 }
 
 .id-cell {
   width: vw(40);
-  text-align: center;
+  justify-content: center;
 }
 
-.active-cell,
-.top-cell {
+.checkbox-cell {
   width: vw(66);
-}
-
-.userid-cell {
-  width: vw(73);
+  justify-content: center;
 }
 
 .email-cell {
@@ -183,40 +217,15 @@ const tableData = ref<Event[]>([
 }
 
 .title-cell {
-  min-width: vw(240);
   flex: 1;
+  min-width: vw(240);
 }
 
 .date-cell {
   width: vw(155);
 }
 
-.action-cell {
-  width: vw(40);
-}
-
-.action-content {
-  display: flex;
-  width: 100%;
-  padding: vw(10);
-  align-items: center;
-  gap: vw(10);
-  overflow: hidden;
-  justify-content: start;
-}
-
-.action-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: vw(20);
-  align-self: stretch;
-  margin: auto;
-  flex: 1;
-}
-
 .table-body {
   margin-top: vw(10);
-  width: 100%;
 }
 </style>

@@ -1,99 +1,115 @@
 <template>
-  <section class="info-section" aria-labelledby="info-section-title">
+  <section class="info-section">
     <header class="section-header">
-      <h2 id="info-section-title" class="section-title">Информация</h2>
+      <h2 class="section-title">Информация</h2>
     </header>
 
     <div class="section-content">
-      <div class="city-field">
-        <label class="field-label">Город</label>
-        <div class="field-input">
-          <span class="input-text">Сочи</span>
+      <div class="form-group">
+        <label class="form-label">Город</label>
+        <div class="input-wrapper">
+          <input v-model="city" type="text" class="form-input" />
           <img
             src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/cab5b4227ad7fa14d18cf9f833b27483c9ba4d37?placeholderIfAbsent=true"
-            alt="Select city"
+            alt=""
             class="input-icon"
           />
         </div>
       </div>
 
-      <div class="date-fields">
-        <div class="date-group">
-          <div class="date-field">
-            <label class="field-label">Дата начала*</label>
-            <div class="date-input">
-              <input type="text" value="19.04 19:40" class="time-input" />
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/3e14d0c2c0e60d3dfe22b0ba1361183264604d58?placeholderIfAbsent=true"
-                alt="Select date"
-                class="input-icon"
-              />
-            </div>
-          </div>
-
-          <div class="date-field">
-            <label class="field-label">Дата окончания</label>
-            <div class="date-input">
-              <input type="text" placeholder="дд.мм чч.мм" class="time-input" />
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/b4bb50155e5c091c68c7fcd204ba848c2ea50977?placeholderIfAbsent=true"
-                alt="Select date"
-                class="input-icon"
-              />
-            </div>
+      <div class="date-group">
+        <div class="form-group">
+          <label class="form-label">Дата начала*</label>
+          <div class="input-wrapper">
+            <input v-model="startDate" type="text" class="form-input" />
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/3e14d0c2c0e60d3dfe22b0ba1361183264604d58?placeholderIfAbsent=true"
+              alt=""
+              class="calendar-icon"
+            />
           </div>
         </div>
 
-        <div class="date-actions">
-          <button type="button" class="action-button">+ День</button>
-          <button type="button" class="action-button">+ Неделя</button>
+        <div class="form-group">
+          <label class="form-label">Дата окончания</label>
+          <div class="input-wrapper">
+            <input
+              v-model="endDate"
+              type="text"
+              class="form-input"
+              placeholder="дд.мм чч.мм"
+            />
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/b4bb50155e5c091c68c7fcd204ba848c2ea50977?placeholderIfAbsent=true"
+              alt=""
+              class="calendar-icon"
+            />
+          </div>
         </div>
+
+        <button class="date-btn">+ День</button>
+        <button class="date-btn">+ Неделя</button>
       </div>
 
-      <div class="price-field">
-        <label class="field-label">Цена</label>
+      <div class="price-group">
+        <label class="form-label">Цена</label>
         <div class="price-inputs">
-          <div class="price-input">
-            <span class="currency">₽</span>
-            <input type="text" value="10000" class="amount-input" />
-          </div>
-          <div class="price-input">
-            <span class="currency">₽</span>
-            <input type="text" value="10000" class="amount-input" />
-          </div>
-          <div class="price-input disabled">
-            <span class="currency">₽</span>
-            <input type="text" value="0" class="amount-input" disabled />
+          <div
+            v-for="(price, index) in prices"
+            :key="index"
+            class="price-input-wrapper"
+          >
+            <div class="price-input">
+              <span class="currency">₽</span>
+              <input
+                v-model="price.value"
+                type="text"
+                class="form-input"
+                :disabled="isFree"
+              />
+              <img
+                v-if="!isFree"
+                src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/24e0392bbc33a7d9e489af789945c6f801393f99?placeholderIfAbsent=true"
+                alt=""
+                class="input-icon"
+              />
+            </div>
           </div>
         </div>
+
         <div class="free-toggle">
-          <label class="toggle-label">
-            <input type="checkbox" class="toggle-input" />
+          <label class="toggle">
+            <input type="checkbox" v-model="isFree" />
             <span class="toggle-slider"></span>
           </label>
-          <span class="toggle-text">Бесплатно</span>
+          <span class="toggle-label">Бесплатно</span>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
 
-<style scoped lang="scss">
-@import "./_colors.scss";
+const city = ref("Сочи");
+const startDate = ref("19.04 19:40");
+const endDate = ref("");
+const isFree = ref(false);
+const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
+</script>
 
+<style scoped>
 .info-section {
   border-radius: 20px;
-  box-shadow: 0px 5px 15px 0px $shadow-color;
+  box-shadow: 0px 5px 15px 0px rgba(39, 18, 47, 0.1);
   width: 100%;
   overflow: hidden;
-  background-color: $bg-white;
+  background-color: #fff;
 }
 
 .section-header {
-  background-color: $bg-gray;
-  border-bottom: 1px solid $border-gray;
+  background-color: rgba(237, 234, 238, 1);
   padding: 10px 20px;
 }
 
@@ -105,162 +121,109 @@
     Helvetica,
     sans-serif;
   font-size: 18px;
-  color: $text-dark;
+  color: #242125;
   font-weight: 600;
-  line-height: 2;
 }
 
 .section-content {
   padding: 20px;
 }
 
-.field-label {
-  color: $text-gray;
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  color: rgba(68, 65, 69, 1);
   font-size: 16px;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
   font-weight: 500;
-  line-height: 2;
   display: block;
   margin-bottom: 5px;
 }
 
-.field-input {
-  border-radius: 10px;
-  background-color: $bg-light;
-  border: 1px solid $border-gray;
+.input-wrapper {
+  position: relative;
   display: flex;
-  padding: 10px;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
 }
 
-.input-text {
+.form-input {
+  border-radius: 10px;
+  border: 1px solid rgba(237, 234, 238, 1);
+  padding: 10px;
+  width: 100%;
   font-size: 18px;
-  color: $text-black;
 }
 
 .input-icon {
+  position: absolute;
+  right: 10px;
   width: 20px;
   height: 20px;
-  object-fit: contain;
-}
-
-.date-fields {
-  margin-top: 20px;
 }
 
 .date-group {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
 
-.date-field {
-  flex: 1;
-}
-
-.date-input {
+.date-btn {
   border-radius: 10px;
-  border: 1px solid $border-gray;
-  display: flex;
-  align-items: center;
+  background-color: rgba(146, 24, 192, 1);
+  color: #fff;
   padding: 10px;
-  gap: 10px;
-}
-
-.time-input {
   border: none;
-  background: none;
-  font-size: 20px;
-  color: $text-black;
-  width: 100%;
-
-  &::placeholder {
-    color: $text-light-gray;
-  }
-}
-
-.date-actions {
-  display: flex;
-  gap: 5px;
-}
-
-.action-button {
-  border-radius: 10px;
-  background-color: $primary-light-purple;
-  border: 1px solid $primary-light-purple;
-  color: $bg-white;
-  padding: 10px;
   font-size: 16px;
   font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.9;
-  }
+  height: 40px;
 }
 
-.price-field {
+.price-group {
   margin-top: 20px;
 }
 
 .price-inputs {
   display: flex;
   gap: 20px;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.price-input-wrapper {
+  width: 200px;
 }
 
 .price-input {
   border-radius: 15px;
-  border: 1px solid $border-gray;
+  border: 1px solid rgba(237, 234, 238, 1);
+  padding: 15px;
   display: flex;
   align-items: center;
-  padding: 15px;
-  width: 200px;
-
-  &.disabled {
-    background-color: $bg-light;
-  }
+  min-height: 60px;
 }
 
 .currency {
-  color: $text-gray;
+  color: rgba(68, 65, 69, 1);
   width: 20px;
   text-align: center;
-}
-
-.amount-input {
-  border: none;
-  background: none;
-  font-size: 20px;
-  color: $text-black;
-  width: 100%;
-
-  &:disabled {
-    color: $text-light-gray;
-  }
 }
 
 .free-toggle {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 10px;
 }
 
-.toggle-label {
+.toggle {
   position: relative;
   display: inline-block;
   width: 54px;
   height: 30px;
 }
 
-.toggle-input {
+.toggle input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -276,26 +239,40 @@
   background-color: #f2f4f7;
   transition: 0.4s;
   border-radius: 18px;
-
-  &:before {
-    position: absolute;
-    content: "";
-    height: 24px;
-    width: 24px;
-    left: 3px;
-    bottom: 3px;
-    background-color: $bg-white;
-    transition: 0.4s;
-    border-radius: 50%;
-    box-shadow:
-      0px 1.5px 3px rgba(16, 24, 40, 0.06),
-      0px 1.5px 4.5px rgba(16, 24, 40, 0.1);
-  }
 }
 
-.toggle-text {
-  color: $text-gray;
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+  box-shadow:
+    0px 1.5px 3px rgba(16, 24, 40, 0.06),
+    0px 1.5px 4.5px rgba(16, 24, 40, 0.1);
+}
+
+.toggle input:checked + .toggle-slider {
+  background-color: rgba(146, 24, 192, 1);
+}
+
+.toggle input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+.toggle-label {
+  color: rgba(68, 65, 69, 1);
   font-size: 18px;
   font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .info-section {
+    max-width: 100%;
+  }
 }
 </style>

@@ -1,30 +1,41 @@
 <template>
   <form class="event-form" @submit.prevent="handleSubmit">
-    <div class="form-sections">
-      <InfoSection />
-      <ContentSection />
-      <PhotoUploadSection />
-      <CategorySection />
-    </div>
+    <InfoSection />
+    <ContentSection />
+    <PhotoSection />
+    <CategoriesSection />
   </form>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import type { EventFormData } from "./types";
 import InfoSection from "./InfoSection.vue";
 import ContentSection from "./ContentSection.vue";
-import PhotoUploadSection from "./PhotoUploadSection.vue";
-import CategorySection from "./CategorySection.vue";
+import PhotoSection from "./PhotoSection.vue";
+import CategoriesSection from "./CategoriesSection.vue";
+
+const formData = ref<EventFormData>({
+  city: "Сочи",
+  startDate: "19.04 19:40",
+  endDate: "",
+  price: 10000,
+  isFree: false,
+  title: "",
+  description: "",
+  photos: [],
+  categories: [],
+});
 
 const handleSubmit = () => {
   // Handle form submission
+  console.log("Form submitted:", formData.value);
 };
 </script>
 
-<style scoped lang="scss">
-@import "./_colors.scss";
-
+<style scoped>
 .event-form {
-  background-color: $bg-light;
+  background-color: rgba(249, 246, 250, 1);
   display: flex;
   width: 100%;
   padding: 20px;
@@ -33,24 +44,10 @@ const handleSubmit = () => {
   overflow: hidden;
   justify-content: start;
   flex-wrap: wrap;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
 }
 
-.form-sections {
-  display: flex;
-  min-width: 240px;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  flex: 1;
-  gap: 20px;
-  flex-shrink: 1;
-  flex-basis: 0%;
-
-  @media (max-width: 991px) {
+@media (max-width: 991px) {
+  .event-form {
     max-width: 100%;
   }
 }

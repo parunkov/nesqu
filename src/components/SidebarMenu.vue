@@ -2,7 +2,7 @@
 import { ref, type Component } from "vue";
 import MenuLink from "./MenuLink.vue";
 import UserTable from "./UserTable.vue";
-import EventsTable from "./EventsTable.vue";
+import EventsDashboard from "./EventsDashboard.vue";
 interface View {
   id: number,
   component: Component
@@ -17,7 +17,7 @@ const views: Record<string, View> = {
   },
   'eventsTable': {
     id: 1,
-    component: EventsTable
+    component: EventsDashboard
   }
 }
 
@@ -64,6 +64,7 @@ const changeMode = (newView: View) => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-self: flex-start;
 }
 
 .sidebar__top {

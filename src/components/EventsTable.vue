@@ -1,20 +1,6 @@
 <template>
   <header class="controls">
-    <div class="search-group">
-      <div class="search-bar">
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/981f964299c01baddccd8cc7df57a5a2bbec607c?placeholderIfAbsent=true"
-          alt="Search" class="search-icon" />
-        <input type="text" placeholder="Поиск по e-mail" class="search-input" />
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4558a1360aa665253428547f6febb46927b3fec5?placeholderIfAbsent=true"
-          alt="Clear" class="clear-icon" />
-      </div>
-      <div class="active-filter">
-        <span class="filter-text">Только активные</span>
-        <Toggle />
-      </div>
-    </div>
+    <SearchBar />
     <button @click="addEvent" class="create-button">+ Создать Мероприятие</button>
   </header>
   <section class="table-container">
@@ -39,6 +25,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TableRow from "./TableRow.vue";
+import SearchBar from "./SearchBar.vue";
 
 const emit = defineEmits(['changeMode'])
 

@@ -22,10 +22,7 @@ const views: Record<string, View> = {
 }
 
 
-const currentView = ref<View>({
-  id: 0,
-  component: UserTable
-})
+const currentView = ref<View>(views['eventsTable'])
 
 const changeMode = (newView: View) => {
   emit('updateView', newView.component)

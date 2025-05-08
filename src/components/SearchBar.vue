@@ -17,13 +17,9 @@ const clearSearch = () => {
   <div class="search-container">
     <div class="search-bar">
       <div class="search-bar__content">
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c28480708dde4fe32a22360e33273e1ed5aa8d5?placeholderIfAbsent=true&apiKey=3ddaa06ea6924d749ad36fa1206a069f"
-          class="search-bar__icon" alt="Search icon" />
+        <img src="/icons/mail.png" class="search-bar__icon" alt="Search icon" />
         <input type="text" class="search-bar__input" placeholder="Поиск по e-mail" v-model="searchQuery" />
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4558a1360aa665253428547f6febb46927b3fec5?placeholderIfAbsent=true&apiKey=3ddaa06ea6924d749ad36fa1206a069f"
-          class="search-bar__clear-icon" alt="Clear search" @click="clearSearch" />
+        <img src="/icons/search.png" class="search-bar__icon" alt="Clear search" @click="clearSearch" />
       </div>
     </div>
     <label class="toggle-label">Только активные</label>
@@ -56,7 +52,7 @@ const clearSearch = () => {
     Helvetica,
     sans-serif;
   font-size: vw(16);
-  color: var(--color-gray-800);
+  color: var(--color-gray-900);
   font-weight: 400;
   line-height: 1;
   justify-content: center;
@@ -102,6 +98,7 @@ const clearSearch = () => {
     sans-serif;
   font-size: vw(16);
   color: var(--color-gray-800);
+  min-width: 0;
 }
 
 .search-bar__clear-icon {

@@ -58,7 +58,6 @@ const emit = defineEmits(['changeMode'])
   align-items: center;
   gap: vw(20);
   /* заменено на vw */
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .header-icon {

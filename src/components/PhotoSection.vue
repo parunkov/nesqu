@@ -65,12 +65,7 @@ const handlePhotoUpload = (event: Event) => {
 }
 
 .section-title {
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(18);
   color: var(--color-gray-1000);
   font-weight: 600;
@@ -152,12 +147,7 @@ const handlePhotoUpload = (event: Event) => {
 }
 
 .upload-text {
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(14);
   color: var(--color-gray-900);
   font-weight: 500;

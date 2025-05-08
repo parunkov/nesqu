@@ -45,12 +45,7 @@ defineProps<{
   display: flex;
   align-items: center;
   margin-bottom: vw(10);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(16);
   color: var(--color-gray-900);
   font-weight: 400;

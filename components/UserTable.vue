@@ -117,12 +117,7 @@ const handleToggleActive = (value: boolean) => {
 
 .table-header {
   width: 100%;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(15);
   color: var(--color-black);
   font-weight: 500;
@@ -203,12 +198,7 @@ const handleToggleActive = (value: boolean) => {
 
 .table-row--data .table-cell--id,
 .table-row--data .table-cell--email {
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(16);
   color: var(--color-gray-800);
   font-weight: 400;

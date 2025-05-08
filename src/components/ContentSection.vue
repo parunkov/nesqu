@@ -46,7 +46,6 @@ const description = ref("");
 }
 
 .section-title {
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: vw(18);
   /* заменено на vw */
   color: var(--color-gray-1000);

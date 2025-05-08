@@ -105,12 +105,7 @@ const tableData = ref<EventRow[]>([
   border: none;
   background: none;
   flex: 1;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(16);
   color: var(--color-gray-900);
 }
@@ -130,12 +125,7 @@ const tableData = ref<EventRow[]>([
   display: flex;
   align-items: center;
   gap: vw(10);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(16);
   color: var(--color-gray-900);
 }
@@ -146,12 +136,7 @@ const tableData = ref<EventRow[]>([
   border: none;
   border-radius: vw(10);
   padding: vw(10);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(18);
   font-weight: 500;
   cursor: pointer;
@@ -164,12 +149,7 @@ const tableData = ref<EventRow[]>([
 }
 
 .table-header {
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(15);
   color: var(--color-black);
   font-weight: 500;

@@ -46,12 +46,7 @@ const changeMode = (mode: boolean) => {
 
 .nav-links {
   margin-top: vw(40);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(20);
   color: var(--color-white);
   font-weight: 500;
@@ -86,12 +81,7 @@ const changeMode = (mode: boolean) => {
   padding: vw(10);
   border-radius: vw(10);
   color: var(--color-white);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(18);
   font-weight: 500;
   letter-spacing: vw(0.18);

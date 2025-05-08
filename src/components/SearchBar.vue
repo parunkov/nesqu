@@ -45,12 +45,7 @@ const clearSearch = () => {
   margin-bottom: auto;
   flex-direction: column;
   align-items: stretch;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(16);
   color: var(--color-gray-900);
   font-weight: 400;
@@ -90,12 +85,7 @@ const clearSearch = () => {
   background: transparent;
   border: none;
   outline: none;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(16);
   color: var(--color-gray-800);
   min-width: 0;
@@ -116,12 +106,7 @@ const clearSearch = () => {
 .toggle-label {
   color: var(--color-gray-800);
   font-size: vw(16);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-weight: 400;
   line-height: 1;
   align-self: stretch;

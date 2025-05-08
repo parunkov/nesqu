@@ -146,7 +146,6 @@ const tableData = ref<Event[]>([
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: vw(16);
   color: var(--color-gray-900);
   font-weight: 400;

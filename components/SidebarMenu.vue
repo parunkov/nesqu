@@ -89,12 +89,7 @@ const changeMode = (newView: View) => {
 .navigation {
   margin-top: vw(40);
   width: 100%;
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(20);
   color: var(--color-white);
   font-weight: 500;
@@ -110,12 +105,7 @@ const changeMode = (newView: View) => {
   padding: vw(10) vw(8);
   align-items: center;
   gap: vw(12);
-  font-family:
-    Inter,
-    -apple-system,
-    Roboto,
-    Helvetica,
-    sans-serif;
+
   font-size: vw(18);
   color: var(--color-white);
   font-weight: 500;

@@ -91,7 +91,6 @@ const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
 }
 
 .section-title {
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: vw(18);
   color: var(--color-gray-900);
   font-weight: 600;

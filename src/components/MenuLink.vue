@@ -38,7 +38,6 @@ defineProps<MenuItemProps>()
 .menu-link__content {
   align-self: stretch;
   display: flex;
-  min-width: vw(240);
   margin-top: auto;
   margin-bottom: auto;
   width: 100%;
@@ -62,11 +61,15 @@ defineProps<MenuItemProps>()
 }
 
 .menu-link__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
   flex: 1;
   flex-shrink: 1;
   flex-basis: 0%;
+  line-height: 1.2;
 }
 </style>

@@ -44,10 +44,7 @@ const changeMode = (newView: View) => {
       </nav>
     </div>
     <div class="user-profile">
-      <div class="user-profile__content">
-        <img src="/icons/log-out.png" class="user-profile__icon" alt="User" />
-        <span class="user-profile__name">username@...</span>
-      </div>
+      <MenuLink icon="/icons/log-out.png" title="veryVeryLongEmail2025@mail.ru" />
     </div>
   </aside>
 </template>

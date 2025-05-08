@@ -20,36 +20,33 @@ const toggleSwitch = () => {
 </template>
 <style scoped lang="scss">
 .toggle {
-  justify-content: end;
-  align-items: center;
-  border-radius: vw(12);
-  display: flex;
-  min-height: vw(20);
+  position: relative;
   width: vw(36);
+  height: vw(20);
+  border-radius: vw(12);
   padding: vw(2);
-  overflow: hidden;
   background-color: var(--color-gray-600);
-  cursor: pointer;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .toggle--active {
   background-color: var(--color-primary-600);
-  justify-content: flex-end;
 }
 
 .toggle__button {
-  filter: drop-shadow(0px vw(1) vw(2) rgba(16, 24, 40, 0.06)) drop-shadow(0px vw(1) vw(3) rgba(16, 24, 40, 0.1));
-  background-color: var(--color-white);
-  border-radius: 50%;
-  align-self: stretch;
-  display: flex;
-  min-height: vw(16);
-  margin-top: auto;
-  margin-bottom: auto;
+  position: absolute;
+  top: vw(2);
+  left: vw(2);
   width: vw(16);
   height: vw(16);
-  fill: var(--color-white);
+  border-radius: 50%;
+  background-color: var(--color-white);
   transition: transform 0.3s ease;
+  transform: translateX(0);
+}
+
+.toggle--active .toggle__button {
+  transform: translateX(vw(16)); // плавно едет вправо
 }
 </style>

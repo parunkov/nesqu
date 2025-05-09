@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import ToggleSwitch from "./ToggleSwitch.vue";
+import { watch } from 'vue'
+const searchQuery = defineModel<string>('searchQuery');
+const activeOnly = defineModel<boolean>('activeOnly');
+const emits = defineEmits(["search"])
 
-const emits = defineEmits(["search", "toggle-active"])
-const searchQuery = ref("");
-const activeOnly = ref(true);
+// const search = () =>{
+//   console.log(activeOnly.value);
+//   emits('search', activeOnly.value);
+// }
 
-const clearSearch = () => {
-  searchQuery.value = "";
-  emits("search", "");
-};
+watch(() => activeOnly.value, () => emits('search'))
+
 </script>
 
 <template>
@@ -17,14 +19,15 @@ const clearSearch = () => {
     <div class="search-bar">
       <div class="search-bar__content">
         <img src="/icons/mail.png" class="search-bar__icon" alt="Search icon" />
-        <input type="text" class="search-bar__input" placeholder="Поиск по e-mail" v-model="searchQuery" />
-        <img src="/icons/search.png" class="search-bar__icon" alt="Clear search" @click="clearSearch" />
+        <input type="text" class="search-bar__input" placeholder="Поиск по e-mail" @change="emits('search')" v-model="searchQuery" />
+        <img src="/icons/search.png" class="search-bar__icon" alt="Clear search" @click="emits('search')" />
       </div>
     </div>
     <label class="toggle-label">Только активные</label>
     <ToggleSwitch v-model="activeOnly" />
   </div>
 </template>
+
 <style scoped lang="scss">
 .search-container {
   min-width: 700px;
@@ -80,8 +83,7 @@ const clearSearch = () => {
   margin-top: auto;
   margin-bottom: auto;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+  flex-basis: 0;
   background: transparent;
   border: none;
   outline: none;

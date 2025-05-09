@@ -24,20 +24,12 @@ const filteredUsers = computed(() => {
   });
 });
 
-const handleSearch = (query: string) => {
-  searchQuery.value = query;
-};
-
-const handleToggleActive = (value: boolean) => {
-  showActiveOnly.value = value;
-};
-
 </script>
 
 <template>
   <section class="user-table-section">
     <header class="search-header">
-      <SearchBar @search="handleSearch" @toggle-active="handleToggleActive" />
+      <SearchBar v-model:active-only="showActiveOnly" v-model:search-query="searchQuery" />
     </header>
     <div class="wrapper">
     <AppTable class="user-table">

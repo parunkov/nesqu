@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import TableRow from "./TableRow.vue";
+import { ref } from 'vue'
 import SearchBar from "./SearchBar.vue";
 import AppTable from '@/components/AppTable.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
@@ -18,6 +17,14 @@ interface EventRow {
 }
 
 const addEvent = () => emit('changeMode')
+
+const searchQuery = ref('')
+const activeOnly = ref(false)
+
+
+const filterEvents = () =>{
+  filteredEvents.value = tableData.value.filter((el) => ((activeOnly.value  === el.active) || !activeOnly.value) && el.email.includes(searchQuery.value))
+}
 
 const tableData = ref<EventRow[]>([
   {
@@ -48,11 +55,13 @@ const tableData = ref<EventRow[]>([
     date: "15.04.2025",
   },
 ]);
+
+const filteredEvents = ref(tableData.value)
 </script>
 
 <template>
   <header class="controls">
-    <SearchBar />
+    <SearchBar v-model:search-query="searchQuery" v-model:activeOnly="activeOnly" @search="filterEvents"/>
     <button @click="addEvent" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
@@ -82,7 +91,7 @@ const tableData = ref<EventRow[]>([
     </tr>
 </template>
 <template #tbody>
-  <tr v-for="row in tableData" :key="row.id">
+  <tr v-for="row in filteredEvents" :key="row.id">
     <td class=" table-cell--id">
       <div>{{ row.id }}</div>
     </td>

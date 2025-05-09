@@ -1,20 +1,9 @@
 <script setup lang="ts">
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  }
-})
-
-const emits = defineEmits(['update:modelValue'])
-
-const toggleSwitch = () => {
-  emits("update:modelValue", !props.modelValue);
-};
+const modelValue = defineModel<boolean>()
 </script>
 
 <template>
-  <div class="toggle" :class="{ 'toggle--active': modelValue }" @click="toggleSwitch">
+  <div class="toggle" :class="{ 'toggle--active': modelValue }" @click="modelValue = !modelValue">
     <div class="toggle__button"></div>
   </div>
 </template>

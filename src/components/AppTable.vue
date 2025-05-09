@@ -1,68 +1,20 @@
 <script setup lang="ts">
-import { computed, ref, type Component } from 'vue'
-import AppCheckbox from './AppCheckbox.vue'
-import ToggleSwitch from './ToggleSwitch.vue'
-import type { User } from './types';
-
-
-const searchQuery = ref("");
-const showActiveOnly = ref(false);
-
-const users = ref<User[]>([
-    { id: 1, active: false, email: "username@mail.com" },
-    { id: 2, active: true, email: "username@mail.com" },
-    { id: 3, active: false, email: "username@mail.com" },
-]);
-
-const filteredUsers = computed(() => {
-    return users.value.filter((user) => {
-        const matchesSearch =
-            searchQuery.value === "" ||
-            user.email.toLowerCase().includes(searchQuery.value.toLowerCase());
-        const matchesActive = !showActiveOnly.value || user.active;
-        return matchesSearch && matchesActive;
-    });
-});
 </script>
 
-
-
 <template>
-    <main class="table-container">
-        <div class="user-table">
-            <div class="table-header">
-                <div class="table-row">
-                    <div class="table-cell table-cell--id">
-                        <div class="table-cell__content">ID</div>
-                    </div>
-                    <div class="table-cell table-cell--active">
-                        <div class="table-cell__content">Active</div>
-                    </div>
-                    <div class="table-cell table-cell--email">
-                        <div class="table-cell__content">email/tg-name</div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-body">
-                <div v-for="user in filteredUsers" :key="user.id" class="table-row table-row--data">
-                    <div class="table-cell table-cell--id">
-                        <div class="table-cell__content">{{ user.id }}</div>
-                    </div>
-                    <div class="table-cell table-cell--active">
-                        <div class="table-cell__content table-cell__content--centered">
-                            <AppCheckbox v-model="user.active" />
-                        </div>
-                    </div>
-                    <div class="table-cell table-cell--email">
-                        <div class="table-cell__content">{{ user.email }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+  <main class="table-container">
+    <table>
+      <thead>
+      <slot name="thead" />
+      </thead>
+      <tbody>
+      <slot name="tbody" />
+      </tbody>
+    </table>
+  </main>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .table-container {
     background-color: var(--color-gray-100);
     display: flex;
@@ -76,100 +28,112 @@ const filteredUsers = computed(() => {
     height: 100%;
 }
 
-.user-table {
+table {
     border-radius: vw(10);
     min-width: vw(240);
-    width: vw(460);
     overflow: hidden;
+  border-collapse: separate; // или collapse, если без gap
+  border-spacing: 0 vw(10);
+  table-layout: auto; // или fixed, если хочешь равномерность
+
+  font-size: vw(15);
+  color: var(--color-black);
+  font-weight: 500;
 }
 
-.table-header {
+thead {
     width: 100%;
     font-size: vw(15);
     color: var(--color-black);
     font-weight: 500;
     white-space: nowrap;
     line-height: 1;
-}
 
-.table-header .table-row {
+  tr {
+
+    background-color: var(--color-gray-300);
+    text-align: start;
     border: vw(1) solid var(--color-gray-400);
+
+    th {
+
+      padding: vw(10);
+    }
+
+    /* Скругляем углы: первая и последняя ячейка */
+    th:first-child {
+      border-top-left-radius: vw(10);
+      border-bottom-left-radius: vw(10);
+    }
+
+    th:last-child {
+      border-top-right-radius: vw(10);
+      border-bottom-right-radius: vw(10);
+    }
+
+  }
+
+  th:not(:first-child) {
+    border-left: vw(1) solid var(--color-gray-400);
+  }
+
+  th>* {
+      align-self: stretch;
+      width: 100%;
+      gap: vw(10);
+      overflow: hidden;
+    }
 }
 
-.table-row {
+tbody {
+  margin-top: vw(10);
+  width: 100%;
+
+  tr {
+    border-radius: vw(20);
+    background-color: var(--color-white);
+    padding: vw(10);
+    align-items: stretch;
+    margin-top: vw(10);
+
+    td {
+
+      background-color: var(--color-white);
+      border-left: none;
+
+      * {
+        margin: vw(10);
+        gap: vw(10);
+        overflow: hidden;
+      }
+    }
+
+     td:first-child {
+      border-top-left-radius: vw(20);
+      border-bottom-left-radius: vw(20);
+    }
+
+     td:last-child {
+      border-top-right-radius: vw(20);
+      border-bottom-right-radius: vw(20);
+    }
+
+  }
+}
+
+tr {
     border-radius: vw(10);
-    display: flex;
     width: 100%;
     align-items: flex-start;
     overflow: hidden;
     justify-content: flex-start;
 }
 
-.table-row--data {
-    border-radius: vw(20);
-    background-color: var(--color-white);
-    padding: vw(10);
-    align-items: stretch;
-    margin-top: vw(10);
-}
-
-.table-cell {
-    background-color: var(--color-gray-300);
-    border-left: vw(1) solid var(---color-gray-100);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-}
-
-.table-row--data .table-cell {
-    background-color: transparent;
-    border-left: none;
-}
-
-.table-cell--id {
-    width: vw(50);
-    text-align: center;
-}
-
-.table-cell--active {
-    width: vw(66);
-}
-
-.table-cell--email {
-    min-width: vw(240);
-    width: vw(344);
-}
-
-.table-cell__content {
-    align-self: stretch;
-    width: 100%;
-    padding: vw(10);
-    gap: vw(10);
-    overflow: hidden;
-}
-
-.table-cell__content--centered {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.table-body {
-    margin-top: vw(10);
-    width: 100%;
-}
-
-.table-row--data .table-cell--id,
-.table-row--data .table-cell--email {
-    font-size: vw(16);
-    color: var(--color-gray-800);
-    font-weight: 400;
-    white-space: nowrap;
-    line-height: 1;
-}
-
-.table-row--data .table-cell--id {
-    text-align: center;
+td {
+  background-color: var(--color-gray-300);
+  border-left: vw(1) solid var(---color-gray-100);
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
 }
 </style>

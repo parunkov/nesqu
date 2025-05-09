@@ -1,31 +1,9 @@
-<template>
-  <header class="controls">
-    <SearchBar />
-    <button @click="addEvent" class="create-button">+ Создать Мероприятие</button>
-  </header>
-  <section class="table-container">
-    <header class="table-header">
-      <div class="header-row">
-        <div class="header-cell id-cell">ID</div>
-        <div class="header-cell checkbox-cell">Active</div>
-        <div class="header-cell checkbox-cell">Топ</div>
-        <div class="header-cell">user_id</div>
-        <div class="header-cell email-cell">E-mail</div>
-        <div class="header-cell title-cell">Название</div>
-        <div class="header-cell date-cell">Дата начала</div>
-      </div>
-    </header>
-
-    <div class="table-body">
-      <TableRow v-for="row in tableData" :key="row.id" :row-data="row" />
-    </div>
-  </section>
-</template>
-
 <script setup lang="ts">
 import { ref } from "vue";
 import TableRow from "./TableRow.vue";
 import SearchBar from "./SearchBar.vue";
+import AppTable from '@/components/AppTable.vue'
+import AppCheckbox from '@/components/AppCheckbox.vue'
 
 const emit = defineEmits(['changeMode'])
 
@@ -72,7 +50,93 @@ const tableData = ref<EventRow[]>([
 ]);
 </script>
 
+<template>
+  <header class="controls">
+    <SearchBar />
+    <button @click="addEvent" class="create-button">+ Создать Мероприятие</button>
+  </header>
+  <AppTable class="event-table">
+    <template #thead>
+    <tr>
+      <th class=" table-cell--id">
+        <div>ID</div>
+      </th>
+      <th class=" table-cell--active">
+        <div>Active</div>
+      </th>
+      <th class=" table-cell--top">
+        <div>Топ</div>
+      </th>
+      <th class=" table-cell--user">
+        <div>User ID</div>
+      </th>
+      <th class=" table-cell--email">
+        <div>E-mail</div>
+      </th>
+      <th class=" table-cell--title">
+        <div>Название</div>
+      </th>
+      <th class=" table-cell--date">
+        <div>Дата начала</div>
+      </th>
+    </tr>
+</template>
+<template #tbody>
+  <tr v-for="row in tableData" :key="row.id">
+    <td class=" table-cell--id">
+      <div>{{ row.id }}</div>
+    </td>
+    <td class=" table-cell--active">
+      <div><AppCheckbox v-model="row.active" /></div>
+    </td>
+    <td class=" table-cell--top">
+      <div><AppCheckbox v-model="row.top" /></div>
+    </td>
+    <td class=" table-cell--user">
+      <div>{{ row.userId }}</div>
+    </td>
+    <td class=" table-cell--email">
+      <div>{{ row.email }}</div>
+    </td>
+    <td class=" table-cell--title">
+      <div>{{ row.title }}</div>
+    </td>
+    <td class=" table-cell--date">
+      <div>
+      <div>{{ row.date }}</div>
+      <div class="cell action-cell">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/e6a3403470659afbea51fe6dba668384b8ef2118?placeholderIfAbsent=true"
+          alt="Actions" class="action-icon" />
+      </div>
+      </div>
+    </td>
+  </tr>
+</template>
+  </AppTable>
+</template>
+
 <style scoped lang="scss">
+
+.table-cell--email {
+  width: 40%;
+}
+.table-cell--title {
+  width: 60%;
+}
+
+.table-cell--date>div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .action-cell {
+    display: flex;
+    align-items: center;
+  }
+
+}
+
 .controls {
   background-color: var(--color-white);
   border-radius: vw(20) 0 0 0;

@@ -10,7 +10,6 @@ const clearSearch = () => {
   searchQuery.value = "";
   emits("search", "");
 };
-
 </script>
 
 <template>
@@ -28,6 +27,7 @@ const clearSearch = () => {
 </template>
 <style scoped lang="scss">
 .search-container {
+  min-width: 700px;
   display: flex;
   align-items: center;
   gap: vw(20);

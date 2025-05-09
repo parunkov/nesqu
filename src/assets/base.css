@@ -55,3 +55,40 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* Сброс стандартных таблиц */
+table {
+  border-collapse: collapse; /* убирает двойные границы между ячейками */
+  border-spacing: 0;         /* убирает отступы между ячейками */
+  width: 100%;               /* на всю ширину контейнера */
+  table-layout: auto;        /* стандартное поведение ширины */
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* Убираем обводки */
+th,
+td {
+  border: none;
+}
+
+/* Дополнительно — убираем жирный шрифт у th, если нужно */
+th {
+  font-weight: normal;
+}

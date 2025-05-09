@@ -16,124 +16,129 @@
 
 <style lang="scss">
 .table-container {
-    background-color: var(--color-gray-100);
-    display: flex;
-    width: 100%;
-    padding: vw(20);
-    align-items: flex-start;
-    gap: vw(20);
-    overflow: hidden;
-    justify-content: flex-start;
-    flex: 1;
-    height: 100%;
+  background-color: var(--color-gray-100);
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  align-items: flex-start;
+  gap: 20px;
+  overflow: hidden;
+  justify-content: flex-start;
+  flex: 1;
+  height: 100%;
 }
 
 table {
-    border-radius: vw(10);
-    min-width: vw(240);
-    overflow: hidden;
+  border-radius: 10px;
+  min-width: 240px;
+  overflow: hidden;
   border-collapse: separate; // или collapse, если без gap
-  border-spacing: 0 vw(10);
+  border-spacing: 0 10px;
   table-layout: auto; // или fixed, если хочешь равномерность
 
-  font-size: vw(15);
+  font-size: 15px;
   color: var(--color-black);
   font-weight: 500;
 }
 
 thead {
-    width: 100%;
-    font-size: vw(15);
-    color: var(--color-black);
-    font-weight: 500;
-    white-space: nowrap;
-    line-height: 1;
+  width: 100%;
+  font-size: 15px;
+  color: var(--color-black);
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
 
   tr {
-
     background-color: var(--color-gray-300);
     text-align: start;
-    border: vw(1) solid var(--color-gray-400);
+    border: 1px solid var(--color-gray-400);
 
     th {
-
-      padding: vw(10);
+      padding: 10px;
     }
 
     /* Скругляем углы: первая и последняя ячейка */
     th:first-child {
-      border-top-left-radius: vw(10);
-      border-bottom-left-radius: vw(10);
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
     }
 
     th:last-child {
-      border-top-right-radius: vw(10);
-      border-bottom-right-radius: vw(10);
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
 
   }
 
   th:not(:first-child) {
-    border-left: vw(1) solid var(--color-gray-400);
+    border-left: 1px solid var(--color-gray-400);
   }
 
   th>* {
-      align-self: stretch;
-      width: 100%;
-      gap: vw(10);
-      overflow: hidden;
-    }
+    align-self: stretch;
+    width: 100%;
+    gap: 10px;
+    overflow: hidden;
+  }
 }
 
 tbody {
-  margin-top: vw(10);
+  margin-top: 10px;
   width: 100%;
 
   tr {
-    border-radius: vw(20);
+    border-radius: 20px;
     background-color: var(--color-white);
-    padding: vw(10);
+    padding: 10px;
     align-items: stretch;
-    margin-top: vw(10);
+    margin-top: 10px;
 
     td {
-
       background-color: var(--color-white);
       border-left: none;
 
       * {
-        margin: vw(10);
-        gap: vw(10);
+        margin: 10px;
+        gap: 10px;
         overflow: hidden;
       }
     }
 
-     td:first-child {
-      border-top-left-radius: vw(20);
-      border-bottom-left-radius: vw(20);
+    td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
     }
 
-     td:last-child {
-      border-top-right-radius: vw(20);
-      border-bottom-right-radius: vw(20);
+    td:last-child {
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
 
   }
 }
 
 tr {
-    border-radius: vw(10);
-    width: 100%;
-    align-items: flex-start;
-    overflow: hidden;
-    justify-content: flex-start;
+  border-radius: 10px;
+  width: 100%;
+  align-items: flex-start;
+  overflow: hidden;
+  justify-content: flex-start;
 }
 
 td {
   background-color: var(--color-gray-300);
-  border-left: vw(1) solid var(---color-gray-100);
+  border-left: 1px solid var(--color-gray-100);
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
 }
+
+@media (max-width: 991px) {
+  thead {
+    display: none;
+  }
+}
+
 </style>
+

@@ -24,74 +24,56 @@ import { ref } from "vue";
 const title = ref("");
 const description = ref("");
 </script>
+
 <style scoped lang="scss">
 .content-section {
-  border-radius: vw(20);
-  /* заменено на vw */
-  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
-  /* заменено на vw */
+  border-radius: 20px;
+  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
   width: 100%;
   overflow: hidden;
   background-color: var(--color-white);
-  /* заменено на var(--color-white) */
-  margin-top: vw(20);
-  /* заменено на vw */
+  margin-top: 20px;
 }
 
 .section-header {
   background-color: var(--color-gray-100);
-  /* заменено на var(--color-gray-100) */
-  padding: vw(10) vw(20);
-  /* заменено на vw */
+  padding: 10px 20px;
 }
 
 .section-title {
-  font-size: vw(18);
-  /* заменено на vw */
+  font-size: 18px;
   color: var(--color-gray-1000);
-  /* заменено на var(--color-gray-1000) */
   font-weight: 600;
 }
 
 .section-content {
-  padding: vw(20);
-  /* заменено на vw */
+  padding: 20px;
 }
 
 .form-group {
-  margin-bottom: vw(10);
-  /* заменено на vw */
+  margin-bottom: 10px;
 }
 
 .form-label {
   color: var(--color-gray-900);
-  /* заменено на var(--color-gray-900) */
-  font-size: vw(16);
-  /* заменено на vw */
+  font-size: 16px;
   font-weight: 500;
   display: block;
-  margin-bottom: vw(5);
-  /* заменено на vw */
+  margin-bottom: 5px;
 }
 
 .form-input,
 .form-textarea {
-  border-radius: vw(10);
-  /* заменено на vw */
+  border-radius: 10px;
   background-color: var(--color-gray-100);
-  /* заменено на var(--color-gray-100) */
   border: 1px solid var(--color-gray-200);
-  /* заменено на var(--color-gray-200) */
-  padding: vw(10);
-  /* заменено на vw */
+  padding: 10px;
   width: 100%;
-  font-size: vw(18);
-  /* заменено на vw */
+  font-size: 18px;
 }
 
 .form-textarea {
-  min-height: vw(120);
-  /* заменено на vw */
+  min-height: 120px;
   resize: vertical;
 }
 
@@ -101,3 +83,4 @@ const description = ref("");
   }
 }
 </style>
+

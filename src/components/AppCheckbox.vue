@@ -9,14 +9,15 @@ const model = defineModel({
 <template>
   <div class="AppCheckbox" :class="{ 'AppCheckbox--checked': model }" @click="model = !model"></div>
 </template>
+
 <style scoped lang="scss">
 .AppCheckbox {
-  border-radius: vw(4);
+  border-radius: 4px;
   background-color: var(--color-gray-100);
-  border: vw(1) solid var(--color-gray-400);
-  min-height: vw(20);
-  width: vw(20);
-  height: vw(20);
+  border: 1px solid var(--color-gray-400);
+  min-height: 20px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 
@@ -29,12 +30,13 @@ const model = defineModel({
 .AppCheckbox--checked::after {
   content: "";
   position: absolute;
-  top: vw(3);
-  left: vw(7);
-  width: vw(4);
-  height: vw(8);
+  top: 3px;
+  left: 7px;
+  width: 4px;
+  height: 8px;
   border: solid var(--color-white);
-  border-width: 0 vw(2) vw(2) 0;
+  border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 </style>
+

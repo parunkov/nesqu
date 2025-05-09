@@ -115,59 +115,45 @@ const additionalCategories = ref([
   { title: "🎉 Развлечения и вечеринки" },
 ]);
 </script>
+
 <style scoped lang="scss">
 .categories-section {
-  border-radius: vw(20);
-  /* заменено на vw */
-  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
-  /* заменено на vw */
-  min-width: vw(240);
-  /* заменено на vw */
+  border-radius: 20px;
+  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
+  min-width: 240px;
   overflow: hidden;
-  width: vw(430);
-  /* заменено на vw */
+  width: 430px;
   background-color: var(--color-white);
-  /* заменено на var(--color-white) */
 }
 
 .section-header {
   background-color: var(--color-gray-100);
-  /* заменено на var(--color-gray-100) */
-  padding: vw(10) vw(20);
-  /* заменено на vw */
+  padding: 10px 20px;
 }
 
 .section-title {
-  font-size: vw(18);
-  /* заменено на vw */
+  font-size: 18px;
   color: var(--color-gray-1000);
-  /* заменено на var(--color-gray-1000) */
   font-weight: 600;
 }
 
 .section-content {
-  padding: vw(20);
-  /* заменено на vw */
+  padding: 20px;
 }
 
 .category-group {
-  margin-bottom: vw(20);
-  /* заменено на vw */
+  margin-bottom: 20px;
 }
 
 .category-title {
   color: var(--color-gray-900);
-  /* заменено на var(--color-gray-900) */
-  font-size: vw(16);
-  /* заменено на vw */
+  font-size: 16px;
   font-weight: 500;
-  margin-bottom: vw(5);
-  /* заменено на vw */
+  margin-bottom: 5px;
 }
 
 .subcategory {
-  margin-top: vw(10);
-  /* заменено на vw */
+  margin-top: 10px;
 }
 
 .subcategory-header {
@@ -175,59 +161,41 @@ const additionalCategories = ref([
   align-items: center;
   justify-content: space-between;
   color: var(--color-gray-700);
-  /* заменено на var(--color-gray-700) */
-  font-size: vw(16);
-  /* заменено на vw */
-  padding: vw(5) 0;
-  /* заменено на vw */
+  font-size: 16px;
+  padding: 5px 0;
 }
 
 .arrow-icon {
-  width: vw(20);
-  /* заменено на vw */
-  height: vw(20);
-  /* заменено на vw */
+  width: 20px;
+  height: 20px;
 }
 
 .subcategory-items {
-  margin-top: vw(10);
-  /* заменено на vw */
-  padding-left: vw(20);
-  /* заменено на vw */
+  margin-top: 10px;
+  padding-left: 20px;
 }
 
 .category-item {
   display: flex;
   align-items: center;
-  gap: vw(10);
-  /* заменено на vw */
-  padding: vw(5) 0;
-  /* заменено на vw */
+  gap: 10px;
+  padding: 5px 0;
   cursor: pointer;
   color: var(--color-gray-1000);
-  /* заменено на var(--color-gray-1000) */
-  font-size: vw(16);
-  /* заменено на vw */
+  font-size: 16px;
 }
 
 .checkbox {
-  width: vw(20);
-  /* заменено на vw */
-  height: vw(20);
-  /* заменено на vw */
-  border-radius: vw(6);
-  /* заменено на vw */
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
   border: 1px solid var(--color-gray-300);
-  /* заменено на var(--color-gray-300) */
   background-color: var(--color-white);
-  /* заменено на var(--color-white) */
 }
 
 .check-icon {
-  width: vw(20);
-  /* заменено на vw */
-  height: vw(20);
-  /* заменено на vw */
+  width: 20px;
+  height: 20px;
 }
 
 .item-text {
@@ -240,3 +208,4 @@ const additionalCategories = ref([
   }
 }
 </style>
+

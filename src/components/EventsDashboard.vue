@@ -18,50 +18,48 @@ const changeMode = (mode: boolean) => {
   console.log(currentMode.value)
 }
 </script>
-
 <style scoped lang="scss">
 .dashboard {
   display: flex;
   background-color: var(--color-primary-900);
   flex: 1;
-  padding-top: vw(20);
+  padding-top: 20px;
   align-self: stretch;
   box-sizing: inherit;
 }
 
 .sidebar {
-  min-width: vw(240);
-  width: vw(330);
-  padding: vw(30);
+  min-width: 240px;
+  width: 330px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .logo {
-  width: vw(220);
+  width: 220px;
   aspect-ratio: 5.49;
   object-fit: contain;
 }
 
 .nav-links {
-  margin-top: vw(40);
-
-  font-size: vw(20);
+  margin-top: 40px;
+  font-size: 20px;
   color: var(--color-white);
   font-weight: 500;
-  letter-spacing: vw(0.2);
+  letter-spacing: 0.2px;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
-  gap: vw(10);
-  padding: vw(15) vw(10);
-  border-radius: vw(10);
+  gap: 10px;
+  padding: 15px 10px;
+  border-radius: 10px;
   text-decoration: none;
   color: inherit;
-  margin-bottom: vw(10);
+  margin-bottom: 10px;
 }
 
 .nav-link-active {
@@ -69,22 +67,21 @@ const changeMode = (mode: boolean) => {
 }
 
 .nav-icon {
-  width: vw(30);
-  height: vw(30);
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
 
 .user-info {
   display: flex;
   align-items: center;
-  gap: vw(10);
-  padding: vw(10);
-  border-radius: vw(10);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
   color: var(--color-white);
-
-  font-size: vw(18);
+  font-size: 18px;
   font-weight: 500;
-  letter-spacing: vw(0.18);
+  letter-spacing: 0.18px;
 }
 
 .content {

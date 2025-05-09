@@ -134,7 +134,7 @@ const filteredEvents = ref(tableData.value)
   width: 60%;
 }
 
-.table-cell--date>div {
+.table-cell--date > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -143,43 +143,41 @@ const filteredEvents = ref(tableData.value)
     display: flex;
     align-items: center;
   }
-
 }
 
 .controls {
   background-color: var(--color-white);
-  border-radius: vw(20) 0 0 0;
-  padding: vw(20);
+  border-radius: 20px 0 0 0;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: vw(20);
+  gap: 20px;
 }
 
 .search-group {
   display: flex;
   align-items: center;
-  gap: vw(20);
+  gap: 20px;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  gap: vw(10);
-  padding: vw(10);
+  gap: 10px;
+  padding: 10px;
   background-color: var(--color-gray-100);
   border: 1px solid var(--color-gray-300);
-  border-radius: vw(10);
-  width: vw(235);
+  border-radius: 10px;
+  width: 235px;
 }
 
 .search-input {
   border: none;
   background: none;
   flex: 1;
-
-  font-size: vw(16);
+  font-size: 16px;
   color: var(--color-gray-900);
 }
 
@@ -189,17 +187,16 @@ const filteredEvents = ref(tableData.value)
 
 .search-icon,
 .clear-icon {
-  width: vw(20);
-  height: vw(20);
+  width: 20px;
+  height: 20px;
   object-fit: contain;
 }
 
 .active-filter {
   display: flex;
   align-items: center;
-  gap: vw(10);
-
-  font-size: vw(16);
+  gap: 10px;
+  font-size: 16px;
   color: var(--color-gray-900);
 }
 
@@ -207,10 +204,9 @@ const filteredEvents = ref(tableData.value)
   background-color: var(--color-primary-700);
   color: var(--color-white);
   border: none;
-  border-radius: vw(10);
-  padding: vw(10);
-
-  font-size: vw(18);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -222,8 +218,7 @@ const filteredEvents = ref(tableData.value)
 }
 
 .table-header {
-
-  font-size: vw(15);
+  font-size: 15px;
   color: var(--color-black);
   font-weight: 500;
   line-height: 1;
@@ -236,36 +231,36 @@ const filteredEvents = ref(tableData.value)
 
 .header-cell {
   background-color: var(--color-gray-300);
-  padding: vw(10);
+  padding: 10px;
   border-left: 1px solid var(--color-gray-400);
   display: flex;
   align-items: center;
 }
 
 .id-cell {
-  width: vw(40);
+  width: 40px;
   justify-content: center;
 }
 
 .checkbox-cell {
-  width: vw(66);
+  width: 66px;
   justify-content: center;
 }
 
 .email-cell {
-  width: vw(235);
+  width: 235px;
 }
 
 .title-cell {
   flex: 1;
-  min-width: vw(240);
+  min-width: 240px;
 }
 
 .date-cell {
-  width: vw(155);
+  width: 155px;
 }
 
 .table-body {
-  margin-top: vw(10);
+  margin-top: 10px;
 }
 </style>

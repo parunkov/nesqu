@@ -64,7 +64,6 @@ const filteredUsers = computed(() => {
     </div>
   </section>
 </template>
-
 <style scoped lang="scss">
 .wrapper {
   height: 100%;
@@ -72,29 +71,29 @@ const filteredUsers = computed(() => {
 }
 
 .user-table {
-  max-width: vw(460);
+  box-sizing: content-box;
+  width: 460px;
 }
 
 .user-table-section {
   align-self: stretch;
-  min-width: vw(240);
+  min-width: 240px;
   height: 100vh;
-  padding-top: vw(20);
+  padding-top: 20px;
   flex: 1;
-  flex-basis: vw(60);
+  flex-basis: 60px;
 }
 
 .search-header {
-  border-radius: vw(20) 0 0 0;
+  border-radius: 20px 0 0 0;
   background-color: var(--color-white);
   display: flex;
   width: 100%;
-  padding: vw(20);
+  padding: 20px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 }
-
 
 .table-cell--id {
   width: auto;
@@ -108,6 +107,6 @@ const filteredUsers = computed(() => {
 }
 
 .table-cell--email {
-  width: 100%
+  width: 100%;
 }
 </style>

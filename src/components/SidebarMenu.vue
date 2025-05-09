@@ -48,13 +48,12 @@ const changeMode = (newView: View) => {
     </div>
   </aside>
 </template>
-
 <style scoped lang="scss">
 .sidebar {
   background-color: var(--color-primary-900);
   height: 100vh;
-  padding: vw(30);
-  width: vw(300);
+  padding: 30px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -82,10 +81,10 @@ const changeMode = (newView: View) => {
 }
 
 .navigation {
-  margin-top: vw(40);
+  margin-top: 40px;
   width: 100%;
 
-  font-size: vw(20);
+  font-size: 20px;
   color: var(--color-white);
   font-weight: 500;
   white-space: nowrap;
@@ -94,14 +93,14 @@ const changeMode = (newView: View) => {
 }
 
 .user-profile {
-  border-radius: vw(10);
+  border-radius: 10px;
   display: flex;
   width: 100%;
-  padding: vw(10) vw(8);
+  padding: 10px 8px;
   align-items: center;
-  gap: vw(12);
+  gap: 12px;
 
-  font-size: vw(18);
+  font-size: 18px;
   color: var(--color-white);
   font-weight: 500;
   white-space: nowrap;
@@ -113,23 +112,22 @@ const changeMode = (newView: View) => {
 .user-profile__content {
   align-self: stretch;
   display: flex;
-  min-width: vw(240);
+  min-width: 240px;
   margin-top: auto;
   margin-bottom: auto;
   width: 100%;
   align-items: center;
-  gap: vw(10);
+  gap: 10px;
   justify-content: flex-start;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+  flex-basis: 0;
 }
 
 .user-profile__icon {
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: vw(30);
+  width: 30px;
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
@@ -141,7 +139,6 @@ const changeMode = (newView: View) => {
   margin-top: auto;
   margin-bottom: auto;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+  flex-basis: 0;
 }
 </style>

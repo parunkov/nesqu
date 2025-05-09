@@ -49,51 +49,51 @@ const handlePhotoUpload = (event: Event) => {
   }
 };
 </script>
+
 <style scoped lang="scss">
 .photo-section {
-  border-radius: vw(20);
-  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
   width: 100%;
   overflow: hidden;
   background-color: var(--color-white);
-  margin-top: vw(20);
+  margin-top: 20px;
 }
 
 .section-header {
   background-color: var(--color-gray-300);
-  padding: vw(10) vw(20);
+  padding: 10px 20px;
 }
 
 .section-title {
-
-  font-size: vw(18);
+  font-size: 18px;
   color: var(--color-gray-1000);
   font-weight: 600;
 }
 
 .section-content {
-  padding: vw(20);
+  padding: 20px;
 }
 
 .upload-text {
   color: var(--color-gray-900);
-  font-size: vw(18);
+  font-size: 18px;
   font-weight: 500;
-  margin-bottom: vw(5);
+  margin-bottom: 5px;
 }
 
 .photos-container {
   display: flex;
-  gap: vw(20);
+  gap: 20px;
   flex-wrap: wrap;
-  margin-top: vw(5);
+  margin-top: 5px;
 }
 
 .photo-preview {
   position: relative;
-  width: vw(200);
-  height: vw(200);
-  border-radius: vw(10);
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -105,13 +105,13 @@ const handlePhotoUpload = (event: Event) => {
 
 .delete-btn {
   position: absolute;
-  top: vw(10);
-  right: vw(5);
+  top: 10px;
+  right: 5px;
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-300);
-  border-radius: vw(10);
-  width: vw(40);
-  height: vw(40);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,16 +119,16 @@ const handlePhotoUpload = (event: Event) => {
 }
 
 .delete-icon {
-  width: vw(20);
-  height: vw(20);
+  width: 20px;
+  height: 20px;
 }
 
 .upload-btn {
-  border-radius: vw(10);
+  border-radius: 10px;
   background-color: var(--color-gray-100);
-  border: vw(2) dashed var(--color-primary-300);
-  width: vw(200);
-  height: vw(200);
+  border: 2px dashed var(--color-primary-300);
+  width: 200px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,14 +141,13 @@ const handlePhotoUpload = (event: Event) => {
 }
 
 .upload-icon {
-  width: vw(30);
-  height: vw(30);
-  margin-bottom: vw(10);
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 .upload-text {
-
-  font-size: vw(14);
+  font-size: 14px;
   color: var(--color-gray-900);
   font-weight: 500;
 }

@@ -25,7 +25,6 @@ const emit = defineEmits(['changeMode'])
 <style scoped lang="scss">
 .event-creation {
   background-color: var(--color-primary-700);
-  /* заменено на var(--color-primary-700) */
   display: flex;
   align-items: stretch;
   overflow: hidden;
@@ -34,47 +33,35 @@ const emit = defineEmits(['changeMode'])
 }
 
 .event-content {
-  min-width: vw(240);
-  /* заменено на vw */
+  min-width: 240px;
   margin-top: auto;
   margin-bottom: auto;
-  padding-top: vw(20);
-  /* заменено на vw */
+  padding-top: 20px;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: vw(60);
-  /* заменено на vw */
+  flex-basis: 60px;
 }
 
 .event-header {
-  border-radius: vw(40) 0 0 0;
-  /* заменено на vw */
+  border-radius: 40px 0 0 0;
   background-color: var(--color-white);
-  /* заменено на var(--color-white) */
   display: flex;
   width: 100%;
-  padding: vw(20);
-  /* заменено на vw */
+  padding: 20px;
   align-items: center;
-  gap: vw(20);
-  /* заменено на vw */
+  gap: 20px;
 }
 
 .header-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  width: vw(30);
-  /* заменено на vw */
+  width: 30px;
 }
 
 .header-title {
-  font-size: vw(30);
-  /* заменено на vw */
+  font-size: 30px;
   color: var(--color-gray-900);
-  /* заменено на var(--color-gray-900) */
   font-weight: 700;
-  letter-spacing: vw(0.3);
-  /* заменено на vw */
+  letter-spacing: 0.3px;
   flex: 1;
 }
 

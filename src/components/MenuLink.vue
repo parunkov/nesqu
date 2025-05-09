@@ -15,13 +15,13 @@ defineProps<MenuItemProps>()
 
 <style scoped lang="scss">
 .menu-link {
-  border-radius: vw(10);
+  border-radius: 10px;
   display: flex;
-  min-height: vw(60);
+  min-height: 60px;
   width: 100%;
-  padding: vw(15) vw(8) vw(15) vw(10);
+  padding: 15px 8px 15px 10px;
   align-items: center;
-  gap: vw(12);
+  gap: 12px;
   justify-content: flex-start;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -42,18 +42,17 @@ defineProps<MenuItemProps>()
   margin-bottom: auto;
   width: 100%;
   align-items: center;
-  gap: vw(10);
+  gap: 10px;
   justify-content: flex-start;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+  flex-basis: 0;
 }
 
 .menu-link__icon {
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: vw(30);
+  width: 30px;
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
@@ -68,8 +67,7 @@ defineProps<MenuItemProps>()
   margin-top: auto;
   margin-bottom: auto;
   flex: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+  flex-basis: 0;
   line-height: 1.2;
 }
 </style>

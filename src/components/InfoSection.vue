@@ -78,8 +78,8 @@ const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
 
 <style scoped lang="scss">
 .info-section {
-  border-radius: vw(20);
-  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
   width: 100%;
   overflow: hidden;
   background-color: var(--color-white);
@@ -87,29 +87,29 @@ const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
 
 .section-header {
   background-color: var(--color-gray-200);
-  padding: vw(10) vw(20);
+  padding: 10px 20px;
 }
 
 .section-title {
-  font-size: vw(18);
+  font-size: 18px;
   color: var(--color-gray-900);
   font-weight: 600;
 }
 
 .section-content {
-  padding: vw(20);
+  padding: 20px;
 }
 
 .form-group {
-  margin-bottom: vw(20);
+  margin-bottom: 20px;
 }
 
 .form-label {
   color: var(--color-gray-900);
-  font-size: vw(16);
+  font-size: 16px;
   font-weight: 500;
   display: block;
-  margin-bottom: vw(5);
+  margin-bottom: 5px;
 }
 
 .input-wrapper {
@@ -119,79 +119,79 @@ const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
 }
 
 .form-input {
-  border-radius: vw(10);
+  border-radius: 10px;
   border: 1px solid var(--color-gray-200);
-  padding: vw(10);
+  padding: 10px;
   width: 100%;
-  font-size: vw(18);
+  font-size: 18px;
 }
 
 .input-icon {
   position: absolute;
-  right: vw(10);
-  width: vw(20);
-  height: vw(20);
+  right: 10px;
+  width: 20px;
+  height: 20px;
 }
 
 .date-group {
   display: flex;
-  gap: vw(10);
+  gap: 10px;
   flex-wrap: wrap;
   align-items: flex-end;
 }
 
 .date-btn {
-  border-radius: vw(10);
+  border-radius: 10px;
   background-color: var(--color-primary-700);
   color: var(--color-white);
-  padding: vw(10);
+  padding: 10px;
   border: none;
-  font-size: vw(16);
+  font-size: 16px;
   font-weight: 500;
-  height: vw(40);
+  height: 40px;
 }
 
 .price-group {
-  margin-top: vw(20);
+  margin-top: 20px;
 }
 
 .price-inputs {
   display: flex;
-  gap: vw(20);
+  gap: 20px;
   flex-wrap: wrap;
 }
 
 .price-input-wrapper {
-  width: vw(200);
+  width: 200px;
 }
 
 .price-input {
-  border-radius: vw(15);
+  border-radius: 15px;
   border: 1px solid var(--color-gray-200);
-  padding: vw(15);
+  padding: 15px;
   display: flex;
   align-items: center;
-  min-height: vw(60);
+  min-height: 60px;
 }
 
 .currency {
   color: var(--color-gray-900);
-  width: vw(20);
+  width: 20px;
   text-align: center;
 }
 
 .free-toggle {
   display: flex;
   align-items: center;
-  gap: vw(10);
-  margin-top: vw(10);
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .toggle {
   position: relative;
   display: inline-block;
-  width: vw(54);
-  height: vw(30);
+  width: 54px;
+  height: 30px;
 }
 
 .toggle input {
@@ -209,35 +209,35 @@ const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
   bottom: 0;
   background-color: var(--color-gray-100);
   transition: 0.4s;
-  border-radius: vw(18);
+  border-radius: 18px;
 }
 
 .toggle-slider:before {
   position: absolute;
   content: "";
-  height: vw(24);
-  width: vw(24);
-  left: vw(3);
-  bottom: vw(3);
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
   background-color: var(--color-white);
   transition: 0.4s;
   border-radius: 50%;
   box-shadow:
-    0 vw(1.5) vw(3) rgba(16, 24, 40, 0.06),
-    0 vw(1.5) vw(4.5) rgba(16, 24, 40, 0.1);
+    0 1.5px 3px rgba(16, 24, 40, 0.06),
+    0 1.5px 4.5px rgba(16, 24, 40, 0.1);
 }
 
-.toggle input:checked+.toggle-slider {
+.toggle input:checked + .toggle-slider {
   background-color: var(--color-primary-700);
 }
 
-.toggle input:checked+.toggle-slider:before {
-  transform: translateX(vw(24));
+.toggle input:checked + .toggle-slider:before {
+  transform: translateX(24px);
 }
 
 .toggle-label {
   color: var(--color-gray-900);
-  font-size: vw(18);
+  font-size: 18px;
   font-weight: 400;
 }
 
@@ -247,3 +247,4 @@ const prices = ref([{ value: "10000" }, { value: "10000" }, { value: "0" }]);
   }
 }
 </style>
+

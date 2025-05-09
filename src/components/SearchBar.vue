@@ -33,36 +33,36 @@ watch(() => activeOnly.value, () => emits('search'))
   min-width: 700px;
   display: flex;
   align-items: center;
-  gap: vw(20);
+  gap: 20px;
   justify-content: flex-start;
 }
 
 .search-bar {
-  border-radius: vw(10);
+  border-radius: 10px;
   background-color: var(--color-gray-100);
-  border: vw(1) solid var(--color-gray-400);
+  border: 1px solid var(--color-gray-400);
   align-self: stretch;
   display: flex;
-  min-width: vw(240);
+  min-width: 240px;
   margin-top: auto;
   margin-bottom: auto;
   flex-direction: column;
   align-items: stretch;
 
-  font-size: vw(16);
+  font-size: 16px;
   color: var(--color-gray-900);
   font-weight: 400;
   line-height: 1;
   justify-content: center;
-  width: vw(245);
+  width: 245px;
 }
 
 .search-bar__content {
   display: flex;
   width: 100%;
-  padding: vw(10);
+  padding: 10px;
   align-items: center;
-  gap: vw(10);
+  gap: 10px;
   overflow: hidden;
   justify-content: flex-start;
 }
@@ -71,7 +71,7 @@ watch(() => activeOnly.value, () => emits('search'))
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: vw(20);
+  width: 20px;
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
@@ -88,7 +88,7 @@ watch(() => activeOnly.value, () => emits('search'))
   border: none;
   outline: none;
 
-  font-size: vw(16);
+  font-size: 16px;
   color: var(--color-gray-800);
   min-width: 0;
 }
@@ -97,7 +97,7 @@ watch(() => activeOnly.value, () => emits('search'))
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: vw(20);
+  width: 20px;
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
@@ -107,7 +107,7 @@ watch(() => activeOnly.value, () => emits('search'))
 
 .toggle-label {
   color: var(--color-gray-800);
-  font-size: vw(16);
+  font-size: 16px;
 
   font-weight: 400;
   line-height: 1;

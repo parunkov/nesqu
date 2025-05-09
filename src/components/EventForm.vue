@@ -33,17 +33,14 @@ const handleSubmit = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .event-form {
   background-color: var(--color-gray-100);
-  /* заменено на var(--color-gray-100) */
   display: flex;
   width: 100%;
-  padding: vw(20);
-  /* заменено на vw */
+  padding: 20px;
   align-items: start;
-  gap: vw(20);
-  /* заменено на vw */
+  gap: 20px;
   overflow: hidden;
   justify-content: start;
   flex-wrap: wrap;
@@ -55,3 +52,4 @@ const handleSubmit = () => {
   }
 }
 </style>
+

@@ -12,7 +12,7 @@
           <img :src="photos[0]" alt="" class="preview-image" />
           <button class="delete-btn">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/24e0392bbc33a7d9e489af789945c6f801393f99?placeholderIfAbsent=true"
+              src="/icons/delete.svg"
               alt="Delete" class="delete-icon" />
           </button>
         </div>
@@ -20,7 +20,7 @@
         <label class="upload-btn">
           <input type="file" accept="image/*" @change="handlePhotoUpload" class="file-input" />
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/2af0401ca9c4aed8362cf80ec6bc2b6920a279c1?placeholderIfAbsent=true"
+            src="/icons/photo.svg"
             alt="" class="upload-icon" />
           <span class="upload-text">+ Фото</span>
         </label>
@@ -33,7 +33,7 @@
 import { ref } from "vue";
 
 const photos = ref<string[]>([
-  "https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/c8608cf0d2eeeaf956c29c6d4f69432f38dbd8e1?placeholderIfAbsent=true",
+  "/images/photo.png",
 ]);
 
 const handlePhotoUpload = (event: Event) => {

@@ -3,7 +3,7 @@
     <section class="event-content">
       <header class="event-header">
         <img @click="() => emit('changeMode')"
-          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/753b3f4ef1c20af83a91234be20f8554883918ba?placeholderIfAbsent=true"
+          src="/icons/back.svg"
           alt="" class="header-icon" />
         <h1 class="header-title">Новое Мероприятие</h1>
       </header>

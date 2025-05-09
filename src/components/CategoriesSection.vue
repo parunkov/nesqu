@@ -12,8 +12,8 @@
           <div class="subcategory-header">
             <span class="subcategory-title">🎭 Культура и творчество</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/d120d173784c19fbd1937ca48f459558bf71f54c?placeholderIfAbsent=true"
-              alt="" class="arrow-icon" />
+              src="/icons/arrow.svg"
+              alt="" class="arrow-icon open-categories" />
           </div>
 
           <div class="subcategory-items">
@@ -22,10 +22,8 @@
               <span class="item-text">Концерты</span>
             </label>
 
-            <label class="category-item selected">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/2bf4b50e06316a1d63c5e47816fef7d900fdf977?placeholderIfAbsent=true"
-                alt="" class="check-icon" />
+            <label class="category-item">
+              <input type="checkbox" class="checkbox" :value="true"/>
               <span class="item-text">Театр</span>
             </label>
 
@@ -55,7 +53,7 @@
           <div class="subcategory-header">
             <span class="subcategory-title">🎨 Хобби и креатив</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
+              src="/icons/arrow.svg"
               alt="" class="arrow-icon" />
           </div>
         </div>
@@ -65,7 +63,7 @@
           <div class="subcategory-header">
             <span class="subcategory-title">{{ category.title }}</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
+              src="/icons/arrow.svg"
               alt="" class="arrow-icon" />
           </div>
         </div>
@@ -78,7 +76,7 @@
           <div class="subcategory-header">
             <span class="subcategory-title">🧠 Образование и развитие</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
+              src="/icons/arrow.svg"
               alt="" class="arrow-icon" />
           </div>
         </div>
@@ -87,7 +85,7 @@
           <div class="subcategory-header">
             <span class="subcategory-title">🤝 Нетворкинг и профессиональные события</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/5a0ce6b165b7f9cc892cf0a91bc9352353f5b435?placeholderIfAbsent=true"
+              src="/icons/arrow.svg"
               alt="" class="arrow-icon" />
           </div>
         </div>
@@ -96,7 +94,7 @@
           <div class="subcategory-header">
             <span class="subcategory-title">⚖️ Сферы деятельности</span>
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/4fd765603d7a48d6b95006cfb8796273cce87a43?placeholderIfAbsent=true"
+              src="/icons/arrow.svg"
               alt="" class="arrow-icon" />
           </div>
         </div>
@@ -117,6 +115,11 @@ const additionalCategories = ref([
 </script>
 
 <style scoped lang="scss">
+.open-categories{
+
+  transform: rotate(180deg);
+}
+
 .categories-section {
   border-radius: 20px;
   box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);

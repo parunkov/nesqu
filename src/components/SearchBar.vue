@@ -18,9 +18,9 @@ watch(() => activeOnly.value, () => emits('search'))
   <div class="search-container">
     <div class="search-bar">
       <div class="search-bar__content">
-        <img src="/icons/mail.png" class="search-bar__icon" alt="Search icon" />
+        <img src="/icons/mail.svg" class="search-bar__icon" alt="Search icon" />
         <input type="text" class="search-bar__input" placeholder="Поиск по e-mail" @change="emits('search')" v-model="searchQuery" />
-        <img src="/icons/search.png" class="search-bar__icon" alt="Clear search" @click="emits('search')" />
+        <img src="/icons/search.svg" class="search-bar__icon" alt="Clear search" @click="emits('search')" />
       </div>
     </div>
     <label class="toggle-label">Только активные</label>
@@ -91,18 +91,6 @@ watch(() => activeOnly.value, () => emits('search'))
   font-size: 16px;
   color: var(--color-gray-800);
   min-width: 0;
-}
-
-.search-bar__clear-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: 20px;
-  align-self: stretch;
-  margin-top: auto;
-  margin-bottom: auto;
-  flex-shrink: 0;
-  cursor: pointer;
 }
 
 .toggle-label {

@@ -43,47 +43,6 @@ const changeMode = (mode: boolean) => {
   object-fit: contain;
 }
 
-.nav-links {
-  margin-top: 40px;
-  font-size: 20px;
-  color: var(--color-white);
-  font-weight: 500;
-  letter-spacing: 0.2px;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 15px 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: inherit;
-  margin-bottom: 10px;
-}
-
-.nav-link-active {
-  background-color: var(--color-primary-800);
-}
-
-.nav-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  color: var(--color-white);
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 0.18px;
-}
-
 .content {
   flex: 1;
   display: flex;

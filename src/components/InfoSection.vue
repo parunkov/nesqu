@@ -10,7 +10,7 @@
         <div class="input-wrapper">
           <input v-model="city" type="text" class="form-input" />
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/cab5b4227ad7fa14d18cf9f833b27483c9ba4d37?placeholderIfAbsent=true"
+            src="/icons/arrow.svg"
             alt="" class="input-icon" />
         </div>
       </div>
@@ -21,7 +21,7 @@
           <div class="input-wrapper">
             <input v-model="startDate" type="text" class="form-input" />
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/3e14d0c2c0e60d3dfe22b0ba1361183264604d58?placeholderIfAbsent=true"
+              src="/icons/calendar.svg"
               alt="" class="calendar-icon" />
           </div>
         </div>
@@ -31,7 +31,7 @@
           <div class="input-wrapper">
             <input v-model="endDate" type="text" class="form-input" placeholder="дд.мм чч.мм" />
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/b4bb50155e5c091c68c7fcd204ba848c2ea50977?placeholderIfAbsent=true"
+              src="/icons/calendar.svg"
               alt="" class="calendar-icon" />
           </div>
         </div>
@@ -48,7 +48,7 @@
               <span class="currency">₽</span>
               <input v-model="price.value" type="text" class="form-input" :disabled="isFree" />
               <img v-if="!isFree"
-                src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/24e0392bbc33a7d9e489af789945c6f801393f99?placeholderIfAbsent=true"
+                src="/icons/delete.svg"
                 alt="" class="input-icon" />
             </div>
           </div>

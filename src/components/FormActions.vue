@@ -2,7 +2,7 @@
   <footer class="form-actions">
     <button type="button" class="delete-btn" @click="handleDelete">
       <img
-        src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/24e0392bbc33a7d9e489af789945c6f801393f99?placeholderIfAbsent=true"
+        src="/icons/delete.svg"
         alt="" class="btn-icon" />
       <span class="btn-text">Удалить</span>
     </button>

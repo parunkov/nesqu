@@ -1,3 +1,18 @@
+<!--suppress ALL -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import SearchBar from "./SearchBar.vue";
@@ -115,7 +130,7 @@ const filteredEvents = ref(tableData.value)
       <div>{{ row.date }}</div>
       <div class="cell action-cell">
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/ac4380b2920040a3acca8d67795801e6/e6a3403470659afbea51fe6dba668384b8ef2118?placeholderIfAbsent=true"
+          src="/icons/delete.svg"
           alt="Actions" class="action-icon" />
       </div>
       </div>
@@ -156,12 +171,6 @@ const filteredEvents = ref(tableData.value)
   gap: 20px;
 }
 
-.search-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
 .search-bar {
   display: flex;
   align-items: center;
@@ -171,33 +180,6 @@ const filteredEvents = ref(tableData.value)
   border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   width: 235px;
-}
-
-.search-input {
-  border: none;
-  background: none;
-  flex: 1;
-  font-size: 16px;
-  color: var(--color-gray-900);
-}
-
-.search-input::placeholder {
-  color: var(--color-gray-900);
-}
-
-.search-icon,
-.clear-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.active-filter {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  color: var(--color-gray-900);
 }
 
 .create-button {
@@ -217,50 +199,4 @@ const filteredEvents = ref(tableData.value)
   flex: 1;
 }
 
-.table-header {
-  font-size: 15px;
-  color: var(--color-black);
-  font-weight: 500;
-  line-height: 1;
-}
-
-.header-row {
-  display: flex;
-  border: 1px solid var(--color-gray-400);
-}
-
-.header-cell {
-  background-color: var(--color-gray-300);
-  padding: 10px;
-  border-left: 1px solid var(--color-gray-400);
-  display: flex;
-  align-items: center;
-}
-
-.id-cell {
-  width: 40px;
-  justify-content: center;
-}
-
-.checkbox-cell {
-  width: 66px;
-  justify-content: center;
-}
-
-.email-cell {
-  width: 235px;
-}
-
-.title-cell {
-  flex: 1;
-  min-width: 240px;
-}
-
-.date-cell {
-  width: 155px;
-}
-
-.table-body {
-  margin-top: 10px;
-}
 </style>

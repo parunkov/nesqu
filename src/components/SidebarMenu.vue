@@ -37,14 +37,14 @@ const changeMode = (newView: View) => {
         <img src="/icons/logo.png" class="logo" alt="Logo" />
       </div>
       <nav class="navigation">
-        <MenuLink icon="/icons/calendar.png" title="Мероприятия" :isActive="currentView.id == 1"
+        <MenuLink icon="/icons/calendar.svg" title="Мероприятия" :isActive="currentView.id == 1"
           @click="changeMode(views['eventsTable'])" />
-        <MenuLink icon="/icons/user.png" title="Пользователи" :isActive="currentView.id == 0"
+        <MenuLink icon="/icons/user.svg" title="Пользователи" :isActive="currentView.id == 0"
           @click="changeMode(views['usersTable'])" />
       </nav>
     </div>
     <div class="user-profile">
-      <MenuLink icon="/icons/log-out.png" title="veryVeryLongEmail2025@mail.ru" />
+      <MenuLink icon="/icons/exit.svg" title="veryVeryLongEmail2025@mail.ru" />
     </div>
   </aside>
 </template>
@@ -109,36 +109,4 @@ const changeMode = (newView: View) => {
   justify-content: flex-start;
 }
 
-.user-profile__content {
-  align-self: stretch;
-  display: flex;
-  min-width: 240px;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 100%;
-  align-items: center;
-  gap: 10px;
-  justify-content: flex-start;
-  flex: 1;
-  flex-basis: 0;
-}
-
-.user-profile__icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: 30px;
-  align-self: stretch;
-  margin-top: auto;
-  margin-bottom: auto;
-  flex-shrink: 0;
-}
-
-.user-profile__name {
-  align-self: stretch;
-  margin-top: auto;
-  margin-bottom: auto;
-  flex: 1;
-  flex-basis: 0;
-}
 </style>

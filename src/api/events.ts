@@ -1,5 +1,5 @@
 import client from '@/http/client.ts'
-import type { EventCard, EventData, EventsFilter } from '@/api/types.ts'
+import type { EventCard, EventData, EventsFilter } from '@/types/events'
 import { EVENT, EVENTS } from '@/api/endpoints.ts'
 
 export default class EventService {

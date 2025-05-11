@@ -196,11 +196,6 @@ const additionalCategories = ref([
   background-color: var(--color-white);
 }
 
-.check-icon {
-  width: 20px;
-  height: 20px;
-}
-
 .item-text {
   flex: 1;
 }

@@ -1,32 +1,52 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
+const options = ['Сочи', 'Краснодар', 'Москва'];
+const selected = ref(options[0]);
+const isOpen = ref(false);
+
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value;
+};
+
+const selectOption = (option: string) => {
+  selected.value = option;
+  isOpen.value = false;
+};
 </script>
 
 <template>
-  <div class="dropdown dropdown--select">
-    <div class="dropdown__trigger field">
-      Сочи
+  <div
+    class="dropdown dropdown--select"
+    :class="{ 'dropdown--active': isOpen }"
+  >
+    <div class="dropdown__trigger field" @click="toggleDropdown">
+      {{ selected }}
     </div>
 
-    <div class="dropdown__wrapper" aria-hidden="true">
+    <div class="dropdown__wrapper" :aria-hidden="!isOpen">
       <div class="dropdown__inner">
         <div class="dropdown__content">
           <ul class="dropdown-list">
-            <li class="dropdown-list__item">
-              Сочи
-            </li>
-
-            <li class="dropdown-list__item">
-              Краснодар
-            </li>
-
-            <li class="dropdown-list__item">
-              Москва
+            <li
+              v-for="(option, index) in options"
+              :key="index"
+              class="dropdown-list__item"
+              @click="selectOption(option)"
+            >
+              {{ option }}
             </li>
           </ul>
         </div>
       </div>
     </div>
+
+    <!-- Нативный <select>, скрытый -->
+    <select class="dropdown__select-native" v-model="selected">
+      <option v-for="(option, index) in options" :key="index" :value="option">
+        {{ option }}
+      </option>
+    </select>
   </div>
 </template>
 
@@ -73,6 +93,10 @@
   border-radius: 10px;
   background: #fff;
   overflow: hidden;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
   // .dropdown-list__item
 

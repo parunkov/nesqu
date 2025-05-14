@@ -1,5 +1,37 @@
 <script setup lang="ts">
+import { ref, nextTick } from 'vue'
 import ToggleSwitch from '@/components/ToggleSwitch.vue'
+
+interface PriceValue {
+  value: string
+  id: number
+}
+
+const prices = ref<PriceValue[]>([{ value: '', id: Date.now() }])
+const isFree = ref(false)
+
+const formatInput = (val: string) => val.replace(/[^0-9]/g, '').slice(0, 6)
+
+const handlePriceInput = async (index: number) => {
+  const price = prices.value[index]
+  price.value = formatInput(price.value)
+
+  const isLast = index === prices.value.length - 1
+  const isNotEmpty = price.value !== ''
+
+  if (isLast && isNotEmpty) {
+    prices.value.push({ value: '', id: Date.now() + Math.random() })
+    await nextTick()
+  }
+}
+
+const deletePrice = (index: number) => {
+  if (index < prices.value.length - 1) {
+    prices.value.splice(index, 1)
+  }
+}
+
+
 </script>
 
 <template>
@@ -8,19 +40,38 @@ import ToggleSwitch from '@/components/ToggleSwitch.vue'
       <label for="" class="form-item__label">Цена</label>
 
       <div class="form-price">
-        <div class="form-price__values">
-          <div class="form-price__value field">
-                              <span class="form-price__caption">
-                                ₽
-                              </span>
-
-            <input class="form-price__input" type="text" placeholder="0">
+        <div class="form-price__values" :class="{ disabled: isFree }">
+          <div
+            class="form-price__value field"
+            v-for="(item, index) in prices"
+            :key="item.id"
+          >
+            <span class="form-price__caption">₽</span>
+            <input
+              class="form-price__input"
+              type="text"
+              placeholder="0"
+              v-model="item.value"
+              :disabled="isFree"
+              @input="handlePriceInput(index)"
+            />
+            <button
+              v-if="index < prices.length - 1"
+              class="form-price__delete"
+              type="button"
+              @click="deletePrice(index)"
+            >
+              <!-- SVG Иконка удаления -->
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.3333 5.00002V4.33335C13.3333 3.39993 13.3333 2.93322 13.1517 2.5767C12.9919 2.2631 12.7369 2.00813 12.4233 1.84834C12.0668 1.66669 11.6001 1.66669 10.6667 1.66669H9.33333C8.39991 1.66669 7.9332 1.66669 7.57668 1.84834C7.26308 2.00813 7.00811 2.2631 6.84832 2.5767C6.66667 2.93322 6.66667 3.39993 6.66667 4.33335V5.00002M8.33333 9.58335V13.75M11.6667 9.58335V13.75M2.5 5.00002H17.5M15.8333 5.00002V14.3334C15.8333 15.7335 15.8333 16.4336 15.5608 16.9683C15.3212 17.4387 14.9387 17.8212 14.4683 18.0609C13.9335 18.3334 13.2335 18.3334 11.8333 18.3334H8.16667C6.76654 18.3334 6.06647 18.3334 5.53169 18.0609C5.06129 17.8212 4.67883 17.4387 4.43915 16.9683C4.16667 16.4336 4.16667 15.7335 4.16667 14.3334V5.00002" stroke="#F60B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
           </div>
         </div>
 
         <div class="form-price__free-checkbox custom-checkbox">
           <label class="custom-checkbox__label">
-            <ToggleSwitch />
+            <ToggleSwitch v-model="isFree" />
             <span class="custom-checkbox__caption">Бесплатно</span>
           </label>
         </div>

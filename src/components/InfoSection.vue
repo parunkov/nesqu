@@ -17,13 +17,7 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="form-date">
-            <div class="form-date__row">
-              <EventDates />
-            </div>
-          </div>
-        </div>
+            <EventDates />
 
         <PriceInput />
       </div>

@@ -7,10 +7,18 @@ const model = defineModel({
 </script>
 
 <template>
+  <div class="content-wrap">
   <div class="AppCheckbox" :class="{ 'AppCheckbox--checked': model }" @click="model = !model"></div>
+  <slot></slot>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.content-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 .AppCheckbox {
   border-radius: 4px;
   background-color: var(--color-gray-100);

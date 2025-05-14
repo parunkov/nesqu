@@ -1,13 +1,4 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
-
-<template>
-  <RouterView />
-</template>
-
-<style lang="scss">
-@use "./assets/scss/helpers" as *;
+@use "./helpers" as *;
 
 html {
   // scrollbar-gutter: stable;
@@ -53,4 +44,3 @@ a {
 button svg {
   display: block;
 }
-</style>

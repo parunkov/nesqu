@@ -1,208 +1,210 @@
 <template>
-  <section class="categories-section">
-    <header class="section-header">
-      <h2 class="section-title">Категории</h2>
-    </header>
-
-    <div class="section-content">
-      <div class="category-group">
-        <h3 class="category-title">Развлекательные мероприятия</h3>
-
-        <div class="subcategory">
-          <div class="subcategory-header">
-            <span class="subcategory-title">🎭 Культура и творчество</span>
-            <img
-              src="/icons/arrow.svg"
-              alt="" class="arrow-icon open-categories" />
-          </div>
-
-          <div class="subcategory-items">
-            <label class="category-item">
-              <input type="checkbox" class="checkbox" />
-              <span class="item-text">Концерты</span>
-            </label>
-
-            <label class="category-item">
-              <input type="checkbox" class="checkbox" :value="true"/>
-              <span class="item-text">Театр</span>
-            </label>
-
-            <label class="category-item">
-              <input type="checkbox" class="checkbox" />
-              <span class="item-text">Выставки</span>
-            </label>
-
-            <label class="category-item">
-              <input type="checkbox" class="checkbox" />
-              <span class="item-text">Фестивали</span>
-            </label>
-
-            <label class="category-item">
-              <input type="checkbox" class="checkbox" />
-              <span class="item-text">Стендап</span>
-            </label>
-
-            <label class="category-item">
-              <input type="checkbox" class="checkbox" />
-              <span class="item-text">Кино</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="subcategory">
-          <div class="subcategory-header">
-            <span class="subcategory-title">🎨 Хобби и креатив</span>
-            <img
-              src="/icons/arrow.svg"
-              alt="" class="arrow-icon" />
-          </div>
-        </div>
-
-        <!-- Additional subcategories -->
-        <div class="subcategory" v-for="category in additionalCategories" :key="category.title">
-          <div class="subcategory-header">
-            <span class="subcategory-title">{{ category.title }}</span>
-            <img
-              src="/icons/arrow.svg"
-              alt="" class="arrow-icon" />
-          </div>
-        </div>
+  <div class="content-card">
+    <div class="content-card__inner">
+      <div class="content-card__head">
+        <h3 class="content-card__title">
+          Категории
+        </h3>
       </div>
 
-      <div class="category-group">
-        <h3 class="category-title">Деловые мероприятия</h3>
-
-        <div class="subcategory">
-          <div class="subcategory-header">
-            <span class="subcategory-title">🧠 Образование и развитие</span>
-            <img
-              src="/icons/arrow.svg"
-              alt="" class="arrow-icon" />
-          </div>
+      <div class="content-card__body">
+        <div @click.stop class="filters__list">
+          <AppAccordion @closeOthers="(flag: boolean = false) => closeOthers(filterIndex, flag)"
+                        v-for="(filter, filterIndex) of filters" class="filters__item" v-model="model[filterIndex]" :key="filterIndex">
+            <template #btn>
+              {{ filter.group_name }}
+            </template>
+            <template #content>
+              <div class="filters__item-main">
+                <AppCheckbox @click.stop v-for="(item, itemIndex) of filter.group_content" class="filters__item-checkbox"
+                             v-model="selectedFilters[filter.group_name][item.id]" :key="itemIndex">
+                  {{ item.type_name }}
+                </AppCheckbox>
+              </div>
+            </template>
+          </AppAccordion>
         </div>
-
-        <div class="subcategory">
-          <div class="subcategory-header">
-            <span class="subcategory-title">🤝 Нетворкинг и профессиональные события</span>
-            <img
-              src="/icons/arrow.svg"
-              alt="" class="arrow-icon" />
-          </div>
-        </div>
-
-        <div class="subcategory">
-          <div class="subcategory-header">
-            <span class="subcategory-title">⚖️ Сферы деятельности</span>
-            <img
-              src="/icons/arrow.svg"
-              alt="" class="arrow-icon" />
-          </div>
-        </div>
+      </div>
       </div>
     </div>
-  </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref, watchEffect } from 'vue'
+import AppAccordion from '@/components/AppAccordion.vue'
+import AppCheckbox from '@/components/AppCheckbox.vue'
 
-const additionalCategories = ref([
-  { title: "🏃 Активный отдых и спорт" },
-  { title: "👶 Детские события" },
-  { title: "🍽️ Гастрономические мероприятия" },
-  { title: "🎉 Развлечения и вечеринки" },
-]);
+const closeOthers = (index: number, flag: boolean = false) => {
+  for (let i = 0; i < model.value.length; i++) {
+    model.value[i] = i == index ? flag : false
+  }
+}
+
+type EventGroup = {
+  group_name: string;
+  group_content: {
+    id: number | string;
+    type_name: string;
+  }[];
+}
+
+const filters = reactive<EventGroup[]>([
+  {
+    group_name: "🧠 Образование и развитие",
+    group_content: [
+      { id: 29, type_name: "Обучение" },
+      { id: 28, type_name: "Мастер-классы" },
+      { id: 4, type_name: "Форумы" },
+      { id: 3, type_name: "Конференции" },
+      { id: 2, type_name: "Тренинги" },
+      { id: 1, type_name: "Лекции" }
+    ]
+  },
+  {
+    group_name: "🤝 Нетворкинг и профсобытия",
+    group_content: [
+      { id: 30, type_name: "Нетворкинг" },
+      { id: 7, type_name: "Мастермайнды" },
+      { id: 6, type_name: "Бизнес-встречи" }
+    ]
+  },
+  {
+    group_name: "⚖️ Сферы деятельности",
+    group_content: [
+      { id: 53, type_name: "Дизайн" },
+      { id: 47, type_name: "Управление проектами" },
+      { id: 46, type_name: "Медицина" },
+      { id: 45, type_name: "Наука" },
+      { id: 44, type_name: "Сфера услуг" },
+      { id: 43, type_name: "Маркетинг" },
+      { id: 9, type_name: "Финансы" },
+      { id: 10, type_name: "Мода" },
+      { id: 8, type_name: "IT и технологии" }
+    ]
+  },
+  {
+    group_name: "🎨 Хобби и креатив",
+    group_content: [
+      { id: 17, type_name: "Творчество" },
+      { id: 16, type_name: "Танцы" },
+      { id: 15, type_name: "Музыка" }
+    ]
+  },
+  {
+    group_name: "🏃 Активный отдых и спорт",
+    group_content: [
+      { id: 18, type_name: "Походы и экскурсии" },
+      { id: 19, type_name: "Спорт и фитнес" }
+    ]
+  },
+  {
+    group_name: "🍽️ Гастрономические мероприятия",
+    group_content: [
+      { id: 38, type_name: "Винные вечера " },
+      { id: 37, type_name: "Гастрономические " },
+      { id: 22, type_name: "Дегустации" }
+    ]
+  },
+  {
+    group_name: "👶 Семейные мероприятия",
+    group_content: [
+      { id: 52, type_name: "Мамам" },
+      { id: 20, type_name: "Семейный досуг" },
+      { id: 36, type_name: "Развивающие" },
+      { id: 21, type_name: "Детям" }
+    ]
+  },
+  {
+    group_name: "🙏 Путь к себе",
+    group_content: [
+      { id: 5, type_name: "Психология для всех" },
+      { id: 50, type_name: "Оздоровление" },
+      { id: 49, type_name: "Ретриты" },
+      { id: 41, type_name: "Медитации и практики " },
+      { id: 34, type_name: "Йога" }
+    ]
+  },
+  {
+    group_name: "🎭 Развлекательная программа",
+    group_content: [
+      { id: 39, type_name: "Вечеринки " },
+      { id: 40, type_name: "Фестивали " },
+      { id: 51, type_name: "Stand Up" },
+      { id: 26, type_name: "Встречи" },
+      { id: 25, type_name: "Знакомства" },
+      { id: 24, type_name: "Клуб" },
+      { id: 23, type_name: "Квесты и игры" },
+      { id: 32, type_name: "Цирк " },
+      { id: 14, type_name: "Кино" },
+      { id: 13, type_name: "Выставки" },
+      { id: 12, type_name: "Театр" },
+      { id: 11, type_name: "Концерты" }
+    ]
+  },
+  {
+    group_name: "😌 Другое",
+    group_content: [
+      { id: 48, type_name: "Другое" }
+    ]
+  }
+])
+const model = ref<boolean[]>(filters.map(((_, index) => index == 0)))
+const selectedFilters = reactive<Record<string, Record<string, boolean>>>({});
+watchEffect(() => {
+  filters.forEach(filter => {
+    if (!selectedFilters[filter.group_name]) {
+      selectedFilters[filter.group_name] = {};
+    }
+    filter.group_content.forEach(item => {
+      if (selectedFilters[filter.group_name][item.id] === undefined) {
+        selectedFilters[filter.group_name][item.id] = false;
+      }
+    });
+  });
+});
+
+console.log(filters)
 </script>
 
 <style scoped lang="scss">
-.open-categories{
+@use "../assets/scss/helpers" as *;
 
-  transform: rotate(180deg);
-}
-
-.categories-section {
-  border-radius: 20px;
+.content-card {
   box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
-  min-width: 240px;
-  overflow: hidden;
-  width: 430px;
-  background-color: var(--color-white);
-}
+  border-radius: 20px;
+  background: #fff;
 
-.section-header {
-  background-color: var(--color-gray-100);
-  padding: 10px 20px;
-}
 
-.section-title {
-  font-size: 18px;
-  color: var(--color-gray-1000);
-  font-weight: 600;
-}
+  + .content-card {
+    margin-top: 20px;
+  }
 
-.section-content {
-  padding: 20px;
-}
+  // .content-card__inner
 
-.category-group {
-  margin-bottom: 20px;
-}
+  &__inner {
+  }
 
-.category-title {
-  color: var(--color-gray-900);
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
+  // .content-card__head
 
-.subcategory {
-  margin-top: 10px;
-}
+  &__head {
+    padding: 10px 20px;
+    background: #edeaee;
+    border-radius: 20px 20px 0 0;
+  }
 
-.subcategory-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--color-gray-700);
-  font-size: 16px;
-  padding: 5px 0;
-}
+  // .content-card__title
 
-.arrow-icon {
-  width: 20px;
-  height: 20px;
-}
+  &__title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.67;
+    color: #242125;
+  }
 
-.subcategory-items {
-  margin-top: 10px;
-  padding-left: 20px;
-}
+  // .content-card__body
 
-.category-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 0;
-  cursor: pointer;
-  color: var(--color-gray-1000);
-  font-size: 16px;
-}
-
-.checkbox {
-  width: 20px;
-  height: 20px;
-  border-radius: 6px;
-  border: 1px solid var(--color-gray-300);
-  background-color: var(--color-white);
-}
-
-.item-text {
-  flex: 1;
-}
-
-@media (max-width: 991px) {
-  .categories-section {
-    max-width: 100%;
+  &__body {
+    padding: 20px;
   }
 }
 </style>

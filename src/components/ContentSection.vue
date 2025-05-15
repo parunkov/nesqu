@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import type { Event } from '@/types/events.ts'
+
+const title = defineModel<Event['name']>('title')
+const description = defineModel<Event['description']>('description')
+</script>
+
 <template>
   <div class="content-card">
     <div class="content-card__inner">
@@ -32,13 +39,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from "vue";
-
-const title = ref("");
-const description = ref("");
-</script>
 
 <style scoped lang="scss">
 @use "../assets/scss/helpers" as *;

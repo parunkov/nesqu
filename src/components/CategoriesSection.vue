@@ -163,7 +163,6 @@ watchEffect(() => {
   });
 });
 
-console.log(filters)
 </script>
 
 <style scoped lang="scss">

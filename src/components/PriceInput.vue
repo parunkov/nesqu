@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import ToggleSwitch from '@/components/ToggleSwitch.vue'
+import type { Event } from '@/types/events.ts'
+
+const eventrices = defineModel<Event['prices']>()
 
 interface PriceValue {
   value: string
@@ -31,6 +34,15 @@ const deletePrice = (index: number) => {
   }
 }
 
+watch(() => prices.value, () => {
+  eventrices.value = prices.value.map(item => item.value).slice(0,-1)
+}, {deep: true})
+
+watch(() => isFree.value, () => {
+  if (!isFree.value)
+    eventrices.value = prices.value.map(item => item.value).slice(0,-1)
+  else eventrices.value = undefined
+})
 
 </script>
 

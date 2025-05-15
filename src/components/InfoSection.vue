@@ -1,3 +1,22 @@
+
+<script setup lang="ts">
+import AppDropDown from '@/components/AppDropDown.vue'
+import EventDates from '@/components/EventDates.vue'
+import PriceInput from '@/components/PriceInput.vue'
+import type { Event } from '@/types/events.ts'
+
+const dates = defineModel<Event['datetime']>('dates')
+const prices = defineModel<Event['prices']>('prices')
+const city = defineModel<Event['city']>('city')
+
+const changeCity = (id: number) => {
+  city.value = id
+}
+const updateDates = (datesData: Event['datetime']) => {
+  dates.value = datesData
+}
+</script>
+
 <template>
   <div class="content-card">
     <div class="content-card__inner">
@@ -13,23 +32,18 @@
           <div class="form-item">
             <label for="" class="form-item__label">Город</label>
 
-            <AppDropDown/>
+            <AppDropDown @changeCity="(id: number) => changeCity(id)" />
           </div>
         </div>
 
-            <EventDates />
+            <EventDates @update-dates="(datesData: Event['datetime']) => updateDates(datesData)" />
 
-        <PriceInput />
+        <PriceInput v-model="prices" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import AppDropDown from '@/components/AppDropDown.vue'
-import EventDates from '@/components/EventDates.vue'
-import PriceInput from '@/components/PriceInput.vue'
-</script>
 
 <style scoped lang="scss">
 .content-card {

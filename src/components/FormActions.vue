@@ -19,12 +19,10 @@
 <script setup lang="ts">
 const handleDelete = () => {
   // Handle delete action
-  console.log('Delete clicked');
 };
 
 const handleSave = () => {
   // Handle save action
-  console.log('Save clicked');
 };
 </script>
 

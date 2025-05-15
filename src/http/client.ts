@@ -19,24 +19,24 @@ import { axiosClient, handleAxiosError } from "./axiost.ts"
 const client = {
   get(url: string, params: Record<string, unknown> = {}) {
     return handleAxiosError(() => axiosClient.get(url, {
-      params
+      ...params
     }).then(response => response.data))
   },
-  post(url: string, body: Record<string, unknown> | FormData, headers: Record<string, string> = {}) {
+  post(url: string, body: Record<string, unknown> | FormData | Array<unknown>, headers: Record<string, string> = {}) {
     return handleAxiosError(() => axiosClient.post(url, body, {
       headers: {
       ...axiosClient.defaults.headers.common,
       ...headers,
       }}).then(response => response.data))
   },
-  put(url: string, body: Record<string, unknown> | FormData, headers: Record<string, string> = {}) {
+  put(url: string, body: Record<string, unknown> | FormData | Array<unknown>, headers: Record<string, string> = {}) {
     return handleAxiosError(() => axiosClient.put(url, body, {
       headers: {
         ...axiosClient.defaults.headers.common,
         ...headers,
       }}).then(response => response.data))
   },
-  patch(url: string, body: Record<string, unknown> | FormData, headers: Record<string, string> = {}) {
+  patch(url: string, body: Record<string, unknown> | Array<unknown> | FormData, headers: Record<string, string> = {}) {
     return handleAxiosError(() => axiosClient.patch(url, body, {
       headers: {
         ...axiosClient.defaults.headers.common,

@@ -22,9 +22,7 @@ const handleClick = () => {
   isLoading.value = true;
 
   timeoutId.value = window.setTimeout(() => {
-    console.log('pum')
     emit('delete');
-    isLoading.value = false;
     timeoutId.value = null;
   }, ANIMATION_DURATION);
 };

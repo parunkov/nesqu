@@ -15,7 +15,6 @@ const currentMode = ref<Boolean>(true)
 
 const changeMode = (mode: boolean) => {
   currentMode.value = mode
-  console.log(currentMode.value)
 }
 </script>
 <style scoped lang="scss">

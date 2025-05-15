@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
 import AppButton from '@/components/AppButton.vue'
+import type { Event as EventType } from '@/types/events.ts'
+
+const dates = ref<EventType['datetime']>([])
+const emit = defineEmits(['updateDates'])
 
 interface DateRow {
   startDate: string
@@ -15,6 +19,7 @@ const rows = ref<DateRow[]>([
   { startDate: '', startTime: '', endDate: '', endTime: '', showActions: false, showHint: false }
 ])
 
+
 const formatInput = (value: string, isDate: boolean): string => {
   value = value.replace(/[^0-9_]/g, '')
   const separator = isDate ? '.' : ':'
@@ -28,31 +33,76 @@ const formatInput = (value: string, isDate: boolean): string => {
   return formatted
 }
 
+const isFieldComplete = (value: string): boolean => {
+  // Проверяем, что строка полностью заполнена (формат: 5 символов)
+  return value.length === 5;
+}
+
+const toIsoDateTime = (dateStr: string, timeStr?: string): string | null => {
+  // dateStr: 'dd.mm'
+  // timeStr: 'HH:mm' или undefined
+  if (!dateStr || dateStr.length !== 5) return null;
+
+  const [day, month] = dateStr.split('.').map(Number);
+  const year = 2026; // фиксируем год, или вынеси как параметр, если нужно динамически
+
+  if (timeStr && timeStr.length === 5) {
+    // Формируем ISO строку с временем и секундами
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T${timeStr}:00`;
+  } else {
+    // Формируем ISO строку только с датой (время 00:00:00)
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00`;
+  }
+}
+
+const updateDatesAndEmit = () => {
+  dates.value = rows.value
+    .map(row => {
+      const from = toIsoDateTime(row.startDate, row.startTime);
+      if (!from) return null; // from - обязательное поле
+
+      const to = row.endDate ? toIsoDateTime(row.endDate, row.endTime) : undefined;
+
+      return to ? { from, to } : { from };
+    })
+    .filter((item): item is { from: string; to?: string } => item !== null);
+
+  emit('updateDates', dates.value);
+}
+
+
 const handleInput = async (
   e: Event,
   rowIndex: number,
   field: 'startDate' | 'startTime' | 'endDate' | 'endTime',
   isDate: boolean
 ) => {
-  const input = e.target as HTMLInputElement
-  const value = input.value
-  const formatted = formatInput(value, isDate)
-  rows.value[rowIndex][field] = formatted
+  const input = e.target as HTMLInputElement;
+  const value = input.value;
+  const formatted = formatInput(value, isDate);
+  rows.value[rowIndex][field] = formatted;
 
+  // Логика для показа действий и подсказок
   if (isDate && formatted.length === 5 && field === 'startDate') {
-    rows.value[rowIndex].showActions = true
-    await nextTick()
-    focusInput(rowIndex, 'startTime')
+    rows.value[rowIndex].showActions = true;
+    await nextTick();
+    focusInput(rowIndex, 'startTime');
   }
 
   if (field !== 'startDate' && rows.value[rowIndex].startDate.length < 5) {
-    rows.value[rowIndex].showHint = true
-    await nextTick()
-    focusInput(rowIndex, 'startDate')
+    rows.value[rowIndex].showHint = true;
+    await nextTick();
+    focusInput(rowIndex, 'startDate');
   } else {
-    rows.value[rowIndex].showHint = false
+    rows.value[rowIndex].showHint = false;
+  }
+
+  // Вызов emit только если поле полностью заполнено
+  if (isFieldComplete(formatted)) {
+    updateDatesAndEmit();
   }
 }
+
 
 const focusInput = (rowIndex: number, field: keyof DateRow) => {
   const input = document.querySelectorAll<HTMLInputElement>(
@@ -74,29 +124,43 @@ const shiftDate = (dateStr: string, days: number): string => {
   const date = new Date(2025, month - 1, day + days)
   return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`
 }
-
-const duplicateRowWithShift = async (rowIndex: number, days: number) => {
-  const currentRow = rows.value[rowIndex]
-  const newStartDate = shiftDate(currentRow.startDate, days)
-  const newEndDate = currentRow.endDate
-    ? shiftDate(currentRow.endDate, days)
-    : ''
-
-  rows.value.splice(rowIndex + 1, 0, {
-    startDate: newStartDate,
-    startTime: currentRow.startTime, // скопировать время начала
-    endDate: newEndDate,
-    endTime: currentRow.endTime,     // скопировать время окончания
-    showActions: true,
-    showHint: false
-  })
-
-  await nextTick()
-  focusInput(rowIndex + 1, 'startTime')
+const isRowComplete = (row: DateRow): boolean => {
+  // Проверяем, что у строки заполнены полностью startDate, startTime
+  // Можно добавить проверку endDate и endTime, если они есть (но не обязательны)
+  return (
+    row.startDate.length === 5 &&
+    row.startTime.length === 5 &&
+    (!row.endDate || row.endDate.length === 5) &&
+    (!row.endTime || row.endTime.length === 5)
+  );
 }
 
+const duplicateRowWithShift = async (rowIndex: number, days: number) => {
+  const currentRow = rows.value[rowIndex];
+  const newStartDate = shiftDate(currentRow.startDate, days);
+  const newEndDate = currentRow.endDate
+    ? shiftDate(currentRow.endDate, days)
+    : '';
 
+  const newRow: DateRow = {
+    startDate: newStartDate,
+    startTime: currentRow.startTime,
+    endDate: newEndDate,
+    endTime: currentRow.endTime,
+    showActions: true,
+    showHint: false
+  };
 
+  rows.value.splice(rowIndex + 1, 0, newRow);
+
+  await nextTick();
+  focusInput(rowIndex + 1, 'startTime');
+
+  // Если новая строка полностью заполнена — обновляем dates и эмитим
+  if (isRowComplete(newRow)) {
+    updateDatesAndEmit();
+  }
+}
 </script>
 
 <template>
@@ -360,16 +424,6 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
       background: #f60b0f;
       border-radius: 50%;
     }
-  }
-
-  // .form-date__add-day-btn
-
-  &__add-day-btn {
-  }
-
-  // .form-date__add-week-btn
-
-  &__add-week-btn {
   }
 }
 

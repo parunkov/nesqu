@@ -15,7 +15,7 @@ export type EventData = {
 }
 
 export type EventsFilter = {
-  page: number;
+  page: number | null;
   types?: string;
   cities?: string;
   date_from?: string;
@@ -24,15 +24,39 @@ export type EventsFilter = {
 
 export type EventCard = {
   id: number;
-  top: boolean;
-  address: string | null;
   name: string;
-  date_from: string;
-  date_to?: string;
-  image: string;
   description: string;
-  favorite?: boolean;
+  address: string;
+  date_from: string; // ISO формат
+  date_to: string | null;
+  image: string;
   is_hiden: boolean;
-  user_name: string;
+  top: boolean;
+  favorite: boolean;
+  stat_fave: number;
+  stat_redirect: number;
+  stat_view_pwa: number;
+  stat_view_tg: number;
   user_id: string;
+  user_name: string;
+}
+
+
+export type Event = {
+  city: number;
+  types: number[];
+  name: string;
+  contacts?: string[];
+  datetime: DateTime[];
+  prices?: string[];
+  images?: string[];
+  address?: string;
+  description?: string;
+};
+
+export type EventStatus =  {
+  "id": number,
+  "top": boolean,
+  "is_hiden": boolean,
+  "is_banned": boolean,
 }

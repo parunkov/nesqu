@@ -66,6 +66,23 @@ onBeforeUnmount(() => {
     observer.unobserve(infiniteScrollTrigger.value)
 })
 
+const deleteEvent = (id: number, index: number) => {
+  eventStore.deleteEvent(id).then(() => {
+    tableData.value.splice(index, 1)
+  })
+}
+
+const statusToogle = (event: EventCard) => {
+  console.log()
+  eventStore.updateEventsStatus([{
+    id: event.id,
+    is_banned: false,
+    is_hiden: event.is_hiden,
+    top: event.top
+  }])
+}
+
+
 </script>
 
 <template>
@@ -100,15 +117,15 @@ onBeforeUnmount(() => {
     </tr>
   </template>
   <template #tbody>
-    <tr v-for="row in filteredEvents" :key="row.id">
+    <tr v-for="(row, index) in filteredEvents" :key="row.id">
       <td class=" table-cell--id">
         <div>{{ row.id }}</div>
       </td>
       <td class=" table-cell--active">
-        <div><AppCheckbox v-model="row.is_hiden" /></div>
+        <div><AppCheckbox @click="statusToogle(row)" v-model="row.is_hiden" /></div>
       </td>
       <td class=" table-cell--top">
-        <div><AppCheckbox v-model="row.top" /></div>
+        <div><AppCheckbox @click="statusToogle(row)" v-model="row.top" /></div>
       </td>
       <td class=" table-cell--user">
         <div>{{ row.user_id }}</div>
@@ -123,7 +140,7 @@ onBeforeUnmount(() => {
         <div>
         <div>{{ row.date_from }}</div>
         <div class="cell action-cell">
-          <DeleteButton class="delete"/>
+          <DeleteButton @delete="deleteEvent(row.id, index)" class="delete"/>
         </div>
         </div>
       </td>

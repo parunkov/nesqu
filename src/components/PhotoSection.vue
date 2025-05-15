@@ -3,30 +3,35 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-
+import type { Event as EventType} from '@/types/events.ts'
 // Максимальное количество изображений
 const MAX_IMAGES = 6;
 
-// Реактивная переменная для хранения загруженных изображений
-const images = ref<{ src: string }[]>([]);
+const eventImages = defineModel<EventType['images']>()
 
-// Функция для обработки загрузки изображений
+const images = ref<{ src: string; file: File }[]>([]);
+
 const handleImageUpload = (event: Event) => {
   const input = event.target as HTMLInputElement;
   if (!input.files) return;
 
   const files = Array.from(input.files).slice(0, MAX_IMAGES - images.value.length);
+
   files.forEach(file => {
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = () => {
-        images.value.push({ src: reader.result as string });
+        images.value.push({
+          src: reader.result as string,
+          file
+        });
+        updateUploadState();
       };
       reader.readAsDataURL(file);
     }
   });
-  updateUploadState();
 };
+
 
 // Функция для удаления изображения
 const removeImage = (index: number) => {
@@ -46,8 +51,12 @@ const updateUploadState = () => {
   }
 };
 
-// Инициализация состояния при монтировании
-watch(images, updateUploadState);
+watch(images, () => {
+  updateUploadState();
+  // Только пути (src) сохраняем в модель
+  eventImages.value = images.value.map(img => img.src);
+}, { deep: true });
+
 </script>
 
 <template>
@@ -121,10 +130,6 @@ watch(images, updateUploadState);
     margin-top: 20px;
   }
 
-  // .content-card__inner
-
-  &__inner {
-  }
 
   // .content-card__head
 
@@ -141,11 +146,6 @@ watch(images, updateUploadState);
     font-size: 18px;
     line-height: 1.67;
     color: #242125;
-  }
-
-  // .content-card__body
-
-  &__body {
   }
 }
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const emit = defineEmits(['changeCity'])
+
 const options = ['Сочи', 'Краснодар', 'Москва'];
 const selected = ref(options[0]);
 const isOpen = ref(false);
@@ -9,8 +11,9 @@ const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-const selectOption = (option: string) => {
+const selectOption = (option: string, index: number) => {
   selected.value = option;
+  emit('changeCity', index)
   isOpen.value = false;
 };
 </script>
@@ -32,7 +35,7 @@ const selectOption = (option: string) => {
               v-for="(option, index) in options"
               :key="index"
               class="dropdown-list__item"
-              @click="selectOption(option)"
+              @click="selectOption(option, index)"
             >
               {{ option }}
             </li>

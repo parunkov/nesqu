@@ -14,64 +14,58 @@
 
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import SearchBar from "./SearchBar.vue";
 import AppTable from '@/components/AppTable.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
+import { useEventsStore } from '@/stores/events.ts'
+import type { EventCard } from '@/types/events.ts'
+import DeleteButton from '@/components/DeleteButton.vue'
 
+const infiniteScrollTrigger = ref(null)
+let observer: IntersectionObserver
+const eventStore = useEventsStore()
 const emit = defineEmits(['changeMode'])
 
-interface EventRow {
-  id: number;
-  active: boolean;
-  top: boolean;
-  userId: number;
-  email: string;
-  title: string;
-  date: string;
-}
+const tableData = ref<EventCard[]>([])
 
 const addEvent = () => emit('changeMode')
+
+eventStore.getEvents().then((res) => tableData.value.push(...res))
 
 const searchQuery = ref('')
 const activeOnly = ref(false)
 
 
 const filterEvents = () =>{
-  filteredEvents.value = tableData.value.filter((el) => ((activeOnly.value  === el.active) || !activeOnly.value) && el.email.includes(searchQuery.value))
+  filteredEvents.value = tableData.value.filter((el) => ((activeOnly.value  === el.is_hiden) || !activeOnly.value) && el.user_name.includes(searchQuery.value))
 }
 
-const tableData = ref<EventRow[]>([
-  {
-    id: 1,
-    active: false,
-    top: false,
-    userId: 10,
-    email: "username@mail.com",
-    title: "Быстрые свидания в Москве",
-    date: "15.04.2025",
-  },
-  {
-    id: 2,
-    active: false,
-    top: false,
-    userId: 12,
-    email: "username@mail.com",
-    title: "Быстрые свидания в Москве",
-    date: "15.04.2025",
-  },
-  {
-    id: 3,
-    active: false,
-    top: false,
-    userId: 13,
-    email: "username@mail.com",
-    title: "Быстрые свидания в Москве",
-    date: "15.04.2025",
-  },
-]);
-
 const filteredEvents = ref(tableData.value)
+
+let firstCall = false
+onMounted(() => {
+  setTimeout(() => {
+    observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && eventStore.nextPage && !firstCall) {
+        eventStore.loadMore()
+      }
+      firstCall = false
+    }, {
+      rootMargin: '100px',
+    })
+
+    if (infiniteScrollTrigger.value)
+      observer.observe(infiniteScrollTrigger.value)
+  }, 500)
+
+})
+
+onBeforeUnmount(() => {
+  if (observer && infiniteScrollTrigger.value)
+    observer.unobserve(infiniteScrollTrigger.value)
+})
+
 </script>
 
 <template>
@@ -104,49 +98,50 @@ const filteredEvents = ref(tableData.value)
         <div>Дата начала</div>
       </th>
     </tr>
-</template>
-<template #tbody>
-  <tr v-for="row in filteredEvents" :key="row.id">
-    <td class=" table-cell--id">
-      <div>{{ row.id }}</div>
-    </td>
-    <td class=" table-cell--active">
-      <div><AppCheckbox v-model="row.active" /></div>
-    </td>
-    <td class=" table-cell--top">
-      <div><AppCheckbox v-model="row.top" /></div>
-    </td>
-    <td class=" table-cell--user">
-      <div>{{ row.userId }}</div>
-    </td>
-    <td class=" table-cell--email">
-      <div>{{ row.email }}</div>
-    </td>
-    <td class=" table-cell--title">
-      <div>{{ row.title }}</div>
-    </td>
-    <td class=" table-cell--date">
-      <div>
-      <div>{{ row.date }}</div>
-      <div class="cell action-cell">
-        <img
-          src="/icons/delete.svg"
-          alt="Actions" class="action-icon" />
-      </div>
-      </div>
-    </td>
-  </tr>
-</template>
+  </template>
+  <template #tbody>
+    <tr v-for="row in filteredEvents" :key="row.id">
+      <td class=" table-cell--id">
+        <div>{{ row.id }}</div>
+      </td>
+      <td class=" table-cell--active">
+        <div><AppCheckbox v-model="row.is_hiden" /></div>
+      </td>
+      <td class=" table-cell--top">
+        <div><AppCheckbox v-model="row.top" /></div>
+      </td>
+      <td class=" table-cell--user">
+        <div>{{ row.user_id }}</div>
+      </td>
+      <td class=" table-cell--email">
+        <div>{{ row.user_name }}</div>
+      </td>
+      <td class=" table-cell--title">
+        <div>{{ row.name }}</div>
+      </td>
+      <td class=" table-cell--date">
+        <div>
+        <div>{{ row.date_from }}</div>
+        <div class="cell action-cell">
+          <DeleteButton class="delete"/>
+        </div>
+        </div>
+      </td>
+    </tr>
+  </template>
   </AppTable>
+  <div ref="infiniteScrollTrigger"></div>
 </template>
 
 <style scoped lang="scss">
+.delete {
+}
 
 .table-cell--email {
-  width: 40%;
+  width: 20%;
 }
 .table-cell--title {
-  width: 60%;
+  width: 30%;
 }
 
 .table-cell--date > div {
@@ -157,6 +152,8 @@ const filteredEvents = ref(tableData.value)
   .action-cell {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 0;
   }
 }
 

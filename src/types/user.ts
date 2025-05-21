@@ -4,6 +4,9 @@ export type AuthToken = {
 }
 
 export type User = {
+  id: number,
   name: string,
   role?: string,
 }
+
+export type UsersFilters = Partial<Omit<User, 'id'>> & {page: number}

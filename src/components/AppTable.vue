@@ -140,5 +140,9 @@ td {
   }
 }
 
+.is-warning {
+  background-color: var(--color-warning);
+}
+
 </style>
 

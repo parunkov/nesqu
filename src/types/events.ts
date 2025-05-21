@@ -22,24 +22,24 @@ export type EventsFilter = {
   date_to?: string
 }
 
-export type EventCard = {
+export type EventCard =  {
   id: number;
-  name: string;
-  description: string;
-  address: string;
-  date_from: string; // ISO формат
-  date_to: string | null;
-  image: string;
   is_hiden: boolean;
-  top: boolean;
-  favorite: boolean;
-  stat_fave: number;
-  stat_redirect: number;
-  stat_view_pwa: number;
-  stat_view_tg: number;
+  is_validated: boolean | null;
   user_id: string;
   user_name: string;
-}
+  top: boolean;
+  address: string;
+  name: string;
+  date_from: string; // ISO-8601 datetime string
+  date_to: string | null;
+  modified_at: string; // ISO-8601 datetime string
+  image: string;
+  stat_view_pwa: number;
+  stat_view_tg: number;
+  stat_redirect: number;
+  stat_fave: number;
+};
 
 
 export type Event = {

@@ -1,23 +1,26 @@
 const AUTH = {
-  LOGIN: "/account/mail/login",
+  LOGIN: "/account/mail/login/",
   LIST: '/super/user/list/'
 } as const
 
-
-const EVENTS = {
-  ADD_EVENT: '/organizer/event/new/',
-  LIST: '/organizer/event/list/',
-  STATUS: '/organizer/event/status/',
+const MODERATOR = {
+  USERS_STATUS: '/moderator/user/status/',
+  STATS_CITIES: '/moderator/stats/cities/',
+  STAT_DAYS: '/moderator/stats/days/',
+  LIST: '/moderator/user/list/'
 } as const
 
 const EVENT = {
-  PICS: '/organizer',
-  UPDATE: '/organizer/update/',
-  DELETE: '/organizer/event/',
+  PICS: '/event/{id}/pics/',
+  UPDATE: 'event/{id}/update/',
+  DELETE: '/event/{id}/',
+  ADD_EVENT: '/event/new/',
+  LIST: '/event/list/',
+  STATUS: '/event/status/',
 } as const
 
 export {
-  EVENTS,
+  MODERATOR,
   EVENT,
   AUTH,
 }

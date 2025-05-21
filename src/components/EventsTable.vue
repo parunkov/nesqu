@@ -49,6 +49,7 @@ onMounted(() => {
     observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && eventStore.nextPage && !firstCall) {
         eventStore.loadMore()
+          .then(res => tableData.value.push(...res))
       }
       firstCall = false
     }, {
@@ -57,7 +58,7 @@ onMounted(() => {
 
     if (infiniteScrollTrigger.value)
       observer.observe(infiniteScrollTrigger.value)
-  }, 500)
+  }, 600)
 
 })
 
@@ -117,7 +118,7 @@ const statusToogle = (event: EventCard) => {
     </tr>
   </template>
   <template #tbody>
-    <tr v-for="(row, index) in filteredEvents" :key="row.id">
+    <tr v-for="(row, index) in filteredEvents" :class="{'is-warning': row.is_validated == null}" :key="row.id">
       <td class=" table-cell--id">
         <div>{{ row.id }}</div>
       </td>

@@ -1,35 +1,18 @@
-<!--suppress ALL -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import SearchBar from "./SearchBar.vue";
+import SearchBar from "../components/SearchBar.vue";
 import AppTable from '@/components/AppTable.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
 import DeleteButton from '@/components/DeleteButton.vue'
+import router from '@/router'
 
 const infiniteScrollTrigger = ref(null)
 let observer: IntersectionObserver
 const eventStore = useEventsStore()
-const emit = defineEmits(['changeMode'])
 
 const tableData = ref<EventCard[]>([])
-
-const addEvent = () => emit('changeMode')
 
 eventStore.getEvents().then((res) => tableData.value.push(...res))
 
@@ -83,13 +66,14 @@ const statusToogle = (event: EventCard) => {
   }])
 }
 
-
+const goTo = (url: string) => router.push(url)
 </script>
 
 <template>
+
   <header class="controls">
     <SearchBar v-model:search-query="searchQuery" v-model:activeOnly="activeOnly" @search="filterEvents"/>
-    <button @click="addEvent" class="create-button">+ Создать Мероприятие</button>
+    <button @click="goTo('/events/create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
     <template #thead>
@@ -112,13 +96,19 @@ const statusToogle = (event: EventCard) => {
       <th class=" table-cell--title">
         <div>Название</div>
       </th>
-      <th class=" table-cell--date">
-        <div>Дата начала</div>
+      <th class=" table-cell--views">
+        <div>Просмотры pwa/tg</div>
+      </th>
+      <th class=" table-cell--redirect">
+        <div>Переходы</div>
+      </th>
+      <th class=" table-cell--favorite">
+        <div>Избранное</div>
       </th>
     </tr>
   </template>
   <template #tbody>
-    <tr v-for="(row, index) in filteredEvents" :class="{'is-warning': row.is_validated == null}" :key="row.id">
+    <tr v-for="row in filteredEvents" :class="{'is-warning': row.is_validated == null}" :key="row.id">
       <td class=" table-cell--id">
         <div>{{ row.id }}</div>
       </td>
@@ -137,13 +127,14 @@ const statusToogle = (event: EventCard) => {
       <td class=" table-cell--title">
         <div>{{ row.name }}</div>
       </td>
-      <td class=" table-cell--date">
-        <div>
-        <div>{{ row.date_from }}</div>
-        <div class="cell action-cell">
-          <DeleteButton @delete="deleteEvent(row.id, index)" class="delete"/>
-        </div>
-        </div>
+      <td class=" table-cell--views">
+        <div>{{ row.stat_view_pwa + `/` + row.stat_view_tg }}</div>
+      </td>
+      <td class=" table-cell--redirect">
+        <div>{{ row.stat_redirect }}</div>
+      </td>
+      <td class=" table-cell--favorite">
+        <div>{{ row.stat_fave }}</div>
       </td>
     </tr>
   </template>
@@ -152,14 +143,30 @@ const statusToogle = (event: EventCard) => {
 </template>
 
 <style scoped lang="scss">
-.delete {
-}
-
-.table-cell--email {
-  width: 20%;
-}
-.table-cell--title {
-  width: 30%;
+.table-cell {
+  &--id {
+    text-align: center;
+    min-width: 100px;
+  }
+  &--user {
+    text-align: center;
+    min-width: 100px;
+  }
+  &--email {
+    width: 20%;
+  }
+  &--title {
+    width: 30%;
+  }
+  &--views {
+    text-align: center;
+  }
+  &--redirect {
+    text-align: center;
+  }
+  &--favorite {
+    text-align: center;
+  }
 }
 
 .table-cell--date > div {

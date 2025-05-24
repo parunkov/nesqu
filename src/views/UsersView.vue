@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import SearchBar from "./SearchBar.vue";
-import AppCheckbox from "./AppCheckbox.vue";
-import type { User } from "./types";
-import AppTable from "./AppTable.vue";
+import SearchBar from "../components/SearchBar.vue";
+import AppCheckbox from "../components/AppCheckbox.vue";
+import type { User } from "../components/types.ts";
+import AppTable from "../components/AppTable.vue";
 
 const searchQuery = ref("");
 const showActiveOnly = ref(false);
@@ -27,7 +27,6 @@ const filteredUsers = computed(() => {
 </script>
 
 <template>
-  <section class="user-table-section">
     <header class="search-header">
       <SearchBar v-model:active-only="showActiveOnly" v-model:search-query="searchQuery" />
     </header>
@@ -62,7 +61,6 @@ const filteredUsers = computed(() => {
       </template>
     </AppTable>
     </div>
-  </section>
 </template>
 <style scoped lang="scss">
 .wrapper {

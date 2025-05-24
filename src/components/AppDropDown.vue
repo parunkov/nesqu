@@ -3,17 +3,28 @@ import { ref } from 'vue';
 
 const emit = defineEmits(['changeCity'])
 
-const options = ['Сочи', 'Краснодар', 'Москва'];
-const selected = ref(options[0]);
+type Option = {
+  id: number,
+  value: string
+}
+
+const props = defineProps({
+  options: {
+    type: Array<Option>,
+    required: true
+  }
+})
+
+const selected = ref(props.options[0]);
 const isOpen = ref(false);
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-const selectOption = (option: string, index: number) => {
+const selectOption = (option: Option) => {
   selected.value = option;
-  emit('changeCity', index)
+  emit('changeCity', option)
   isOpen.value = false;
 };
 </script>
@@ -32,10 +43,10 @@ const selectOption = (option: string, index: number) => {
         <div class="dropdown__content">
           <ul class="dropdown-list">
             <li
-              v-for="(option, index) in options"
-              :key="index"
+              v-for="option in options"
+              :key="option.id"
               class="dropdown-list__item"
-              @click="selectOption(option, index)"
+              @click="selectOption(option)"
             >
               {{ option }}
             </li>

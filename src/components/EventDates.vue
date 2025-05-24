@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import AppButton from '@/components/AppButton.vue'
-import type { Event as EventType } from '@/types/events.ts'
-
-const dates = ref<EventType['datetime']>([])
-const emit = defineEmits(['updateDates'])
+import type { Event as EventType, DateTime } from '@/types/events.ts'
 
 interface DateRow {
   startDate: string
@@ -15,10 +12,57 @@ interface DateRow {
   showHint: boolean
 }
 
-const rows = ref<DateRow[]>([
-  { startDate: '', startTime: '', endDate: '', endTime: '', showActions: false, showHint: false }
-])
+const props = defineProps({
+  startDates: {
+    type: Array<DateTime>,
+    default: [],
+  },
+})
 
+const dates = ref<EventType['datetime']>(props.startDates)
+
+const emit = defineEmits(['updateDates'])
+
+const rows = ref<DateRow[]>(convertToDateRows(props.startDates))
+
+watch(
+  () => props.startDates,
+  () => {
+    dates.value = props.startDates
+    rows.value = convertToDateRows(props.startDates)
+  },
+  { deep: true, once: true, immediate: false },
+)
+
+function convertToDateRows(target: DateTime[]): DateRow[] {
+  console.log(props.startDates, 34534534543)
+  return target.map(({ from, to }) => {
+    // Разделение from
+    const [startDateRaw, startTime] = from.split('T')
+    const [startYear, startMonth, startDay] = startDateRaw.split('-')
+    const startDate = `${startDay}:${startMonth}`
+
+    let endDate = ''
+    let endTime = ''
+
+    // Обработка to, если указано
+    if (to && to.includes('T')) {
+      const [endDateRaw, endTimeRaw] = to.split('T')
+      const [endYear, endMonth, endDay] = endDateRaw.split('-')
+      endDate = `${endDay}:${endMonth}`
+      endTime = endTimeRaw
+    }
+
+    return {
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      showActions: false,
+      showHint: false,
+    }
+  })
+}
 
 const formatInput = (value: string, isDate: boolean): string => {
   value = value.replace(/[^0-9_]/g, '')
@@ -34,79 +78,72 @@ const formatInput = (value: string, isDate: boolean): string => {
 }
 
 const isFieldComplete = (value: string): boolean => {
-  // Проверяем, что строка полностью заполнена (формат: 5 символов)
-  return value.length === 5;
+  return value.length === 5
 }
 
 const toIsoDateTime = (dateStr: string, timeStr?: string): string | null => {
-  // dateStr: 'dd.mm'
-  // timeStr: 'HH:mm' или undefined
-  if (!dateStr || dateStr.length !== 5) return null;
+  if (!dateStr || dateStr.length !== 5) return null
 
-  const [day, month] = dateStr.split('.').map(Number);
-  const year = 2026; // фиксируем год, или вынеси как параметр, если нужно динамически
+  const [day, month] = dateStr.split('.').map(Number)
+  const year = 2025
 
   if (timeStr && timeStr.length === 5) {
-    // Формируем ISO строку с временем и секундами
-    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T${timeStr}:00`;
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T${timeStr}:00`
   } else {
-    // Формируем ISO строку только с датой (время 00:00:00)
-    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00`;
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00`
   }
 }
 
 const updateDatesAndEmit = () => {
   dates.value = rows.value
-    .map(row => {
-      const from = toIsoDateTime(row.startDate, row.startTime);
-      if (!from) return null; // from - обязательное поле
+    .map((row) => {
+      const from = toIsoDateTime(row.startDate, row.startTime)
+      if (!from) return null
 
-      const to = row.endDate ? toIsoDateTime(row.endDate, row.endTime) : undefined;
+      const to = row.endDate ? toIsoDateTime(row.endDate, row.endTime) : undefined
 
-      return to ? { from, to } : { from };
+      return to ? { from, to } : { from }
     })
-    .filter((item): item is { from: string; to?: string } => item !== null);
+    .filter((item): item is { from: string; to?: string } => item !== null)
 
-  emit('updateDates', dates.value);
+  emit('updateDates', dates.value)
 }
-
 
 const handleInput = async (
   e: Event,
   rowIndex: number,
   field: 'startDate' | 'startTime' | 'endDate' | 'endTime',
-  isDate: boolean
+  isDate: boolean,
 ) => {
-  const input = e.target as HTMLInputElement;
-  const value = input.value;
-  const formatted = formatInput(value, isDate);
-  rows.value[rowIndex][field] = formatted;
+  const input = e.target as HTMLInputElement
+  const value = input.value
+  const formatted = formatInput(value, isDate)
+  rows.value[rowIndex][field] = formatted
 
   // Логика для показа действий и подсказок
   if (isDate && formatted.length === 5 && field === 'startDate') {
-    rows.value[rowIndex].showActions = true;
-    await nextTick();
-    focusInput(rowIndex, 'startTime');
+    rows.value[rowIndex].showActions = true
+    await nextTick()
+    focusInput(rowIndex, 'startTime')
   }
 
   if (field !== 'startDate' && rows.value[rowIndex].startDate.length < 5) {
-    rows.value[rowIndex].showHint = true;
-    await nextTick();
-    focusInput(rowIndex, 'startDate');
+    rows.value[rowIndex].showHint = true
+    await nextTick()
+    focusInput(rowIndex, 'startDate')
   } else {
-    rows.value[rowIndex].showHint = false;
+    rows.value[rowIndex].showHint = false
   }
 
   // Вызов emit только если поле полностью заполнено
   if (isFieldComplete(formatted)) {
-    updateDatesAndEmit();
+    updateDatesAndEmit()
   }
 }
 
-
 const focusInput = (rowIndex: number, field: keyof DateRow) => {
   const input = document.querySelectorAll<HTMLInputElement>(
-    `.row-${rowIndex} input[data-field="${field}"]`
+    `.row-${rowIndex} input[data-field="${field}"]`,
   )[0]
   input?.focus()
 }
@@ -117,13 +154,6 @@ const handleBlur = (rowIndex: number) => {
     rows.value.splice(rowIndex, 1)
   }
 }
-
-const shiftDate = (dateStr: string, days: number): string => {
-  if (!dateStr || dateStr.length !== 5) return ''
-  const [day, month] = dateStr.split('.').map(Number)
-  const date = new Date(2025, month - 1, day + days)
-  return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`
-}
 const isRowComplete = (row: DateRow): boolean => {
   // Проверяем, что у строки заполнены полностью startDate, startTime
   // Можно добавить проверку endDate и endTime, если они есть (но не обязательны)
@@ -132,33 +162,26 @@ const isRowComplete = (row: DateRow): boolean => {
     row.startTime.length === 5 &&
     (!row.endDate || row.endDate.length === 5) &&
     (!row.endTime || row.endTime.length === 5)
-  );
+  )
 }
 
-const duplicateRowWithShift = async (rowIndex: number, days: number) => {
-  const currentRow = rows.value[rowIndex];
-  const newStartDate = shiftDate(currentRow.startDate, days);
-  const newEndDate = currentRow.endDate
-    ? shiftDate(currentRow.endDate, days)
-    : '';
-
+const addDate = async () => {
   const newRow: DateRow = {
-    startDate: newStartDate,
-    startTime: currentRow.startTime,
-    endDate: newEndDate,
-    endTime: currentRow.endTime,
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: '',
     showActions: true,
-    showHint: false
-  };
+    showHint: false,
+  }
 
-  rows.value.splice(rowIndex + 1, 0, newRow);
+  rows.value.push(newRow)
 
-  await nextTick();
-  focusInput(rowIndex + 1, 'startTime');
+  await nextTick()
+  focusInput(rows.value.length - 1, 'startDate')
 
-  // Если новая строка полностью заполнена — обновляем dates и эмитим
   if (isRowComplete(newRow)) {
-    updateDatesAndEmit();
+    updateDatesAndEmit()
   }
 }
 </script>
@@ -173,28 +196,74 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
         :class="`row-${rowIndex}`"
       >
         <div class="form-date__item">
-          <!-- Start Date -->
           <div class="form-date__element form-item">
-            <label class="form-item__label">Дата начала*</label>
-            <div class="form-date__values field">
-              <input
-                class="form-date__input form-date__input-date"
-                type="text"
-                placeholder="ДД.ММ"
-                v-model="row.startDate"
-                data-field="startDate"
-                @input="e => handleInput(e, rowIndex, 'startDate', true)"
-                @blur="() => handleBlur(rowIndex)"
-              />
-              <input
-                class="form-date__input form-date__input-time"
-                type="text"
-                placeholder="ЧЧ:ММ"
-                v-model="row.startTime"
-                data-field="startTime"
-                @input="e => handleInput(e, rowIndex, 'startTime', false)"
-                :disabled="row.startDate.length < 5"
-              />
+            <label class="form-item__label">Начало</label>
+            <div class="form-date__dates">
+              <div class="form-date__values field" :class="{ filled: row.startDate.length === 5 }">
+                <img src="/icons/black-calendar.svg" />
+                <input
+                  class="form-date__input form-date__input-date"
+                  type="text"
+                  placeholder="ДД.ММ"
+                  v-model="row.startDate"
+                  data-field="startDate"
+                  @input="(e) => handleInput(e, rowIndex, 'startDate', true)"
+                  @blur="() => handleBlur(rowIndex)"
+                />
+              </div>
+              <div
+                class="form-date__values field"
+                :class="{ filled: row.startTime.length === 5, disabled: row.startDate.length < 5 }"
+              >
+                <img src="/icons/black-time.svg" />
+                <input
+                  class="form-date__input form-date__input-time"
+                  type="text"
+                  placeholder="ЧЧ:ММ"
+                  v-model="row.startTime"
+                  data-field="startTime"
+                  @input="(e) => handleInput(e, rowIndex, 'startTime', false)"
+                  :disabled="row.startDate.length < 5"
+                />
+              </div>
+            </div>
+          </div>
+
+          <span class="form-date__item-separator"></span>
+
+          <div class="form-date__element form-item">
+            <label class="form-item__label">Окончание</label>
+            <div class="form-date__dates">
+              <div
+                class="form-date__values field"
+                :class="{ filled: row.endDate.length === 5, disabled: row.startDate.length < 5 }"
+              >
+                <img src="/icons/black-calendar.svg" />
+                <input
+                  class="form-date__input form-date__input-date"
+                  type="text"
+                  placeholder="ДД.ММ"
+                  v-model="row.endDate"
+                  data-field="endDate"
+                  @input="(e) => handleInput(e, rowIndex, 'endDate', true)"
+                  :disabled="row.startDate.length < 5"
+                />
+              </div>
+              <div
+                class="form-date__values field"
+                :class="{ filled: row.endTime.length === 5, disabled: row.startDate.length < 5 }"
+              >
+                <img src="/icons/black-time.svg" />
+                <input
+                  class="form-date__input form-date__input-time"
+                  type="text"
+                  placeholder="ЧЧ:ММ"
+                  v-model="row.endTime"
+                  data-field="endTime"
+                  @input="(e) => handleInput(e, rowIndex, 'endTime', false)"
+                  :disabled="row.startDate.length < 5"
+                />
+              </div>
             </div>
             <p
               v-if="row.showHint"
@@ -205,61 +274,24 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
             </p>
           </div>
 
-          <span class="form-date__item-separator"></span>
-
-          <!-- End Date -->
-          <div class="form-date__element form-item">
-            <label class="form-item__label">Дата окончания</label>
-            <div class="form-date__values field">
-              <input
-                class="form-date__input form-date__input-date"
-                type="text"
-                placeholder="ДД.ММ"
-                v-model="row.endDate"
-                data-field="endDate"
-                @input="e => handleInput(e, rowIndex, 'endDate', true)"
-                :disabled="row.startDate.length < 5"
-              />
-              <input
-                class="form-date__input form-date__input-time"
-                type="text"
-                placeholder="ЧЧ:ММ"
-                v-model="row.endTime"
-                data-field="endTime"
-                @input="e => handleInput(e, rowIndex, 'endTime', false)"
-                :disabled="row.startDate.length < 5"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Actions -->
-        <div
-          v-if="row.showActions "
-          class="form-date__actions"
-          style="opacity: 1; transform: translateY(0)"
-        >
-
-          <button v-if="rowIndex != 0"
+          <button
+            v-if="rowIndex !== 0"
             class="button button--danger button--outline form-date__remove-btn"
             @click="rows.splice(rowIndex, 1)"
           />
-          <AppButton class="form-date__add-day-btn" @click="duplicateRowWithShift(rowIndex, 1)">
-            + День
-          </AppButton>
-          <AppButton class="form-date__add-day-btn" @click="duplicateRowWithShift(rowIndex, 7)">
-            + Неделя
-          </AppButton>
         </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="form-date__actions" style="opacity: 1; transform: translateY(0)">
+        <AppButton class="form-date__add-day-btn" @click="addDate"> + Добавить дату</AppButton>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use "../assets/scss/helpers" as *;
-
-
+@use '../assets/scss/helpers' as *;
 
 .button {
   padding: 19px;
@@ -279,7 +311,7 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
   }
 
   &--danger {
-    color:  #f60b0f;
+    color: #f60b0f;
   }
 
   &--outline {
@@ -292,9 +324,10 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid  #edeaee;
+    border-top: 1px solid #edeaee;
   }
 }
+
 .field {
   display: block;
   width: 100%;
@@ -307,7 +340,9 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
   color: #000;
   background: #f9f6fa;
 
-  transition: border-color 0.33s ease, background 0.33s ease;
+  transition:
+    border-color 0.33s ease,
+    background 0.33s ease;
 
   &::placeholder {
     color: #767377;
@@ -328,12 +363,17 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
 .field:has(input:not(:placeholder-shown)) {
   background: #fff;
 }
+
 .form-date {
   // .form-date__row
+  &__dates {
+    display: flex;
+    gap: 5px;
+  }
 
   &__row {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
     gap: 10px;
   }
 
@@ -352,14 +392,23 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
   // .form-date__element&& rowIndex != 0
 
   &__element {
-    max-width: 185px;
+    max-width: 205px;
   }
 
   // .form-date__values
+  .disabled,
+  .filled {
+    border-color: #767377;
+  }
 
   &__values {
     display: flex;
     gap: 5px;
+    border-color: #9218c0;
+
+    &:disabled {
+      border-color: #767377;
+    }
   }
 
   &__hint {
@@ -400,15 +449,13 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
     display: flex;
     align-items: flex-end;
     gap: 10px;
+    margin-top: 20px;
   }
 
   // .form-date__remove-btn
 
   &__add-day-btn,
-  &__remove-btn,
-  &__add-week-btn {
-    min-width: 40px;
-    height: 40px;
+  &__remove-btn {
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -416,8 +463,14 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
   }
 
   &__remove-btn {
+    height: 24px;
+    width: 24px;
+    align-self: self-end;
+  }
+
+  &__remove-btn {
     &::before {
-      content: "";
+      content: '';
       display: block;
       width: 14px;
       height: 2px;
@@ -426,5 +479,4 @@ const duplicateRowWithShift = async (rowIndex: number, days: number) => {
     }
   }
 }
-
 </style>

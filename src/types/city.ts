@@ -6,3 +6,8 @@ export type CityStatistics = {
   stat_redirect: number,
   stat_fave: number
 }
+
+export type CityInfo = {
+  id: number,
+  name: string
+}

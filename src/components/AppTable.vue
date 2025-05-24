@@ -1,14 +1,13 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main class="table-container">
     <table>
       <thead>
-      <slot name="thead" />
+        <slot name="thead" />
       </thead>
       <tbody>
-      <slot name="tbody" />
+        <slot name="tbody" />
       </tbody>
     </table>
   </main>
@@ -68,14 +67,13 @@ thead {
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
     }
-
   }
 
   th:not(:first-child) {
     border-left: 1px solid var(--color-gray-400);
   }
 
-  th>* {
+  th > * {
     align-self: stretch;
     width: 100%;
     gap: 10px;
@@ -95,7 +93,6 @@ tbody {
     margin-top: 10px;
 
     td {
-      background-color: var(--color-white);
       border-left: none;
 
       * {
@@ -114,7 +111,6 @@ tbody {
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
     }
-
   }
 }
 
@@ -127,7 +123,6 @@ tr {
 }
 
 td {
-  background-color: var(--color-gray-300);
   border-left: 1px solid var(--color-gray-100);
   flex-direction: column;
   align-items: stretch;
@@ -144,5 +139,7 @@ td {
   background-color: var(--color-warning);
 }
 
+.is-error {
+  background-color: var(--color-error);
+}
 </style>
-

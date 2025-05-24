@@ -1,26 +1,24 @@
 const AUTH = {
-  LOGIN: "/account/mail/login/",
-  LIST: '/super/user/list/'
+  LOGIN: '/admin/account/mail/login/',
+  LIST: '/admin/super/user/list/',
 } as const
 
 const MODERATOR = {
-  USERS_STATUS: '/moderator/user/status/',
-  STATS_CITIES: '/moderator/stats/cities/',
-  STAT_DAYS: '/moderator/stats/days/',
-  LIST: '/moderator/user/list/'
+  USERS_STATUS: '/admin/moderator/user/status/',
+  STATS_CITIES: '/admin/moderator/stats/cities/',
+  STAT_DAYS: '/admin/moderator/stats/days/',
+  LIST: '/admin/moderator/user/list/',
+  DICTIONARY: '/dictionary/',
 } as const
 
 const EVENT = {
-  PICS: '/event/{id}/pics/',
-  UPDATE: 'event/{id}/update/',
-  DELETE: '/event/{id}/',
-  ADD_EVENT: '/event/new/',
-  LIST: '/event/list/',
-  STATUS: '/event/status/',
+  PICS: '/admin/event/{id}/pics/',
+  UPDATE: '/admin/event/{id}/update/',
+  DELETE: '/admin/event/{id}/',
+  ADD_EVENT: '/admin/event/new/',
+  LIST: '/admin/event/list/',
+  STATUS: '/admin/event/status/',
+  EVENT: 'object/{id}/',
 } as const
 
-export {
-  MODERATOR,
-  EVENT,
-  AUTH,
-}
+export { MODERATOR, EVENT, AUTH }

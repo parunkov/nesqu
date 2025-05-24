@@ -1,16 +1,14 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 import EventService from '@/api/events.ts'
-import { requestWrapper } from "@/utils/requestWrapper";
-import type { EventsFilter, EventData, EventStatus } from '@/types/events.ts'
+import { requestWrapper } from '@/utils/requestWrapper'
+import type { EventsFilter, EventData, EventStatus, EventInfo } from '@/types/events.ts'
 
-
-export const useEventsStore = defineStore("events", () => {
-  const isLoading = ref(true);
+export const useEventsStore = defineStore('events', () => {
+  const isLoading = ref(true)
   const eventService = new EventService()
-  const filters = ref<EventsFilter>({page: 1})
+  const filters = ref<EventsFilter>({ page: 1 })
   const nextPage = ref(true)
-
 
   async function getEvents() {
     filters.value.page = 0
@@ -20,12 +18,13 @@ export const useEventsStore = defineStore("events", () => {
 
   async function loadMore() {
     if (nextPage.value) {
-      return await requestWrapper(isLoading, () => eventService.getEvents(filters.value))
-        .then(data => {
+      return await requestWrapper(isLoading, () => eventService.getEvents(filters.value)).then(
+        (data) => {
           filters.value.page = data.next
           nextPage.value = data.next !== null
           return data.results
-        })
+        },
+      )
     }
     return []
   }
@@ -40,13 +39,33 @@ export const useEventsStore = defineStore("events", () => {
     return requestWrapper(isLoading, () => eventService.addEvent(event))
   }
 
- async function uploadImage(images: string[], id: number) {
+  async function uploadImage(images: string[], id: number) {
     return requestWrapper(isLoading, () => eventService.uploadPics(images, id))
- }
+  }
 
- async function updateEventsStatus(eventsStatus: EventStatus[]) {
+  async function updateEventsStatus(eventsStatus: EventStatus[]) {
     return requestWrapper(isLoading, () => eventService.updateEventStatus(eventsStatus))
- }
+  }
 
-  return { isLoading, getEvents, loadMore, deleteEvent, addEvent, uploadImage, updateEventsStatus, nextPage, filters };
-});
+  async function getEvent(id: number) {
+    return requestWrapper(isLoading, () => eventService.getEvent(id))
+  }
+
+  async function updateEvent(event: EventInfo, id: number) {
+    return requestWrapper(isLoading, () => eventService.updateEvent(event, id))
+  }
+
+  return {
+    isLoading,
+    getEvents,
+    getEvent,
+    loadMore,
+    deleteEvent,
+    addEvent,
+    uploadImage,
+    updateEventsStatus,
+    updateEvent,
+    nextPage,
+    filters,
+  }
+})

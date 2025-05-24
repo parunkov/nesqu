@@ -1,89 +1,88 @@
-
 <script setup lang="ts">
 import InfoSection from '@/components/InfoSection.vue'
 import CategoriesSection from '@/components/CategoriesSection.vue'
 import ContentSection from '@/components/ContentSection.vue'
 import PhotoSection from '@/components/PhotoSection.vue'
-import type { Event } from '@/types/events.ts'
-import { ref, watch } from 'vue'
+import type { EventInfo } from '@/types/events.ts'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useEventsStore } from '@/stores/events.ts'
+import router from '@/router'
+import { useRoute } from 'vue-router'
 
 const eventStore = useEventsStore()
+let realId = '0'
+const currentEvent = reactive<EventInfo>({} as EventInfo)
 
-const newEvent = ref<Event>({
-  city: 0,
-  types: [],
-  name: "",
-  contacts: [],
-  datetime: [],
-  prices: [],
-  address: "",
-  description: "",
-  images: []
-})
-
-const emit = defineEmits(['changeMode'])
-
-watch(() => newEvent.value, () => console.log(newEvent.value), {
-  deep: true,
-})
-
-const deleteEvent = () => {
-  emit('changeMode')
-}
+watch(
+  () => currentEvent,
+  () => console.log(currentEvent),
+  {
+    deep: true,
+  },
+)
 
 const saveEvent = () => {
-  const { images, ...eventWithoutImages } = newEvent.value;
-  eventStore.addEvent(eventWithoutImages)
-    .then(res => {
-      if (images)
-        eventStore.uploadImage(images, res.id)
-    })
+  console.log(currentEvent)
+  if (!currentEvent) return
+  eventStore.updateEvent(currentEvent, Number(realId))
 }
 
+onMounted(() => {
+  const id = useRoute().params.id as string
+  realId = id
+  eventStore.getEvent(Number(id)).then((data) => {
+    Object.assign(currentEvent, data)
+  })
+})
+
+const currentCity = ref(1)
 </script>
 
 <template>
-  <div class="content-wrap">
+  <div v-if="currentEvent" class="content-wrap">
     <div class="content-wrap__inner">
       <div class="content-wrap__head">
-        <img @click="() => emit('changeMode')"
-             src="/icons/back.svg"
-             alt="" class="header-icon" />
-        <h2 class="content-wrap__title">
-          Новое Мероприятие
-        </h2>
+        <img @click="() => router.back()" src="/icons/back.svg" alt="" class="header-icon" />
+        <h2 class="content-wrap__title">Редактирование мероприятия</h2>
       </div>
       <div class="content-wrap__body">
         <div class="content-wrap__column">
-          <InfoSection v-model:city="newEvent.city" v-model:dates="newEvent.datetime" v-model:prices="newEvent.prices"/>
-          <ContentSection v-model:description="newEvent.description" v-model:title="newEvent.name"/>
-          <PhotoSection v-model="newEvent.images" />
+          <InfoSection
+            v-model:city="currentCity"
+            v-model:dates="currentEvent.datetime"
+            v-model:prices="currentEvent.prices"
+          />
+          <ContentSection
+            v-model:description="currentEvent.description"
+            v-model:title="currentEvent.name"
+          />
+          <PhotoSection v-model="currentEvent.images" />
         </div>
         <div class="content-wrap__column">
           <CategoriesSection />
         </div>
       </div>
       <div class="content-wrap__foot">
-        <button  @click="deleteEvent" class="button button--icon button--outline button--danger" type="button">
-          <img src="/icons/delete.svg" alt="Удалить">
+        <button
+          @click="router.back()"
+          class="button button--icon button--outline button--danger"
+          type="button"
+        >
+          <img src="/icons/delete.svg" alt="Удалить" />
 
           <span>Удалить</span>
         </button>
 
-        <button @click="saveEvent" class="button" type="button">
-          Сохранить
-        </button>
+        <button @click="saveEvent" class="button" type="button">Сохранить</button>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use "../assets/scss/helpers" as *;
-.content-wrap {
-  padding-top: 20px;
+@use '../assets/scss/helpers/index' as *;
 
+.content-wrap {
   @include one {
     padding-top: 0;
   }
@@ -175,7 +174,7 @@ const saveEvent = () => {
   }
 
   &--danger {
-    color:  #f60b0f;
+    color: #f60b0f;
   }
 
   &--outline {
@@ -183,5 +182,4 @@ const saveEvent = () => {
     border-color: currentColor;
   }
 }
-
 </style>

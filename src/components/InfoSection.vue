@@ -1,11 +1,26 @@
-
 <script setup lang="ts">
 import AppDropDown from '@/components/AppDropDown.vue'
 import EventDates from '@/components/EventDates.vue'
 import PriceInput from '@/components/PriceInput.vue'
+import { useModeratorStore } from '@/stores/moderator.ts'
 import type { Event } from '@/types/events.ts'
+import { computed, watch } from 'vue'
 
+const moderatorStore = useModeratorStore()
+
+const cities = computed(() => {
+  return moderatorStore.cities.map((el) => {
+    return { id: el.id, value: el.name }
+  })
+})
 const dates = defineModel<Event['datetime']>('dates')
+watch(
+  () => dates.value,
+  () => {
+    console.log(dates.value)
+  },
+  { deep: true },
+)
 const prices = defineModel<Event['prices']>('prices')
 const city = defineModel<Event['city']>('city')
 
@@ -21,22 +36,22 @@ const updateDates = (datesData: Event['datetime']) => {
   <div class="content-card">
     <div class="content-card__inner">
       <div class="content-card__head">
-        <h3 class="content-card__title">
-          Информация
-        </h3>
+        <h3 class="content-card__title">Информация</h3>
       </div>
 
       <div class="content-card__body">
-
         <div class="form-group">
           <div class="form-item">
             <label for="" class="form-item__label">Город</label>
 
-            <AppDropDown @changeCity="(id: number) => changeCity(id)" />
+            <AppDropDown :options="cities" @changeCity="(option) => changeCity(option.id)" />
           </div>
         </div>
 
-            <EventDates @update-dates="(datesData: Event['datetime']) => updateDates(datesData)" />
+        <EventDates
+          :start-dates="dates"
+          @update-dates="(datesData: Event['datetime']) => updateDates(datesData)"
+        />
 
         <PriceInput v-model="prices" />
       </div>
@@ -44,13 +59,11 @@ const updateDates = (datesData: Event['datetime']) => {
   </div>
 </template>
 
-
 <style scoped lang="scss">
 .content-card {
   box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
   border-radius: 20px;
   background: #fff;
-
 
   + .content-card {
     margin-top: 20px;
@@ -88,12 +101,11 @@ const updateDates = (datesData: Event['datetime']) => {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid  #edeaee;
+    border-top: 1px solid #edeaee;
   }
 }
 
 .form-item {
-
   // .form-block__label
 
   &__label {
@@ -105,7 +117,6 @@ const updateDates = (datesData: Event['datetime']) => {
     color: #444145;
   }
 }
-
 
 .dropdown {
   position: relative;
@@ -134,7 +145,7 @@ const updateDates = (datesData: Event['datetime']) => {
     &::after {
       content: url('data:image/svg+xml,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="%23444145" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>');
       line-height: 0;
-      transition: transform .33s ease;
+      transition: transform 0.33s ease;
     }
   }
 
@@ -149,7 +160,7 @@ const updateDates = (datesData: Event['datetime']) => {
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.5s ease-in-out;
 
-    &[aria-hidden="false"] {
+    &[aria-hidden='false'] {
       grid-template-rows: 1fr;
     }
   }
@@ -194,7 +205,7 @@ const updateDates = (datesData: Event['datetime']) => {
     cursor: pointer;
     padding: 10px;
 
-    transition: background .33s ease;
+    transition: background 0.33s ease;
 
     &:hover {
       background: #e39bfd;
@@ -214,7 +225,9 @@ const updateDates = (datesData: Event['datetime']) => {
   color: #000;
   background: #f9f6fa;
 
-  transition: border-color 0.33s ease, background 0.33s ease;
+  transition:
+    border-color 0.33s ease,
+    background 0.33s ease;
 
   &::placeholder {
     color: #767377;
@@ -236,4 +249,3 @@ const updateDates = (datesData: Event['datetime']) => {
   background: #fff;
 }
 </style>
-

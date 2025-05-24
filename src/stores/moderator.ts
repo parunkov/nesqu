@@ -1,16 +1,20 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { onMounted, ref } from 'vue'
 import ModeratorService from '@/api/moderator.ts'
 import { requestWrapper } from "@/utils/requestWrapper";
 import type {User, UsersFilters} from "@/types/user";
+import type { CityInfo } from '@/types/city.ts'
+import type { RubricsGroup } from '@/types/rubrics.ts'
 
 
-export const useEventsStore = defineStore("events", () => {
+export const useModeratorStore = defineStore("moderator", () => {
   const isLoading = ref(true);
   const moderatorService = new ModeratorService();
   const filters = ref<Partial<UsersFilters>>({page: 1})
   const nextPage = ref(true)
   const users = ref<User[]>([])
+  const cities = ref<CityInfo[]>([])
+  const rubrics = ref<RubricsGroup[]>([])
 
   async function getUsers() {
     filters.value.page = 0
@@ -43,5 +47,17 @@ export const useEventsStore = defineStore("events", () => {
     return requestWrapper(isLoading, () => moderatorService.patchUsersStatus(usersStatus))
   }
 
-  return { isLoading, users, getUsers, loadMoreUsers, nextPage, filters, getCitiesStatistics, getDaysStatistics, patchUsersStatus };
+  function getDictionary(){
+    moderatorService.getDictionary()
+      .then(data => {
+        rubrics.value.push( ...data?.types )
+        cities.value.push(...data?.cities)
+      })
+  }
+
+  onMounted(() => {
+    getDictionary()
+  })
+
+  return { isLoading, users, getUsers, loadMoreUsers, nextPage, filters, getCitiesStatistics, getDaysStatistics, patchUsersStatus, cities, rubrics };
 });

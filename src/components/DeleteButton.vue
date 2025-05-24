@@ -1,53 +1,43 @@
 <script setup lang="ts">
-const ANIMATION_DURATION = 1000;
-import { computed, ref } from 'vue';
+const ANIMATION_DURATION = 1000
+import { computed, ref } from 'vue'
 
-const emit = defineEmits(['delete']);
+const emit = defineEmits(['delete'])
 
-const isLoading = ref(false);
-const timeoutId = ref<number | null>(null);
-const animationDurationSec = computed(() => `${ANIMATION_DURATION / 1000}s`);
+const isLoading = ref(false)
+const timeoutId = ref<number | null>(null)
+const animationDurationSec = computed(() => `${ANIMATION_DURATION / 1000}s`)
 
 const handleClick = () => {
   if (isLoading.value) {
     // При повторном нажатии отменяем таймаут и сбрасываем состояние
     if (timeoutId.value) {
-      clearTimeout(timeoutId.value);
-      timeoutId.value = null;
+      clearTimeout(timeoutId.value)
+      timeoutId.value = null
     }
-    isLoading.value = false;
-    return;
+    isLoading.value = false
+    return
   }
 
-  isLoading.value = true;
+  isLoading.value = true
 
   timeoutId.value = window.setTimeout(() => {
-    emit('delete');
-    timeoutId.value = null;
-  }, ANIMATION_DURATION);
-};
+    emit('delete')
+    timeoutId.value = null
+  }, ANIMATION_DURATION)
+}
 </script>
 
 <template>
   <button
     class="delete-button"
     :class="{ loading: isLoading }"
-    @click="handleClick"
+    @click.stop="handleClick"
     :style="{ '--animation-duration': animationDurationSec }"
   >
     <!-- Анимированный прогресс-круг по краю кнопки -->
-    <svg
-      v-if="isLoading"
-      class="progress-ring"
-      viewBox="0 0 40 40"
-    >
-      <circle
-        class="progress-ring__circle"
-        cx="20"
-        cy="20"
-        r="18"
-        fill="transparent"
-      />
+    <svg v-if="isLoading" class="progress-ring" viewBox="0 0 40 40">
+      <circle class="progress-ring__circle" cx="20" cy="20" r="18" fill="transparent" />
     </svg>
 
     <!-- Иконка -->
@@ -58,7 +48,6 @@ const handleClick = () => {
   </button>
 </template>
 
-
 <style scoped lang="scss">
 .delete-button {
   margin: 0;
@@ -68,7 +57,6 @@ const handleClick = () => {
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: white;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -122,8 +110,4 @@ const handleClick = () => {
     stroke-dashoffset: 0;
   }
 }
-
 </style>
-
-
-

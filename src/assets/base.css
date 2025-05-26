@@ -76,7 +76,6 @@ td {
   margin: 0;
   padding: 0;
   border: 0;
-  background: transparent;
   background-color: transparent;
   font: inherit;
   text-align: left;
@@ -97,12 +96,12 @@ th {
 
 button {
   all: unset;
-  display: inline-block;
+  display: block;
   cursor: pointer;
 }
 
 input {
   all: unset;
-  display: inline-block;
+  display: block;
   cursor: pointer;
 }

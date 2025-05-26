@@ -2,7 +2,7 @@
 import MenuLink from '@/components/MenuLink.vue'
 import router from '@/router'
 
-const goTo = (url: string) => router.push(url)
+const goTo = (name: string) => router.push({ name: name })
 </script>
 
 <template>
@@ -12,13 +12,38 @@ const goTo = (url: string) => router.push(url)
         <img src="/icons/logo.png" class="logo" alt="Logo" />
       </div>
       <nav class="navigation">
-        <MenuLink icon="/icons/calendar.svg" title="Мероприятия"  @click="goTo('/events')"  :isActive="router.currentRoute.value.name == `events`"/>
-        <MenuLink icon="/icons/calendar.svg" title="Мероприятия стат."  @click="goTo('/events-statistics')"  :isActive="router.currentRoute.value.name == `events-statistics`"/>
-        <MenuLink icon="/icons/user.svg" title="Пользователи" @click="goTo('/users')" :isActive="router.currentRoute.value.name == `users`"/>
+        <MenuLink
+          icon="/icons/calendar.svg"
+          title="Мероприятия"
+          @click="goTo('events')"
+          :isActive="router.currentRoute.value.name == `events`"
+        />
+        <MenuLink
+          icon="/icons/stat.svg"
+          title="Мероприятия стат."
+          @click="goTo('events-statistics')"
+          :isActive="router.currentRoute.value.name == `events-statistics`"
+        />
+        <MenuLink
+          icon="/icons/user.svg"
+          title="Пользователи"
+          @click="goTo('users')"
+          :isActive="router.currentRoute.value.name == `users`"
+        />
+        <MenuLink
+          icon="/icons/stat.svg"
+          title="Города стат."
+          @click="goTo('cities-statistics')"
+          :isActive="router.currentRoute.value.name == `cities-statistics`"
+        />
       </nav>
     </div>
     <div class="user-profile">
-      <MenuLink icon="/icons/exit.svg" title="veryVeryLongEmail2025@mail.ru" />
+      <MenuLink
+        icon="/icons/exit.svg"
+        title="veryVeryLongEmail2025@mail.ru"
+        @click="goTo('login')"
+      />
     </div>
   </aside>
 </template>
@@ -82,5 +107,4 @@ const goTo = (url: string) => router.push(url)
   line-height: 1;
   justify-content: flex-start;
 }
-
 </style>

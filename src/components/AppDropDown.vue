@@ -1,44 +1,50 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const emit = defineEmits(['changeCity'])
-
+const emit = defineEmits<{
+  (e: 'changeValue', value: Option): void
+}>()
 type Option = {
-  id: number,
+  id: number | string
   value: string
 }
 
 const props = defineProps({
   options: {
     type: Array<Option>,
-    required: true
-  }
+    required: true,
+  },
+  startValue: {
+    type: Number,
+    default: 0,
+  },
 })
 
-const selected = ref(props.options[0]);
-const isOpen = ref(false);
+const selected = ref(props.options[props.startValue])
+const isOpen = ref(false)
 
 const toggleDropdown = () => {
-  isOpen.value = !isOpen.value;
-};
+  isOpen.value = !isOpen.value
+}
 
 const selectOption = (option: Option) => {
-  selected.value = option;
-  emit('changeCity', option)
-  isOpen.value = false;
-};
+  selected.value = option
+  emit('changeValue', option)
+  isOpen.value = false
+}
 </script>
 
 <template>
   <div
+    v-if="options.length > 0"
     class="dropdown dropdown--select"
     :class="{ 'dropdown--active': isOpen }"
   >
     <div class="dropdown__trigger field" @click="toggleDropdown">
-      {{ selected }}
+      {{ selected.value }}
     </div>
 
-    <div class="dropdown__wrapper" :aria-hidden="!isOpen">
+    <div class="dropdown__wrapper" v-if="isOpen">
       <div class="dropdown__inner">
         <div class="dropdown__content">
           <ul class="dropdown-list">
@@ -48,7 +54,7 @@ const selectOption = (option: Option) => {
               class="dropdown-list__item"
               @click="selectOption(option)"
             >
-              {{ option }}
+              {{ option.value }}
             </li>
           </ul>
         </div>
@@ -58,15 +64,14 @@ const selectOption = (option: Option) => {
     <!-- Нативный <select>, скрытый -->
     <select class="dropdown__select-native" v-model="selected">
       <option v-for="(option, index) in options" :key="index" :value="option">
-        {{ option }}
+        {{ option.value }}
       </option>
     </select>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use "../assets/scss/helpers" as *;
-
+@use '../assets/scss/helpers' as *;
 
 .field {
   display: block;
@@ -80,7 +85,9 @@ const selectOption = (option: Option) => {
   color: #000;
   background: #f9f6fa;
 
-  transition: border-color 0.33s ease, background 0.33s ease;
+  transition:
+    border-color 0.33s ease,
+    background 0.33s ease;
 
   &::placeholder {
     color: #767377;
@@ -102,6 +109,10 @@ const selectOption = (option: Option) => {
   background: #fff;
 }
 
+.dropdown * {
+  margin: 0;
+}
+
 .dropdown-list {
   border: 1px solid #edeaee;
   border-radius: 10px;
@@ -118,14 +129,16 @@ const selectOption = (option: Option) => {
     cursor: pointer;
     padding: 10px;
 
-    transition: background .33s ease;
+    transition: background 0.33s ease;
 
     &:hover {
       background: #e39bfd;
     }
   }
 }
+
 .dropdown {
+  margin: 0;
   position: relative;
 
   // .dropdown__trigger
@@ -143,6 +156,7 @@ const selectOption = (option: Option) => {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    margin: 0;
     cursor: pointer;
 
     &.field {
@@ -152,7 +166,7 @@ const selectOption = (option: Option) => {
     &::after {
       content: url('data:image/svg+xml,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="%23444145" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>');
       line-height: 0;
-      transition: transform .33s ease;
+      transition: transform 0.33s ease;
     }
   }
 
@@ -163,11 +177,12 @@ const selectOption = (option: Option) => {
     top: 100%;
     left: 0;
     width: 100%;
+    margin: 0;
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.5s ease-in-out;
 
-    &[aria-hidden="false"] {
+    &[aria-hidden='false'] {
       grid-template-rows: 1fr;
     }
   }
@@ -176,12 +191,16 @@ const selectOption = (option: Option) => {
 
   &__inner {
     overflow: hidden;
+    position: fixed;
+    margin: 0;
+    z-index: 100;
   }
 
   // .dropdown__content
 
   &__content {
     padding-top: 8px;
+    margin: 0;
   }
 
   // .dropdown__select-native
@@ -199,5 +218,4 @@ const selectOption = (option: Option) => {
     clip-path: inset(50%);
   }
 }
-
 </style>

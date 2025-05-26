@@ -1,7 +1,18 @@
 <script setup lang="ts">
-import type { MenuItemProps } from "./types";
-
-defineProps<MenuItemProps>()
+defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  isActive: {
+    type: Boolean,
+    required: false,
+  },
+  icon: {
+    type: String,
+    required: true,
+  },
+})
 </script>
 
 <template>

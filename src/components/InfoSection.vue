@@ -44,7 +44,10 @@ const updateDates = (datesData: Event['datetime']) => {
           <div class="form-item">
             <label for="" class="form-item__label">Город</label>
 
-            <AppDropDown :options="cities" @changeCity="(option) => changeCity(option.id)" />
+            <AppDropDown
+              :options="cities"
+              @change-value="(option) => changeCity(Number(option.id))"
+            />
           </div>
         </div>
 

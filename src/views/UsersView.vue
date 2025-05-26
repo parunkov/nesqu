@@ -1,66 +1,95 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import SearchBar from "../components/SearchBar.vue";
-import AppCheckbox from "../components/AppCheckbox.vue";
-import type { User } from "../components/types.ts";
-import AppTable from "../components/AppTable.vue";
+import { ref, computed } from 'vue'
+import SearchBar from '../components/SearchBar.vue'
+import type { Roles, User } from '@/types/user'
+import AppTable from '../components/AppTable.vue'
+import AppDropDown from '@/components/AppDropDown.vue'
+import { useModeratorStore } from '@/stores/moderator.ts'
 
-const searchQuery = ref("");
-const showActiveOnly = ref(false);
+const searchQuery = ref('')
+const showActiveOnly = ref(false)
+
+const moderatorStore = useModeratorStore()
 
 const users = ref<User[]>([
-  { id: 1, active: false, email: "username@mail.com" },
-  { id: 2, active: true, email: "username@mail.com" },
-  { id: 3, active: false, email: "username@mail.com" },
-]);
+  { id: 1, role: 'admin', name: 'username@mail.com' },
+  { id: 2, role: 'user', name: 'username@mail.com' },
+  { id: 3, role: 'admin', name: 'username@mail.com' },
+])
+
+const roleNames: Record<Roles, string> = {
+  user: 'Пользователь',
+  organizer: 'Организатор',
+  admin: 'Администратор',
+  owner: 'Владелец',
+}
+
+// Явно перебираем все роли — TS будет ругаться, если какая-то роль пропущена
+const roles: Roles[] = ['user', 'organizer', 'admin', 'owner']
+
+const rolesOptions = roles.map((role) => ({
+  id: role,
+  value: roleNames[role],
+}))
 
 const filteredUsers = computed(() => {
   return users.value.filter((user) => {
     const matchesSearch =
-      searchQuery.value === "" ||
-      user.email.toLowerCase().includes(searchQuery.value.toLowerCase());
-    const matchesActive = !showActiveOnly.value || user.active;
-    return matchesSearch && matchesActive;
-  });
-});
+      searchQuery.value === '' || user.role.toLowerCase().includes(searchQuery.value.toLowerCase())
+    const matchesActive = !showActiveOnly.value
+    return matchesSearch && matchesActive
+  })
+})
 
+const changeRole = (id: number, newRole: string | number) => {
+  const role = newRole as string as User['role']
+  moderatorStore.patchUsersStatus([{ id, role }])
+}
 </script>
 
 <template>
+  <section class="user-table-section">
     <header class="search-header">
       <SearchBar v-model:active-only="showActiveOnly" v-model:search-query="searchQuery" />
     </header>
     <div class="wrapper">
-    <AppTable class="user-table">
-      <template #thead>
-        <tr>
-          <th class=" table-cell--id">
-            <div>ID</div>
-          </th>
-          <th class=" table-cell--active">
-            <div>Active</div>
-          </th>
-          <th class=" table-cell--email">
-            <div>Email/TG</div>
-          </th>
-        </tr>
-      </template>
+      <AppTable class="user-table">
+        <template #thead>
+          <tr>
+            <th class="table-cell--id">
+              <div>ID</div>
+            </th>
+            <th class="table-cell--role">
+              <div>Роль</div>
+            </th>
+            <th class="table-cell--name">
+              <div>Email/tg</div>
+            </th>
+          </tr>
+        </template>
 
-      <template #tbody>
-        <tr v-for="user in filteredUsers" :key="user.id">
-          <td class=" table-cell--id">
-            <div>{{ user.id }}</div>
-          </td>
-          <td class=" table-cell--active">
-            <div><AppCheckbox v-model="user.active" /></div>
-          </td>
-          <td class=" table-cell--email">
-            <div>{{ user.email }}</div>
-          </td>
-        </tr>
-      </template>
-    </AppTable>
+        <template #tbody>
+          <tr v-for="user in filteredUsers" :key="user.id">
+            <td class="table-cell--id">
+              <div>{{ user.id }}</div>
+            </td>
+            <td class="table-cell--role">
+              <div>
+                <AppDropDown
+                  @change-value="(newRole) => changeRole(user.id, newRole.id)"
+                  :start-value="rolesOptions.findIndex((el) => el.id == user.role)"
+                  :options="rolesOptions"
+                />
+              </div>
+            </td>
+            <td class="table-cell--name">
+              <div>{{ user.name }}</div>
+            </td>
+          </tr>
+        </template>
+      </AppTable>
     </div>
+  </section>
 </template>
 <style scoped lang="scss">
 .wrapper {
@@ -98,13 +127,13 @@ const filteredUsers = computed(() => {
   text-align: center;
 }
 
-.table-cell--active {
+.table-cell--role {
   display: flex;
-  width: min-content;
+  width: 100%;
   justify-self: center;
 }
 
-.table-cell--email {
+.table-cell--name {
   width: 100%;
 }
 </style>

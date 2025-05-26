@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import SearchBar from "../components/SearchBar.vue";
+import SearchBar from '../components/SearchBar.vue'
 import AppTable from '@/components/AppTable.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
-import DeleteButton from '@/components/DeleteButton.vue'
 import router from '@/router'
 
 const infiniteScrollTrigger = ref(null)
@@ -19,9 +18,12 @@ eventStore.getEvents().then((res) => tableData.value.push(...res))
 const searchQuery = ref('')
 const activeOnly = ref(false)
 
-
-const filterEvents = () =>{
-  filteredEvents.value = tableData.value.filter((el) => ((activeOnly.value  === el.is_hiden) || !activeOnly.value) && el.user_name.includes(searchQuery.value))
+const filterEvents = () => {
+  filteredEvents.value = tableData.value.filter(
+    (el) =>
+      (activeOnly.value === el.is_hiden || !activeOnly.value) &&
+      el.user_name.includes(searchQuery.value),
+  )
 }
 
 const filteredEvents = ref(tableData.value)
@@ -29,115 +31,121 @@ const filteredEvents = ref(tableData.value)
 let firstCall = false
 onMounted(() => {
   setTimeout(() => {
-    observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && eventStore.nextPage && !firstCall) {
-        eventStore.loadMore()
-          .then(res => tableData.value.push(...res))
-      }
-      firstCall = false
-    }, {
-      rootMargin: '100px',
-    })
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && eventStore.nextPage && !firstCall) {
+          eventStore.loadMore().then((res) => tableData.value.push(...res))
+        }
+        firstCall = false
+      },
+      {
+        rootMargin: '100px',
+      },
+    )
 
-    if (infiniteScrollTrigger.value)
-      observer.observe(infiniteScrollTrigger.value)
+    if (infiniteScrollTrigger.value) observer.observe(infiniteScrollTrigger.value)
   }, 600)
-
 })
 
 onBeforeUnmount(() => {
-  if (observer && infiniteScrollTrigger.value)
-    observer.unobserve(infiniteScrollTrigger.value)
+  if (observer && infiniteScrollTrigger.value) observer.unobserve(infiniteScrollTrigger.value)
 })
-
-const deleteEvent = (id: number, index: number) => {
-  eventStore.deleteEvent(id).then(() => {
-    tableData.value.splice(index, 1)
-  })
-}
 
 const statusToogle = (event: EventCard) => {
   console.log()
-  eventStore.updateEventsStatus([{
-    id: event.id,
-    is_banned: false,
-    is_hiden: event.is_hiden,
-    top: event.top
-  }])
+  eventStore.updateEventsStatus([
+    {
+      id: event.id,
+      is_banned: false,
+      is_hiden: event.is_hiden,
+      top: event.top,
+    },
+  ])
 }
 
 const goTo = (url: string) => router.push(url)
 </script>
 
 <template>
-
   <header class="controls">
-    <SearchBar v-model:search-query="searchQuery" v-model:activeOnly="activeOnly" @search="filterEvents"/>
+    <SearchBar
+      v-model:search-query="searchQuery"
+      v-model:activeOnly="activeOnly"
+      @search="filterEvents"
+    />
     <button @click="goTo('/events/create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
     <template #thead>
-    <tr>
-      <th class=" table-cell--id">
-        <div>ID</div>
-      </th>
-      <th class=" table-cell--active">
-        <div>Active</div>
-      </th>
-      <th class=" table-cell--top">
-        <div>Топ</div>
-      </th>
-      <th class=" table-cell--user">
-        <div>User ID</div>
-      </th>
-      <th class=" table-cell--email">
-        <div>E-mail</div>
-      </th>
-      <th class=" table-cell--title">
-        <div>Название</div>
-      </th>
-      <th class=" table-cell--views">
-        <div>Просмотры pwa/tg</div>
-      </th>
-      <th class=" table-cell--redirect">
-        <div>Переходы</div>
-      </th>
-      <th class=" table-cell--favorite">
-        <div>Избранное</div>
-      </th>
-    </tr>
-  </template>
-  <template #tbody>
-    <tr v-for="row in filteredEvents" :class="{'is-warning': row.is_validated == null}" :key="row.id">
-      <td class=" table-cell--id">
-        <div>{{ row.id }}</div>
-      </td>
-      <td class=" table-cell--active">
-        <div><AppCheckbox @click="statusToogle(row)" v-model="row.is_hiden" /></div>
-      </td>
-      <td class=" table-cell--top">
-        <div><AppCheckbox @click="statusToogle(row)" v-model="row.top" /></div>
-      </td>
-      <td class=" table-cell--user">
-        <div>{{ row.user_id }}</div>
-      </td>
-      <td class=" table-cell--email">
-        <div>{{ row.user_name }}</div>
-      </td>
-      <td class=" table-cell--title">
-        <div>{{ row.name }}</div>
-      </td>
-      <td class=" table-cell--views">
-        <div>{{ row.stat_view_pwa + `/` + row.stat_view_tg }}</div>
-      </td>
-      <td class=" table-cell--redirect">
-        <div>{{ row.stat_redirect }}</div>
-      </td>
-      <td class=" table-cell--favorite">
-        <div>{{ row.stat_fave }}</div>
-      </td>
-    </tr>
-  </template>
+      <tr>
+        <th class="table-cell--id">
+          <div>ID</div>
+        </th>
+        <th class="table-cell--active">
+          <div>Active</div>
+        </th>
+        <th class="table-cell--top">
+          <div>Топ</div>
+        </th>
+        <th class="table-cell--user">
+          <div>User ID</div>
+        </th>
+        <th class="table-cell--email">
+          <div>E-mail</div>
+        </th>
+        <th class="table-cell--title">
+          <div>Название</div>
+        </th>
+        <th class="table-cell--views">
+          <div>Просмотры pwa/tg</div>
+        </th>
+        <th class="table-cell--redirect">
+          <div>Переходы</div>
+        </th>
+        <th class="table-cell--favorite">
+          <div>Избранное</div>
+        </th>
+      </tr>
+    </template>
+    <template #tbody>
+      <tr
+        v-for="row in filteredEvents"
+        :class="{ 'is-warning': row.is_validated == null }"
+        :key="row.id"
+      >
+        <td class="table-cell--id">
+          <div>{{ row.id }}</div>
+        </td>
+        <td class="table-cell--active">
+          <div>
+            <AppCheckbox @click="statusToogle(row)" v-model="row.is_hiden" />
+          </div>
+        </td>
+        <td class="table-cell--top">
+          <div>
+            <AppCheckbox @click="statusToogle(row)" v-model="row.top" />
+          </div>
+        </td>
+        <td class="table-cell--user">
+          <div>{{ row.user_id }}</div>
+        </td>
+        <td class="table-cell--email">
+          <div>{{ row.user_name }}</div>
+        </td>
+        <td class="table-cell--title">
+          <div>{{ row.name }}</div>
+        </td>
+        <td class="table-cell--views">
+          <div>{{ row.stat_view_pwa + `/` + row.stat_view_tg }}</div>
+        </td>
+        <td class="table-cell--redirect">
+          <div>{{ row.stat_redirect }}</div>
+        </td>
+        <td class="table-cell--favorite">
+          <div>{{ row.stat_fave }}</div>
+        </td>
+      </tr>
+    </template>
   </AppTable>
   <div ref="infiniteScrollTrigger"></div>
 </template>
@@ -148,22 +156,28 @@ const goTo = (url: string) => router.push(url)
     text-align: center;
     min-width: 100px;
   }
+
   &--user {
     text-align: center;
     min-width: 100px;
   }
+
   &--email {
     width: 20%;
   }
+
   &--title {
     width: 30%;
   }
+
   &--views {
     text-align: center;
   }
+
   &--redirect {
     text-align: center;
   }
+
   &--favorite {
     text-align: center;
   }
@@ -220,5 +234,4 @@ const goTo = (url: string) => router.push(url)
   overflow: hidden;
   flex: 1;
 }
-
 </style>

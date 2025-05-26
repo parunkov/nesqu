@@ -39,7 +39,7 @@ function convertToDateRows(target: DateTime[]): DateRow[] {
   return target.map(({ from, to }) => {
     // Разделение from
     const [startDateRaw, startTime] = from.split('T')
-    const [startYear, startMonth, startDay] = startDateRaw.split('-')
+    const [, startMonth, startDay] = startDateRaw.split('-')
     const startDate = `${startDay}:${startMonth}`
 
     let endDate = ''
@@ -48,7 +48,7 @@ function convertToDateRows(target: DateTime[]): DateRow[] {
     // Обработка to, если указано
     if (to && to.includes('T')) {
       const [endDateRaw, endTimeRaw] = to.split('T')
-      const [endYear, endMonth, endDay] = endDateRaw.split('-')
+      const [, endMonth, endDay] = endDateRaw.split('-')
       endDate = `${endDay}:${endMonth}`
       endTime = endTimeRaw
     }

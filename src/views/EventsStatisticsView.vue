@@ -110,7 +110,7 @@ const goTo = (url: string) => router.push(url)
     <template #tbody>
       <tr
         v-for="row in filteredEvents"
-        :class="{ 'is-warning': row.is_validated == null }"
+        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }"
         :key="row.id"
       >
         <td class="table-cell--id">

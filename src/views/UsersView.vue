@@ -123,14 +123,13 @@ const changeRole = (id: number, newRole: string | number) => {
 }
 
 .table-cell--id {
-  width: auto;
   text-align: center;
+  min-width: 100px;
 }
 
 .table-cell--role {
-  display: flex;
+  text-align: center;
   width: 100%;
-  justify-self: center;
 }
 
 .table-cell--name {

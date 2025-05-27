@@ -22,8 +22,10 @@
   --color-gray-1000: #242125;
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-warning: #F4F3D5;
-  --color-error: #FFDECF;
+  --color-warning: #FFFEF0;
+  --color-error: #FFEBEB;
+  --color-warning-border: #FFDECF;
+  --color-error-border: #FFDECF;
 }
 
 *,

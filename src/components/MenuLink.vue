@@ -36,6 +36,13 @@ defineProps({
   justify-content: flex-start;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  font-size: 20px;
+  color: var(--color-white);
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  line-height: 1;
 }
 
 .menu-link--active {

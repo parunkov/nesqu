@@ -38,13 +38,7 @@ const goTo = (name: string) => router.push({ name: name })
         />
       </nav>
     </div>
-    <div class="user-profile">
-      <MenuLink
-        icon="/icons/exit.svg"
-        title="veryVeryLongEmail2025@mail.ru"
-        @click="goTo('login')"
-      />
-    </div>
+    <MenuLink icon="/icons/exit.svg" title="veryVeryLongEmail2025@mail.ru" @click="goTo('login')" />
   </aside>
 </template>
 <style scoped lang="scss">
@@ -92,13 +86,6 @@ const goTo = (name: string) => router.push({ name: name })
 }
 
 .user-profile {
-  border-radius: 10px;
-  display: flex;
-  width: 100%;
-  padding: 10px 8px;
-  align-items: center;
-  gap: 12px;
-
   font-size: 18px;
   color: var(--color-white);
   font-weight: 500;

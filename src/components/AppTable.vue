@@ -21,7 +21,6 @@
   padding: 20px;
   align-items: flex-start;
   gap: 20px;
-  overflow: hidden;
   justify-content: flex-start;
   flex: 1;
   height: 100%;
@@ -30,7 +29,6 @@
 table {
   border-radius: 10px;
   min-width: 240px;
-  overflow: hidden;
   border-collapse: separate; // или collapse, если без gap
   border-spacing: 0 10px;
   table-layout: auto; // или fixed, если хочешь равномерность
@@ -77,7 +75,6 @@ thead {
     align-self: stretch;
     width: 100%;
     gap: 10px;
-    overflow: hidden;
   }
 }
 
@@ -98,7 +95,6 @@ tbody {
       * {
         margin: 10px;
         gap: 10px;
-        overflow: hidden;
       }
     }
 
@@ -117,8 +113,9 @@ tbody {
 tr {
   border-radius: 10px;
   width: 100%;
+  min-height: 60px;
+  height: 60px;
   align-items: flex-start;
-  overflow: hidden;
   justify-content: flex-start;
 }
 
@@ -137,9 +134,11 @@ td {
 
 .is-warning {
   background-color: var(--color-warning);
+  border: 5px solid var(--color-warning-border);
 }
 
 .is-error {
   background-color: var(--color-error);
+  border: 5px solid var(--color-error-border);
 }
 </style>

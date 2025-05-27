@@ -190,8 +190,6 @@ const selectOption = (option: Option) => {
   // .dropdown__inner
 
   &__inner {
-    overflow: hidden;
-    position: fixed;
     margin: 0;
     z-index: 100;
   }
@@ -212,7 +210,6 @@ const selectOption = (option: Option) => {
     margin: -1px;
     padding: 0;
     border: 0;
-    overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
     clip-path: inset(50%);

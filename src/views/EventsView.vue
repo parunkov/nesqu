@@ -28,7 +28,6 @@ const filterEvents = () => {
 }
 
 const filteredEvents = ref(tableData.value)
-console.log(filteredEvents.value)
 let firstCall = false
 onMounted(() => {
   setTimeout(() => {
@@ -70,7 +69,7 @@ const statusToogle = (event: EventCard) => {
   ])
 }
 
-const goTo = (url: string) => router.push(url)
+const goTo = (name: string) => router.push({ name: name })
 
 const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id: id } })
 </script>
@@ -82,7 +81,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       v-model:activeOnly="activeOnly"
       @search="filterEvents"
     />
-    <button @click="goTo('/event-create')" class="create-button">+ Создать Мероприятие</button>
+    <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
     <template #thead>

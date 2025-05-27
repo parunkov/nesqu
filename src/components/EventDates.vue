@@ -35,7 +35,6 @@ watch(
 )
 
 function convertToDateRows(target: DateTime[]): DateRow[] {
-  console.log(props.startDates, 34534534543)
   return target.map(({ from, to }) => {
     // Разделение from
     const [startDateRaw, startTime] = from.split('T')

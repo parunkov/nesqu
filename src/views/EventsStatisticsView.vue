@@ -52,7 +52,6 @@ onBeforeUnmount(() => {
 })
 
 const statusToogle = (event: EventCard) => {
-  console.log()
   eventStore.updateEventsStatus([
     {
       id: event.id,
@@ -63,7 +62,7 @@ const statusToogle = (event: EventCard) => {
   ])
 }
 
-const goTo = (url: string) => router.push(url)
+const goTo = (name: string) => router.push({ name: name })
 </script>
 
 <template>
@@ -73,7 +72,7 @@ const goTo = (url: string) => router.push(url)
       v-model:activeOnly="activeOnly"
       @search="filterEvents"
     />
-    <button @click="goTo('/events/create')" class="create-button">+ Создать Мероприятие</button>
+    <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
     <template #thead>

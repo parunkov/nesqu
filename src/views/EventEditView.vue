@@ -22,7 +22,6 @@ watch(
 )
 
 const saveEvent = () => {
-  console.log(currentEvent)
   if (!currentEvent) return
   eventStore.updateEvent(currentEvent, Number(realId))
 }

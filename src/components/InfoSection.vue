@@ -4,7 +4,7 @@ import EventDates from '@/components/EventDates.vue'
 import PriceInput from '@/components/PriceInput.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
 import type { Event } from '@/types/events.ts'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 
 const moderatorStore = useModeratorStore()
 
@@ -14,13 +14,7 @@ const cities = computed(() => {
   })
 })
 const dates = defineModel<Event['datetime']>('dates')
-watch(
-  () => dates.value,
-  () => {
-    console.log(dates.value)
-  },
-  { deep: true },
-)
+
 const prices = defineModel<Event['prices']>('prices')
 const city = defineModel<Event['city']>('city')
 

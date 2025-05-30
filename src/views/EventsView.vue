@@ -218,10 +218,4 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   font-weight: 500;
   cursor: pointer;
 }
-
-.table-container {
-  background-color: var(--color-gray-100);
-  overflow: hidden;
-  flex: 1;
-}
 </style>

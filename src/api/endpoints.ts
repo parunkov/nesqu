@@ -18,7 +18,7 @@ const EVENT = {
   ADD_EVENT: '/admin/event/new/',
   LIST: '/admin/event/list/',
   STATUS: '/admin/event/status/',
-  EVENT: 'object/{id}/',
+  EVENT: 'event/{id}/',
 } as const
 
 export { MODERATOR, EVENT, AUTH }

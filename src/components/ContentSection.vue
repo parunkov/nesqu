@@ -9,44 +9,43 @@ const description = defineModel<Event['description']>('description')
   <div class="content-card">
     <div class="content-card__inner">
       <div class="content-card__head">
-        <h3 class="content-card__title">
-          Контент
-        </h3>
+        <h3 class="content-card__title">Контент</h3>
       </div>
 
       <div class="content-card__body">
-
         <div class="form-group">
           <div class="form-block">
             <div class="form-item">
-              <label for="" class="form-item__label" >Название*</label>
+              <label for="" class="form-item__label">Название*</label>
 
-              <input type="text" class="field" v-model="title" placeholder=" ">
+              <input type="text" class="field" v-model="title" placeholder=" " />
             </div>
           </div>
 
           <div class="form-block">
             <div class="form-item">
-              <label for="" class="form-item__label ">Описание</label>
+              <label for="" class="form-item__label">Описание</label>
 
-              <textarea class="field field--textarea" v-model="description" placeholder=" "></textarea>
+              <textarea
+                class="field field--textarea"
+                v-model="description"
+                placeholder=" "
+              ></textarea>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use "../assets/scss/helpers" as *;
+@use '../assets/scss/helpers' as *;
 
 .field {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 10px 0;
   border: 1px solid #edeaee;
   border-radius: 10px;
   font-weight: 400;
@@ -55,7 +54,9 @@ const description = defineModel<Event['description']>('description')
   color: #000;
   background: #f9f6fa;
 
-  transition: border-color 0.33s ease, background 0.33s ease;
+  transition:
+    border-color 0.33s ease,
+    background 0.33s ease;
 
   &::placeholder {
     color: #767377;
@@ -76,11 +77,22 @@ const description = defineModel<Event['description']>('description')
 .field:has(input:not(:placeholder-shown)) {
   background: #fff;
 }
+
+textarea {
+  outline: none; /* Убрать стандартную чёрную рамку */
+  resize: none; /* Запретить растягивание */
+  overflow: auto;
+
+  &:focus,
+  &:has(input:focus) {
+    border-color: #9218c0;
+  }
+}
+
 .content-card {
   box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
   border-radius: 20px;
   background: #fff;
-
 
   + .content-card {
     margin-top: 20px;
@@ -113,21 +125,22 @@ const description = defineModel<Event['description']>('description')
   &__body {
   }
 }
+
 .form-group {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid  #edeaee;
+    border-top: 1px solid #edeaee;
   }
 }
-.form-block {
 
+.form-block {
   + .form-block {
     margin-top: 10px;
   }
 }
-.form-item {
 
+.form-item {
   // .form-block__label
 
   &__label {
@@ -140,4 +153,3 @@ const description = defineModel<Event['description']>('description')
   }
 }
 </style>
-

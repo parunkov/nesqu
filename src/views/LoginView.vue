@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { ref } from 'vue'
 import AppButton from '@/components/AppButton.vue'
 import router from '@/router'
+import AppInput from '@/components/AppInput.vue'
 
 const email = ref('')
 const password = ref('')
@@ -28,14 +29,14 @@ const login = () => {
           <div class="form-block">
             <div class="form-item">
               <label for="" class="form-item__label">Email</label>
-              <input type="text" class="field" v-model="email" placeholder=" " />
+              <AppInput v-model="email" placeholder="Почта" type="email" />
             </div>
           </div>
 
           <div class="form-block">
             <div class="form-item">
               <label for="" class="form-item__label">Пароль</label>
-              <input class="field" v-model="password" placeholder=" " />
+              <AppInput v-model="password" placeholder="Пароль" type="password" />
             </div>
           </div>
 
@@ -205,37 +206,6 @@ const login = () => {
     &:hover {
       background: #e39bfd;
     }
-  }
-}
-
-.field {
-  display: block;
-  width: 100%;
-  padding: 10px 0;
-  border: 1px solid #edeaee;
-  border-radius: 10px;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.11;
-  color: #000;
-  background: #f9f6fa;
-
-  transition:
-    border-color 0.33s ease,
-    background 0.33s ease;
-
-  &::placeholder {
-    color: #767377;
-    font-size: inherit;
-  }
-
-  &:focus,
-  &:has(input:focus) {
-    border-color: #9218c0;
-  }
-
-  &--textarea {
-    min-height: 120px;
   }
 }
 

@@ -20,6 +20,7 @@ useModeratorStore()
 
 <style scoped lang="scss">
 .dashboard {
+  height: 100%;
   display: flex;
   background-color: var(--color-primary-900);
   flex: 1;
@@ -32,9 +33,11 @@ useModeratorStore()
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-x: scroll;
 }
 
 .user-management {
+  height: 100vh;
   background-color: var(--color-primary-900);
   display: flex;
   align-items: center;

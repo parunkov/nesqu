@@ -2,6 +2,7 @@
 import { ref, nextTick, watch } from 'vue'
 import ToggleSwitch from '@/components/ToggleSwitch.vue'
 import type { Event } from '@/types/events.ts'
+import AppInput from '@/components/AppInput.vue'
 
 const eventPrices = defineModel<Event['prices']>()
 
@@ -11,36 +12,35 @@ interface PriceValue {
 }
 
 const prices = ref<PriceValue[]>(
-  eventPrices.value
-    ? eventPrices.value.map((el) => {
-        return { value: el.replace('₽', ''), id: Date.now() }
-      })
+  eventPrices.value && eventPrices.value.length > 0
+    ? [
+        ...eventPrices.value.map((el) => {
+          return { value: el.replace('₽', ''), id: Date.now() }
+        }),
+      ]
     : [{ value: '', id: Date.now() }],
 )
 
 watch(
   () => eventPrices.value,
   () => {
-    prices.value = eventPrices.value
-      ? eventPrices.value.map((el) => {
-          return { value: el.replace('₽', ''), id: Date.now() }
-        })
-      : [{ value: '', id: Date.now() }]
+    prices.value =
+      eventPrices.value && eventPrices.value.length > 0
+        ? eventPrices.value.map((el) => {
+            return { value: el.replace('₽', ''), id: Date.now() }
+          })
+        : [{ value: '', id: Date.now() }]
   },
   { deep: true, once: true, immediate: false },
 )
 
 const isFree = ref(false)
 
-const formatInput = (val: string) => val.replace(/[^0-9]/g, '').slice(0, 6)
-
 const handlePriceInput = async (index: number) => {
   const price = prices.value[index]
-  price.value = formatInput(price.value)
 
   const isLast = index === prices.value.length - 1
   const isNotEmpty = price.value !== ''
-
   if (isLast && isNotEmpty) {
     prices.value.push({ value: '', id: Date.now() + Math.random() })
     await nextTick()
@@ -56,7 +56,7 @@ const deletePrice = (index: number) => {
 watch(
   () => prices.value,
   () => {
-    eventPrices.value = prices.value.map((item) => item.value).slice(0, -1)
+    eventPrices.value = prices.value.map((item) => String(item.value)).slice(0, -1)
   },
   { deep: true },
 )
@@ -77,39 +77,24 @@ watch(
 
       <div class="form-price">
         <div class="form-price__values" :class="{ disabled: isFree }">
-          <div class="form-price__value field" v-for="(item, index) in prices" :key="item.id">
-            <span class="form-price__caption">₽</span>
-            <input
-              class="form-price__input"
-              type="text"
-              placeholder="0"
-              v-model="item.value"
-              :disabled="isFree"
+          <div class="" v-for="(item, index) in prices" :key="item.id">
+            <AppInput
               @input="handlePriceInput(index)"
-            />
-            <button
-              v-if="index < prices.length - 1"
-              class="form-price__delete"
-              type="button"
-              @click="deletePrice(index)"
+              v-model="item.value"
+              type="number"
+              :disabled="isFree"
             >
-              <!-- SVG Иконка удаления -->
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.3333 5.00002V4.33335C13.3333 3.39993 13.3333 2.93322 13.1517 2.5767C12.9919 2.2631 12.7369 2.00813 12.4233 1.84834C12.0668 1.66669 11.6001 1.66669 10.6667 1.66669H9.33333C8.39991 1.66669 7.9332 1.66669 7.57668 1.84834C7.26308 2.00813 7.00811 2.2631 6.84832 2.5767C6.66667 2.93322 6.66667 3.39993 6.66667 4.33335V5.00002M8.33333 9.58335V13.75M11.6667 9.58335V13.75M2.5 5.00002H17.5M15.8333 5.00002V14.3334C15.8333 15.7335 15.8333 16.4336 15.5608 16.9683C15.3212 17.4387 14.9387 17.8212 14.4683 18.0609C13.9335 18.3334 13.2335 18.3334 11.8333 18.3334H8.16667C6.76654 18.3334 6.06647 18.3334 5.53169 18.0609C5.06129 17.8212 4.67883 17.4387 4.43915 16.9683C4.16667 16.4336 4.16667 15.7335 4.16667 14.3334V5.00002"
-                  stroke="#F60B0F"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+              <template #left-slot>
+                <span class="form-price__caption">₽</span>
+              </template>
+              <template #right-slot>
+                <img
+                  src="/icons/delete.svg"
+                  class="form-price__delete-button"
+                  @click="deletePrice(index)"
                 />
-              </svg>
-            </button>
+              </template>
+            </AppInput>
           </div>
         </div>
 
@@ -179,37 +164,6 @@ watch(
     line-height: 1.11;
     color: #444145;
     user-select: none;
-  }
-}
-
-.field {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #edeaee;
-  border-radius: 10px;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.11;
-  color: #000;
-  background: #f9f6fa;
-
-  transition:
-    border-color 0.33s ease,
-    background 0.33s ease;
-
-  &::placeholder {
-    color: #767377;
-    font-size: inherit;
-  }
-
-  &:focus,
-  &:has(input:focus) {
-    border-color: #9218c0;
-  }
-
-  &--textarea {
-    min-height: 120px;
   }
 }
 
@@ -291,7 +245,8 @@ watch(
 
   // .form-price__delete
 
-  &__delete {
+  &__delete-button {
+    cursor: pointer;
   }
 
   // .form-price__free-checkbox

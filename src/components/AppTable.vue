@@ -23,13 +23,12 @@
   gap: 20px;
   justify-content: flex-start;
   flex: 1;
-  height: 100%;
 }
 
 table {
+  border-collapse: separate;
   border-radius: 10px;
   min-width: 240px;
-  border-collapse: separate; // или collapse, если без gap
   border-spacing: 0 10px;
   table-layout: auto; // или fixed, если хочешь равномерность
 
@@ -111,6 +110,7 @@ tbody {
 }
 
 tr {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   width: 100%;
   min-height: 60px;
@@ -132,13 +132,17 @@ td {
   }
 }
 
-.is-warning {
+.is-warning > td {
   background-color: var(--color-warning);
-  border: 5px solid var(--color-warning-border);
+  border: 1px solid var(--color-warning-border);
+  border-left: none;
+  border-right: none;
 }
 
-.is-error {
+.is-error > td {
   background-color: var(--color-error);
-  border: 5px solid var(--color-error-border);
+  border: 1px solid var(--color-error-border);
+  border-left: none;
+  border-right: none;
 }
 </style>

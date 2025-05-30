@@ -48,48 +48,46 @@ const changeRole = (id: number, newRole: string | number) => {
 </script>
 
 <template>
-  <section class="user-table-section">
-    <header class="search-header">
-      <SearchBar v-model:active-only="showActiveOnly" v-model:search-query="searchQuery" />
-    </header>
-    <div class="wrapper">
-      <AppTable class="user-table">
-        <template #thead>
-          <tr>
-            <th class="table-cell--id">
-              <div>ID</div>
-            </th>
-            <th class="table-cell--role">
-              <div>Роль</div>
-            </th>
-            <th class="table-cell--name">
-              <div>Email/tg</div>
-            </th>
-          </tr>
-        </template>
+  <header class="search-header">
+    <SearchBar v-model:active-only="showActiveOnly" v-model:search-query="searchQuery" />
+  </header>
+  <div class="wrapper">
+    <AppTable class="user-table">
+      <template #thead>
+        <tr>
+          <th class="table-cell--id">
+            <div>ID</div>
+          </th>
+          <th class="table-cell--role">
+            <div>Роль</div>
+          </th>
+          <th class="table-cell--name">
+            <div>Email/tg</div>
+          </th>
+        </tr>
+      </template>
 
-        <template #tbody>
-          <tr v-for="user in filteredUsers" :key="user.id">
-            <td class="table-cell--id">
-              <div>{{ user.id }}</div>
-            </td>
-            <td class="table-cell--role">
-              <div>
-                <AppDropDown
-                  @change-value="(newRole) => changeRole(user.id, newRole.id)"
-                  :start-value="rolesOptions.findIndex((el) => el.id == user.role)"
-                  :options="rolesOptions"
-                />
-              </div>
-            </td>
-            <td class="table-cell--name">
-              <div>{{ user.name }}</div>
-            </td>
-          </tr>
-        </template>
-      </AppTable>
-    </div>
-  </section>
+      <template #tbody>
+        <tr v-for="user in filteredUsers" :key="user.id">
+          <td class="table-cell--id">
+            <div>{{ user.id }}</div>
+          </td>
+          <td class="table-cell--role">
+            <div>
+              <AppDropDown
+                @change-value="(newRole) => changeRole(user.id, newRole.id)"
+                :start-value="rolesOptions.findIndex((el) => el.id == user.role)"
+                :options="rolesOptions"
+              />
+            </div>
+          </td>
+          <td class="table-cell--name">
+            <div>{{ user.name }}</div>
+          </td>
+        </tr>
+      </template>
+    </AppTable>
+  </div>
 </template>
 <style scoped lang="scss">
 .wrapper {
@@ -100,15 +98,6 @@ const changeRole = (id: number, newRole: string | number) => {
 .user-table {
   box-sizing: content-box;
   width: 460px;
-}
-
-.user-table-section {
-  align-self: stretch;
-  min-width: 240px;
-  height: 100vh;
-  padding-top: 20px;
-  flex: 1;
-  flex-basis: 60px;
 }
 
 .search-header {
@@ -133,6 +122,7 @@ const changeRole = (id: number, newRole: string | number) => {
 }
 
 .table-cell--name {
+  min-width: 215px;
   width: 100%;
 }
 </style>

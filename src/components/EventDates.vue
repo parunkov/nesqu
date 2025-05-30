@@ -403,7 +403,6 @@ const addDate = async () => {
   &__values {
     display: flex;
     gap: 5px;
-    border-color: #9218c0;
 
     &:disabled {
       border-color: #767377;

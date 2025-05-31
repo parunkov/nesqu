@@ -8,6 +8,7 @@ import EventEditView from '@/views/EventEditView.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import CitiesStatisticsView from '@/views/CitiesStatisticsView.vue'
+import DaysStatistics from '@/views/DaysStatistics.vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 const router = createRouter({
@@ -67,6 +68,14 @@ const router = createRouter({
           component: CitiesStatisticsView,
           meta: {
             requiredRoles: ['moderator', 'owner'],
+          },
+        },
+        {
+          path: 'days-statistics',
+          name: 'days-statistics',
+          component: DaysStatistics,
+          meta: {
+            requiredRoles: ['organizer', 'moderator', 'owner'],
           },
         },
       ],

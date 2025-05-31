@@ -66,6 +66,13 @@ const logout = () => {
           @click="goTo('cities-statistics')"
           :isActive="router.currentRoute.value.name == `cities-statistics`"
         />
+        <MenuLink
+          v-if="showTab(`days-statistics`)"
+          icon="/icons/stat.svg"
+          title="Дни стат."
+          @click="goTo('days-statistics')"
+          :isActive="router.currentRoute.value.name == `days-statistics`"
+        />
       </nav>
     </div>
     <MenuLink

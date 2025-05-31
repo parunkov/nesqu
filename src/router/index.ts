@@ -34,7 +34,7 @@ const router = createRouter({
           name: 'users',
           component: UsersView,
           meta: {
-            requiredRoles: ['organizer', 'moderator', 'owner'],
+            requiredRoles: ['moderator', 'owner'],
           },
         },
         {

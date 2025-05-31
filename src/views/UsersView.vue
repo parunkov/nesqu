@@ -10,22 +10,21 @@ const searchQuery = ref('')
 const showActiveOnly = ref(false)
 
 const moderatorStore = useModeratorStore()
-
+moderatorStore.getUsers()
 const users = ref<User[]>([
-  { id: 1, role: 'admin', name: 'username@mail.com' },
+  { id: 1, role: 'moderator', name: 'username@mail.com' },
   { id: 2, role: 'user', name: 'username@mail.com' },
-  { id: 3, role: 'admin', name: 'username@mail.com' },
+  { id: 3, role: 'moderator', name: 'username@mail.com' },
 ])
 
 const roleNames: Record<Roles, string> = {
   user: 'Пользователь',
   organizer: 'Организатор',
-  admin: 'Администратор',
+  moderator: 'Администратор',
   owner: 'Владелец',
 }
 
-// Явно перебираем все роли — TS будет ругаться, если какая-то роль пропущена
-const roles: Roles[] = ['user', 'organizer', 'admin', 'owner']
+const roles: Roles[] = ['user', 'organizer', 'moderator', 'owner']
 
 const rolesOptions = roles.map((role) => ({
   id: role,

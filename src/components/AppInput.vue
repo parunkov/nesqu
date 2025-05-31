@@ -7,6 +7,9 @@ const props = defineProps<{
   placeholder?: string
   disabled?: boolean
   type?: string
+  name?: string
+  autocomplete?: string
+  required?: boolean
 }>()
 
 const emits = defineEmits(['input'])
@@ -17,6 +20,9 @@ const emits = defineEmits(['input'])
     <slot name="left-slot"></slot>
     <input
       v-model="model"
+      required
+      :name="props.name"
+      :autocomplete="props.autocomplete"
       :placeholder="props.placeholder || ' '"
       :disabled="props.disabled"
       :type="props.type || 'text'"

@@ -11,8 +11,13 @@ const error = ref('')
 const authStore = useAuthStore()
 
 const login = () => {
-  useAuthStore().login(email.value, password.value)
-  router.push({ name: 'events' })
+  error.value = ''
+  useAuthStore()
+    .login(email.value, password.value)
+    .then(() => {
+      router.push({ name: 'events' })
+    })
+    .catch((err) => (error.value = err))
 }
 </script>
 
@@ -22,29 +27,43 @@ const login = () => {
       <div class="content-card__head">
         <h3 class="content-card__title">Информация</h3>
       </div>
-
-      <div class="content-card__body">
-        <div v-if="error" class="error">{{ error }}</div>
+      <form @submit.prevent="login" method="POST" class="content-card__body" autocomplete="on">
         <div class="form-group">
           <div class="form-block">
             <div class="form-item">
               <label for="" class="form-item__label">Email</label>
-              <AppInput v-model="email" placeholder="Почта" type="email" />
+              <AppInput
+                v-model="email"
+                name="username"
+                placeholder="Почта"
+                type="email"
+                autocomplete="username"
+                required
+              />
             </div>
           </div>
 
           <div class="form-block">
             <div class="form-item">
               <label for="" class="form-item__label">Пароль</label>
-              <AppInput v-model="password" placeholder="Пароль" type="password" />
+              <AppInput
+                v-model="password"
+                name="password"
+                placeholder="Пароль"
+                type="password"
+                autocomplete="current-password"
+                required
+              />
             </div>
           </div>
 
-          <AppButton class="submit" @click="login">
+          <div v-if="error" class="error">{{ error }}</div>
+
+          <AppButton class="submit" type="submit">
             {{ authStore.isLoading ? 'Вход...' : 'Войти' }}
           </AppButton>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -53,6 +72,14 @@ const login = () => {
 .submit {
   margin-top: 20px;
   justify-self: center;
+}
+
+.error {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: var(--color-error);
+  border: 1px solid var(--color-error-borderr);
+  border-radius: 10px;
 }
 
 .content-card {

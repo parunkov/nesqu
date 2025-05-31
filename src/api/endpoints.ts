@@ -1,5 +1,5 @@
 const AUTH = {
-  LOGIN: '/admin/account/mail/login/',
+  LOGIN: '/account/mail/login',
   LIST: '/admin/super/user/list/',
 } as const
 
@@ -8,7 +8,7 @@ const MODERATOR = {
   STATS_CITIES: '/admin/moderator/stats/cities/',
   STAT_DAYS: '/admin/moderator/stats/days/',
   LIST: '/admin/moderator/user/list/',
-  DICTIONARY: '/dictionary/',
+  DICTIONARY: '/dictionary',
 } as const
 
 const EVENT = {

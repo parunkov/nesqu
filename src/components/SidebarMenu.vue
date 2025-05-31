@@ -1,8 +1,34 @@
 <script setup lang="ts">
 import MenuLink from '@/components/MenuLink.vue'
 import router from '@/router'
+import { useAuthStore } from '@/stores/auth.ts'
+
+const authStore = useAuthStore()
+
+const showTab = (pageName: string) => {
+  const route = router.getRoutes().find((r) => r.name === pageName)
+
+  if (!route) {
+    console.warn(`Маршрут с именем "${pageName}" не найден`)
+    return false
+  }
+
+  const requiredRoles = route.meta?.requiredRoles
+  const userRole = authStore.currentUser?.role
+
+  if (!requiredRoles || requiredRoles.length === 0) {
+    return true
+  }
+
+  return userRole && requiredRoles.includes(userRole)
+}
 
 const goTo = (name: string) => router.push({ name: name })
+
+const logout = () => {
+  useAuthStore().logout()
+  goTo('login')
+}
 </script>
 
 <template>
@@ -13,24 +39,28 @@ const goTo = (name: string) => router.push({ name: name })
       </div>
       <nav class="navigation">
         <MenuLink
+          v-if="showTab(`events`)"
           icon="/icons/calendar.svg"
           title="Мероприятия"
           @click="goTo('events')"
           :isActive="router.currentRoute.value.name == `events`"
         />
         <MenuLink
+          v-if="showTab(`events-statistics`)"
           icon="/icons/stat.svg"
           title="Мероприятия стат."
           @click="goTo('events-statistics')"
           :isActive="router.currentRoute.value.name == `events-statistics`"
         />
         <MenuLink
+          v-if="showTab(`users`)"
           icon="/icons/user.svg"
           title="Пользователи"
           @click="goTo('users')"
           :isActive="router.currentRoute.value.name == `users`"
         />
         <MenuLink
+          v-if="showTab(`cities-statistics`)"
           icon="/icons/stat.svg"
           title="Города стат."
           @click="goTo('cities-statistics')"
@@ -38,7 +68,11 @@ const goTo = (name: string) => router.push({ name: name })
         />
       </nav>
     </div>
-    <MenuLink icon="/icons/exit.svg" title="veryVeryLongEmail2025@mail.ru" @click="goTo('login')" />
+    <MenuLink
+      icon="/icons/exit.svg"
+      :title="authStore.currentUser?.email || `Выйти`"
+      @click="logout"
+    />
   </aside>
 </template>
 <style scoped lang="scss">

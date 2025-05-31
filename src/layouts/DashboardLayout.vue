@@ -27,13 +27,13 @@ useModeratorStore()
   padding-top: 20px;
   align-self: stretch;
   box-sizing: inherit;
+  overflow-y: auto;
 }
 
 .content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-x: scroll;
 }
 
 .user-management {

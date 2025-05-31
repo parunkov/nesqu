@@ -1,9 +1,10 @@
 export type AuthToken = {
   access_token: string
   token_type: string
+  role: Roles
 }
 
-export type Roles = 'user' | 'organizer' | 'admin' | 'owner'
+export type Roles = 'user' | 'organizer' | 'moderator' | 'owner'
 
 export type User = {
   id: number

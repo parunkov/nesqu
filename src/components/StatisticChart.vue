@@ -10,25 +10,14 @@ import {
   GridComponent,
   LegendComponent,
 } from 'echarts/components'
+import type { ChartStatistics, Series } from '@/types/staticstics.ts'
 
-// Регистрация компонентов ECharts
 use([CanvasRenderer, LineChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])
 
-// Типы
-type SeriesItem = {
-  name: string
-  data: (number | string)[]
-  color?: string
-}
-
 const props = defineProps<{
-  chart: {
-    categories: (string | number)[]
-    series: SeriesItem[]
-  }
+  chart: ChartStatistics
 }>()
 
-// Цветовая палитра по умолчанию
 const defaultColors = [
   '#8884d8',
   '#82ca9d',
@@ -40,9 +29,8 @@ const defaultColors = [
   '#FF4444',
 ]
 
-// Опции для графика
 const chartOptions = computed(() => {
-  const series = props.chart.series.map((item, index) => ({
+  const series = props.chart.series.map((item: Series, index: number) => ({
     ...item,
     type: 'line',
     smooth: true,
@@ -62,7 +50,7 @@ const chartOptions = computed(() => {
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: props.chart.categories,
+      data: props.chart.labels,
     },
     yAxis: {
       type: 'value',

@@ -7,6 +7,7 @@ import type { Event } from '@/types/events.ts'
 import { ref } from 'vue'
 import { useEventsStore } from '@/stores/events.ts'
 import router from '@/router'
+import AppButton from '@/components/AppButton.vue'
 
 const eventStore = useEventsStore()
 
@@ -55,17 +56,11 @@ const saveEvent = () => {
         </div>
       </div>
       <div class="content-wrap__foot">
-        <button
-          @click="router.back()"
-          class="button button--icon button--outline button--danger"
-          type="button"
-        >
+        <AppButton @click="router.back()" outline danger icon>
           <img src="/icons/delete.svg" alt="Удалить" />
-
           <span>Удалить</span>
-        </button>
-
-        <button @click="saveEvent" class="button" type="button">Сохранить</button>
+        </AppButton>
+        <AppButton @click="saveEvent" type="button"> Сохранить</AppButton>
       </div>
     </div>
   </div>
@@ -97,7 +92,7 @@ const saveEvent = () => {
 
   &__head {
     padding: 20px;
-    border-bottom: 1px solid #edeaee;
+    border-bottom: 1px solid var(--color-gray-300);
     display: flex;
     gap: 10px;
   }
@@ -141,37 +136,6 @@ const saveEvent = () => {
     justify-content: space-between;
     padding: 20px;
     gap: 20px;
-  }
-}
-
-.button {
-  padding: 19px;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.11;
-  color: #fff;
-  background: #9218c0;
-  border-radius: 10px;
-  border: 1px solid #9218c0;
-  stroke: currentColor;
-
-  span {
-    line-height: 1;
-  }
-
-  &--icon {
-    display: flex;
-    align-items: end;
-    gap: 10px;
-  }
-
-  &--danger {
-    color: #f60b0f;
-  }
-
-  &--outline {
-    background: none;
-    border-color: currentColor;
   }
 }
 </style>

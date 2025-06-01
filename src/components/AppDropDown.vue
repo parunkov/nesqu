@@ -77,7 +77,7 @@ const selectOption = (option: Option) => {
   display: block;
   width: 100%;
   padding: 10px;
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   font-weight: 400;
   font-size: 18px;
@@ -114,7 +114,7 @@ const selectOption = (option: Option) => {
 }
 
 .dropdown-list {
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   background: #fff;
   overflow: hidden;

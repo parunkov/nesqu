@@ -1,15 +1,28 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 
+const props = defineProps<{
+  outline?: boolean
+  danger?: boolean
+  icon?: boolean
+}>()
+
+const classes = computed(() => ({
+  btn: true,
+  'btn--outline': props.outline,
+  'btn--danger': props.danger,
+  'btn--icon': props.icon,
+}))
 </script>
 
 <template>
-  <button>
-    <slot></slot>
+  <button :class="classes">
+    <slot />
   </button>
 </template>
 
 <style scoped lang="scss">
-button {
+.btn {
   padding: 19px;
   font-weight: 600;
   font-size: 18px;
@@ -19,6 +32,7 @@ button {
   border-radius: 10px;
   border: 1px solid #9218c0;
   stroke: currentColor;
+  transition: 0.2s ease;
 
   &--icon {
     display: flex;
@@ -27,7 +41,9 @@ button {
   }
 
   &--danger {
-    color:  #f60b0f;
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+    background: var(--color-white);
   }
 
   &--outline {
@@ -35,5 +51,4 @@ button {
     border-color: currentColor;
   }
 }
-
 </style>

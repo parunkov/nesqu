@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import ToggleSwitch from "./ToggleSwitch.vue";
 import { watch } from 'vue'
-const searchQuery = defineModel<string>('searchQuery');
-const activeOnly = defineModel<boolean>('activeOnly');
-const emits = defineEmits(["search"])
+
+const searchQuery = defineModel<string>('searchQuery')
+const activeOnly = defineModel<boolean>('activeOnly')
+const emits = defineEmits(['search'])
 
 // const search = () =>{
 //   console.log(activeOnly.value);
 //   emits('search', activeOnly.value);
 // }
 
-watch(() => activeOnly.value, () => emits('search'))
-
+watch(
+  () => activeOnly.value,
+  () => emits('search'),
+)
 </script>
 
 <template>
@@ -19,12 +21,21 @@ watch(() => activeOnly.value, () => emits('search'))
     <div class="search-bar">
       <div class="search-bar__content">
         <img src="/icons/mail.svg" class="search-bar__icon" alt="Search icon" />
-        <input type="text" class="search-bar__input" placeholder="Поиск по e-mail" @change="emits('search')" v-model="searchQuery" />
-        <img src="/icons/search.svg" class="search-bar__icon" alt="Clear search" @click="emits('search')" />
+        <input
+          type="text"
+          class="search-bar__input"
+          placeholder="Поиск по e-mail"
+          @change="emits('search')"
+          v-model="searchQuery"
+        />
+        <img
+          src="/icons/search.svg"
+          class="search-bar__icon"
+          alt="Clear search"
+          @click="emits('search')"
+        />
       </div>
     </div>
-    <label class="toggle-label">Только активные</label>
-    <ToggleSwitch v-model="activeOnly" />
   </div>
 </template>
 

@@ -176,7 +176,7 @@ watch(
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid #edeaee;
+    border-top: 1px solid var(--color-gray-300);
   }
 }
 

@@ -8,7 +8,10 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useEventsStore } from '@/stores/events.ts'
 import router from '@/router'
 import { useRoute } from 'vue-router'
+import AppButton from '@/components/AppButton.vue'
+import { useAuthStore } from '@/stores/auth.ts'
 
+const authStore = useAuthStore()
 const eventStore = useEventsStore()
 let realId = '0'
 const currentEvent = reactive<EventInfo>({} as EventInfo)
@@ -21,11 +24,6 @@ watch(
   },
 )
 
-const saveEvent = () => {
-  if (!currentEvent) return
-  eventStore.updateEvent(currentEvent, Number(realId))
-}
-
 onMounted(() => {
   const id = useRoute().params.id as string
   realId = id
@@ -33,6 +31,38 @@ onMounted(() => {
     Object.assign(currentEvent, data)
   })
 })
+
+const saveEvent = () => {
+  if (!currentEvent) return
+  eventStore.updateEvent(currentEvent, Number(realId))
+}
+
+const banEvent = () => {
+  eventStore.updateEventsStatus([
+    {
+      id: Number(realId),
+      top: false,
+      is_hiden: false,
+      is_validated: false,
+    },
+  ])
+}
+
+const deleteEvent = () => {
+  eventStore.deleteEvent(Number(realId))
+  router.back()
+}
+
+const publishEvent = () => {
+  eventStore.updateEventsStatus([
+    {
+      id: Number(realId),
+      top: false,
+      is_hiden: false,
+      is_validated: true,
+    },
+  ])
+}
 
 const currentCity = ref(1)
 </script>
@@ -61,18 +91,18 @@ const currentCity = ref(1)
           <CategoriesSection />
         </div>
       </div>
-      <div class="content-wrap__foot">
-        <button
-          @click="router.back()"
-          class="button button--icon button--outline button--danger"
-          type="button"
-        >
+      <div v-if="authStore.currentUser?.role == 'organizer'" class="content-wrap__foot">
+        <AppButton @click="deleteEvent" outline danger icon>
           <img src="/icons/delete.svg" alt="Удалить" />
-
           <span>Удалить</span>
-        </button>
-
-        <button @click="saveEvent" class="button" type="button">Сохранить</button>
+        </AppButton>
+        <AppButton @click="saveEvent" type="button"> Сохранить</AppButton>
+      </div>
+      <div v-else class="content-wrap__foot">
+        <AppButton @click="banEvent" outline danger icon>
+          <span>Забанить</span>
+        </AppButton>
+        <AppButton @click="publishEvent" type="button"> Опубликовать</AppButton>
       </div>
     </div>
   </div>
@@ -104,7 +134,7 @@ const currentCity = ref(1)
 
   &__head {
     padding: 20px;
-    border-bottom: 1px solid #edeaee;
+    border-bottom: 1px solid var(--color-gray-300);
     display: flex;
     gap: 10px;
   }
@@ -148,37 +178,6 @@ const currentCity = ref(1)
     justify-content: space-between;
     padding: 20px;
     gap: 20px;
-  }
-}
-
-.button {
-  padding: 19px;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.11;
-  color: #fff;
-  background: #9218c0;
-  border-radius: 10px;
-  border: 1px solid #9218c0;
-  stroke: currentColor;
-
-  span {
-    line-height: 1;
-  }
-
-  &--icon {
-    display: flex;
-    align-items: end;
-    gap: 10px;
-  }
-
-  &--danger {
-    color: #f60b0f;
-  }
-
-  &--outline {
-    background: none;
-    border-color: currentColor;
   }
 }
 </style>

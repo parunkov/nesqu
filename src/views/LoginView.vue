@@ -101,7 +101,7 @@ const login = () => {
 
   &__head {
     padding: 10px 20px;
-    background: #edeaee;
+    background: var(--color-gray-300);
     border-radius: 20px 20px 0 0;
   }
 
@@ -124,7 +124,7 @@ const login = () => {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid #edeaee;
+    border-top: 1px solid var(--color-gray-300);
   }
 }
 
@@ -217,7 +217,7 @@ const login = () => {
 }
 
 .dropdown-list {
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   background: #fff;
   overflow: hidden;

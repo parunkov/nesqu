@@ -323,7 +323,7 @@ const addDate = async () => {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid #edeaee;
+    border-top: 1px solid var(--color-gray-300);
   }
 }
 
@@ -331,7 +331,7 @@ const addDate = async () => {
   display: block;
   width: 100%;
   padding: 10px;
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   font-weight: 400;
   font-size: 18px;

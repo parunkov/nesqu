@@ -55,7 +55,7 @@ const statusToogle = (event: EventCard) => {
   eventStore.updateEventsStatus([
     {
       id: event.id,
-      is_banned: false,
+      is_validated: false,
       is_hiden: event.is_hiden,
       top: event.top,
     },

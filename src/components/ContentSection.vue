@@ -46,7 +46,7 @@ const description = defineModel<Event['description']>('description')
   display: block;
   width: 100%;
   padding: 10px 0;
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   font-weight: 400;
   font-size: 18px;
@@ -107,7 +107,7 @@ textarea {
 
   &__head {
     padding: 10px 20px;
-    background: #edeaee;
+    background: var(--color-gray-300);
     border-radius: 20px 20px 0 0;
   }
 
@@ -130,7 +130,7 @@ textarea {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid #edeaee;
+    border-top: 1px solid var(--color-gray-300);
   }
 }
 

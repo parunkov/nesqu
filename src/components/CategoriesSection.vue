@@ -2,22 +2,30 @@
   <div class="content-card">
     <div class="content-card__inner">
       <div class="content-card__head">
-        <h3 class="content-card__title">
-          Категории
-        </h3>
+        <h3 class="content-card__title">Категории</h3>
       </div>
 
       <div class="content-card__body">
         <div @click.stop class="filters__list">
-          <AppAccordion @closeOthers="(flag: boolean = false) => closeOthers(filterIndex, flag)"
-                        v-for="(filter, filterIndex) of moderatorStore.rubrics" class="filters__item" v-model="model[filterIndex]" :key="filterIndex">
+          <AppAccordion
+            @closeOthers="(flag: boolean = false) => closeOthers(filterIndex, flag)"
+            v-for="(filter, filterIndex) of moderatorStore.rubrics"
+            class="filters__item"
+            v-model="model[filterIndex]"
+            :key="filterIndex"
+          >
             <template #btn>
               {{ filter.group_name }}
             </template>
             <template #content>
               <div class="filters__item-main">
-                <AppCheckbox @click.stop v-for="(item, itemIndex) of filter.group_content" class="filters__item-checkbox"
-                             v-model="selectedFilters[filter.group_name][item.id]" :key="itemIndex">
+                <AppCheckbox
+                  @click.stop
+                  v-for="(item, itemIndex) of filter.group_content"
+                  class="filters__item-checkbox"
+                  v-model="selectedFilters[filter.group_name][item.id]"
+                  :key="itemIndex"
+                >
                   {{ item.type_name }}
                 </AppCheckbox>
               </div>
@@ -25,8 +33,8 @@
           </AppAccordion>
         </div>
       </div>
-      </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -42,31 +50,29 @@ const closeOthers = (index: number, flag: boolean = false) => {
   }
 }
 
-const model = ref<boolean[]>(moderatorStore.rubrics.map(((_, index) => index == 0)))
-const selectedFilters = reactive<Record<string, Record<string, boolean>>>({});
+const model = ref<boolean[]>(moderatorStore.rubrics.map((_, index) => index == 0))
+const selectedFilters = reactive<Record<string, Record<string, boolean>>>({})
 watchEffect(() => {
-  moderatorStore.rubrics.forEach(filter => {
+  moderatorStore.rubrics.forEach((filter) => {
     if (!selectedFilters[filter.group_name]) {
-      selectedFilters[filter.group_name] = {};
+      selectedFilters[filter.group_name] = {}
     }
-    filter.group_content.forEach(item => {
+    filter.group_content.forEach((item) => {
       if (selectedFilters[filter.group_name][item.id] === undefined) {
-        selectedFilters[filter.group_name][item.id] = false;
+        selectedFilters[filter.group_name][item.id] = false
       }
-    });
-  });
-});
-
+    })
+  })
+})
 </script>
 
 <style scoped lang="scss">
-@use "../assets/scss/helpers" as *;
+@use '../assets/scss/helpers' as *;
 
 .content-card {
   box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
   border-radius: 20px;
   background: #fff;
-
 
   + .content-card {
     margin-top: 20px;
@@ -81,7 +87,7 @@ watchEffect(() => {
 
   &__head {
     padding: 10px 20px;
-    background: #edeaee;
+    background: var(--color-gray-300);
     border-radius: 20px 20px 0 0;
   }
 
@@ -101,4 +107,3 @@ watchEffect(() => {
   }
 }
 </style>
-

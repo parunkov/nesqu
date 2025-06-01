@@ -57,7 +57,7 @@ export type EventStatus = {
   id: number
   top: boolean
   is_hiden: boolean
-  is_banned: boolean
+  is_validated: boolean
 }
 
 export type EventInfo = {

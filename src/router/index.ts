@@ -75,7 +75,7 @@ const router = createRouter({
           name: 'days-statistics',
           component: DaysStatistics,
           meta: {
-            requiredRoles: ['organizer', 'moderator', 'owner'],
+            requiredRoles: ['moderator', 'owner'],
           },
         },
       ],

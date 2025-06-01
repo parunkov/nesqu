@@ -75,7 +75,7 @@ const updateDates = (datesData: Event['datetime']) => {
 
   &__head {
     padding: 10px 20px;
-    background: #edeaee;
+    background: var(--color-gray-300);
     border-radius: 20px 20px 0 0;
   }
 
@@ -98,7 +98,7 @@ const updateDates = (datesData: Event['datetime']) => {
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid #edeaee;
+    border-top: 1px solid var(--color-gray-300);
   }
 }
 
@@ -191,7 +191,7 @@ const updateDates = (datesData: Event['datetime']) => {
 }
 
 .dropdown-list {
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   background: #fff;
   overflow: hidden;
@@ -214,7 +214,7 @@ const updateDates = (datesData: Event['datetime']) => {
   display: block;
   width: 100%;
   padding: 10px;
-  border: 1px solid #edeaee;
+  border: 1px solid var(--color-gray-300);
   border-radius: 10px;
   font-weight: 400;
   font-size: 18px;

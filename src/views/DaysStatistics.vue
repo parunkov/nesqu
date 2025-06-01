@@ -3,7 +3,6 @@ import StatisticChart from '@/components/StatisticChart.vue'
 import type { ChartStatistics } from '@/types/staticstics.ts'
 import { ref } from 'vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
-import router from '@/router'
 
 const chart = ref<ChartStatistics | null>(null)
 
@@ -34,7 +33,6 @@ const chart = {
 
 <template>
   <div class="header">
-    <img @click="() => router.back()" src="/icons/back.svg" alt="назад" />
     <h2 class="title">Статистика</h2>
   </div>
   <StatisticChart v-if="chart" :chart="chart" />
@@ -43,7 +41,7 @@ const chart = {
 <style>
 .header {
   padding: 20px;
-  border-bottom: 1px solid #edeaee;
+  border-bottom: 1px solid var(--color-gray-300);
   display: flex;
   gap: 10px;
 }

@@ -178,7 +178,7 @@ watch(
 
   &__head {
     padding: 10px 20px;
-    background: #edeaee;
+    background: var(--color-gray-300);
     border-radius: 20px 20px 0 0;
   }
 
@@ -231,7 +231,7 @@ watch(
 
   &__preview {
     position: relative;
-    border: 1px solid #edeaee;
+    border: 1px solid var(--color-gray-300);
     background: #f9f6fa;
   }
 
@@ -252,7 +252,7 @@ watch(
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #edeaee;
+    border: 1px solid var(--color-gray-300);
     border-radius: 10px;
     background: #fff;
   }
@@ -299,7 +299,7 @@ watch(
   padding: 20px;
 
   + .form-group {
-    border-top: 1px solid #edeaee;
+    border-top: 1px solid var(--color-gray-300);
   }
 }
 </style>

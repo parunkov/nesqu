@@ -34,6 +34,8 @@ useModeratorStore()
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-gray-100);
+  border-radius: 20px 0 0 0;
 }
 
 .user-management {

@@ -24,9 +24,6 @@ const login = () => {
 <template>
   <div class="content-card">
     <div class="content-card__inner">
-      <div class="content-card__head">
-        <h3 class="content-card__title">Информация</h3>
-      </div>
       <form @submit.prevent="login" method="POST" class="content-card__body" autocomplete="on">
         <div class="form-group">
           <div class="form-block">
@@ -58,11 +55,10 @@ const login = () => {
           </div>
 
           <div v-if="error" class="error">{{ error }}</div>
-
-          <AppButton class="submit" type="submit">
-            {{ authStore.isLoading ? 'Вход...' : 'Войти' }}
-          </AppButton>
         </div>
+        <AppButton mini class="submit" type="submit">
+          {{ authStore.isLoading ? 'Вход...' : 'Войти' }}
+        </AppButton>
       </form>
     </div>
   </div>
@@ -87,6 +83,7 @@ const login = () => {
   border-radius: 20px;
   background: #fff;
   width: 460px;
+  height: 280px;
 
   + .content-card {
     margin-top: 20px;
@@ -95,6 +92,7 @@ const login = () => {
   // .content-card__inner
 
   &__inner {
+    height: 100%;
   }
 
   // .content-card__head
@@ -117,11 +115,17 @@ const login = () => {
   // .content-card__body
 
   &__body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
   }
 }
 
 .form-group {
-  padding: 20px;
+  width: 100%;
 
   + .form-group {
     border-top: 1px solid var(--color-gray-300);

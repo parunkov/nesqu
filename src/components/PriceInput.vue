@@ -21,24 +21,24 @@ const prices = ref<PriceValue[]>(
     : [{ value: '', id: Date.now() }],
 )
 
-watch(
-  () => eventPrices.value,
-  () => {
-    prices.value =
-      eventPrices.value && eventPrices.value.length > 0
-        ? eventPrices.value.map((el) => {
-            return { value: el.replace('₽', ''), id: Date.now() }
-          })
-        : [{ value: '', id: Date.now() }]
-  },
-  { deep: true, once: true, immediate: false },
-)
+// watch(
+//   () => eventPrices.value,
+//   () => {
+//     prices.value =
+//       eventPrices.value && eventPrices.value.length > 0
+//         ? eventPrices.value.map((el) => {
+//             return { value: el.replace('₽', ''), id: Date.now() }
+//           })
+//         : [{ value: '', id: Date.now() }]
+//   },
+//   { deep: true, once: true, immediate: false },
+// )
 
 const isFree = ref(false)
 
 const handlePriceInput = async (index: number) => {
   const price = prices.value[index]
-
+  console.log('here')
   const isLast = index === prices.value.length - 1
   const isNotEmpty = price.value !== ''
   if (isLast && isNotEmpty) {

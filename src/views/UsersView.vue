@@ -10,12 +10,10 @@ const searchQuery = ref('')
 const showActiveOnly = ref(false)
 
 const moderatorStore = useModeratorStore()
-moderatorStore.getUsers()
-const users = ref<User[]>([
-  { id: 1, role: 'moderator', name: 'username@mail.com' },
-  { id: 2, role: 'user', name: 'username@mail.com' },
-  { id: 3, role: 'moderator', name: 'username@mail.com' },
-])
+
+const users = ref<User[]>([])
+
+moderatorStore.getUsers().then((data) => (data ? (users.value = data) : (users.value = [])))
 
 const roleNames: Record<Roles, string> = {
   user: 'Пользователь',
@@ -33,10 +31,9 @@ const rolesOptions = roles.map((role) => ({
 
 const filteredUsers = computed(() => {
   return users.value.filter((user) => {
-    const matchesSearch =
-      searchQuery.value === '' || user.role.toLowerCase().includes(searchQuery.value.toLowerCase())
-    const matchesActive = !showActiveOnly.value
-    return matchesSearch && matchesActive
+    return (
+      searchQuery.value === '' || user.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    )
   })
 })
 
@@ -90,7 +87,6 @@ const changeRole = (id: number, newRole: string | number) => {
 </template>
 <style scoped lang="scss">
 .wrapper {
-  height: 100%;
   background-color: var(--color-gray-100);
 }
 

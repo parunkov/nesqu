@@ -5,6 +5,7 @@ const props = defineProps<{
   outline?: boolean
   danger?: boolean
   icon?: boolean
+  mini?: boolean
 }>()
 
 const classes = computed(() => ({
@@ -12,6 +13,7 @@ const classes = computed(() => ({
   'btn--outline': props.outline,
   'btn--danger': props.danger,
   'btn--icon': props.icon,
+  'btn--mini': props.mini,
 }))
 </script>
 
@@ -49,6 +51,12 @@ const classes = computed(() => ({
   &--outline {
     background: none;
     border-color: currentColor;
+  }
+
+  &--mini {
+    padding: 10px;
+    height: min-content;
+    width: min-content;
   }
 }
 </style>

@@ -44,7 +44,7 @@ const emits = defineEmits(['input'])
   font-size: 18px;
   line-height: 1.11;
   color: #000;
-  background: #f9f6fa;
+  background: var(--color-gray-100);
 
   transition:
     border-color 0.33s ease,

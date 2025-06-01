@@ -9,10 +9,11 @@ import AuthLayout from '@/layouts/AuthLayout.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import CitiesStatisticsView from '@/views/CitiesStatisticsView.vue'
 import DaysStatistics from '@/views/DaysStatistics.vue'
+import EventsOrganizerView from '@/views/EventsOrganizerView.vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -76,6 +77,14 @@ const router = createRouter({
           component: DaysStatistics,
           meta: {
             requiredRoles: ['moderator', 'owner'],
+          },
+        },
+        {
+          path: 'organizer-events',
+          name: 'organizer-events',
+          component: EventsOrganizerView,
+          meta: {
+            requiredRoles: ['organizer', 'moderator', 'owner'],
           },
         },
       ],

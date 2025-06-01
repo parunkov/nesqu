@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import EventService from '@/api/events.ts'
 import { requestWrapper } from '@/utils/requestWrapper'
-import type { EventsFilter, EventData, EventStatus, EventInfo } from '@/types/events.ts'
+import type { EventsFilter, EventData, EventStatus, EventInfo, EventCard } from '@/types/events.ts'
 
 export const useEventsStore = defineStore('events', () => {
   const isLoading = ref(true)
@@ -22,6 +22,7 @@ export const useEventsStore = defineStore('events', () => {
         (data) => {
           filters.value.page = data.next
           nextPage.value = data.next !== null
+          data.results.forEach((event: EventCard) => (event.image = 'https://' + event.image))
           return data.results
         },
       )
@@ -48,7 +49,9 @@ export const useEventsStore = defineStore('events', () => {
   }
 
   async function getEvent(id: number) {
-    return requestWrapper(isLoading, () => eventService.getEvent(id))
+    return requestWrapper(isLoading, () => eventService.getEvent(id)).then((event: EventInfo) =>
+      event.images.forEach((image) => 'https://' + image),
+    )
   }
 
   async function updateEvent(event: EventInfo, id: number) {

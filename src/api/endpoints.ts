@@ -8,7 +8,7 @@ const MODERATOR = {
   STATS_CITIES: '/admin/moderator/stats/cities/',
   STAT_DAYS: '/admin/moderator/stats/days/',
   LIST: '/admin/moderator/user/list/',
-  DICTIONARY: '/dictionary',
+  DICTIONARY: '/dictionary/',
 } as const
 
 const EVENT = {

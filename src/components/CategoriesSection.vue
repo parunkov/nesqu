@@ -1,3 +1,48 @@
+<script setup lang="ts">
+import { reactive, ref, watch, watchEffect } from 'vue'
+import AppAccordion from '@/components/AppAccordion.vue'
+import AppCheckbox from '@/components/AppCheckbox.vue'
+import { useModeratorStore } from '@/stores/moderator.ts'
+
+const selectedID = defineModel<number[]>()
+
+const moderatorStore = useModeratorStore()
+const closeOthers = (index: number, flag: boolean = false) => {
+  for (let i = 0; i < model.value.length; i++) {
+    model.value[i] = i == index ? flag : false
+  }
+}
+
+const model = ref<boolean[]>(moderatorStore.rubrics.map((_, index) => index == 0))
+const selectedFilters = reactive<Record<string, Record<number, boolean>>>({})
+watchEffect(() => {
+  moderatorStore.rubrics.forEach((filter) => {
+    if (!selectedFilters[filter.group_name]) {
+      selectedFilters[filter.group_name] = {}
+    }
+    filter.group_content.forEach((item) => {
+      if (selectedFilters[filter.group_name][item.id] === undefined) {
+        selectedFilters[filter.group_name][item.id] = false
+      }
+    })
+  })
+})
+
+watch(
+  () => selectedFilters,
+  () => {
+    const selected: number[] = []
+    for (const selectedFiltersKey in selectedFilters) {
+      for (const id in selectedFilters[selectedFiltersKey]) {
+        if (selectedFilters[selectedFiltersKey][id]) selected.push(Number(id))
+      }
+    }
+    selectedID.value = selected
+  },
+  { deep: true },
+)
+</script>
+
 <template>
   <div class="content-card">
     <div class="content-card__inner">
@@ -36,35 +81,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { reactive, ref, watchEffect } from 'vue'
-import AppAccordion from '@/components/AppAccordion.vue'
-import AppCheckbox from '@/components/AppCheckbox.vue'
-import { useModeratorStore } from '@/stores/moderator.ts'
-
-const moderatorStore = useModeratorStore()
-const closeOthers = (index: number, flag: boolean = false) => {
-  for (let i = 0; i < model.value.length; i++) {
-    model.value[i] = i == index ? flag : false
-  }
-}
-
-const model = ref<boolean[]>(moderatorStore.rubrics.map((_, index) => index == 0))
-const selectedFilters = reactive<Record<string, Record<string, boolean>>>({})
-watchEffect(() => {
-  moderatorStore.rubrics.forEach((filter) => {
-    if (!selectedFilters[filter.group_name]) {
-      selectedFilters[filter.group_name] = {}
-    }
-    filter.group_content.forEach((item) => {
-      if (selectedFilters[filter.group_name][item.id] === undefined) {
-        selectedFilters[filter.group_name][item.id] = false
-      }
-    })
-  })
-})
-</script>
 
 <style scoped lang="scss">
 @use '../assets/scss/helpers' as *;

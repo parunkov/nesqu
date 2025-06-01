@@ -8,16 +8,18 @@ import { ref } from 'vue'
 import { useEventsStore } from '@/stores/events.ts'
 import router from '@/router'
 import AppButton from '@/components/AppButton.vue'
+import { useModeratorStore } from '@/stores/moderator.ts'
 
+const moderatorStore = useModeratorStore()
 const eventStore = useEventsStore()
 
 const newEvent = ref<Event>({
   city: 0,
-  types: [],
+  types: [0],
   name: '',
   contacts: [],
   datetime: [],
-  prices: [],
+  prices: [''],
   address: '',
   description: '',
   images: [],
@@ -38,7 +40,7 @@ const saveEvent = () => {
         <img @click="() => router.back()" src="/icons/back.svg" alt="" class="header-icon" />
         <h2 class="content-wrap__title">Новое Мероприятие</h2>
       </div>
-      <div class="content-wrap__body">
+      <div v-if="!moderatorStore.isLoading" class="content-wrap__body">
         <div class="content-wrap__column">
           <InfoSection
             v-model:city="newEvent.city"
@@ -52,7 +54,7 @@ const saveEvent = () => {
           <PhotoSection v-model="newEvent.images" />
         </div>
         <div class="content-wrap__column">
-          <CategoriesSection />
+          <CategoriesSection v-model="newEvent.types" />
         </div>
       </div>
       <div class="content-wrap__foot">
@@ -80,7 +82,7 @@ const saveEvent = () => {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: #fff;
+    background: var(--color-white);
     border-radius: 20px 0 0 0;
 
     @include one {
@@ -107,7 +109,7 @@ const saveEvent = () => {
     font-size: 30px;
     line-height: 1.33;
     letter-spacing: 0.01em;
-    color: #000;
+    color: var(--colorr-black);
   }
 
   // .content-wrap__body

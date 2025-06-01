@@ -10,9 +10,10 @@ const moderatorStore = useModeratorStore()
 
 const cities = computed(() => {
   return moderatorStore.cities.map((el) => {
-    return { id: el.id, value: el.name }
+    return { id: el.id, value: el.city_name }
   })
 })
+
 const dates = defineModel<Event['datetime']>('dates')
 
 const prices = defineModel<Event['prices']>('prices')
@@ -39,6 +40,7 @@ const updateDates = (datesData: Event['datetime']) => {
             <label for="" class="form-item__label">Город</label>
 
             <AppDropDown
+              :start-value="city"
               :options="cities"
               @change-value="(option) => changeCity(Number(option.id))"
             />

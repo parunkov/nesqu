@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick, watch } from 'vue'
+import { ref, nextTick } from 'vue'
 import AppButton from '@/components/AppButton.vue'
 import type { Event as EventType, DateTime } from '@/types/events.ts'
 
@@ -25,18 +25,17 @@ const emit = defineEmits(['updateDates'])
 
 const rows = ref<DateRow[]>(convertToDateRows(props.startDates))
 
-watch(
-  () => props.startDates,
-  () => {
-    dates.value = props.startDates
-    rows.value = convertToDateRows(props.startDates)
-  },
-  { deep: true, once: true, immediate: false },
-)
+// watch(
+//   () => props.startDates,
+//   () => {
+//     dates.value = props.startDates
+//     rows.value = convertToDateRows(props.startDates)
+//   },
+//   { deep: true, once: true, immediate: false },
+// )
 
 function convertToDateRows(target: DateTime[]): DateRow[] {
   return target.map(({ from, to }) => {
-    // Разделение from
     const [startDateRaw, startTime] = from.split('T')
     const [, startMonth, startDay] = startDateRaw.split('-')
     const startDate = `${startDay}:${startMonth}`
@@ -44,7 +43,6 @@ function convertToDateRows(target: DateTime[]): DateRow[] {
     let endDate = ''
     let endTime = ''
 
-    // Обработка to, если указано
     if (to && to.includes('T')) {
       const [endDateRaw, endTimeRaw] = to.split('T')
       const [, endMonth, endDay] = endDateRaw.split('-')
@@ -132,6 +130,10 @@ const handleInput = async (
     focusInput(rowIndex, 'startDate')
   } else {
     rows.value[rowIndex].showHint = false
+  }
+
+  if (field === 'endDate' && rows.value[rowIndex].endDate.length == 5) {
+    focusInput(rowIndex, 'endTime')
   }
 
   // Вызов emit только если поле полностью заполнено

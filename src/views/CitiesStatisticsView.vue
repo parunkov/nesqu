@@ -11,6 +11,9 @@ const tableData = ref<CityStatistics[]>([])
 moderatorStore.getCitiesStatistics().then((res) => tableData.value.push(...res))
 </script>
 <template>
+  <div class="header">
+    <h2 class="title">Статистика</h2>
+  </div>
   <AppTable class="event-table">
     <template #thead>
       <tr>
@@ -136,5 +139,27 @@ moderatorStore.getCitiesStatistics().then((res) => tableData.value.push(...res))
   background-color: var(--color-gray-100);
   overflow: hidden;
   flex: 1;
+}
+
+.event-table {
+  border-radius: 20px 0 0 0;
+}
+
+.header {
+  padding: 20px;
+  border-bottom: 1px solid var(--color-gray-300);
+  display: flex;
+  gap: 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.33;
+  letter-spacing: 0.01em;
+  color: var(--color-black);
 }
 </style>

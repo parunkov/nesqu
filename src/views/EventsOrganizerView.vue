@@ -68,7 +68,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   </header>
   <AppTable class="event-table">
     <template #thead>
-      <tr>
+      <tr class="table-header">
         <th class="table-cell--image">
           <div>Фото</div>
         </th>
@@ -170,7 +170,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 }
 
 .controls {
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border-radius: 20px 0 0 0;
   padding: 20px 40px;
   display: flex;
@@ -184,7 +184,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
     font-size: 30px;
     line-height: 40px;
     letter-spacing: 0.9px;
-    color: #000000;
+    color: var(--color-black);
     margin: 0;
     flex: 1;
     display: flex;
@@ -204,9 +204,9 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 }
 
 .create-button {
-  background-color: #9218C0;
-  color: #FFFFFF;
-  border: 1px solid #9218C0;
+  background-color: var(--color-primary-700);
+  color: var(--color-white);
+  border: 1px solid var(--color-primary-700);
   border-radius: 10px;
   padding: 10px;
   font-size: 18px;

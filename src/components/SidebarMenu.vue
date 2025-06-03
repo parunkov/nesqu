@@ -94,7 +94,7 @@ const logout = () => {
   background-color: var(--color-primary-900);
   height: 100vh;
   padding: 30px;
-  width: 300px;
+  width: 330px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

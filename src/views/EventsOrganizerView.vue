@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import SearchBar from '../components/SearchBar.vue'
 import AppTable from '@/components/AppTable.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
@@ -18,6 +17,7 @@ eventStore.getEvents().then((res) => tableData.value.push(...res))
 const searchQuery = ref('')
 const activeOnly = ref(false)
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterEvents = () => {
   filteredEvents.value = tableData.value.filter(
     (el) =>
@@ -63,11 +63,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
 <template>
   <header class="controls">
-    <SearchBar
-      v-model:search-query="searchQuery"
-      v-model:activeOnly="activeOnly"
-      @search="filterEvents"
-    />
+    <h1 class="title">Мероприятия</h1>
     <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
@@ -174,14 +170,26 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 }
 
 .controls {
-  background-color: var(--color-white);
+  background-color: #FFFFFF;
   border-radius: 20px 0 0 0;
-  padding: 20px;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
+
+  .title {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: 0.9px;
+    color: #000000;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .search-bar {
@@ -196,14 +204,28 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 }
 
 .create-button {
-  background-color: var(--color-primary-700);
-  color: var(--color-white);
-  border: none;
+  background-color: #9218C0;
+  color: #FFFFFF;
+  border: 1px solid #9218C0;
   border-radius: 10px;
   padding: 10px;
   font-size: 18px;
   font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.4px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
 }
 
 th {

@@ -15,7 +15,7 @@
 
 <style lang="scss">
 .table-container {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-gray-1);
   display: flex;
   width: 100%;
   padding: 20px;

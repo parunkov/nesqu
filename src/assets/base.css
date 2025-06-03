@@ -10,7 +10,7 @@
   --color-primary-800: #6C1B8C;
   --color-primary-900: #49185C;
   --color-primary-1000: #27122F;
-  --color-gray-100: #F1F1F1;
+  --color-gray-100: #F9F6FA;
   --color-gray-200: #F4F1F5;
   --color-gray-300: #EDEAEE;
   --color-gray-400: #DFDDE0;
@@ -27,6 +27,10 @@
   --color-warning-border: #F4F3D5;
   --color-error-border: #FFDECF;
   --color-danger: #F60B0F;
+  --color-gray-1: #F1F1F1;
+  --color-gray-2: #DFDFDF;
+  --color-gray-3: #D1D1D1;
+  --color-gray-4: #DFDDE0;
 }
 
 *,

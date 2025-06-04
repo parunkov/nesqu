@@ -209,6 +209,10 @@ const formatDate = (dateString: string) => {
   &--id {
     text-align: center;
     width: 73px;
+
+    div {
+      margin: 0;
+    }
   }
 
   &--active,
@@ -216,8 +220,7 @@ const formatDate = (dateString: string) => {
     width: 66px;
 
     div {
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0;
     }
 
     .content-wrap {
@@ -227,15 +230,29 @@ const formatDate = (dateString: string) => {
 
   &--user {
     text-align: center;
-    width: 84px;
+    width: 84px;  
+
+    div {
+      margin: 0;
+    }
   }
 
   &--email {
-    width: 20%;
+    width: 20%; 
+
+    div {
+      margin: 0;
+    }
   }
 
   &--date {
     width: 205px;
+    padding-left: 10px;
+
+    div {
+      margin: 0;
+      margin-right: 10px;
+    }
   }
 }
 

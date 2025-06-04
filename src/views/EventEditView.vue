@@ -72,7 +72,7 @@ const currentCity = ref(1)
     <div class="content-wrap__inner">
       <div class="content-wrap__head">
         <img @click="() => router.back()" src="/icons/back.svg" alt="" class="header-icon" />
-        <h2 class="content-wrap__title">Редактирование мероприятия</h2>
+        <h2 class="content-wrap__title">Новое Мероприятие</h2>
       </div>
       <div class="content-wrap__body">
         <div class="content-wrap__column">
@@ -150,6 +150,7 @@ const currentCity = ref(1)
     line-height: 1.33;
     letter-spacing: 0.01em;
     color: #000;
+    margin-left: 20px;
   }
 
   // .content-wrap__body

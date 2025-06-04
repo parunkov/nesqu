@@ -99,7 +99,7 @@ const formatDate = (dateString: string) => {
           <div>Топ</div>
         </th>
         <th class="table-cell--user">
-          <div>User ID</div>
+          <div>Создано</div>
         </th>
         <th class="table-cell--email">
           <div>E-mail</div>

@@ -19,6 +19,7 @@
   display: flex;
   width: 100%;
   padding: 20px;
+  padding-top: 10px;
   align-items: flex-start;
   gap: 20px;
   justify-content: flex-start;

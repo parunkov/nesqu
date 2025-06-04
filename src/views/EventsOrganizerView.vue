@@ -84,12 +84,8 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       </tr>
     </template>
     <template #tbody>
-      <tr
-        v-for="(row, index) in filteredEvents"
-        @click.stop="editEvent(row.id)"
-        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in filteredEvents" @click.stop="editEvent(row.id)"
+        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -114,7 +110,42 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 </template>
 
 <style scoped lang="scss">
-.table-cell--end-date > div {
+.table-header {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  background-color: var(--color-gray-2);
+  border: 1px solid var(--color-gray-3);
+  height: auto;
+
+  .table-cell--image {
+    width: 110px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+
+    div {
+      font-weight: 500;
+    }
+  }
+
+  .table-cell--name,
+  .table-cell--start-date,
+  .table-cell--end-date {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    border-left: 1px solid var(--color-gray-3);
+    text-align: left;
+
+    div {
+      font-weight: 500;
+    }
+  }
+}
+
+.table-cell--end-date>div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -142,7 +173,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
     text-align: center;
     min-width: 100px;
 
-    div > div {
+    div>div {
       font-weight: 600;
     }
   }
@@ -156,7 +187,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   }
 }
 
-.table-cell--date > div {
+.table-cell--date>div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -218,11 +249,11 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-  
+
   &:hover {
     opacity: 0.9;
   }
-  
+
   &:active {
     opacity: 0.8;
   }

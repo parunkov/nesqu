@@ -59,6 +59,13 @@ const deleteEvent = (id: number, index: number) => {
 const goTo = (name: string) => router.push({ name: name })
 
 const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id: id } })
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString)
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const year = date.getFullYear()
+  return `${day}.${month}.${year}`
+}
 </script>
 
 <template>
@@ -93,11 +100,11 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
           {{ row.name }}
         </td>
         <td class="table-cell--start-date">
-          {{ row.date_from }}
+          {{ formatDate(row.date_from) }}
         </td>
         <td class="table-cell--end-date">
           <div>
-            <div>{{ row.date_to }}</div>
+            <div>{{ row.date_to ? formatDate(row.date_to as string) : '' }}</div>
             <div class="cell action-cell">
               <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
             </div>

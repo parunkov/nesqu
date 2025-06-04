@@ -276,7 +276,7 @@ const formatDate = (dateString: string) => {
     font-weight: 700;
     font-size: 30px;
     line-height: 40px;
-    letter-spacing: 0.9px;
+    letter-spacing: 0.3px;
     color: var(--color-black);
     margin: 0;
     flex: 1;

@@ -24,7 +24,7 @@ watch(
         <input
           type="text"
           class="search-bar__input"
-          placeholder="Поиск по e-mail"
+          placeholder="Поиск по e-mail или названию"
           @change="emits('search')"
           v-model="searchQuery"
         />
@@ -65,17 +65,18 @@ watch(
   font-weight: 400;
   line-height: 1;
   justify-content: center;
-  width: 245px;
+  width: 460px;
 }
 
 .search-bar__content {
   display: flex;
   width: 100%;
-  padding: 10px;
+  padding: 8.5px 10px;
   align-items: center;
   gap: 10px;
   overflow: hidden;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .search-bar__icon {
@@ -102,6 +103,7 @@ watch(
   font-size: 16px;
   color: var(--color-gray-800);
   min-width: 0;
+  width: 100%;
 }
 
 .toggle-label {

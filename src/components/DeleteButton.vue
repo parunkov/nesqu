@@ -41,7 +41,7 @@ const handleClick = () => {
     </svg>
 
     <!-- Иконка -->
-    <div class="icon-wrapper">
+    <div class="icon-wrapper" :class="{ 'loading-icon': isLoading }">
       <img v-if="!isLoading" src="/icons/delete.svg" />
       <img v-else src="/icons/cansel.svg" />
     </div>
@@ -61,26 +61,33 @@ const handleClick = () => {
   position: relative;
   overflow: hidden;
   transition: background-color 0.3s;
-
-  &.loading {
-    background-color: var(--color-primary-100);
-  }
 }
 
 .icon-wrapper {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+
+  &.loading-icon {
+    background: var(--color-primary-100);
+
+    img {
+      width: 10px;
+      height: 10px;
+    }
+  }
 
   img {
     margin: 0;
-    width: 100%;
-    height: 100%;
+    width: 20px;
+    height: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -98,7 +105,7 @@ const handleClick = () => {
 }
 
 .progress-ring__circle {
-  stroke: var(--color-primary-500);
+  stroke: var(--color-primary-700);
   stroke-width: 2;
   stroke-dasharray: 113.1;
   stroke-dashoffset: 113.1;

@@ -71,7 +71,7 @@ thead {
     border-left: 1px solid var(--color-gray-400);
   }
 
-  th > * {
+  th>* {
     align-self: stretch;
     width: 100%;
     gap: 10px;
@@ -90,7 +90,8 @@ tbody {
     margin-top: 10px;
 
     td {
-      border-left: none;
+      border: 1px solid transparent;
+      box-sizing: border-box;
 
       * {
         margin: 10px;
@@ -133,17 +134,39 @@ td {
   }
 }
 
-.is-warning > td {
+tr.is-warning {
   background-color: var(--color-warning);
   border: 1px solid var(--color-warning-border);
-  border-left: none;
-  border-right: none;
+
+  td {
+    border-top-color: var(--color-warning-border);
+    border-bottom-color: var(--color-warning-border);
+
+    &:first-child {
+      border-left-color: var(--color-warning-border);
+    }
+
+    &:last-child {
+      border-right-color: var(--color-warning-border);
+    }
+  }
 }
 
-.is-error > td {
+tr.is-error {
   background-color: var(--color-error);
   border: 1px solid var(--color-error-border);
-  border-left: none;
-  border-right: none;
+
+  td {
+    border-top-color: var(--color-error-border);
+    border-bottom-color: var(--color-error-border);
+
+    &:first-child {
+      border-left-color: var(--color-error-border);
+    }
+
+    &:last-child {
+      border-right-color: var(--color-error-border);
+    }
+  }
 }
 </style>

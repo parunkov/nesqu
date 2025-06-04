@@ -219,7 +219,7 @@ const formatDate = (dateString: string) => {
     padding: 10px;
 
     div>div {
-      font-weight: 600;
+      font-weight: 400;
     }
 
     div {

@@ -123,7 +123,6 @@ const formatDate = (dateString: string) => {
   line-height: 20px;
   background-color: var(--color-gray-2);
   border: 1px solid var(--color-gray-3);
-  height: auto;
 
   .table-cell--image {
     width: 110px;
@@ -164,6 +163,7 @@ const formatDate = (dateString: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 0;
 
   .action-cell {
     display: flex;
@@ -203,15 +203,27 @@ const formatDate = (dateString: string) => {
 
   &--start-date {
     padding: 10px;
+    color: var(--color-gray-900);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
   }
 
   &--end-date {
-    text-align: center;
+    text-align: left;
+    color: var(--color-gray-900);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
     min-width: 100px;
     padding: 10px;
 
     div>div {
       font-weight: 600;
+    }
+
+    div {
+      margin-left: 0;
     }
   }
 
@@ -302,22 +314,29 @@ th {
   }
 }
 
-// Финальное переопределение всех стилей для изображений
 .event-table {
   tbody tr {
     height: 110px !important;
     min-height: 110px !important;
     max-height: 110px !important;
   }
-  
+
   .table-cell--image {
     height: 110px !important;
     max-height: 110px !important;
     overflow: hidden;
-    
+
     * {
       margin: 0 !important;
     }
+  }
+}
+
+.event-table .table-header {
+  height: 40px !important;
+  
+  .table-cell--image {
+    height: 40px !important;
   }
 }
 </style>

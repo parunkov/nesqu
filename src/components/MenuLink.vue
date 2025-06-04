@@ -36,6 +36,7 @@ defineProps({
   justify-content: flex-start;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 
   font-size: 20px;
   color: var(--color-white);

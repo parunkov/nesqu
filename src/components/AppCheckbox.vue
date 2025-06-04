@@ -21,8 +21,8 @@ const model = defineModel({
 }
 .AppCheckbox {
   border-radius: 4px;
-  background-color: var(--color-gray-100);
-  border: 1px solid var(--color-gray-400);
+  background-color: var(--color-gray-1);
+  border: 1px solid var(--color-gray-4);
   min-height: 20px;
   width: 20px;
   height: 20px;
@@ -30,8 +30,8 @@ const model = defineModel({
 }
 
 .AppCheckbox--checked {
-  background-color: var(--color-primary-600);
-  border-color: var(--color-primary-600);
+  background-color: var(--color-gray-5);
+  border-color: var(--color-primary-1);
   position: relative;
 }
 
@@ -42,7 +42,7 @@ const model = defineModel({
   left: 7px;
   width: 4px;
   height: 8px;
-  border: solid var(--color-white);
+  border: solid var(--color-primary-1);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }

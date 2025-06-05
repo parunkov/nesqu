@@ -52,12 +52,12 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
 <template>
   <header class="controls">
-    <h2 class="title">Мероприятия</h2>
+    <h1 class="title">Мероприятия</h1>
     <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
     <template #thead>
-      <tr>
+      <tr class="table-header">
         <th class="table-cell--image">
           <div>Фото</div>
         </th>
@@ -159,10 +159,66 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 </template>
 
 <style scoped lang="scss">
-.table-cell--end-date > div {
+.table-header {
+  font-size: vw(15);
+  font-weight: 500;
+  line-height: vw(20);
+  background-color: var(--color-gray-2);
+
+  th {
+    border: vw(1) solid var(--color-gray-3);
+    border-bottom-color: var(--color-gray-3);
+    padding: vw(9) vw(10);
+
+    &:first-child {
+      border-left-color: var(--color-gray-3);
+    }
+
+    &:last-child {
+      border-right-color: var(--color-gray-3);
+    }
+  }
+
+  .table-cell--image {
+    width: vw(110);
+    text-align: left;
+    font-size: vw(15);
+    font-weight: 500;
+    line-height: vw(20);
+
+    div {
+      font-weight: 500;
+    }
+  }
+
+  .table-cell--name,
+  .table-cell--start-date,
+  .table-cell--end-date {
+    font-size: vw(15);
+    font-weight: 500;
+    line-height: vw(20);
+    border-left: vw(1) solid var(--color-gray-3);
+    text-align: left;
+
+    div {
+      font-weight: 500;
+    }
+  }
+
+  .table-cell--start-date {
+    width: vw(155);
+  }
+
+  .table-cell--end-date {
+    width: vw(225);
+  }
+}
+
+.table-cell--end-date>div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 0;
 
   .action-cell {
     display: flex;
@@ -174,22 +230,55 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
 .table-cell {
   &--image {
-    width: 150px;
     text-align: center;
+    padding: vw(9) vw(10) !important;
+    padding-right: 0 !important;
+    box-sizing: border-box;
+    height: vw(110);
+    line-height: 1;
 
     img {
       object-fit: contain;
-      width: 100px;
-      height: 100px;
+      width: vw(100);
+      height: vw(90);
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none;
+      display: block;
     }
   }
 
-  &--end-date {
-    text-align: center;
-    min-width: 100px;
+  &--name {
+    padding: vw(10);
+    color: var(--color-gray-900);
+    font-size: vw(16);
+    font-weight: 400;
+    line-height: vw(20);
+  }
 
-    div > div {
-      font-weight: 600;
+  &--start-date {
+    padding: vw(10);
+    color: var(--color-gray-900);
+    font-size: vw(16);
+    font-weight: 400;
+    line-height: vw(20);
+  }
+
+  &--end-date {
+    text-align: left;
+    color: var(--color-gray-900);
+    font-size: vw(16);
+    font-weight: 400;
+    line-height: vw(20);
+    min-width: vw(100);
+    padding: vw(10);
+
+    div>div {
+      font-weight: 400;
+    }
+
+    div {
+      margin-left: 0;
     }
   }
 
@@ -202,7 +291,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   }
 }
 
-.table-cell--date > div {
+.table-cell--date>div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -217,40 +306,92 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
 .controls {
   background-color: var(--color-white);
-  border-radius: 20px 0 0 0;
-  padding: 20px;
+  border-radius: vw(20) 0 0 0;
+  padding: vw(20) vw(40);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: vw(10);
+
+  .title {
+    font-weight: 700;
+    font-size: vw(30);
+    line-height: vw(40);
+    letter-spacing: vw(0.3);
+    color: var(--color-black);
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  gap: vw(10);
+  padding: vw(10);
   background-color: var(--color-gray-100);
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
-  width: 235px;
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
+  width: vw(235);
 }
 
 .create-button {
   background-color: var(--color-primary-700);
   color: var(--color-white);
-  border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 18px;
+  border: vw(1) solid var(--color-primary-700);
+  border-radius: vw(10);
+  padding: vw(10);
+  font-size: vw(18);
   font-weight: 500;
+  line-height: vw(20);
+  letter-spacing: vw(0.4);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
 }
 
 th {
   .table-cell--end-date {
     text-align: left;
+  }
+}
+
+.event-table {
+  tbody tr {
+    height: vw(108);
+    // min-height: vw(110) !important;
+    // max-height: vw(110) !important;
+  }
+
+  .table-cell--image {
+    height: vw(108);
+    // max-height: vw(110) !important;
+    // overflow: hidden;
+
+    * {
+      margin: 0 !important;
+    }
+  }
+}
+
+.event-table .table-header {
+  height: vw(40) !important;
+
+  .table-cell--image {
+    height: vw(40) !important;
   }
 }
 </style>

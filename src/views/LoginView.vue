@@ -66,27 +66,27 @@ const login = () => {
 
 <style scoped lang="scss">
 .submit {
-  margin-top: 20px;
+  margin-top: vw(20);
   justify-self: center;
 }
 
 .error {
-  margin-top: 20px;
-  padding: 10px;
+  margin-top: vw(20);
+  padding: vw(10);
   background-color: var(--color-error);
-  border: 1px solid var(--color-error-borderr);
-  border-radius: 10px;
+  border: vw(1) solid var(--color-error-borderr);
+  border-radius: vw(10);
 }
 
 .content-card {
-  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
-  border-radius: 20px;
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
   background: #fff;
-  width: 460px;
-  min-height: 280px;
+  width: vw(460);
+  min-height: vw(280);
 
   + .content-card {
-    margin-top: 20px;
+    margin-top: vw(20);
   }
 
   // .content-card__inner
@@ -98,16 +98,16 @@ const login = () => {
   // .content-card__head
 
   &__head {
-    padding: 10px 20px;
+    padding: vw(10) vw(20);
     background: var(--color-gray-300);
-    border-radius: 20px 20px 0 0;
+    border-radius: vw(20) vw(20) 0 0;
   }
 
   // .content-card__title
 
   &__title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: vw(18);
     line-height: 1.67;
     color: #242125;
   }
@@ -115,7 +115,7 @@ const login = () => {
   // .content-card__body
 
   &__body {
-    padding: 20px;
+    padding: vw(20);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,7 +128,7 @@ const login = () => {
   width: 100%;
 
   + .form-group {
-    border-top: 1px solid var(--color-gray-300);
+    border-top: vw(1) solid var(--color-gray-300);
   }
 }
 
@@ -137,9 +137,9 @@ const login = () => {
 
   &__label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: vw(5);
     font-weight: 500;
-    font-size: 16px;
+    font-size: vw(16);
     line-height: 1.56;
     color: #444145;
   }
@@ -162,7 +162,7 @@ const login = () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
     cursor: pointer;
 
     &.field {
@@ -201,16 +201,16 @@ const login = () => {
   // .dropdown__content
 
   &__content {
-    padding-top: 8px;
+    padding-top: vw(8);
   }
 
   // .dropdown__select-native
 
   &__select-native {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
+    width: vw(1);
+    height: vw(1);
+    margin: vw(-1);
     padding: 0;
     border: 0;
     overflow: hidden;
@@ -221,8 +221,8 @@ const login = () => {
 }
 
 .dropdown-list {
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
   background: #fff;
   overflow: hidden;
 
@@ -230,7 +230,7 @@ const login = () => {
 
   &__item {
     cursor: pointer;
-    padding: 10px;
+    padding: vw(10);
 
     transition: background 0.33s ease;
 

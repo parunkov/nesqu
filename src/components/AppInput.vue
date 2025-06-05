@@ -35,13 +35,13 @@ const emits = defineEmits(['input'])
 <style lang="scss" scoped>
 .field {
   display: inline-flex;
-  gap: 20px;
+  gap: vw(20);
   width: 100%;
-  padding: 10px 10px 10px 10px;
+  padding: vw(10);
   border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  border-radius: vw(10);
   font-weight: 400;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: var(--color-black);
   background: var(--color-gray-100);
@@ -61,7 +61,7 @@ const emits = defineEmits(['input'])
   }
 
   &--textarea {
-    min-height: 120px;
+    min-height: vw(120);
   }
 }
 

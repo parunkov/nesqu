@@ -15,31 +15,32 @@
 
 <style lang="scss">
 .table-container {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-gray-1);
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: vw(20);
+  padding-top: vw(10);
   align-items: flex-start;
-  gap: 20px;
+  gap: vw(20);
   justify-content: flex-start;
   flex: 1;
 }
 
 table {
   border-collapse: separate;
-  border-radius: 10px;
-  min-width: 240px;
-  border-spacing: 0 10px;
+  border-radius: vw(10);
+  min-width: vw(240);
+  border-spacing: 0 vw(10);
   table-layout: auto; // или fixed, если хочешь равномерность
 
-  font-size: 15px;
+  font-size: vw(15);
   color: var(--color-black);
   font-weight: 500;
 }
 
 thead {
   width: 100%;
-  font-size: 15px;
+  font-size: vw(15);
   color: var(--color-black);
   font-weight: 500;
   white-space: nowrap;
@@ -48,63 +49,64 @@ thead {
   tr {
     background-color: var(--color-gray-300);
     text-align: start;
-    border: 1px solid var(--color-gray-400);
+    border: vw(1) solid var(--color-gray-400);
 
     th {
-      padding: 10px;
+      padding: vw(10);
     }
 
     /* Скругляем углы: первая и последняя ячейка */
     th:first-child {
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
+      border-top-left-radius: vw(10);
+      border-bottom-left-radius: vw(10);
     }
 
     th:last-child {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
+      border-top-right-radius: vw(10);
+      border-bottom-right-radius: vw(10);
     }
   }
 
   th:not(:first-child) {
-    border-left: 1px solid var(--color-gray-400);
+    border-left: vw(1) solid var(--color-gray-400);
   }
 
-  th > * {
+  th>* {
     align-self: stretch;
     width: 100%;
-    gap: 10px;
+    gap: vw(10);
   }
 }
 
 tbody {
-  margin-top: 10px;
+  margin-top: vw(10);
   width: 100%;
 
   tr {
-    border-radius: 20px;
+    border-radius: vw(20);
     background-color: var(--color-white);
-    padding: 10px;
+    padding: vw(10);
     align-items: stretch;
-    margin-top: 10px;
+    margin-top: vw(10);
 
     td {
-      border-left: none;
+      border: vw(1) solid transparent;
+      box-sizing: border-box;
 
       * {
-        margin: 10px;
-        gap: 10px;
+        margin: vw(10);
+        gap: vw(10);
       }
     }
 
     td:first-child {
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
+      border-top-left-radius: vw(20);
+      border-bottom-left-radius: vw(20);
     }
 
     td:last-child {
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
+      border-top-right-radius: vw(20);
+      border-bottom-right-radius: vw(20);
     }
   }
 
@@ -120,17 +122,17 @@ tbody {
 }
 
 tr {
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
+  box-shadow: 0 vw(5) vw(15) 0 rgba(0, 0, 0, 0.05);
+  border-radius: vw(10);
   width: 100%;
-  min-height: 60px;
-  height: 60px;
+  min-height: vw(60);
+  height: vw(60);
   align-items: flex-start;
   justify-content: flex-start;
 }
 
 td {
-  border-left: 1px solid var(--color-gray-100);
+  border-left: vw(1) solid var(--color-gray-100);
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
@@ -142,17 +144,39 @@ td {
   }
 }
 
-.is-warning > td {
+tr.is-warning {
   background-color: var(--color-warning);
-  border: 1px solid var(--color-warning-border);
-  border-left: none;
-  border-right: none;
+  border: vw(1) solid var(--color-warning-border);
+
+  td {
+    border-top-color: var(--color-warning-border);
+    border-bottom-color: var(--color-warning-border);
+
+    &:first-child {
+      border-left-color: var(--color-warning-border);
+    }
+
+    &:last-child {
+      border-right-color: var(--color-warning-border);
+    }
+  }
 }
 
-.is-error > td {
+tr.is-error {
   background-color: var(--color-error);
-  border: 1px solid var(--color-error-border);
-  border-left: none;
-  border-right: none;
+  border: vw(1) solid var(--color-error-border);
+
+  td {
+    border-top-color: var(--color-error-border);
+    border-bottom-color: var(--color-error-border);
+
+    &:first-child {
+      border-left-color: var(--color-error-border);
+    }
+
+    &:last-child {
+      border-right-color: var(--color-error-border);
+    }
+  }
 }
 </style>

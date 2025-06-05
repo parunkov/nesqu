@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { onClickOutside } from '@vueuse/core'
 
 const emit = defineEmits<{
   (e: 'changeValue', value: Option): void
@@ -16,11 +15,12 @@ const props = defineProps({
     required: true,
   },
   startValue: {
-    type: [Number, String],
+    type: Number,
     default: 0,
   },
 })
-const selected = ref(props.options.find((option) => option.id === props.startValue))
+
+const selected = ref(props.options[props.startValue])
 const isOpen = ref(false)
 
 const toggleDropdown = () => {
@@ -32,17 +32,12 @@ const selectOption = (option: Option) => {
   emit('changeValue', option)
   isOpen.value = false
 }
-
-const $select = ref<HTMLElement | null>(null)
-
-onClickOutside($select, () => (isOpen.value = false))
 </script>
 
 <template>
   <div
-    v-if="options.length > 0 && selected"
+    v-if="options.length > 0"
     class="dropdown dropdown--select"
-    ref="$select"
     :class="{ 'dropdown--active': isOpen }"
   >
     <div class="dropdown__trigger field" @click="toggleDropdown">
@@ -88,20 +83,20 @@ onClickOutside($select, () => (isOpen.value = false))
   font-size: 18px;
   line-height: 1.11;
   color: #000;
-  background: var(--color-gray-100);
+  background: #f9f6fa;
 
   transition:
     border-color 0.33s ease,
     background 0.33s ease;
 
   &::placeholder {
-    color: var(--color-gray-700);
+    color: #767377;
     font-size: inherit;
   }
 
   &:focus,
   &:has(input:focus) {
-    border-color: var(--color-primary-100);
+    border-color: #9218c0;
   }
 
   &--textarea {
@@ -218,14 +213,6 @@ onClickOutside($select, () => (isOpen.value = false))
     clip: rect(0 0 0 0);
     white-space: nowrap;
     clip-path: inset(50%);
-  }
-}
-
-.input {
-  width: 275px;
-
-  .dropdown__trigger {
-    background-color: var(--color-gray-100);
   }
 }
 </style>

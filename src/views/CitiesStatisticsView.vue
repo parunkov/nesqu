@@ -60,12 +60,12 @@ moderatorStore.getCitiesStatistics().then((res) => tableData.value.push(...res))
 .table-cell {
   &--id {
     text-align: center;
-    min-width: 100px;
+    min-width: vw(100);
   }
 
   &--user {
     text-align: center;
-    min-width: 100px;
+    min-width: vw(100);
   }
 
   &--email {
@@ -104,33 +104,33 @@ moderatorStore.getCitiesStatistics().then((res) => tableData.value.push(...res))
 
 .controls {
   background-color: var(--color-white);
-  border-radius: 20px 0 0 0;
-  padding: 20px;
+  border-radius: vw(20) 0 0 0;
+  padding: vw(20);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: vw(20);
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  gap: vw(10);
+  padding: vw(10);
   background-color: var(--color-gray-100);
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
-  width: 235px;
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
+  width: vw(235);
 }
 
 .create-button {
   background-color: var(--color-primary-700);
   color: var(--color-white);
   border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 18px;
+  border-radius: vw(10);
+  padding: vw(10);
+  font-size: vw(18);
   font-weight: 500;
   cursor: pointer;
 }
@@ -142,22 +142,22 @@ moderatorStore.getCitiesStatistics().then((res) => tableData.value.push(...res))
 }
 
 .event-table {
-  border-radius: 20px 0 0 0;
+  border-radius: vw(20) 0 0 0;
 }
 
 .header {
-  padding: 20px;
-  border-bottom: 1px solid var(--color-gray-300);
+  padding: vw(20);
+  border-bottom: vw(1) solid var(--color-gray-300);
   display: flex;
-  gap: 10px;
+  gap: vw(10);
 }
 
 .title {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: vw(26);
   font-weight: 700;
-  font-size: 30px;
+  font-size: vw(30);
   line-height: 1.33;
   letter-spacing: 0.01em;
   color: var(--color-black);

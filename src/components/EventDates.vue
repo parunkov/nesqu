@@ -288,20 +288,20 @@ const addDate = async () => {
 @use '../assets/scss/helpers' as *;
 
 .button {
-  padding: 19px;
+  padding: vw(19);
   font-weight: 600;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: var(--color-white);
   background: var(--color-primary-700);
-  border-radius: 10px;
-  border: 1px solid var(--color-primary-700);
+  border-radius: vw(10);
+  border: vw(1) solid var(--color-primary-700);
   stroke: currentColor;
 
   &--icon {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
   }
 
   &--danger {
@@ -315,21 +315,21 @@ const addDate = async () => {
 }
 
 .form-group {
-  padding: 20px;
+  padding: vw(20);
 
   + .form-group {
-    border-top: 1px solid var(--color-gray-300);
+    border-top: vw(1) solid var(--color-gray-300);
   }
 }
 
 .field {
   display: block;
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  padding: vw(10);
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
   font-weight: 400;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: #000;
   background: var(--color-gray-100);
@@ -349,7 +349,7 @@ const addDate = async () => {
   }
 
   &--textarea {
-    min-height: 120px;
+    min-height: vw(120);
   }
 }
 
@@ -362,17 +362,17 @@ const addDate = async () => {
   // .form-date__row
   &__dates {
     display: flex;
-    gap: 5px;
+    gap: vw(5);
   }
 
   &__row {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: vw(10);
   }
 
   &__row + &__row {
-    margin-top: 20px;
+    margin-top: vw(20);
   }
 
   // .form-date__item
@@ -380,13 +380,13 @@ const addDate = async () => {
   &__item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
   }
 
   // .form-date__element&& rowIndex != 0
 
   &__element {
-    max-width: 205px;
+    max-width: vw(205);
   }
 
   // .form-date__values
@@ -397,7 +397,7 @@ const addDate = async () => {
 
   &__values {
     display: flex;
-    gap: 5px;
+    gap: vw(5);
 
     &:disabled {
       border-color: var(--color-primary-700);
@@ -406,9 +406,9 @@ const addDate = async () => {
 
   &__hint {
     height: 0;
-    font-size: 10px;
+    font-size: vw(10);
     color: var(--color-danger);
-    margin-top: 2px;
+    margin-top: vw(2);
   }
 
   // .form-date__input
@@ -430,9 +430,9 @@ const addDate = async () => {
 
   &__item-separator {
     align-self: flex-end;
-    height: 1px;
-    width: 10px;
-    margin: 20px 0;
+    height: vw(1);
+    width: vw(10);
+    margin: vw(20) 0;
     background: var(--color-gray-600);
   }
 
@@ -441,23 +441,23 @@ const addDate = async () => {
   &__actions {
     display: flex;
     align-items: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+    gap: vw(10);
+    margin-top: vw(20);
   }
 
   // .form-date__remove-btn
 
   &__add-day-btn,
   &__remove-btn {
-    padding: 10px;
+    padding: vw(10);
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   &__remove-btn {
-    height: 24px;
-    width: 24px;
+    height: vw(24);
+    width: vw(24);
     align-self: self-end;
   }
 
@@ -465,8 +465,8 @@ const addDate = async () => {
     &::before {
       content: '';
       display: block;
-      width: 14px;
-      height: 2px;
+      width: vw(14);
+      height: vw(2);
       background: var(--color-danger);
       border-radius: 50%;
     }

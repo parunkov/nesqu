@@ -24,7 +24,7 @@ watch(
         <input
           type="text"
           class="search-bar__input"
-          placeholder="Поиск по e-mail"
+          placeholder="Поиск по e-mail или названию"
           @change="emits('search')"
           v-model="searchQuery"
         />
@@ -41,48 +41,49 @@ watch(
 
 <style scoped lang="scss">
 .search-container {
-  min-width: 700px;
+  min-width: vw(700);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: vw(20);
   justify-content: flex-start;
 }
 
 .search-bar {
-  border-radius: 10px;
+  border-radius: vw(10);
   background-color: var(--color-gray-100);
-  border: 1px solid var(--color-gray-400);
+  border: vw(1) solid var(--color-gray-400);
   align-self: stretch;
   display: flex;
-  min-width: 240px;
+  min-width: vw(240);
   margin-top: auto;
   margin-bottom: auto;
   flex-direction: column;
   align-items: stretch;
 
-  font-size: 16px;
+  font-size: vw(16);
   color: var(--color-gray-900);
   font-weight: 400;
   line-height: 1;
   justify-content: center;
-  width: 245px;
+  width: vw(460);
 }
 
 .search-bar__content {
   display: flex;
   width: 100%;
-  padding: 10px;
+  padding: vw(8.5) vw(10);
   align-items: center;
-  gap: 10px;
+  gap: vw(10);
   overflow: hidden;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .search-bar__icon {
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: 20px;
+  width: vw(20);
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
@@ -99,14 +100,15 @@ watch(
   border: none;
   outline: none;
 
-  font-size: 16px;
+  font-size: vw(16);
   color: var(--color-gray-800);
   min-width: 0;
+  width: 100%;
 }
 
 .toggle-label {
   color: var(--color-gray-800);
-  font-size: 16px;
+  font-size: vw(16);
 
   font-weight: 400;
   line-height: 1;

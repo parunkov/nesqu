@@ -52,9 +52,9 @@
 
 @mixin visually-hidden {
   position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  margin: -1px !important;
+  width: vw(1) !important;
+  height: vw(1) !important;
+  margin: vw(-1) !important;
   border: 0 !important;
   padding: 0 !important;
   white-space: nowrap !important;

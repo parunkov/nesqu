@@ -69,11 +69,11 @@ const chartOptions = computed(() => {
 <style lang="scss" scoped>
 .chart-container {
   width: 100%;
-  height: 600px;
+  height: vw(600);
   padding: 2rem;
   background: var(--color-gray-100);
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: vw(16);
+  box-shadow: 0 vw(10) vw(25) rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 

@@ -8,7 +8,7 @@ $mobile: 767.98;
 $mobile-md: 627.98;
 $mobile-s: 480.98;
 
-$one: 999.99px;
+$one: vw(999.99);
 
 @mixin one {
   @media (width < $one) {

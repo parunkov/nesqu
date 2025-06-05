@@ -26,22 +26,23 @@ defineProps({
 
 <style scoped lang="scss">
 .menu-link {
-  border-radius: 10px;
+  border-radius: vw(10);
   display: flex;
-  min-height: 60px;
+  min-height: vw(60);
   width: 100%;
-  padding: 15px 8px 15px 10px;
+  padding: vw(15) vw(8) vw(15) vw(10);
   align-items: center;
-  gap: 12px;
+  gap: vw(12);
   justify-content: flex-start;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: vw(10);
 
-  font-size: 20px;
+  font-size: vw(20);
   color: var(--color-white);
   font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 0.2px;
+  letter-spacing: vw(0.2);
   line-height: 1;
 }
 
@@ -60,7 +61,7 @@ defineProps({
   margin-bottom: auto;
   width: 100%;
   align-items: center;
-  gap: 10px;
+  gap: vw(10);
   justify-content: flex-start;
   flex: 1;
   flex-basis: 0;
@@ -70,7 +71,7 @@ defineProps({
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: 30px;
+  width: vw(30);
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;

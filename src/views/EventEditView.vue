@@ -70,7 +70,7 @@ const publishEvent = () => {
     <div class="content-wrap__inner">
       <div class="content-wrap__head">
         <img @click="() => router.back()" src="/icons/back.svg" alt="" class="header-icon" />
-        <h2 class="content-wrap__title">Редактирование мероприятия</h2>
+        <h2 class="content-wrap__title">Новое Мероприятие</h2>
       </div>
       <div class="content-wrap__body">
         <div class="content-wrap__column">
@@ -123,7 +123,7 @@ const publishEvent = () => {
     flex-direction: column;
     height: 100%;
     background: #fff;
-    border-radius: 20px 0 0 0;
+    border-radius: vw(20) 0 0 0;
 
     @include one {
       border-radius: 0;
@@ -133,10 +133,10 @@ const publishEvent = () => {
   // .content-wrap__head
 
   &__head {
-    padding: 20px;
-    border-bottom: 1px solid var(--color-gray-300);
+    padding: vw(20);
+    border-bottom: vw(1) solid var(--color-gray-300);
     display: flex;
-    gap: 10px;
+    gap: vw(10);
   }
 
   // .content-wrap__title
@@ -144,12 +144,13 @@ const publishEvent = () => {
   &__title {
     display: flex;
     align-items: center;
-    gap: 26px;
+    gap: vw(26);
     font-weight: 700;
-    font-size: 30px;
+    font-size: vw(30);
     line-height: 1.33;
     letter-spacing: 0.01em;
     color: #000;
+    margin-left: vw(20);
   }
 
   // .content-wrap__body
@@ -157,9 +158,9 @@ const publishEvent = () => {
   &__body {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: 680px 430px;
-    padding: 20px;
-    gap: 20px;
+    grid-template-columns: vw(680) vw(430);
+    padding: vw(20);
+    gap: vw(20);
 
     @include one {
       grid-template-columns: 1fr;
@@ -171,8 +172,8 @@ const publishEvent = () => {
   &__foot {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    gap: 20px;
+    padding: vw(20);
+    gap: vw(20);
   }
 }
 </style>

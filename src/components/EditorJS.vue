@@ -4,6 +4,10 @@ import EditorJS, { type OutputData } from '@editorjs/editorjs'
 import Header from '@editorjs/header'
 import Paragraph from '@editorjs/paragraph'
 import List from '@editorjs/list'
+import Quote from '@editorjs/quote'
+import Code from '@editorjs/code'
+import Delimiter from '@editorjs/delimiter'
+import Table from '@editorjs/table'
 
 interface Props {
   modelValue?: OutputData
@@ -59,13 +63,38 @@ onMounted(async () => {
           class: List as any,
           inlineToolbar: true,
           config: {
-            defaultStyle: 'unordered',
-            styles: {
-              unordered: 'Маркированный список',
-              ordered: 'Нумерованный список'
-            }
+            defaultStyle: 'unordered'
           }
         },
+        quote: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          class: Quote as any,
+          inlineToolbar: true,
+          config: {
+            quotePlaceholder: 'Введите цитату...',
+            captionPlaceholder: 'Автор цитаты'
+          }
+        },
+        code: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          class: Code as any,
+          config: {
+            placeholder: 'Введите код...'
+          }
+        },
+        delimiter: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          class: Delimiter as any
+        },
+        table: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          class: Table as any,
+          inlineToolbar: true,
+          config: {
+            rows: 2,
+            cols: 3
+          }
+        }
       },
       onChange: async () => {
         if (editor) {

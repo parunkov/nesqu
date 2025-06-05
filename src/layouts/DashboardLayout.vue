@@ -24,7 +24,7 @@ useModeratorStore()
   display: flex;
   background-color: var(--color-primary-900);
   flex: 1;
-  padding-top: 20px;
+  padding-top: vw(20);
   align-self: stretch;
   box-sizing: inherit;
   overflow-y: auto;

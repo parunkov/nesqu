@@ -25,13 +25,13 @@ const classes = computed(() => ({
 
 <style scoped lang="scss">
 .btn {
-  padding: 19px;
+  padding: vw(19);
   font-weight: 600;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: #fff;
   background: #9218c0;
-  border-radius: 10px;
+  border-radius: vw(10);
   border: 1px solid #9218c0;
   stroke: currentColor;
   transition: 0.2s ease;
@@ -39,7 +39,7 @@ const classes = computed(() => ({
   &--icon {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
   }
 
   &--danger {

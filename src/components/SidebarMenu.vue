@@ -76,7 +76,7 @@ const logout = () => {
         <MenuLink
           v-if="showTab(`organizer-events`)"
           icon="/icons/calendar.svg"
-          title="Мероприятия"
+          title="Мероприятия О"
           @click="goTo('organizer-events')"
           :isActive="router.currentRoute.value.name == `organizer-events`"
         />

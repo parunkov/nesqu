@@ -8,8 +8,8 @@ const model = defineModel({
 
 <template>
   <div class="content-wrap">
-  <div class="AppCheckbox" :class="{ 'AppCheckbox--checked': model }" @click="model = !model"></div>
-  <slot></slot>
+    <div class="AppCheckbox" :class="{ 'AppCheckbox--checked': model }" @click="model = !model"></div>
+    <slot></slot>
   </div>
 </template>
 
@@ -19,6 +19,7 @@ const model = defineModel({
   flex-direction: row;
   gap: vw(10);
 }
+
 .AppCheckbox {
   border-radius: vw(4);
   background-color: var(--color-gray-1);
@@ -26,6 +27,7 @@ const model = defineModel({
   min-height: vw(20);
   width: vw(20);
   height: vw(20);
+  margin-bottom: vw(10);
   cursor: pointer;
 }
 
@@ -47,4 +49,3 @@ const model = defineModel({
   transform: rotate(45deg);
 }
 </style>
-

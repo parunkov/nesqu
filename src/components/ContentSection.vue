@@ -1,8 +1,25 @@
 <script setup lang="ts">
 import type { Event } from '@/types/events.ts'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { ref } from 'vue'
 
 const title = defineModel<Event['name']>('title')
 const description = defineModel<Event['description']>('description')
+
+// Ссылка на редактор для получения содержимого
+const quillEditor = ref()
+
+// Обработчик изменения текста в редакторе
+const handleTextChange = () => {
+  if (quillEditor.value) {
+    // Получаем содержимое в разных форматах
+    const htmlContent = quillEditor.value.getHTML()
+    
+    console.log('🖋️ QuillEditor содержимое изменено:')
+    console.log('📝 HTML:', htmlContent)
+  }
+}
 </script>
 
 <template>
@@ -31,6 +48,11 @@ const description = defineModel<Event['description']>('description')
                 v-model="description"
                 placeholder=" "
               ></textarea>
+              <QuillEditor 
+                ref="quillEditor"
+                @textChange="handleTextChange"
+                placeholder="Введите описание события..."
+              />
             </div>
           </div>
         </div>

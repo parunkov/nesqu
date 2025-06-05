@@ -5,7 +5,6 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ref } from 'vue'
 
 const title = defineModel<Event['name']>('title')
-const description = defineModel<Event['description']>('description')
 
 const quillEditor = ref()
 
@@ -110,19 +109,11 @@ textarea {
     margin-top: vw(20);
   }
 
-  // .content-card__inner
-
-  &__inner {}
-
-  // .content-card__head
-
   &__head {
     padding: vw(10) vw(20);
     background: var(--color-gray-300);
     border-radius: vw(20) vw(20) 0 0;
   }
-
-  // .content-card__title
 
   &__title {
     font-weight: 600;
@@ -130,10 +121,6 @@ textarea {
     line-height: 1.67;
     color: #242125;
   }
-
-  // .content-card__body
-
-  &__body {}
 }
 
 .form-group {
@@ -151,8 +138,6 @@ textarea {
 }
 
 .form-item {
-  // .form-block__label
-
   &__label {
     display: block;
     margin-bottom: vw(5);

@@ -25,20 +25,13 @@ const emit = defineEmits(['updateDates'])
 
 const rows = ref<DateRow[]>(convertToDateRows(props.startDates))
 
-// watch(
-//   () => props.startDates,
-//   () => {
-//     dates.value = props.startDates
-//     rows.value = convertToDateRows(props.startDates)
-//   },
-//   { deep: true, once: true, immediate: false },
-// )
-
 function convertToDateRows(target: DateTime[]): DateRow[] {
   return target.map(({ from, to }) => {
-    const [startDateRaw, startTime] = from.split('T')
+    const [startDateRaw, startTimeRaw] = from.split('T')
     const [, startMonth, startDay] = startDateRaw.split('-')
-    const startDate = `${startDay}:${startMonth}`
+    const startDate = `${startDay}.${startMonth}`
+
+    const startTime = startTimeRaw?.slice(0, 5) || '' // ← обрезаем секунды
 
     let endDate = ''
     let endTime = ''
@@ -46,8 +39,8 @@ function convertToDateRows(target: DateTime[]): DateRow[] {
     if (to && to.includes('T')) {
       const [endDateRaw, endTimeRaw] = to.split('T')
       const [, endMonth, endDay] = endDateRaw.split('-')
-      endDate = `${endDay}:${endMonth}`
-      endTime = endTimeRaw
+      endDate = `${endDay}.${endMonth}`
+      endTime = endTimeRaw?.slice(0, 5) || '' // ← тоже обрезаем
     }
 
     return {
@@ -299,10 +292,10 @@ const addDate = async () => {
   font-weight: 600;
   font-size: 18px;
   line-height: 1.11;
-  color: #fff;
-  background: #9218c0;
+  color: var(--color-white);
+  background: var(--color-primary-700);
   border-radius: 10px;
-  border: 1px solid #9218c0;
+  border: 1px solid var(--color-primary-700);
   stroke: currentColor;
 
   &--icon {
@@ -312,7 +305,7 @@ const addDate = async () => {
   }
 
   &--danger {
-    color: #f60b0f;
+    color: var(--color-danger);
   }
 
   &--outline {
@@ -339,20 +332,20 @@ const addDate = async () => {
   font-size: 18px;
   line-height: 1.11;
   color: #000;
-  background: #f9f6fa;
+  background: var(--color-gray-100);
 
   transition:
     border-color 0.33s ease,
     background 0.33s ease;
 
   &::placeholder {
-    color: #767377;
+    color: var(--color-gray-700);
     font-size: inherit;
   }
 
   &:focus,
   &:has(input:focus) {
-    border-color: #9218c0;
+    border-color: var(--color-primary-700);
   }
 
   &--textarea {
@@ -362,7 +355,7 @@ const addDate = async () => {
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 
 .form-date {
@@ -399,7 +392,7 @@ const addDate = async () => {
   // .form-date__values
   .disabled,
   .filled {
-    border-color: #767377;
+    border-color: var(--color-primary-700);
   }
 
   &__values {
@@ -407,14 +400,14 @@ const addDate = async () => {
     gap: 5px;
 
     &:disabled {
-      border-color: #767377;
+      border-color: var(--color-primary-700);
     }
   }
 
   &__hint {
     height: 0;
     font-size: 10px;
-    color: #f60b0f;
+    color: var(--color-danger);
     margin-top: 2px;
   }
 
@@ -426,7 +419,7 @@ const addDate = async () => {
     font-family: inherit;
 
     &::placeholder {
-      color: #767377;
+      color: var(--color-gray-700);
       font-family: inherit;
       font-size: inherit;
       text-transform: lowercase;
@@ -440,7 +433,7 @@ const addDate = async () => {
     height: 1px;
     width: 10px;
     margin: 20px 0;
-    background: #9f9ca0;
+    background: var(--color-gray-600);
   }
 
   // .form-date__actions
@@ -474,7 +467,7 @@ const addDate = async () => {
       display: block;
       width: 14px;
       height: 2px;
-      background: #f60b0f;
+      background: var(--color-danger);
       border-radius: 50%;
     }
   }

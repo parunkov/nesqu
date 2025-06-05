@@ -43,7 +43,7 @@ const emits = defineEmits(['input'])
   font-weight: 400;
   font-size: 18px;
   line-height: 1.11;
-  color: #000;
+  color: var(--color-black);
   background: var(--color-gray-100);
 
   transition:
@@ -51,13 +51,13 @@ const emits = defineEmits(['input'])
     background 0.33s ease;
 
   &::placeholder {
-    color: #767377;
+    color: var(--color-gray-700);
     font-size: inherit;
   }
 
   &:focus,
   &:has(input:focus) {
-    border-color: #9218c0;
+    border-color: var(--color-primary-700);
   }
 
   &--textarea {
@@ -67,7 +67,7 @@ const emits = defineEmits(['input'])
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 
 input {

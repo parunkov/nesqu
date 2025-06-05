@@ -29,10 +29,10 @@ const classes = computed(() => ({
   font-weight: 600;
   font-size: 18px;
   line-height: 1.11;
-  color: #fff;
-  background: #9218c0;
+  color: var(--color-white);
+  background: var(--color-primary-700);
   border-radius: 10px;
-  border: 1px solid #9218c0;
+  border: 1px solid var(--color-primary-700);
   stroke: currentColor;
   transition: 0.2s ease;
 

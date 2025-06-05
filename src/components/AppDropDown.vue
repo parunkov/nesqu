@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 
 const emit = defineEmits<{
   (e: 'changeValue', value: Option): void
@@ -15,12 +16,11 @@ const props = defineProps({
     required: true,
   },
   startValue: {
-    type: Number,
+    type: [Number, String],
     default: 0,
   },
 })
-
-const selected = ref(props.options[props.startValue])
+const selected = ref(props.options.find((option) => option.id === props.startValue))
 const isOpen = ref(false)
 
 const toggleDropdown = () => {
@@ -32,12 +32,17 @@ const selectOption = (option: Option) => {
   emit('changeValue', option)
   isOpen.value = false
 }
+
+const $select = ref<HTMLElement | null>(null)
+
+onClickOutside($select, () => (isOpen.value = false))
 </script>
 
 <template>
   <div
-    v-if="options.length > 0"
+    v-if="options.length > 0 && selected"
     class="dropdown dropdown--select"
+    ref="$select"
     :class="{ 'dropdown--active': isOpen }"
   >
     <div class="dropdown__trigger field" @click="toggleDropdown">
@@ -83,20 +88,20 @@ const selectOption = (option: Option) => {
   font-size: 18px;
   line-height: 1.11;
   color: #000;
-  background: #f9f6fa;
+  background: var(--color-gray-100);
 
   transition:
     border-color 0.33s ease,
     background 0.33s ease;
 
   &::placeholder {
-    color: #767377;
+    color: var(--color-gray-700);
     font-size: inherit;
   }
 
   &:focus,
   &:has(input:focus) {
-    border-color: #9218c0;
+    border-color: var(--color-primary-100);
   }
 
   &--textarea {
@@ -106,7 +111,7 @@ const selectOption = (option: Option) => {
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 
 .dropdown * {
@@ -116,7 +121,7 @@ const selectOption = (option: Option) => {
 .dropdown-list {
   border: 1px solid var(--color-gray-300);
   border-radius: 10px;
-  background: #fff;
+  background: var(--color-white);
   overflow: hidden;
 
   list-style: none;
@@ -132,7 +137,7 @@ const selectOption = (option: Option) => {
     transition: background 0.33s ease;
 
     &:hover {
-      background: #e39bfd;
+      background: var(--color-primary-100);
     }
   }
 }
@@ -144,7 +149,7 @@ const selectOption = (option: Option) => {
   // .dropdown__trigger
 
   &--active &__trigger {
-    border-color: #9218c0;
+    border-color: var(--color-primary-100);
 
     &::after {
       transform: rotate(180deg);
@@ -160,7 +165,7 @@ const selectOption = (option: Option) => {
     cursor: pointer;
 
     &.field {
-      background: #fff;
+      background: var(--color-white);
     }
 
     &::after {
@@ -213,6 +218,14 @@ const selectOption = (option: Option) => {
     clip: rect(0 0 0 0);
     white-space: nowrap;
     clip-path: inset(50%);
+  }
+}
+
+.input {
+  width: 275px;
+
+  .dropdown__trigger {
+    background-color: var(--color-gray-100);
   }
 }
 </style>

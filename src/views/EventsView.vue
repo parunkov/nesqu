@@ -7,6 +7,7 @@ import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
 import DeleteButton from '@/components/DeleteButton.vue'
 import router from '@/router'
+import { formatDate } from '@/utils/dateConverter.ts'
 
 const infiniteScrollTrigger = ref(null)
 let observer: IntersectionObserver
@@ -28,7 +29,7 @@ const filterEvents = () => {
 }
 
 const filteredEvents = ref(tableData.value)
-let firstCall = false
+let firstCall = true
 onMounted(() => {
   setTimeout(() => {
     observer = new IntersectionObserver(
@@ -58,7 +59,6 @@ const deleteEvent = (id: number, index: number) => {
 }
 
 const statusToogle = (event: EventCard) => {
-  console.log()
   eventStore.updateEventsStatus([
     {
       id: event.id,
@@ -113,7 +113,10 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       <tr
         v-for="(row, index) in filteredEvents"
         @click.stop="editEvent(row.id)"
-        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }"
+        :class="{
+          'is-warning': row.is_validated === null || row.is_validated === undefined,
+          'is-error': row.is_validated === false,
+        }"
         :key="row.id"
       >
         <td class="table-cell--id">
@@ -121,12 +124,12 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
         </td>
         <td class="table-cell--active">
           <div>
-            <AppCheckbox @click="statusToogle(row)" v-model="row.is_hiden" />
+            <AppCheckbox @click.stop="statusToogle(row)" v-model="row.is_hiden" />
           </div>
         </td>
         <td class="table-cell--top">
           <div>
-            <AppCheckbox @click="statusToogle(row)" v-model="row.top" />
+            <AppCheckbox @click.stop="statusToogle(row)" v-model="row.top" />
           </div>
         </td>
         <td class="table-cell--user">
@@ -140,7 +143,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
         </td>
         <td class="table-cell--date">
           <div>
-            <div>{{ row.date_from }}</div>
+            <div>{{ formatDate(row.date_from) }}</div>
             <div class="cell action-cell">
               <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
             </div>

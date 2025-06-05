@@ -107,6 +107,16 @@ tbody {
       border-bottom-right-radius: 20px;
     }
   }
+
+  .sub-header {
+    all: unset;
+    color: var(--color-sub-header);
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    vertical-align: bottom;
+  }
 }
 
 tr {

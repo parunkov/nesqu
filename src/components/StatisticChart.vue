@@ -71,7 +71,7 @@ const chartOptions = computed(() => {
   width: 100%;
   height: 600px;
   padding: 2rem;
-  background: #fff;
+  background: var(--color-gray-100);
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;

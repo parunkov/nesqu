@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import AuthService from '@/api/auth'
 import client from '@/http/client.ts'
 import type { AuthToken, Roles } from '@/types/user'
@@ -71,12 +71,6 @@ export const useAuthStore = defineStore('auth', () => {
   onMounted(() => {
     loadUserInfo()
   })
-
-  watch(
-    () => currentUser.value,
-    () => console.log(currentUser.value),
-    { deep: true },
-  )
 
   return { isLoading, login, logout, currentUser }
 })

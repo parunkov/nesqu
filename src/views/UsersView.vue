@@ -72,7 +72,7 @@ const changeRole = (id: number, newRole: string | number) => {
             <div>
               <AppDropDown
                 @change-value="(newRole) => changeRole(user.id, newRole.id)"
-                :start-value="rolesOptions.findIndex((el) => el.id == user.role)"
+                :start-value="user.role"
                 :options="rolesOptions"
               />
             </div>

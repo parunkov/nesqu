@@ -49,7 +49,10 @@ export const useModeratorStore = defineStore('moderator', () => {
     isLoading.value = true
     moderatorService.getDictionary().then((data) => {
       if (data?.types) rubrics.value.push(...data.types)
-      if (data?.cities) cities.value.push(...data.cities)
+      if (data?.cities) {
+        data.cities.sort((a, b) => Number(b.is_active) - Number(a.is_active))
+        cities.value.push(...data.cities)
+      }
       isLoading.value = false
     })
   }

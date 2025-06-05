@@ -48,7 +48,7 @@ const logout = () => {
         <MenuLink
           v-if="showTab(`events-statistics`)"
           icon="/icons/stat.svg"
-          title="Мероприятия стат."
+          title="Стат / мероприятия"
           @click="goTo('events-statistics')"
           :isActive="router.currentRoute.value.name == `events-statistics`"
         />
@@ -62,14 +62,14 @@ const logout = () => {
         <MenuLink
           v-if="showTab(`cities-statistics`)"
           icon="/icons/stat.svg"
-          title="Города стат."
+          title="Стат / города"
           @click="goTo('cities-statistics')"
           :isActive="router.currentRoute.value.name == `cities-statistics`"
         />
         <MenuLink
           v-if="showTab(`days-statistics`)"
           icon="/icons/stat.svg"
-          title="Дни стат."
+          title="Стат / по дням"
           @click="goTo('days-statistics')"
           :isActive="router.currentRoute.value.name == `days-statistics`"
         />

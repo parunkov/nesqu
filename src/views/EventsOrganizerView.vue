@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import SearchBar from '../components/SearchBar.vue'
 import AppTable from '@/components/AppTable.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
 import DeleteButton from '@/components/DeleteButton.vue'
+import { formatDate } from '@/utils/dateConverter.ts'
 import router from '@/router'
 
 const infiniteScrollTrigger = ref(null)
@@ -15,19 +15,8 @@ const tableData = ref<EventCard[]>([])
 
 eventStore.getEvents().then((res) => tableData.value.push(...res))
 
-const searchQuery = ref('')
-const activeOnly = ref(false)
-
-const filterEvents = () => {
-  filteredEvents.value = tableData.value.filter(
-    (el) =>
-      (activeOnly.value === el.is_hiden || !activeOnly.value) &&
-      el.user_name.includes(searchQuery.value),
-  )
-}
-
 const filteredEvents = ref(tableData.value)
-let firstCall = false
+let firstCall = true
 onMounted(() => {
   setTimeout(() => {
     observer = new IntersectionObserver(
@@ -63,11 +52,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
 <template>
   <header class="controls">
-    <SearchBar
-      v-model:search-query="searchQuery"
-      v-model:activeOnly="activeOnly"
-      @search="filterEvents"
-    />
+    <h2 class="title">Мероприятия</h2>
     <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
@@ -88,10 +73,14 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       </tr>
     </template>
     <template #tbody>
+      <tr class="sub-header">
+        <td colspan="4">На модерации</td>
+      </tr>
       <tr
-        v-for="(row, index) in filteredEvents"
+        v-for="(row, index) in filteredEvents.filter(
+          (el) => el.is_validated === null || el.is_validated === undefined,
+        )"
         @click.stop="editEvent(row.id)"
-        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }"
         :key="row.id"
       >
         <td class="table-cell--image">
@@ -101,11 +90,63 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
           {{ row.name }}
         </td>
         <td class="table-cell--start-date">
-          {{ row.date_from }}
+          {{ formatDate(row.date_from) }}
         </td>
         <td class="table-cell--end-date">
           <div>
-            <div>{{ row.date_to }}</div>
+            <div>{{ row.date_to ? formatDate(row.date_to) : '' }}</div>
+            <div class="cell action-cell">
+              <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="sub-header">
+        <td colspan="4">Опубликованные</td>
+      </tr>
+      <tr
+        v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === true)"
+        @click.stop="editEvent(row.id)"
+        :key="row.id"
+      >
+        <td class="table-cell--image">
+          <img :src="row.image" />
+        </td>
+        <td class="table-cell--name">
+          {{ row.name }}
+        </td>
+        <td class="table-cell--start-date">
+          {{ formatDate(row.date_from) }}
+        </td>
+        <td class="table-cell--end-date">
+          <div>
+            <div>{{ row.date_to ? formatDate(row.date_to) : '' }}</div>
+            <div class="cell action-cell">
+              <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="sub-header">
+        <td colspan="4">Не прошедшие модерацию</td>
+      </tr>
+      <tr
+        v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === false)"
+        @click.stop="editEvent(row.id)"
+        :key="row.id"
+      >
+        <td class="table-cell--image">
+          <img :src="row.image" />
+        </td>
+        <td class="table-cell--name">
+          {{ row.name }}
+        </td>
+        <td class="table-cell--start-date">
+          {{ formatDate(row.date_from) }}
+        </td>
+        <td class="table-cell--end-date">
+          <div>
+            <div>{{ row.date_to ? formatDate(row.date_to) : '' }}</div>
             <div class="cell action-cell">
               <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
             </div>
@@ -133,6 +174,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
 .table-cell {
   &--image {
+    width: 150px;
     text-align: center;
 
     img {

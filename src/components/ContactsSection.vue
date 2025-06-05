@@ -1,36 +1,31 @@
 <script setup lang="ts">
 import type { Event } from '@/types/events.ts'
+import AppInput from '@/components/AppInput.vue'
 
-const title = defineModel<Event['name']>('title')
-const description = defineModel<Event['description']>('description')
+const contacts = defineModel<Event['contacts']>('contacts')
 </script>
 
 <template>
-  <div class="content-card">
+  <div v-if="contacts" class="content-card">
     <div class="content-card__inner">
       <div class="content-card__head">
-        <h3 class="content-card__title">Контент</h3>
+        <h3 class="content-card__title">Контакты</h3>
       </div>
 
       <div class="content-card__body">
         <div class="form-group">
           <div class="form-block">
             <div class="form-item">
-              <label for="" class="form-item__label">Название*</label>
-
-              <input type="text" class="field" v-model="title" placeholder=" " />
+              <label for="" class="form-item__label">Сайт</label>
+              <AppInput v-model="contacts[0]" placeholder=" " />
             </div>
-          </div>
-
-          <div class="form-block">
             <div class="form-item">
-              <label for="" class="form-item__label">Описание</label>
-
-              <textarea
-                class="field field--textarea"
-                v-model="description"
-                placeholder=" "
-              ></textarea>
+              <label for="" class="form-item__label">Телеграм</label>
+              <AppInput v-model="contacts[1]" placeholder=" " />
+            </div>
+            <div class="form-item">
+              <label for="" class="form-item__label">Вотсап</label>
+              <AppInput v-model="contacts[2]" placeholder=" " />
             </div>
           </div>
         </div>
@@ -42,40 +37,9 @@ const description = defineModel<Event['description']>('description')
 <style scoped lang="scss">
 @use '../assets/scss/helpers' as *;
 
-.field {
-  display: block;
-  width: 100%;
-  padding: 10px 0;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.11;
-  color: var(--color-black);
-  background: var(--color-gray-100);
-
-  transition:
-    border-color 0.33s ease,
-    background 0.33s ease;
-
-  &::placeholder {
-    color: var(--color-gray-700);
-    font-size: inherit;
-  }
-
-  &:focus,
-  &:has(input:focus) {
-    border-color: var(--color-primary-700);
-  }
-
-  &--textarea {
-    min-height: 120px;
-  }
-}
-
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: var(--color-white);
+  background: #fff;
 }
 
 textarea {

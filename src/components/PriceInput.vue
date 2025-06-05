@@ -38,11 +38,24 @@ const isFree = ref(false)
 
 const handlePriceInput = async (index: number) => {
   const price = prices.value[index]
-  console.log('here')
+
   const isLast = index === prices.value.length - 1
   const isNotEmpty = price.value !== ''
+
   if (isLast && isNotEmpty) {
     prices.value.push({ value: '', id: Date.now() + Math.random() })
+    await nextTick()
+  }
+
+  const isSecondLast = index === prices.value.length - 2
+  if (isSecondLast && price.value === '' && prices.value[prices.value.length - 1]?.value === '') {
+    prices.value.pop()
+    await nextTick()
+    return
+  }
+
+  if (!isLast && price.value === '') {
+    prices.value.splice(index, 1)
     await nextTick()
   }
 }
@@ -65,7 +78,7 @@ watch(
   () => isFree.value,
   () => {
     if (!isFree.value) eventPrices.value = prices.value.map((item) => item.value).slice(0, -1)
-    else eventPrices.value = undefined
+    else eventPrices.value = ['Не указана']
   },
 )
 </script>
@@ -147,7 +160,7 @@ watch(
       left: 3px;
       width: 24px;
       height: 24px;
-      background: #fff;
+      background: var(--color-white);
       box-shadow:
         0 1px 3px 0 rgba(16, 24, 40, 0.06),
         0 1px 4px 0 rgba(16, 24, 40, 0.1);
@@ -162,14 +175,14 @@ watch(
   &__caption {
     font-size: 18px;
     line-height: 1.11;
-    color: #444145;
+    color: var(--color-gray-900);
     user-select: none;
   }
 }
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 
 .form-group {
@@ -189,7 +202,7 @@ watch(
     font-weight: 500;
     font-size: 16px;
     line-height: 1.56;
-    color: #444145;
+    color: var(--color-gray-900);
   }
 }
 
@@ -231,7 +244,7 @@ watch(
     text-align: center;
     font-size: 20px;
     line-height: 1;
-    color: #444145;
+    color: var(--color-gray-900);
   }
 
   // .form-price__input

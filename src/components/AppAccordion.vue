@@ -1,43 +1,46 @@
 <script lang="ts" setup>
-import { ref, computed, nextTick, watch } from 'vue';
+import { ref, computed, nextTick, watch } from 'vue'
 
-const emits = defineEmits(["closeOthers"])
-const mustBeOpen = defineModel<boolean>();
+const emits = defineEmits(['closeOthers'])
+const mustBeOpen = defineModel<boolean>()
 const open = ref(mustBeOpen.value)
-watch(() => mustBeOpen, () => {
-  toggle().then(() =>
-    open.value = mustBeOpen.value)
-}, { deep: true })
-const $content = ref<HTMLElement | null>(null);
-const $main = ref<HTMLElement | null>(null);
-const isBtnActive = ref(false);
-const isActivating = ref(false);
-const height = ref<number | null>(null);
+watch(
+  () => mustBeOpen,
+  () => {
+    toggle().then(() => (open.value = mustBeOpen.value))
+  },
+  { deep: true },
+)
+const $content = ref<HTMLElement | null>(null)
+const $main = ref<HTMLElement | null>(null)
+const isBtnActive = ref(false)
+const isActivating = ref(false)
+const height = ref<number | null>(null)
 
-const contentStyles = computed(() => (height.value !== null ? { height: height.value + 'px' } : {}));
+const contentStyles = computed(() => (height.value !== null ? { height: height.value + 'px' } : {}))
 
 async function toggle() {
   if (!open.value) {
-    isActivating.value = true;
-    isBtnActive.value = true;
-    await nextTick();
+    isActivating.value = true
+    isBtnActive.value = true
+    await nextTick()
     if ($main.value) {
-      height.value = $main.value.getBoundingClientRect().height;
+      height.value = $main.value.getBoundingClientRect().height
     }
   } else {
     if ($main.value) {
-      height.value = $main.value.getBoundingClientRect().height;
+      height.value = $main.value.getBoundingClientRect().height
     }
-    isBtnActive.value = false;
-    isActivating.value = true;
-    setTimeout(() => (height.value = 0), 0);
+    isBtnActive.value = false
+    isActivating.value = true
+    setTimeout(() => (height.value = 0), 0)
   }
 }
 
 function transitionendHandler(event: Event) {
-  if (event.target !== $content.value) return;
-  isActivating.value = false;
-  if (!open.value) height.value = null;
+  if (event.target !== $content.value) return
+  isActivating.value = false
+  if (!open.value) height.value = null
 }
 
 function clickHandler() {
@@ -48,29 +51,35 @@ function clickHandler() {
       emits('closeOthers', true)
     })
   }
-
 }
 
 const styles = computed(() => {
   return { 'accordion--active': open.value, 'accordion--activating': isActivating.value }
 })
-
 </script>
 
 <template>
   <div class="accordion" :class="styles">
-    <button class="accordion__btn" :class="{ 'accordion__btn--active': isBtnActive }" @click="clickHandler">
+    <button
+      class="accordion__btn"
+      :class="{ 'accordion__btn--active': isBtnActive }"
+      @click="clickHandler"
+    >
       <slot @click.stop name="btn"></slot>
-      <div class="img" ></div>
+      <div class="img"></div>
     </button>
-    <div class="accordion__content" ref="$content" :style="contentStyles" @transitionend="transitionendHandler">
+    <div
+      class="accordion__content"
+      ref="$content"
+      :style="contentStyles"
+      @transitionend="transitionendHandler"
+    >
       <div class="accordion__main" ref="$main">
         <slot @click.stop name="content"></slot>
       </div>
     </div>
   </div>
 </template>
-
 
 <style lang="scss" scoped>
 .accordion {
@@ -86,21 +95,20 @@ const styles = computed(() => {
     .img {
       content: '';
       flex: 0 0 auto;
-      margin-left: vw(8);
-      width: vw(24);
-      height: vw(24);
+      margin-left: 8px;
+      width: 24px;
+      height: 24px;
       background: url('/public/icons/arrow.svg') center / contain no-repeat;
-      background-size: vw(12);
+      background-size: 12px;
       transition: transform 0.4s;
     }
-    &--active{
+
+    &--active {
       .img {
         transform: rotate(-180deg);
       }
     }
   }
-
-
 
   &__content {
     display: none;

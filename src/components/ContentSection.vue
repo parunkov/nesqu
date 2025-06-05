@@ -7,15 +7,12 @@ import { ref } from 'vue'
 const title = defineModel<Event['name']>('title')
 const description = defineModel<Event['description']>('description')
 
-// Ссылка на редактор для получения содержимого
 const quillEditor = ref()
 
-// Обработчик изменения текста в редакторе
 const handleTextChange = () => {
   if (quillEditor.value) {
-    // Получаем содержимое в разных форматах
     const htmlContent = quillEditor.value.getHTML()
-    
+
     console.log('🖋️ QuillEditor содержимое изменено:')
     console.log('📝 HTML:', htmlContent)
   }
@@ -43,16 +40,7 @@ const handleTextChange = () => {
             <div class="form-item">
               <label for="" class="form-item__label">Описание</label>
 
-              <textarea
-                class="field field--textarea"
-                v-model="description"
-                placeholder=" "
-              ></textarea>
-              <QuillEditor 
-                ref="quillEditor"
-                @textChange="handleTextChange"
-                placeholder="Введите описание события..."
-              />
+              <QuillEditor ref="quillEditor" @textChange="handleTextChange" placeholder="Введите описание события..." />
             </div>
           </div>
         </div>
@@ -101,8 +89,10 @@ const handleTextChange = () => {
 }
 
 textarea {
-  outline: none; /* Убрать стандартную чёрную рамку */
-  resize: none; /* Запретить растягивание */
+  outline: none;
+  /* Убрать стандартную чёрную рамку */
+  resize: none;
+  /* Запретить растягивание */
   overflow: auto;
 
   &:focus,
@@ -116,14 +106,13 @@ textarea {
   border-radius: vw(20);
   background: #fff;
 
-  + .content-card {
+  +.content-card {
     margin-top: vw(20);
   }
 
   // .content-card__inner
 
-  &__inner {
-  }
+  &__inner {}
 
   // .content-card__head
 
@@ -144,20 +133,19 @@ textarea {
 
   // .content-card__body
 
-  &__body {
-  }
+  &__body {}
 }
 
 .form-group {
   padding: vw(20);
 
-  + .form-group {
+  +.form-group {
     border-top: vw(1) solid var(--color-gray-300);
   }
 }
 
 .form-block {
-  + .form-block {
+  +.form-block {
     margin-top: vw(10);
   }
 }
@@ -172,6 +160,26 @@ textarea {
     font-size: vw(16);
     line-height: 1.56;
     color: #444145;
+  }
+}
+</style>
+<style lang="scss">
+.ql-toolbar {
+  background: var(--color-gray-100);
+  border-color: var(--color-gray-300);
+  border-radius: vw(10) vw(10) 0 0;
+}
+
+.ql-container {
+  background: var(--color-gray-100);
+  border-color: var(--color-gray-300);
+  border-radius: 0 0 vw(10) vw(10);
+  height: vw(77);
+}
+
+.ql-snow {
+  .ql-formats:first-child {
+    display: none;
   }
 }
 </style>

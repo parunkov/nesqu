@@ -54,7 +54,7 @@ const classes = computed(() => ({
   }
 
   &--mini {
-    padding: 10px;
+    padding: vw(10);
     height: min-content;
     width: min-content;
   }

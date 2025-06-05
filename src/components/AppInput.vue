@@ -61,7 +61,7 @@ const emits = defineEmits(['input'])
   }
 
   &--textarea {
-    min-height: 120px;
+    min-height: vw(120);
   }
 }
 

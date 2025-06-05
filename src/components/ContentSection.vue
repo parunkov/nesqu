@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Event } from '@/types/events.ts'
-import EditorJS from './EditorJS.vue';
 
 const title = defineModel<Event['name']>('title')
 const description = defineModel<Event['description']>('description')
@@ -32,7 +31,6 @@ const description = defineModel<Event['description']>('description')
                 v-model="description"
                 placeholder=" "
               ></textarea>
-              <EditorJS />
             </div>
           </div>
         </div>

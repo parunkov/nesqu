@@ -185,27 +185,27 @@ watch(
 }
 
 .content-card {
-  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
-  border-radius: 20px;
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
   background: var(--color-white);
 
   + .content-card {
-    margin-top: 20px;
+    margin-top: vw(20);
   }
 
   // .content-card__head
 
   &__head {
-    padding: 10px 20px;
+    padding: vw(10) vw(20);
     background: var(--color-gray-300);
-    border-radius: 20px 20px 0 0;
+    border-radius: vw(20) vw(20) 0 0;
   }
 
   // .content-card__title
 
   &__title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: vw(18);
     line-height: 1.67;
     color: #242125;
   }
@@ -217,23 +217,23 @@ watch(
   &__inner {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: vw(20);
   }
 
   // .form-file__card
 
   &__card {
-    border-radius: 10px;
-    width: 200px;
-    height: 200px;
+    border-radius: vw(10);
+    width: vw(200);
+    height: vw(200);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     @include one {
-      width: 130px;
-      height: 130px;
+      width: vw(130);
+      height: vw(130);
     }
   }
 
@@ -250,7 +250,7 @@ watch(
 
   &__preview {
     position: relative;
-    border: 1px solid var(--color-gray-300);
+    border: vw(1) solid var(--color-gray-300);
     background: #f9f6fa;
   }
 
@@ -264,22 +264,22 @@ watch(
 
   &__delete-button {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 40px;
-    height: 40px;
+    top: vw(5);
+    right: vw(5);
+    width: vw(40);
+    height: vw(40);
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--color-gray-300);
-    border-radius: 10px;
+    border: vw(1) solid var(--color-gray-300);
+    border-radius: vw(10);
     background: #fff;
   }
 
   // .form-file__upload-button
 
   &__upload-button {
-    border: 2px dashed #e39bfd;
+    border: vw(2) dashed #e39bfd;
   }
 
   // .form-file__icon
@@ -294,7 +294,7 @@ watch(
 
   &__caption {
     font-weight: 500;
-    font-size: 14px;
+    font-size: vw(14);
     line-height: 1.43;
     color: #444145;
   }
@@ -308,17 +308,17 @@ watch(
   // .form-file__alert
 
   &__alert {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: vw(10);
+    font-size: vw(14);
     color: #f60b0f;
   }
 }
 
 .form-group {
-  padding: 20px;
+  padding: vw(20);
 
   + .form-group {
-    border-top: 1px solid var(--color-gray-300);
+    border-top: vw(1) solid var(--color-gray-300);
   }
 }
 </style>

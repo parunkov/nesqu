@@ -17,15 +17,15 @@ const model = defineModel({
 .content-wrap {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: vw(10);
 }
 .AppCheckbox {
-  border-radius: 4px;
+  border-radius: vw(4);
   background-color: var(--color-gray-1);
-  border: 1px solid var(--color-gray-4);
-  min-height: 20px;
-  width: 20px;
-  height: 20px;
+  border: vw(1) solid var(--color-gray-4);
+  min-height: vw(20);
+  width: vw(20);
+  height: vw(20);
   cursor: pointer;
 }
 
@@ -38,12 +38,12 @@ const model = defineModel({
 .AppCheckbox--checked::after {
   content: "";
   position: absolute;
-  top: 3px;
-  left: 7px;
-  width: 4px;
-  height: 8px;
+  top: vw(3);
+  left: vw(7);
+  width: vw(4);
+  height: vw(8);
   border: solid var(--color-primary-1);
-  border-width: 0 2px 2px 0;
+  border-width: 0 vw(2) vw(2) 0;
   transform: rotate(45deg);
 }
 </style>

@@ -40,18 +40,18 @@ const chart = {
 
 <style>
 .header {
-  padding: 20px;
-  border-bottom: 1px solid var(--color-gray-300);
+  padding: vw(20);
+  border-bottom: vw(1) solid var(--color-gray-300);
   display: flex;
-  gap: 10px;
+  gap: vw(10);
 }
 
 .title {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: vw(26);
   font-weight: 700;
-  font-size: 30px;
+  font-size: vw(30);
   line-height: 1.33;
   letter-spacing: 0.01em;
   color: #000;

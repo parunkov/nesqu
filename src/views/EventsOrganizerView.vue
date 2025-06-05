@@ -118,15 +118,15 @@ const formatDate = (dateString: string) => {
 
 <style scoped lang="scss">
 .table-header {
-  font-size: 15px;
+  font-size: vw(15);
   font-weight: 500;
-  line-height: 20px;
+  line-height: vw(20);
   background-color: var(--color-gray-2);
 
   th {
-    border: 1px solid var(--color-gray-3);
+    border: vw(1) solid var(--color-gray-3);
     border-bottom-color: var(--color-gray-3);
-    padding: 9px 10px;
+    padding: vw(9) vw(10);
 
     &:first-child {
       border-left-color: var(--color-gray-3);
@@ -138,11 +138,11 @@ const formatDate = (dateString: string) => {
   }
 
   .table-cell--image {
-    width: 110px;
+    width: vw(110);
     text-align: left;
-    font-size: 15px;
+    font-size: vw(15);
     font-weight: 500;
-    line-height: 20px;
+    line-height: vw(20);
 
     div {
       font-weight: 500;
@@ -152,10 +152,10 @@ const formatDate = (dateString: string) => {
   .table-cell--name,
   .table-cell--start-date,
   .table-cell--end-date {
-    font-size: 15px;
+    font-size: vw(15);
     font-weight: 500;
-    line-height: 20px;
-    border-left: 1px solid var(--color-gray-3);
+    line-height: vw(20);
+    border-left: vw(1) solid var(--color-gray-3);
     text-align: left;
 
     div {
@@ -164,11 +164,11 @@ const formatDate = (dateString: string) => {
   }
 
   .table-cell--start-date {
-    width: 155px;
+    width: vw(155);
   }
 
   .table-cell--end-date {
-    width: 225px;
+    width: vw(225);
   }
 }
 
@@ -189,16 +189,16 @@ const formatDate = (dateString: string) => {
 .table-cell {
   &--image {
     text-align: center;
-    padding: 9px 10px !important;
+    padding: vw(9) vw(10) !important;
     padding-right: 0 !important;
     box-sizing: border-box;
-    height: 110px;
+    height: vw(110);
     line-height: 1;
 
     img {
       object-fit: contain;
-      width: 100px;
-      height: 90px;
+      width: vw(100);
+      height: vw(90);
       margin: 0 !important;
       padding: 0 !important;
       border: none;
@@ -207,29 +207,29 @@ const formatDate = (dateString: string) => {
   }
 
   &--name {
-    padding: 10px;
+    padding: vw(10);
     color: var(--color-gray-900);
-    font-size: 16px;
+    font-size: vw(16);
     font-weight: 400;
-    line-height: 20px;
+    line-height: vw(20);
   }
 
   &--start-date {
-    padding: 10px;
+    padding: vw(10);
     color: var(--color-gray-900);
-    font-size: 16px;
+    font-size: vw(16);
     font-weight: 400;
-    line-height: 20px;
+    line-height: vw(20);
   }
 
   &--end-date {
     text-align: left;
     color: var(--color-gray-900);
-    font-size: 16px;
+    font-size: vw(16);
     font-weight: 400;
-    line-height: 20px;
-    min-width: 100px;
-    padding: 10px;
+    line-height: vw(20);
+    min-width: vw(100);
+    padding: vw(10);
 
     div>div {
       font-weight: 400;
@@ -264,19 +264,19 @@ const formatDate = (dateString: string) => {
 
 .controls {
   background-color: var(--color-white);
-  border-radius: 20px 0 0 0;
-  padding: 20px 40px;
+  border-radius: vw(20) 0 0 0;
+  padding: vw(20) vw(40);
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: vw(10);
 
   .title {
     font-weight: 700;
-    font-size: 30px;
-    line-height: 40px;
-    letter-spacing: 0.3px;
+    font-size: vw(30);
+    line-height: vw(40);
+    letter-spacing: vw(0.3);
     color: var(--color-black);
     margin: 0;
     flex: 1;
@@ -288,24 +288,24 @@ const formatDate = (dateString: string) => {
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  gap: vw(10);
+  padding: vw(10);
   background-color: var(--color-gray-100);
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
-  width: 235px;
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
+  width: vw(235);
 }
 
 .create-button {
   background-color: var(--color-primary-700);
   color: var(--color-white);
-  border: 1px solid var(--color-primary-700);
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 18px;
+  border: vw(1) solid var(--color-primary-700);
+  border-radius: vw(10);
+  padding: vw(10);
+  font-size: vw(18);
   font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.4px;
+  line-height: vw(20);
+  letter-spacing: vw(0.4);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -329,14 +329,14 @@ th {
 
 .event-table {
   tbody tr {
-    height: 108px;
-    // min-height: 110px !important;
-    // max-height: 110px !important;
+    height: vw(108);
+    // min-height: vw(110) !important;
+    // max-height: vw(110) !important;
   }
 
   .table-cell--image {
-    height: 108px;
-    // max-height: 110px !important;
+    height: vw(108);
+    // max-height: vw(110) !important;
     // overflow: hidden;
 
     * {
@@ -346,10 +346,10 @@ th {
 }
 
 .event-table .table-header {
-  height: 40px !important;
+  height: vw(40) !important;
   
   .table-cell--image {
-    height: 40px !important;
+    height: vw(40) !important;
   }
 }
 </style>

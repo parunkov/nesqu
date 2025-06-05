@@ -76,11 +76,11 @@ const selectOption = (option: Option) => {
 .field {
   display: block;
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  padding: vw(10);
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
   font-weight: 400;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: #000;
   background: #f9f6fa;
@@ -100,7 +100,7 @@ const selectOption = (option: Option) => {
   }
 
   &--textarea {
-    min-height: 120px;
+    min-height: vw(120);
   }
 }
 
@@ -114,8 +114,8 @@ const selectOption = (option: Option) => {
 }
 
 .dropdown-list {
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
   background: #fff;
   overflow: hidden;
 
@@ -127,7 +127,7 @@ const selectOption = (option: Option) => {
 
   &__item {
     cursor: pointer;
-    padding: 10px;
+    padding: vw(10);
 
     transition: background 0.33s ease;
 
@@ -155,7 +155,7 @@ const selectOption = (option: Option) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
     margin: 0;
     cursor: pointer;
 
@@ -197,7 +197,7 @@ const selectOption = (option: Option) => {
   // .dropdown__content
 
   &__content {
-    padding-top: 8px;
+    padding-top: vw(8);
     margin: 0;
   }
 
@@ -205,9 +205,9 @@ const selectOption = (option: Option) => {
 
   &__select-native {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
+    width: vw(1);
+    height: vw(1);
+    margin: vw(-1);
     padding: 0;
     border: 0;
     clip: rect(0 0 0 0);

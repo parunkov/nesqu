@@ -11,10 +11,10 @@ const modelValue = defineModel<boolean>()
 <style scoped lang="scss">
 .toggle {
   position: relative;
-  width: 36px;
-  height: 20px;
-  border-radius: 12px;
-  padding: 2px;
+  width: vw(36);
+  height: vw(20);
+  border-radius: vw(12);
+  padding: vw(2);
   background-color: var(--color-gray-600);
   transition: background-color 0.3s ease;
   cursor: pointer;
@@ -26,10 +26,10 @@ const modelValue = defineModel<boolean>()
 
 .toggle__button {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
+  top: vw(2);
+  left: vw(2);
+  width: vw(16);
+  height: vw(16);
   border-radius: 50%;
   background-color: var(--color-white);
   transition: transform 0.3s ease;
@@ -37,6 +37,6 @@ const modelValue = defineModel<boolean>()
 }
 
 .toggle--active .toggle__button {
-  transform: translateX(16px); // плавно едет вправо
+  transform: translateX(vw(16)); // плавно едет вправо
 }
 </style>

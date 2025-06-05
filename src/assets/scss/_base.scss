@@ -34,7 +34,7 @@ a {
 .main {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 330px 1170px;
+  grid-template-columns: vw(330) vw(1170);
 
   @include one {
     grid-template-columns: 1fr;

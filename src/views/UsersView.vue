@@ -92,15 +92,15 @@ const changeRole = (id: number, newRole: string | number) => {
 
 .user-table {
   box-sizing: content-box;
-  width: 460px;
+  width: vw(460);
 }
 
 .search-header {
-  border-radius: 20px 0 0 0;
+  border-radius: vw(20) 0 0 0;
   background-color: var(--color-white);
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: vw(20);
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -108,7 +108,7 @@ const changeRole = (id: number, newRole: string | number) => {
 
 .table-cell--id {
   text-align: center;
-  min-width: 100px;
+  min-width: vw(100);
 }
 
 .table-cell--role {
@@ -117,7 +117,7 @@ const changeRole = (id: number, newRole: string | number) => {
 }
 
 .table-cell--name {
-  min-width: 215px;
+  min-width: vw(215);
   width: 100%;
 }
 </style>

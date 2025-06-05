@@ -93,8 +93,8 @@ const logout = () => {
 .sidebar {
   background-color: var(--color-primary-900);
   height: 100vh;
-  padding: 30px;
-  width: 330px;
+  padding: vw(30);
+  width: vw(330);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -122,23 +122,23 @@ const logout = () => {
 }
 
 .navigation {
-  margin-top: 40px;
+  margin-top: vw(40);
   width: 100%;
 
-  font-size: 20px;
+  font-size: vw(20);
   color: var(--color-white);
   font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 0.2px;
+  letter-spacing: vw(0.2);
   line-height: 1;
 }
 
 .user-profile {
-  font-size: 18px;
+  font-size: vw(18);
   color: var(--color-white);
   font-weight: 500;
   white-space: nowrap;
-  letter-spacing: 0.18px;
+  letter-spacing: vw(0.18);
   line-height: 1;
   justify-content: flex-start;
 }

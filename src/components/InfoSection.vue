@@ -60,12 +60,12 @@ const updateDates = (datesData: Event['datetime']) => {
 
 <style scoped lang="scss">
 .content-card {
-  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
-  border-radius: 20px;
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
   background: #fff;
 
   + .content-card {
-    margin-top: 20px;
+    margin-top: vw(20);
   }
 
   // .content-card__inner
@@ -76,16 +76,16 @@ const updateDates = (datesData: Event['datetime']) => {
   // .content-card__head
 
   &__head {
-    padding: 10px 20px;
+    padding: vw(10) vw(20);
     background: var(--color-gray-300);
-    border-radius: 20px 20px 0 0;
+    border-radius: vw(20) vw(20) 0 0;
   }
 
   // .content-card__title
 
   &__title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: vw(18);
     line-height: 1.67;
     color: #242125;
   }
@@ -97,10 +97,10 @@ const updateDates = (datesData: Event['datetime']) => {
 }
 
 .form-group {
-  padding: 20px;
+  padding: vw(20);
 
   + .form-group {
-    border-top: 1px solid var(--color-gray-300);
+    border-top: vw(1) solid var(--color-gray-300);
   }
 }
 
@@ -109,9 +109,9 @@ const updateDates = (datesData: Event['datetime']) => {
 
   &__label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: vw(5);
     font-weight: 500;
-    font-size: 16px;
+    font-size: vw(16);
     line-height: 1.56;
     color: #444145;
   }
@@ -134,7 +134,7 @@ const updateDates = (datesData: Event['datetime']) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
     cursor: pointer;
 
     &.field {
@@ -173,16 +173,16 @@ const updateDates = (datesData: Event['datetime']) => {
   // .dropdown__content
 
   &__content {
-    padding-top: 8px;
+    padding-top: vw(8);
   }
 
   // .dropdown__select-native
 
   &__select-native {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
+    width: vw(1);
+    height: vw(1);
+    margin: vw(-1);
     padding: 0;
     border: 0;
     overflow: hidden;
@@ -193,8 +193,8 @@ const updateDates = (datesData: Event['datetime']) => {
 }
 
 .dropdown-list {
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
   background: #fff;
   overflow: hidden;
 
@@ -202,7 +202,7 @@ const updateDates = (datesData: Event['datetime']) => {
 
   &__item {
     cursor: pointer;
-    padding: 10px;
+    padding: vw(10);
 
     transition: background 0.33s ease;
 
@@ -215,11 +215,11 @@ const updateDates = (datesData: Event['datetime']) => {
 .field {
   display: block;
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 10px;
+  padding: vw(10);
+  border: vw(1) solid var(--color-gray-300);
+  border-radius: vw(10);
   font-weight: 400;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: #000;
   background: #f9f6fa;
@@ -239,7 +239,7 @@ const updateDates = (datesData: Event['datetime']) => {
   }
 
   &--textarea {
-    min-height: 120px;
+    min-height: vw(120);
   }
 }
 

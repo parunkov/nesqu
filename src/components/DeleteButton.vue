@@ -51,8 +51,8 @@ const handleClick = () => {
 <style scoped lang="scss">
 .delete-button {
   margin: 0;
-  width: 40px;
-  height: 40px;
+  width: vw(40);
+  height: vw(40);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,29 +65,29 @@ const handleClick = () => {
 
 .icon-wrapper {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: vw(30);
+  height: vw(30);
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
-  border-radius: 15px;
+  border-radius: vw(15);
   transition: background-color 0.3s;
 
   &.loading-icon {
     background: var(--color-primary-100);
 
     img {
-      width: 10px;
-      height: 10px;
+      width: vw(10);
+      height: vw(10);
     }
   }
 
   img {
     margin: 0;
-    width: 20px;
-    height: 20px;
+    width: vw(20);
+    height: vw(20);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -97,8 +97,8 @@ const handleClick = () => {
 
 .progress-ring {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: vw(40);
+  height: vw(40);
   transform: rotate(-90deg);
   z-index: 1;
   pointer-events: none;

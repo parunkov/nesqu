@@ -118,7 +118,7 @@ watch(
   &__label {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
   }
 
   // .custom-checkbox__checkbox
@@ -128,29 +128,29 @@ watch(
   }
 
   &__checkbox:checked + &__decor::before {
-    left: calc(100% - 27px);
+    left: calc(100% - vw(27));
   }
 
   // .custom-checkbox__decor
 
   &__decor {
     position: relative;
-    width: 54px;
-    height: 30px;
+    width: vw(54);
+    height: vw(30);
     background: #f2f4f7;
-    border-radius: 18px;
+    border-radius: vw(18);
 
     &::before {
       content: '';
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 24px;
-      height: 24px;
+      top: vw(3);
+      left: vw(3);
+      width: vw(24);
+      height: vw(24);
       background: #fff;
       box-shadow:
-        0 1px 3px 0 rgba(16, 24, 40, 0.06),
-        0 1px 4px 0 rgba(16, 24, 40, 0.1);
+        0 vw(1) vw(3) 0 rgba(16, 24, 40, 0.06),
+        0 vw(1) vw(4) 0 rgba(16, 24, 40, 0.1);
       border-radius: 50%;
 
       transition: left 0.33s ease;
@@ -160,7 +160,7 @@ watch(
   // .custom-checkbox__caption
 
   &__caption {
-    font-size: 18px;
+    font-size: vw(18);
     line-height: 1.11;
     color: #444145;
     user-select: none;
@@ -173,10 +173,10 @@ watch(
 }
 
 .form-group {
-  padding: 20px;
+  padding: vw(20);
 
   + .form-group {
-    border-top: 1px solid var(--color-gray-300);
+    border-top: vw(1) solid var(--color-gray-300);
   }
 }
 
@@ -185,9 +185,9 @@ watch(
 
   &__label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: vw(5);
     font-weight: 500;
-    font-size: 16px;
+    font-size: vw(16);
     line-height: 1.56;
     color: #444145;
   }
@@ -199,12 +199,12 @@ watch(
   &__values {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: vw(20);
 
     transition: opacity 0.33s ease;
 
     @include one {
-      grid-template-columns: 200px;
+      grid-template-columns: vw(200);
     }
 
     &.disabled {
@@ -218,7 +218,7 @@ watch(
   &__value {
     display: flex;
     align-items: center;
-    padding: 19px 14px;
+    padding: vw(19) vw(14);
   }
 
   // .form-price__caption
@@ -226,10 +226,10 @@ watch(
   &__caption {
     flex-shrink: 0;
     display: block;
-    width: 20px;
-    margin-right: 5px;
+    width: vw(20);
+    margin-right: vw(5);
     text-align: center;
-    font-size: 20px;
+    font-size: vw(20);
     line-height: 1;
     color: #444145;
   }
@@ -239,7 +239,7 @@ watch(
   &__input {
     max-width: 100%;
     width: 100%;
-    margin-right: 10px;
+    margin-right: vw(10);
     flex-grow: 1;
   }
 
@@ -252,7 +252,7 @@ watch(
   // .form-price__free-checkbox
 
   &__free-checkbox {
-    margin-top: 15px;
+    margin-top: vw(15);
   }
 
   // .form-price__alert

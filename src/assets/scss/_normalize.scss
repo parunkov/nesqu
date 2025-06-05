@@ -71,7 +71,7 @@
    чтобы избежать взаимодействие с более сложным селектором
   */
  p {
-   --paragraphMarginBottom: 24px;
+   --paragraphMarginBottom: vw(24);
  
    margin-block: 0;
  }

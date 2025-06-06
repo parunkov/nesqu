@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, watch, watchEffect } from 'vue'
+import { onMounted, reactive, ref, watch, watchEffect } from 'vue'
 import AppAccordion from '@/components/AppAccordion.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
@@ -41,6 +41,22 @@ watch(
   },
   { deep: true },
 )
+
+function resetSelectedFilters() {
+  for (const filter of moderatorStore.rubrics) {
+    if (!selectedFilters[filter.group_name]) {
+      selectedFilters[filter.group_name] = {}
+    }
+
+    for (const item of filter.group_content) {
+      selectedFilters[filter.group_name][item.id] = selectedID.value?.includes(item.id) ?? false
+    }
+  }
+}
+
+onMounted(() => {
+  resetSelectedFilters()
+})
 </script>
 
 <template>
@@ -88,7 +104,7 @@ watch(
 .content-card {
   box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
   border-radius: vw(20);
-  background: #fff;
+  background: var(--color-white);
 
   + .content-card {
     margin-top: vw(20);
@@ -113,7 +129,7 @@ watch(
     font-weight: 600;
     font-size: vw(18);
     line-height: 1.67;
-    color: #242125;
+    color: var(--color-gray-1000);
   }
 
   // .content-card__body

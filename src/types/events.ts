@@ -3,6 +3,12 @@ export type DateTime = {
   to?: string
 }
 
+export type DateTimeInfo = {
+  event_id: number
+  from: string
+  to?: string
+}
+
 export type EventData = {
   city: number
   types: number[]
@@ -12,6 +18,7 @@ export type EventData = {
   prices?: string[]
   address?: string
   description?: string
+  images: string[]
 }
 
 export type EventsFilter = {
@@ -49,7 +56,7 @@ export type Event = {
   datetime: DateTime[]
   prices?: string[]
   images?: string[]
-  address?: string
+  address: string
   description?: string
 }
 
@@ -62,10 +69,12 @@ export type EventStatus = {
 
 export type EventInfo = {
   name: string
+  types: number[]
   contacts: string[]
-  datetime: DateTime[]
+  datetime: DateTimeInfo[]
   prices: string[]
-  addresses: string[]
+  address: string
   images: string[]
   description: string
+  city: number
 }

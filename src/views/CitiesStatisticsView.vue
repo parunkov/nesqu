@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import AppTable from '@/components/AppTable.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
 import type { CityStatistics } from '@/types/city.ts'
+import AppHeader from '@/components/AppHeader.vue'
 
 const moderatorStore = useModeratorStore()
 
@@ -11,9 +12,9 @@ const tableData = ref<CityStatistics[]>([])
 moderatorStore.getCitiesStatistics().then((res) => tableData.value.push(...res))
 </script>
 <template>
-  <div class="header">
-    <h2 class="title">Статистика</h2>
-  </div>
+  <AppHeader>
+    <hi class="title">Статистика</hi>
+  </AppHeader>
   <AppTable class="event-table">
     <template #thead>
       <tr>

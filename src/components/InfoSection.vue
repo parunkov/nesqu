@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import AppDropDown from '@/components/AppDropDown.vue'
 import EventDates from '@/components/EventDates.vue'
-import PriceInput from '@/components/PriceInput.vue'
+import PriceInputCreate from '@/components/PriceInputCreate.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
 import type { Event } from '@/types/events.ts'
 import { computed } from 'vue'
+import AppInput from '@/components/AppInput.vue'
 
 const moderatorStore = useModeratorStore()
 
@@ -15,10 +16,9 @@ const cities = computed(() => {
 })
 
 const dates = defineModel<Event['datetime']>('dates')
-
+const address = defineModel<Event['address']>('address')
 const prices = defineModel<Event['prices']>('prices')
 const city = defineModel<Event['city']>('city')
-
 const changeCity = (id: number) => {
   city.value = id
 }
@@ -40,10 +40,15 @@ const updateDates = (datesData: Event['datetime']) => {
             <label for="" class="form-item__label">Город</label>
 
             <AppDropDown
+              class="input"
               :start-value="city"
               :options="cities"
               @change-value="(option) => changeCity(Number(option.id))"
             />
+          </div>
+          <div class="form-item">
+            <label for="" class="form-item__label">Адрес</label>
+            <AppInput v-model="address" placeholder=" " />
           </div>
         </div>
 
@@ -52,7 +57,7 @@ const updateDates = (datesData: Event['datetime']) => {
           @update-dates="(datesData: Event['datetime']) => updateDates(datesData)"
         />
 
-        <PriceInput v-model="prices" />
+        <PriceInputCreate v-model="prices" />
       </div>
     </div>
   </div>
@@ -62,7 +67,7 @@ const updateDates = (datesData: Event['datetime']) => {
 .content-card {
   box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
   border-radius: vw(20);
-  background: #fff;
+  background: var(--color-white);
 
   + .content-card {
     margin-top: vw(20);
@@ -87,7 +92,7 @@ const updateDates = (datesData: Event['datetime']) => {
     font-weight: 600;
     font-size: vw(18);
     line-height: 1.67;
-    color: #242125;
+    color: var(--color-gray-1000);
   }
 
   // .content-card__body
@@ -113,7 +118,7 @@ const updateDates = (datesData: Event['datetime']) => {
     font-weight: 500;
     font-size: vw(16);
     line-height: 1.56;
-    color: #444145;
+    color: var(--color-gray-900);
   }
 }
 
@@ -123,7 +128,7 @@ const updateDates = (datesData: Event['datetime']) => {
   // .dropdown__trigger
 
   &--active &__trigger {
-    border-color: #9218c0;
+    border-color: var(--color-primary-700);
 
     &::after {
       transform: rotate(180deg);
@@ -138,7 +143,7 @@ const updateDates = (datesData: Event['datetime']) => {
     cursor: pointer;
 
     &.field {
-      background: #fff;
+      background: var(--color-white);
     }
 
     &::after {
@@ -195,7 +200,7 @@ const updateDates = (datesData: Event['datetime']) => {
 .dropdown-list {
   border: vw(1) solid var(--color-gray-300);
   border-radius: vw(10);
-  background: #fff;
+  background: var(--color-white);
   overflow: hidden;
 
   // .dropdown-list__item
@@ -207,7 +212,7 @@ const updateDates = (datesData: Event['datetime']) => {
     transition: background 0.33s ease;
 
     &:hover {
-      background: #e39bfd;
+      background: var(--color-primary-300);
     }
   }
 }
@@ -221,21 +226,21 @@ const updateDates = (datesData: Event['datetime']) => {
   font-weight: 400;
   font-size: vw(18);
   line-height: 1.11;
-  color: #000;
-  background: #f9f6fa;
+  color: var(--color-black);
+  background: var(--color-gray-100);
 
   transition:
     border-color 0.33s ease,
     background 0.33s ease;
 
   &::placeholder {
-    color: #767377;
+    color: var(--color-gray-700);
     font-size: inherit;
   }
 
   &:focus,
   &:has(input:focus) {
-    border-color: #9218c0;
+    border-color: var(--color-primary-700);
   }
 
   &--textarea {
@@ -245,6 +250,6 @@ const updateDates = (datesData: Event['datetime']) => {
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 </style>

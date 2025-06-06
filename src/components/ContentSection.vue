@@ -60,21 +60,21 @@ const handleTextChange = () => {
   font-weight: 400;
   font-size: vw(18);
   line-height: 1.11;
-  color: #000;
-  background: #f9f6fa;
+  color: var(--color-black);
+  background: var(--color-gray-100);
 
   transition:
     border-color 0.33s ease,
     background 0.33s ease;
 
   &::placeholder {
-    color: #767377;
+    color: var(--color-gray-700);
     font-size: inherit;
   }
 
   &:focus,
   &:has(input:focus) {
-    border-color: #9218c0;
+    border-color: var(--color-primary-700);
   }
 
   &--textarea {
@@ -84,7 +84,7 @@ const handleTextChange = () => {
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 
 textarea {
@@ -96,14 +96,14 @@ textarea {
 
   &:focus,
   &:has(input:focus) {
-    border-color: #9218c0;
+    border-color: var(--color-primary-700);
   }
 }
 
 .content-card {
   box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
   border-radius: vw(20);
-  background: #fff;
+  background: var(--color-white);
 
   +.content-card {
     margin-top: vw(20);
@@ -119,7 +119,7 @@ textarea {
     font-weight: 600;
     font-size: vw(18);
     line-height: 1.67;
-    color: #242125;
+    color: var(--color-gray-1000);
   }
 }
 
@@ -144,7 +144,7 @@ textarea {
     font-weight: 500;
     font-size: vw(16);
     line-height: 1.56;
-    color: #444145;
+    color: var(--color-gray-900);
   }
 }
 </style>

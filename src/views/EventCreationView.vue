@@ -1,40 +1,52 @@
 <script setup lang="ts">
-import InfoSection from '@/components/InfoSection.vue'
 import CategoriesSection from '@/components/CategoriesSection.vue'
 import ContentSection from '@/components/ContentSection.vue'
 import PhotoSection from '@/components/PhotoSection.vue'
 import type { Event } from '@/types/events.ts'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useEventsStore } from '@/stores/events.ts'
 import router from '@/router'
 import AppButton from '@/components/AppButton.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
+import ContactsSection from '@/components/ContactsSection.vue'
+import InfoSectionCreate from '@/components/InfoSectionCreate.vue'
 
 const moderatorStore = useModeratorStore()
 const eventStore = useEventsStore()
 
-const newEvent = ref<Event>({
-  city: 0,
-  types: [0],
-  name: '',
-  contacts: [],
-  datetime: [],
-  prices: [''],
-  address: '',
-  description: '',
-  images: [],
-})
+const newEvent = ref<Event | null>(null)
+
+watch(
+  () => moderatorStore.cities,
+  (cities) => {
+    if (cities.length && !newEvent.value) {
+      newEvent.value = {
+        city: cities[0].id,
+        types: [],
+        name: '',
+        contacts: [],
+        datetime: [],
+        prices: [''],
+        address: '',
+        description: '',
+        images: [],
+      }
+    }
+  },
+  { immediate: true, deep: true },
+)
 
 const saveEvent = () => {
+  if (!newEvent.value) return
   const { images, ...eventWithoutImages } = newEvent.value
-  eventStore.addEvent(eventWithoutImages).then((res) => {
-    if (images) eventStore.uploadImage(images, res.id)
+  eventStore.addEvent({ ...eventWithoutImages, images: [''] }).then((res) => {
+    if (images) eventStore.uploadImage(images, res.id).then(() => router.push({ name: 'events' }))
   })
 }
 </script>
 
 <template>
-  <div class="content-wrap">
+  <div v-if="newEvent" class="content-wrap">
     <div class="content-wrap__inner">
       <div class="content-wrap__head">
         <img @click="() => router.back()" src="/icons/back.svg" alt="" class="header-icon" />
@@ -42,11 +54,13 @@ const saveEvent = () => {
       </div>
       <div v-if="!moderatorStore.isLoading" class="content-wrap__body">
         <div class="content-wrap__column">
-          <InfoSection
+          <InfoSectionCreate
             v-model:city="newEvent.city"
             v-model:dates="newEvent.datetime"
             v-model:prices="newEvent.prices"
+            v-model:address="newEvent.address"
           />
+          <ContactsSection v-model:contacts="newEvent.contacts" />
           <ContentSection
             v-model:description="newEvent.description"
             v-model:title="newEvent.name"

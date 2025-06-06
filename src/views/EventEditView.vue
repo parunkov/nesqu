@@ -4,37 +4,37 @@ import CategoriesSection from '@/components/CategoriesSection.vue'
 import ContentSection from '@/components/ContentSection.vue'
 import PhotoSection from '@/components/PhotoSection.vue'
 import type { EventInfo } from '@/types/events.ts'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useEventsStore } from '@/stores/events.ts'
 import router from '@/router'
 import { useRoute } from 'vue-router'
 import AppButton from '@/components/AppButton.vue'
 import { useAuthStore } from '@/stores/auth.ts'
+import ContactsSection from '@/components/ContactsSection.vue'
+import { useModeratorStore } from '@/stores/moderator.ts'
 
+const moderatorStore = useModeratorStore()
 const authStore = useAuthStore()
 const eventStore = useEventsStore()
 let realId = '0'
-const currentEvent = reactive<EventInfo>({} as EventInfo)
-
-watch(
-  () => currentEvent,
-  () => console.log(currentEvent),
-  {
-    deep: true,
-  },
-)
+const currentEvent = ref<EventInfo | null>(null)
 
 onMounted(() => {
   const id = useRoute().params.id as string
   realId = id
   eventStore.getEvent(Number(id)).then((data) => {
-    Object.assign(currentEvent, data)
+    currentEvent.value = data
+    if (!currentEvent.value.city) currentEvent.value.city = moderatorStore.cities[0].id
   })
 })
 
 const saveEvent = () => {
-  if (!currentEvent) return
-  eventStore.updateEvent(currentEvent, Number(realId))
+  if (!currentEvent.value) return
+  currentEvent.value.datetime.forEach((el) => (el.event_id = Number(realId)))
+  eventStore.updateEvent(currentEvent.value, Number(realId)).then(() => {
+    if (!currentEvent.value) return
+    eventStore.uploadImage(currentEvent.value.images, Number(realId))
+  })
 }
 
 const banEvent = () => {
@@ -63,8 +63,6 @@ const publishEvent = () => {
     },
   ])
 }
-
-const currentCity = ref(1)
 </script>
 
 <template>
@@ -72,15 +70,17 @@ const currentCity = ref(1)
     <div class="content-wrap__inner">
       <div class="content-wrap__head">
         <img @click="() => router.back()" src="/icons/back.svg" alt="" class="header-icon" />
-        <h2 class="content-wrap__title">Новое Мероприятие</h2>
+        <h2 class="content-wrap__title">Редактирование мероприятия</h2>
       </div>
       <div class="content-wrap__body">
         <div class="content-wrap__column">
           <InfoSection
-            v-model:city="currentCity"
+            v-model:city="currentEvent.city"
             v-model:dates="currentEvent.datetime"
             v-model:prices="currentEvent.prices"
+            v-model:address="currentEvent.address"
           />
+          <ContactsSection v-model:contacts="currentEvent.contacts" />
           <ContentSection
             v-model:description="currentEvent.description"
             v-model:title="currentEvent.name"
@@ -88,7 +88,7 @@ const currentCity = ref(1)
           <PhotoSection v-model="currentEvent.images" />
         </div>
         <div class="content-wrap__column">
-          <CategoriesSection />
+          <CategoriesSection v-model="currentEvent.types" />
         </div>
       </div>
       <div v-if="authStore.currentUser?.role == 'organizer'" class="content-wrap__foot">
@@ -165,11 +165,6 @@ const currentCity = ref(1)
     @include one {
       grid-template-columns: 1fr;
     }
-  }
-
-  // .content-wrap__column
-
-  &__column {
   }
 
   // .content-wrap__foot

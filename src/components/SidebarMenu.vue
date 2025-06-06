@@ -43,19 +43,49 @@ const logout = () => {
           <img v-else src="/icons/menu.svg" class="burger__icon" alt="Меню" />
         </div>
       </div>
-      <nav class="navigation" :class="{ 'navigation--active': isMenuOpen }">
-        <MenuLink v-if="showTab(`events`)" icon="/icons/calendar.svg" title="Мероприятия" @click="goTo('events')"
-          :isActive="router.currentRoute.value.name == `events`" />
-        <MenuLink v-if="showTab(`users`)" icon="/icons/user.svg" title="Пользователи" @click="goTo('users')"
-          :isActive="router.currentRoute.value.name == `users`" />
-        <MenuLink v-if="showTab(`events-statistics`)" icon="/icons/stat.svg" title="Стат / Мероприятия"
-          @click="goTo('events-statistics')" :isActive="router.currentRoute.value.name == `events-statistics`" />
-        <MenuLink v-if="showTab(`cities-statistics`)" icon="/icons/stat.svg" title="Стат / Города"
-          @click="goTo('cities-statistics')" :isActive="router.currentRoute.value.name == `cities-statistics`" />
-        <MenuLink v-if="showTab(`days-statistics`)" icon="/icons/stat.svg" title="Стат / По дням"
-          @click="goTo('days-statistics')" :isActive="router.currentRoute.value.name == `days-statistics`" />
-        <MenuLink v-if="showTab(`organizer-events`)" icon="/icons/calendar.svg" title="Мероприятия О"
-          @click="goTo('organizer-events')" :isActive="router.currentRoute.value.name == `organizer-events`" />
+      <nav class="navigation">
+        <MenuLink
+          v-if="showTab(`events`)"
+          icon="/icons/calendar.svg"
+          title="Мероприятия"
+          @click="goTo('events')"
+          :isActive="router.currentRoute.value.name == `events`"
+        />
+        <MenuLink
+          v-if="showTab(`events-statistics`)"
+          icon="/icons/stat.svg"
+          title="Стат / мероприятия"
+          @click="goTo('events-statistics')"
+          :isActive="router.currentRoute.value.name == `events-statistics`"
+        />
+        <MenuLink
+          v-if="showTab(`users`)"
+          icon="/icons/user.svg"
+          title="Пользователи"
+          @click="goTo('users')"
+          :isActive="router.currentRoute.value.name == `users`"
+        />
+        <MenuLink
+          v-if="showTab(`cities-statistics`)"
+          icon="/icons/stat.svg"
+          title="Стат / города"
+          @click="goTo('cities-statistics')"
+          :isActive="router.currentRoute.value.name == `cities-statistics`"
+        />
+        <MenuLink
+          v-if="showTab(`days-statistics`)"
+          icon="/icons/stat.svg"
+          title="Стат / по дням"
+          @click="goTo('days-statistics')"
+          :isActive="router.currentRoute.value.name == `days-statistics`"
+        />
+        <MenuLink
+          v-if="showTab(`organizer-events`)"
+          icon="/icons/calendar.svg"
+          title="Мероприятия О"
+          @click="goTo('organizer-events')"
+          :isActive="router.currentRoute.value.name == `organizer-events`"
+        />
       </nav>
     </div>
     <MenuLink icon="/icons/exit.svg" :title="authStore.currentUser?.email || `Выйти`" @click="logout" />

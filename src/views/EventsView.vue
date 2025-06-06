@@ -7,6 +7,7 @@ import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
 import DeleteButton from '@/components/DeleteButton.vue'
 import router from '@/router'
+import { formatDate } from '@/utils/dateConverter.ts'
 
 const infiniteScrollTrigger = ref(null)
 let observer: IntersectionObserver
@@ -28,7 +29,7 @@ const filterEvents = () => {
 }
 
 const filteredEvents = ref(tableData.value)
-let firstCall = false
+let firstCall = true
 onMounted(() => {
   setTimeout(() => {
     observer = new IntersectionObserver(
@@ -58,7 +59,6 @@ const deleteEvent = (id: number, index: number) => {
 }
 
 const statusToogle = (event: EventCard) => {
-  console.log()
   eventStore.updateEventsStatus([
     {
       id: event.id,
@@ -72,13 +72,6 @@ const statusToogle = (event: EventCard) => {
 const goTo = (name: string) => router.push({ name: name })
 
 const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id: id } })
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-  return `${day}.${month}.${year}`
-}
 </script>
 
 <template>
@@ -113,19 +106,26 @@ const formatDate = (dateString: string) => {
       </tr>
     </template>
     <template #tbody>
-      <tr v-for="(row, index) in filteredEvents" @click.stop="editEvent(row.id)"
-        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }" :key="row.id">
+      <tr
+        v-for="(row, index) in filteredEvents"
+        @click.stop="editEvent(row.id)"
+        :class="{
+          'is-warning': row.is_validated === null || row.is_validated === undefined,
+          'is-error': row.is_validated === false,
+        }"
+        :key="row.id"
+      >
         <td class="table-cell--id">
           <div>{{ row.id }}</div>
         </td>
         <td class="table-cell--active">
           <div>
-            <AppCheckbox @click="statusToogle(row)" v-model="row.is_hiden" />
+            <AppCheckbox @click.stop="statusToogle(row)" v-model="row.is_hiden" />
           </div>
         </td>
         <td class="table-cell--top">
           <div>
-            <AppCheckbox @click="statusToogle(row)" v-model="row.top" />
+            <AppCheckbox @click.stop="statusToogle(row)" v-model="row.top" />
           </div>
         </td>
         <td class="table-cell--user">
@@ -230,7 +230,7 @@ const formatDate = (dateString: string) => {
 
   &--user {
     text-align: center;
-    width: vw(84);  
+    width: vw(84);
 
     div {
       margin: 0;
@@ -238,7 +238,7 @@ const formatDate = (dateString: string) => {
   }
 
   &--email {
-    width: 20%; 
+    width: 20%;
 
     div {
       margin: 0;

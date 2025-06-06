@@ -207,7 +207,7 @@ watch(
     font-weight: 600;
     font-size: vw(18);
     line-height: 1.67;
-    color: #242125;
+    color: var(--color-gray-1000);
   }
 }
 
@@ -251,7 +251,7 @@ watch(
   &__preview {
     position: relative;
     border: vw(1) solid var(--color-gray-300);
-    background: #f9f6fa;
+    background: var(--color-gray-100);
   }
 
   &__preview-img {
@@ -273,13 +273,13 @@ watch(
     align-items: center;
     border: vw(1) solid var(--color-gray-300);
     border-radius: vw(10);
-    background: #fff;
+    background: var(--color-white);
   }
 
   // .form-file__upload-button
 
   &__upload-button {
-    border: vw(2) dashed #e39bfd;
+    border: vw(2) dashed var(--color-primary-300);
   }
 
   // .form-file__icon
@@ -296,7 +296,7 @@ watch(
     font-weight: 500;
     font-size: vw(14);
     line-height: 1.43;
-    color: #444145;
+    color: var(--color-gray-900);
   }
 
   // .form-file__upload-input
@@ -310,7 +310,7 @@ watch(
   &__alert {
     margin-top: vw(10);
     font-size: vw(14);
-    color: #f60b0f;
+    color: var(--color-danger);
   }
 }
 

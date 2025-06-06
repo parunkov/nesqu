@@ -49,9 +49,12 @@ export const useEventsStore = defineStore('events', () => {
   }
 
   async function getEvent(id: number) {
-    return requestWrapper(isLoading, () => eventService.getEvent(id)).then((event: EventInfo) =>
-      event.images.forEach((image) => 'https://' + image),
-    )
+    return requestWrapper(isLoading, () => eventService.getEvent(id)).then((event: EventInfo) => {
+      if (event.images) {
+        event.images = event.images.map((image) => 'https://' + image)
+      }
+      return event
+    })
   }
 
   async function updateEvent(event: EventInfo, id: number) {

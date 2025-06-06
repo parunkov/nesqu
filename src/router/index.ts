@@ -13,7 +13,7 @@ import EventsOrganizerView from '@/views/EventsOrganizerView.vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -30,13 +30,16 @@ const router = createRouter({
           path: 'events',
           name: 'events',
           component: EventsView,
+          meta: {
+            requiredRoles: ['moderator', 'owner'],
+          },
         },
         {
           path: 'users',
           name: 'users',
           component: UsersView,
           meta: {
-            requiredRoles: ['moderator', 'owner'],
+            requiredRoles: ['owner'],
           },
         },
         {
@@ -84,7 +87,7 @@ const router = createRouter({
           name: 'organizer-events',
           component: EventsOrganizerView,
           meta: {
-            requiredRoles: ['organizer', 'moderator', 'owner'],
+            requiredRoles: ['organizer', 'owner'],
           },
         },
       ],
@@ -122,11 +125,19 @@ router.beforeEach((to, from, next) => {
   const layoutOnlyForGuests = to.matched.some((record) => record.meta.onlyForGuests)
 
   if (layoutRequiresAuth && !authStore.currentUser) {
-    return next({ name: 'login' })
+    if (to.name !== 'login') {
+      return next({ name: 'login' })
+    } else {
+      return next()
+    }
   }
 
   if (layoutOnlyForGuests && authStore.currentUser) {
-    return next({ name: 'events' })
+    if (to.name !== 'events') {
+      return next({ name: 'events' })
+    } else {
+      return next()
+    }
   }
 
   const requiredRoles = to.meta.requiredRoles
@@ -135,7 +146,11 @@ router.beforeEach((to, from, next) => {
     authStore.currentUser &&
     !requiredRoles.includes(authStore.currentUser.role)
   ) {
-    return next({ name: 'events' })
+    if (to.name !== 'events') {
+      return next({ name: 'events' })
+    } else {
+      return next()
+    }
   }
 
   next()

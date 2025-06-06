@@ -15,12 +15,13 @@ const props = defineProps({
     required: true,
   },
   startValue: {
-    type: Number,
+    type: [Number, String],
     default: 0,
   },
 })
 
-const selected = ref(props.options[props.startValue])
+const selected = ref(props.options.find((el) => el.id === props.startValue))
+if (!selected.value) selected.value = props.options[0]
 const isOpen = ref(false)
 
 const toggleDropdown = () => {
@@ -36,7 +37,7 @@ const selectOption = (option: Option) => {
 
 <template>
   <div
-    v-if="options.length > 0"
+    v-if="options.length > 0 && selected"
     class="dropdown dropdown--select"
     :class="{ 'dropdown--active': isOpen }"
   >
@@ -82,7 +83,7 @@ const selectOption = (option: Option) => {
   font-weight: 400;
   font-size: vw(18);
   line-height: 1.11;
-  color: #000;
+  color: var(--color-black);
   background: #f9f6fa;
 
   transition:
@@ -90,7 +91,7 @@ const selectOption = (option: Option) => {
     background 0.33s ease;
 
   &::placeholder {
-    color: #767377;
+    color: var(--color-gray-700);
     font-size: inherit;
   }
 
@@ -106,7 +107,7 @@ const selectOption = (option: Option) => {
 
 :is(input, textarea).field:not(:placeholder-shown),
 .field:has(input:not(:placeholder-shown)) {
-  background: #fff;
+  background: var(--color-white);
 }
 
 .dropdown * {
@@ -116,7 +117,7 @@ const selectOption = (option: Option) => {
 .dropdown-list {
   border: vw(1) solid var(--color-gray-300);
   border-radius: vw(10);
-  background: #fff;
+  background: var(--color-white);
   overflow: hidden;
 
   list-style: none;
@@ -132,7 +133,7 @@ const selectOption = (option: Option) => {
     transition: background 0.33s ease;
 
     &:hover {
-      background: #e39bfd;
+      background: var(--color-primary-100);
     }
   }
 }
@@ -144,7 +145,7 @@ const selectOption = (option: Option) => {
   // .dropdown__trigger
 
   &--active &__trigger {
-    border-color: #9218c0;
+    border-color: var(--color-primary-100);
 
     &::after {
       transform: rotate(180deg);
@@ -160,7 +161,7 @@ const selectOption = (option: Option) => {
     cursor: pointer;
 
     &.field {
-      background: #fff;
+      background: var(--color-white);
     }
 
     &::after {

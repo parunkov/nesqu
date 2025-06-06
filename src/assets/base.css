@@ -27,6 +27,8 @@
   --color-warning-border: #F4F3D5;
   --color-error-border: #FFDECF;
   --color-danger: #F60B0F;
+  --color-sub-header: #585858;
+
   --color-gray-1: #F1F1F1;
   --color-gray-2: #DFDFDF;
   --color-gray-3: #D1D1D1;
@@ -59,7 +61,6 @@ body {
   'Droid Sans',
   'Helvetica Neue',
   sans-serif;
-  /* font-size: 15px; */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

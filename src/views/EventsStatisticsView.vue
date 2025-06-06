@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import SearchBar from '../components/SearchBar.vue'
 import AppTable from '@/components/AppTable.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
-import router from '@/router'
+import AppHeader from '@/components/AppHeader.vue'
 
 const infiniteScrollTrigger = ref(null)
 let observer: IntersectionObserver
@@ -15,20 +14,9 @@ const tableData = ref<EventCard[]>([])
 
 eventStore.getEvents().then((res) => tableData.value.push(...res))
 
-const searchQuery = ref('')
-const activeOnly = ref(false)
-
-const filterEvents = () => {
-  filteredEvents.value = tableData.value.filter(
-    (el) =>
-      (activeOnly.value === el.is_hiden || !activeOnly.value) &&
-      el.user_name.includes(searchQuery.value),
-  )
-}
-
 const filteredEvents = ref(tableData.value)
 
-let firstCall = false
+let firstCall = true
 onMounted(() => {
   setTimeout(() => {
     observer = new IntersectionObserver(
@@ -61,19 +49,12 @@ const statusToogle = (event: EventCard) => {
     },
   ])
 }
-
-const goTo = (name: string) => router.push({ name: name })
 </script>
 
 <template>
-  <header class="controls">
-    <SearchBar
-      v-model:search-query="searchQuery"
-      v-model:activeOnly="activeOnly"
-      @search="filterEvents"
-    />
-    <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
-  </header>
+  <AppHeader>
+    <hi class="title">Статистика</hi>
+  </AppHeader>
   <AppTable class="event-table">
     <template #thead>
       <tr>
@@ -109,7 +90,10 @@ const goTo = (name: string) => router.push({ name: name })
     <template #tbody>
       <tr
         v-for="row in filteredEvents"
-        :class="{ 'is-warning': row.is_validated === null, 'is-error': row.is_validated === false }"
+        :class="{
+          'is-warning': row.is_validated === null || row.is_validated === undefined,
+          'is-error': row.is_validated === false,
+        }"
         :key="row.id"
       >
         <td class="table-cell--id">
@@ -150,6 +134,17 @@ const goTo = (name: string) => router.push({ name: name })
 </template>
 
 <style scoped lang="scss">
+.title {
+  display: flex;
+  align-items: center;
+  gap: vw(26);
+  font-weight: 700;
+  font-size: vw(30);
+  line-height: 1.33;
+  letter-spacing: 0.01em;
+  color: var(--color-black);
+}
+
 .table-cell {
   &--id {
     text-align: center;

@@ -15,7 +15,7 @@ const login = () => {
   useAuthStore()
     .login(email.value, password.value)
     .then(() => {
-      router.push({ name: 'events' })
+      router.push('/')
     })
     .catch((err) => (error.value = err))
 }
@@ -83,7 +83,7 @@ const login = () => {
   border-radius: vw(20);
   background: #fff;
   width: vw(460);
-  height: vw(280);
+  min-height: vw(280);
 
   + .content-card {
     margin-top: vw(20);

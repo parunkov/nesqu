@@ -3,6 +3,7 @@ import StatisticChart from '@/components/StatisticChart.vue'
 import type { ChartStatistics } from '@/types/staticstics.ts'
 import { ref } from 'vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
+import AppHeader from '@/components/AppHeader.vue'
 
 const chart = ref<ChartStatistics | null>(null)
 
@@ -32,20 +33,13 @@ const chart = {
 </script>
 
 <template>
-  <div class="header">
+  <AppHeader>
     <h2 class="title">Статистика</h2>
-  </div>
+  </AppHeader>
   <StatisticChart v-if="chart" :chart="chart" />
 </template>
 
-<style>
-.header {
-  padding: vw(20);
-  border-bottom: vw(1) solid var(--color-gray-300);
-  display: flex;
-  gap: vw(10);
-}
-
+<style lang="scss" scoped>
 .title {
   display: flex;
   align-items: center;
@@ -54,6 +48,6 @@ const chart = {
   font-size: vw(30);
   line-height: 1.33;
   letter-spacing: 0.01em;
-  color: #000;
+  color: var(--color-black);
 }
 </style>

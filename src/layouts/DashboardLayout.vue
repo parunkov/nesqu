@@ -59,7 +59,7 @@ useModeratorStore()
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 2;
+    z-index: 5;
     width: 100%;
     justify-content: space-between;
   }

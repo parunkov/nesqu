@@ -39,11 +39,11 @@ const logout = () => {
       <div class="logo-container">
         <img src="/icons/logo.png" class="logo" alt="Logo" />
         <div class="burger" @click="isMenuOpen = !isMenuOpen" :class="{ 'burger--active': isMenuOpen }">
-          <img v-if="isMenuOpen" src="/icons/burger-cross.svg" alt="Меню" />
-          <img v-else src="/icons/menu.svg" alt="Меню" />
+          <img v-if="isMenuOpen" src="/icons/burger-cross.svg" class="burger__cross" alt="Меню" />
+          <img v-else src="/icons/menu.svg" class="burger__icon" alt="Меню" />
         </div>
       </div>
-      <nav class="navigation">
+      <nav class="navigation" :class="{ 'navigation--active': isMenuOpen }">
         <MenuLink v-if="showTab(`events`)" icon="/icons/calendar.svg" title="Мероприятия" @click="goTo('events')"
           :isActive="router.currentRoute.value.name == `events`" />
         <MenuLink v-if="showTab(`users`)" icon="/icons/user.svg" title="Пользователи" @click="goTo('users')"
@@ -74,11 +74,14 @@ const logout = () => {
 
   @media (max-width: 991px) {
     background-color: var(--color-gray-100);
+    padding: vw(20, $mobile);
+    height: vw(100, $mobile);
   }
 
   &--active {
     @media (max-width: 991px) {
       background-color: var(--color-primary-900);
+      height: 100vh;
     }
   }
 }
@@ -105,6 +108,10 @@ const logout = () => {
   align-self: stretch;
   margin-top: auto;
   margin-bottom: auto;
+
+  @media (max-width: 991px) {
+    width: vw(220, $mobile);
+  }
 }
 
 .burger {
@@ -112,8 +119,8 @@ const logout = () => {
 
   @media (max-width: 991px) {
     display: block;
-    width: 60px;
-    height: 60px;
+    width: vw(60, $mobile);
+    height: vw(60, $mobile);
     background-color: var(--color-primary-100);
     border-radius: 50%;
     display: flex;
@@ -124,6 +131,14 @@ const logout = () => {
     &--active {
       background-color: var(--color-primary-600);
     }
+  }
+
+  &__icon {
+    width: vw(26, $mobile);
+  }
+
+  &__cross {
+    width: vw(30, $mobile);
   }
 }
 
@@ -137,6 +152,16 @@ const logout = () => {
   white-space: nowrap;
   letter-spacing: vw(0.2);
   line-height: 1;
+
+  @media (max-width: 991px) {
+    display: none;
+  }
+
+  &--active {
+    @media (max-width: 991px) {
+      display: block;
+    }
+  }
 }
 
 .user-profile {

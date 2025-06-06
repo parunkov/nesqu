@@ -36,6 +36,11 @@ useModeratorStore()
   flex-direction: column;
   background-color: var(--color-gray-100);
   border-radius: vw(20) 0 0 0;
+
+  @media (max-width: 991px) {
+    padding: vw(20, $mobile);
+    padding-top: vw(100, $mobile);
+  }
 }
 
 .user-management {

@@ -44,6 +44,14 @@ defineProps({
   white-space: nowrap;
   letter-spacing: vw(0.2);
   line-height: 1;
+
+  @media (max-width: 991px) {
+    font-size: vw(20, $mobile);
+    line-height: vw(25, $mobile);
+    margin-bottom: vw(10, $mobile);
+    padding: vw(15, $mobile) vw(10, $mobile);
+    border-radius: vw(10, $mobile);
+  }
 }
 
 .menu-link--active {
@@ -76,6 +84,11 @@ defineProps({
   margin-top: auto;
   margin-bottom: auto;
   flex-shrink: 0;
+
+  @media (max-width: 991px) {
+    width: vw(30, $mobile);
+    margin-right: vw(10, $mobile);
+  }
 }
 
 .menu-link__title {

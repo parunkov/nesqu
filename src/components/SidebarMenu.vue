@@ -25,7 +25,10 @@ const showTab = (pageName: string) => {
   return userRole && requiredRoles.includes(userRole)
 }
 
-const goTo = (name: string) => router.push({ name: name })
+const goTo = (name: string) => {
+  router.push({ name: name })
+  isMenuOpen.value = false
+}
 
 const logout = () => {
   useAuthStore().logout()
@@ -43,7 +46,7 @@ const logout = () => {
           <img v-else src="/icons/menu.svg" class="burger__icon" alt="Меню" />
         </div>
       </div>
-      <nav class="navigation">
+      <nav class="navigation" :class="{ 'navigation--active': isMenuOpen }">
         <MenuLink
           v-if="showTab(`events`)"
           icon="/icons/calendar.svg"
@@ -185,6 +188,7 @@ const logout = () => {
 
   @media (max-width: 991px) {
     display: none;
+    margin-top: vw(51, $mobile);
   }
 
   &--active {

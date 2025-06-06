@@ -100,11 +100,15 @@ const formatDate = (dateString: string) => {
           {{ row.name }}
         </td>
         <td class="table-cell--start-date">
+          <span class="table-cell--date-text">Дата начала: </span>
           {{ formatDate(row.date_from) }}
         </td>
         <td class="table-cell--end-date">
           <div>
-            <div>{{ row.date_to ? formatDate(row.date_to as string) : '' }}</div>
+            <div>
+              <span class="table-cell--date-text">Дата окончания: </span>
+              {{ row.date_to ? formatDate(row.date_to as string) : '' }}
+            </div>
             <div class="cell action-cell">
               <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
             </div>
@@ -203,6 +207,10 @@ const formatDate = (dateString: string) => {
       padding: 0 !important;
       border: none;
       display: block;
+
+      @media (max-width: 991px) {
+        display: none;
+      }
     }
   }
 
@@ -220,6 +228,11 @@ const formatDate = (dateString: string) => {
     font-size: vw(16);
     font-weight: 400;
     line-height: vw(20);
+
+    @media (max-width: 991px) {
+      font-size: vw(16, $mobile);
+      line-height: vw(20, $mobile);
+    }
   }
 
   &--end-date {
@@ -231,12 +244,27 @@ const formatDate = (dateString: string) => {
     min-width: vw(100);
     padding: vw(10);
 
+    @media (max-width: 991px) {
+      font-size: vw(16, $mobile);
+      line-height: vw(20, $mobile);
+    }
+
     div>div {
       font-weight: 400;
     }
 
     div {
       margin-left: 0;
+    }
+  }
+
+  &--date-text {
+    display: none;
+
+    @media (max-width: 991px) {
+      display: inline;
+      font-size: vw(16, $mobile);
+      line-height: vw(20, $mobile);
     }
   }
 
@@ -272,6 +300,12 @@ const formatDate = (dateString: string) => {
   flex-wrap: wrap;
   gap: vw(10);
 
+  @media (max-width: 991px) {
+    background-color: var(--color-gray-100);
+    padding: 0;
+    border-radius: 0;
+  }
+
   .title {
     font-weight: 700;
     font-size: vw(30);
@@ -282,6 +316,13 @@ const formatDate = (dateString: string) => {
     flex: 1;
     display: flex;
     align-items: center;
+
+    @media (max-width: 991px) {
+      font-size: vw(30, $mobile);
+      line-height: vw(40, $mobile);
+      font-weight: 600;
+      margin-bottom: vw(20, $mobile);
+    }
   }
 }
 
@@ -311,6 +352,10 @@ const formatDate = (dateString: string) => {
   justify-content: center;
   align-items: center;
   white-space: nowrap;
+
+  @media (max-width: 991px) {
+    display: none;
+  }
 
   &:hover {
     opacity: 0.9;
@@ -347,7 +392,7 @@ th {
 
 .event-table .table-header {
   height: vw(40) !important;
-  
+
   .table-cell--image {
     height: vw(40) !important;
   }

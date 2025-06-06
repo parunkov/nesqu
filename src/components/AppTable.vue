@@ -24,6 +24,11 @@
   gap: vw(20);
   justify-content: flex-start;
   flex: 1;
+
+  @media (max-width: 991px) {
+    padding: 0;
+    background-color: var(--color-gray-100);
+  }
 }
 
 table {
@@ -36,6 +41,10 @@ table {
   font-size: vw(15);
   color: var(--color-black);
   font-weight: 500;
+
+  @media (max-width: 991px) {
+    border-spacing: 0 vw(10, $mobile);
+  }
 }
 
 thead {
@@ -88,6 +97,13 @@ tbody {
     padding: vw(10);
     align-items: stretch;
     margin-top: vw(10);
+
+    @media (max-width: 991px) {
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
 
     td {
       border: vw(1) solid transparent;

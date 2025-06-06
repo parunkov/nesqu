@@ -4,6 +4,7 @@ import AppTable from '@/components/AppTable.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
+import AppHeader from '@/components/AppHeader.vue'
 
 const infiniteScrollTrigger = ref(null)
 let observer: IntersectionObserver
@@ -51,9 +52,9 @@ const statusToogle = (event: EventCard) => {
 </script>
 
 <template>
-  <div class="header">
-    <h2 class="title">Статистика</h2>
-  </div>
+  <AppHeader>
+    <hi class="title">Статистика</hi>
+  </AppHeader>
   <AppTable class="event-table">
     <template #thead>
       <tr>
@@ -133,6 +134,17 @@ const statusToogle = (event: EventCard) => {
 </template>
 
 <style scoped lang="scss">
+.title {
+  display: flex;
+  align-items: center;
+  gap: vw(26);
+  font-weight: 700;
+  font-size: vw(30);
+  line-height: 1.33;
+  letter-spacing: 0.01em;
+  color: var(--color-black);
+}
+
 .table-cell {
   &--id {
     text-align: center;

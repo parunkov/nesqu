@@ -54,12 +54,12 @@ textarea {
 }
 
 .content-card {
-  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
-  border-radius: 20px;
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
   background: var(--color-white);
 
   + .content-card {
-    margin-top: 20px;
+    margin-top: vw(20);
   }
 
   // .content-card__inner
@@ -70,16 +70,16 @@ textarea {
   // .content-card__head
 
   &__head {
-    padding: 10px 20px;
+    padding: vw(10) vw(20);
     background: var(--color-gray-300);
-    border-radius: 20px 20px 0 0;
+    border-radius: vw(20) vw(20) 0 0;
   }
 
   // .content-card__title
 
   &__title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: vw(18);
     line-height: 1.67;
     color: var(--color-gray-1000);
   }
@@ -91,16 +91,16 @@ textarea {
 }
 
 .form-group {
-  padding: 20px;
+  padding: vw(20);
 
   + .form-group {
-    border-top: 1px solid var(--color-gray-300);
+    border-top: vw(1) solid var(--color-gray-300);
   }
 }
 
 .form-block {
   + .form-block {
-    margin-top: 10px;
+    margin-top: vw(10);
   }
 }
 
@@ -109,9 +109,9 @@ textarea {
 
   &__label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: vw(5);
     font-weight: 500;
-    font-size: 16px;
+    font-size: vw(16);
     line-height: 1.56;
     color: var(--color-gray-900);
   }

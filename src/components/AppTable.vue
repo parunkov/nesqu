@@ -15,7 +15,6 @@
 
 <style lang="scss">
 .table-container {
-  background-color: var(--color-gray-1);
   display: flex;
   width: 100%;
   padding: vw(20);
@@ -71,7 +70,7 @@ thead {
     border-left: vw(1) solid var(--color-gray-400);
   }
 
-  th>* {
+  th > * {
     align-self: stretch;
     width: 100%;
     gap: vw(10);
@@ -115,8 +114,8 @@ tbody {
     color: var(--color-sub-header);
     background-color: transparent;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: vw(18);
+    line-height: vw(20);
     vertical-align: bottom;
   }
 }

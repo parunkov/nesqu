@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import InfoSection from '@/components/InfoSection.vue'
 import CategoriesSection from '@/components/CategoriesSection.vue'
 import ContentSection from '@/components/ContentSection.vue'
 import PhotoSection from '@/components/PhotoSection.vue'
@@ -10,6 +9,7 @@ import router from '@/router'
 import AppButton from '@/components/AppButton.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
 import ContactsSection from '@/components/ContactsSection.vue'
+import InfoSectionCreate from '@/components/InfoSectionCreate.vue'
 
 const moderatorStore = useModeratorStore()
 const eventStore = useEventsStore()
@@ -54,7 +54,7 @@ const saveEvent = () => {
       </div>
       <div v-if="!moderatorStore.isLoading" class="content-wrap__body">
         <div class="content-wrap__column">
-          <InfoSection
+          <InfoSectionCreate
             v-model:city="newEvent.city"
             v-model:dates="newEvent.datetime"
             v-model:prices="newEvent.prices"

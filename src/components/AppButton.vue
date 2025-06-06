@@ -25,21 +25,21 @@ const classes = computed(() => ({
 
 <style scoped lang="scss">
 .btn {
-  padding: 19px;
+  padding: vw(19);
   font-weight: 600;
-  font-size: 18px;
+  font-size: vw(18);
   line-height: 1.11;
   color: var(--color-white);
   background: var(--color-primary-700);
-  border-radius: 10px;
-  border: 1px solid var(--color-primary-700);
+  border-radius: vw(10);
+  border: vw(1) solid var(--color-primary-700);
   stroke: currentColor;
   transition: 0.2s ease;
 
   &--icon {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vw(10);
   }
 
   &--danger {
@@ -54,9 +54,10 @@ const classes = computed(() => ({
   }
 
   &--mini {
-    padding: 10px;
+    padding: vw(10);
     height: min-content;
     width: min-content;
+    white-space: nowrap;
   }
 }
 </style>

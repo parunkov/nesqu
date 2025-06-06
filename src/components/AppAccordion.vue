@@ -95,11 +95,11 @@ const styles = computed(() => {
     .img {
       content: '';
       flex: 0 0 auto;
-      margin-left: 8px;
-      width: 24px;
-      height: 24px;
+      margin-left: vw(0);
+      width: vw(24);
+      height: vw(24);
       background: url('/public/icons/arrow.svg') center / contain no-repeat;
-      background-size: 12px;
+      background-size: vw(12);
       transition: transform 0.4s;
     }
 

@@ -102,12 +102,12 @@ onMounted(() => {
 @use '../assets/scss/helpers' as *;
 
 .content-card {
-  box-shadow: 0 5px 15px 0 rgba(39, 18, 47, 0.1);
-  border-radius: 20px;
+  box-shadow: 0 vw(5) vw(15) 0 rgba(39, 18, 47, 0.1);
+  border-radius: vw(20);
   background: var(--color-white);
 
   + .content-card {
-    margin-top: 20px;
+    margin-top: vw(20);
   }
 
   // .content-card__inner
@@ -118,16 +118,16 @@ onMounted(() => {
   // .content-card__head
 
   &__head {
-    padding: 10px 20px;
+    padding: vw(10) vw(20);
     background: var(--color-gray-300);
-    border-radius: 20px 20px 0 0;
+    border-radius: vw(20) vw(20) 0 0;
   }
 
   // .content-card__title
 
   &__title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: vw(18);
     line-height: 1.67;
     color: var(--color-gray-1000);
   }
@@ -135,7 +135,7 @@ onMounted(() => {
   // .content-card__body
 
   &__body {
-    padding: 20px;
+    padding: vw(20);
   }
 }
 </style>

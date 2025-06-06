@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import AppDropDown from '@/components/AppDropDown.vue'
-import EventDates from '@/components/EventDates.vue'
 import PriceInputCreate from '@/components/PriceInputCreate.vue'
 import { useModeratorStore } from '@/stores/moderator.ts'
 import type { Event } from '@/types/events.ts'
 import { computed } from 'vue'
 import AppInput from '@/components/AppInput.vue'
+import EventDatesCreate from '@/components/EventDatesCreate.vue'
 
 const moderatorStore = useModeratorStore()
 
@@ -52,7 +52,7 @@ const updateDates = (datesData: Event['datetime']) => {
           </div>
         </div>
 
-        <EventDates
+        <EventDatesCreate
           :start-dates="dates"
           @update-dates="(datesData: Event['datetime']) => updateDates(datesData)"
         />

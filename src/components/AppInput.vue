@@ -38,7 +38,7 @@ const emits = defineEmits(['input'])
   gap: vw(20);
   width: 100%;
   padding: vw(10);
-  border: 1px solid var(--color-gray-300);
+  border: vw(1) solid var(--color-gray-300);
   border-radius: vw(10);
   font-weight: 400;
   font-size: vw(18);

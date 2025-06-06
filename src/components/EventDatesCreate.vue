@@ -175,6 +175,39 @@ const addDate = async () => {
     updateDatesAndEmit()
   }
 }
+
+addDate()
+const shiftDate = (dateStr: string, days: number): string => {
+  if (!dateStr || dateStr.length !== 5) return ''
+  const [day, month] = dateStr.split('.').map(Number)
+  const date = new Date(2025, month - 1, day + days)
+  return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`
+}
+
+const duplicateRowWithShift = async (rowIndex: number, days: number) => {
+  const currentRow = rows.value[rowIndex]
+  const newStartDate = shiftDate(currentRow.startDate, days)
+  const newEndDate = currentRow.endDate ? shiftDate(currentRow.endDate, days) : ''
+
+  const newRow: DateRow = {
+    startDate: newStartDate,
+    startTime: currentRow.startTime,
+    endDate: newEndDate,
+    endTime: currentRow.endTime,
+    showActions: true,
+    showHint: false,
+  }
+
+  rows.value.splice(rowIndex + 1, 0, newRow)
+
+  await nextTick()
+  focusInput(rowIndex + 1, 'startTime')
+
+  // Если новая строка полностью заполнена — обновляем dates и эмитим
+  if (isRowComplete(newRow)) {
+    updateDatesAndEmit()
+  }
+}
 </script>
 
 <template>
@@ -264,18 +297,18 @@ const addDate = async () => {
               Введите дату начала!
             </p>
           </div>
-
-          <button
-            v-if="rowIndex !== 0"
-            class="button button--danger button--outline form-date__remove-btn"
-            @click="rows.splice(rowIndex, 1)"
-          />
+          <div class="actions">
+            <AppButton
+              v-if="rowIndex !== 0"
+              outline
+              danger
+              class="button button--danger button--outline form-date__remove-btn"
+              @click="rows.splice(rowIndex, 1)"
+            />
+            <AppButton mini @click="duplicateRowWithShift(rowIndex, 1)"> + День</AppButton>
+            <AppButton mini @click="duplicateRowWithShift(rowIndex, 7)"> + Неделя</AppButton>
+          </div>
         </div>
-      </div>
-
-      <!-- Actions -->
-      <div class="form-date__actions" style="opacity: 1; transform: translateY(0)">
-        <AppButton class="form-date__add-day-btn" @click="addDate"> + Добавить дату</AppButton>
       </div>
     </div>
   </div>
@@ -283,6 +316,12 @@ const addDate = async () => {
 
 <style scoped lang="scss">
 @use '../assets/scss/helpers' as *;
+
+.actions {
+  gap: 5px;
+  align-self: end;
+  display: inline-flex;
+}
 
 .button {
   padding: vw(19);
@@ -450,11 +489,13 @@ const addDate = async () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 1;
+    align-self: self-end;
   }
 
   &__remove-btn {
-    height: vw(24);
-    width: vw(24);
+    height: vw(19);
+    width: vw(19);
     align-self: self-end;
   }
 

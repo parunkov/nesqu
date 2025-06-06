@@ -74,15 +74,13 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
     </template>
     <template #tbody>
       <tr class="sub-header">
-        <td colspan="4">На модерации</td>
+        <td class="sub-header-cell" colspan="4">
+          <div>На модерации</div>
+        </td>
       </tr>
-      <tr
-        v-for="(row, index) in filteredEvents.filter(
-          (el) => el.is_validated === null || el.is_validated === undefined,
-        )"
-        @click.stop="editEvent(row.id)"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in filteredEvents.filter(
+        (el) => el.is_validated === null || el.is_validated === undefined,
+      )" @click.stop="editEvent(row.id)" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -91,9 +89,10 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
         </td>
         <td class="table-cell--start-date">
           <span class="table-cell--date-text">Дата начала: </span>
-          {{ formatDate(row.date_from) }}
+          <div>{{ formatDate(row.date_from) }}</div>
         </td>
         <td class="table-cell--end-date">
+          <span class="table-cell--date-text">Дата окончания: </span>
           <div>
             <div>{{ row.date_to ? formatDate(row.date_to) : '' }}</div>
             <div class="cell action-cell">
@@ -103,13 +102,12 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
         </td>
       </tr>
       <tr class="sub-header">
-        <td colspan="4">Опубликованные</td>
+        <td class="sub-header-cell" colspan="4">
+          <div>Опубликованные</div>
+        </td>
       </tr>
-      <tr
-        v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === true)"
-        @click.stop="editEvent(row.id)"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === true)"
+        @click.stop="editEvent(row.id)" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -129,13 +127,12 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
         </td>
       </tr>
       <tr class="sub-header">
-        <td colspan="4">Не прошедшие модерацию</td>
+        <td class="sub-header-cell" colspan="4">
+          <div>Не прошедшие модерацию</div>
+        </td>
       </tr>
-      <tr
-        v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === false)"
-        @click.stop="editEvent(row.id)"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === false)"
+        @click.stop="editEvent(row.id)" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -182,6 +179,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
 
   .table-cell--image {
     width: vw(110);
+    width: 110px;
     text-align: left;
     font-size: vw(15);
     font-weight: 500;
@@ -214,6 +212,45 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
     width: vw(225);
   }
 }
+
+.sub-header {
+  margin: 0;
+  height: vw(23) !important;
+  display: block;
+
+  @media (max-width: 991px) {
+    height: vw(20, $mobile) !important;
+    min-height: vw(23, $mobile) !important;
+    padding: 0 !important;
+  }
+}
+
+.sub-header-cell {
+  position: relative;
+  overflow: visible;
+  width: vw(110);
+  height: 0;
+  margin: 0;
+
+  div {
+    position: absolute;
+    top: vw(-10);
+    left: 0;
+    width: vw(300);
+    margin: 0;
+    font-size: vw(15);
+    font-weight: 500;
+    line-height: vw(20);
+
+    @media (max-width: 991px) {
+      font-size: vw(15, $mobile);
+      line-height: vw(20, $mobile);
+      top: vw(-10, $mobile);
+      width: vw(300, $mobile);
+    }
+  }
+}
+
 
 .table-cell--end-date>div {
   display: flex;
@@ -363,7 +400,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       font-size: vw(30, $mobile);
       line-height: vw(40, $mobile);
       font-weight: 600;
-      margin-bottom: vw(20, $mobile);
+      margin-bottom: vw(15, $mobile);
     }
   }
 }
@@ -431,6 +468,8 @@ th {
 
   .table-cell--image {
     height: vw(108);
+    width: vw(110);
+    width: 110px;
 
     @media (max-width: 991px) {
       display: none;
@@ -464,6 +503,7 @@ th {
 
       div {
         margin: 0;
+        display: inline-block;
       }
     }
   }
@@ -476,6 +516,7 @@ th {
 
       div {
         margin: 0;
+        display: inline-block;
       }
     }
   }

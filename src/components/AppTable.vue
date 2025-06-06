@@ -79,7 +79,7 @@ thead {
     border-left: vw(1) solid var(--color-gray-400);
   }
 
-  th > * {
+  th>* {
     align-self: stretch;
     width: 100%;
     gap: vw(10);
@@ -87,7 +87,7 @@ thead {
 }
 
 tbody {
-  margin-top: vw(10);
+  margin-top: 0;
   width: 100%;
 
   tr {

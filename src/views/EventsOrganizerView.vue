@@ -222,6 +222,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
     height: vw(20, $mobile) !important;
     min-height: vw(23, $mobile) !important;
     padding: 0 !important;
+    margin-top: vw(10, $mobile);
   }
 }
 
@@ -400,7 +401,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       font-size: vw(30, $mobile);
       line-height: vw(40, $mobile);
       font-weight: 600;
-      margin-bottom: vw(15, $mobile);
+      margin-bottom: vw(5, $mobile);
     }
   }
 }

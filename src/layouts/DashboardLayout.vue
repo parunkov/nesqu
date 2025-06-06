@@ -52,6 +52,10 @@ useModeratorStore()
   justify-content: flex-start;
   flex-wrap: wrap;
   min-height: 100vh;
+
+  @media (max-width: 991px) {
+    height: auto;
+  }
 }
 
 @media (max-width: 991px) {

@@ -262,9 +262,12 @@ const formatDate = (dateString: string) => {
     display: none;
 
     @media (max-width: 991px) {
-      display: inline;
+      display: inline-block;
       font-size: vw(16, $mobile);
       line-height: vw(20, $mobile);
+      width: vw(135, $mobile);
+      margin: 0;
+      margin-right: vw(20, $mobile);
     }
   }
 
@@ -375,17 +378,82 @@ th {
 .event-table {
   tbody tr {
     height: vw(108);
-    // min-height: vw(110) !important;
-    // max-height: vw(110) !important;
+
+    @media (max-width: 991px) {
+      position: relative;
+      height: auto;
+      min-height: vw(115, $mobile);
+      padding: vw(15, $mobile) vw(20, $mobile);
+      padding-right: vw(68, $mobile);
+      padding-bottom: vw(10, $mobile);
+      border: none;
+    }
   }
 
   .table-cell--image {
     height: vw(108);
-    // max-height: vw(110) !important;
-    // overflow: hidden;
+
+    @media (max-width: 991px) {
+      display: none;
+    }
 
     * {
       margin: 0 !important;
+    }
+  }
+
+  .table-cell--name {
+    @media (max-width: 991px) {
+      order: 2;
+      font-size: vw(22, $mobile);
+      line-height: vw(30, $mobile);
+      font-weight: 600;
+      padding: 0;
+      border: none;
+
+      div {
+        margin: 0;
+      }
+    }
+  }
+
+  .table-cell--start-date {
+    @media (max-width: 991px) {
+      padding: 0;
+      border: none;
+      margin-bottom: vw(10, $mobile);
+
+      div {
+        margin: 0;
+      }
+    }
+  }
+
+  .table-cell--end-date {
+    @media (max-width: 991px) {
+      padding: 0;
+      border: none;
+      margin-bottom: vw(10, $mobile);
+
+      div {
+        margin: 0;
+      }
+    }
+  }
+
+  .action-cell {
+    @media (max-width: 991px) {
+      position: absolute;
+      right: vw(20, $mobile);
+      top: 50%;
+      transform: translateY(-50%);
+      width: vw(40, $mobile);
+      height: vw(40, $mobile);
+
+      .delete-button {
+        width: vw(40, $mobile);
+        height: vw(40, $mobile);
+      }
     }
   }
 }

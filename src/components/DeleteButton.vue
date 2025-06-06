@@ -61,6 +61,11 @@ const handleClick = () => {
   position: relative;
   overflow: hidden;
   transition: background-color 0.3s;
+
+  @media (max-width: 991px) {
+    width: vw(30, $mobile);
+    height: vw(30, $mobile);
+  }
 }
 
 .icon-wrapper {
@@ -75,12 +80,33 @@ const handleClick = () => {
   border-radius: vw(15);
   transition: background-color 0.3s;
 
+  @media (max-width: 991px) {
+    width: vw(30, $mobile);
+    height: vw(30, $mobile);
+
+    img {
+      width: vw(30, $mobile) !important;
+      height: vw(30, $mobile) !important;
+    }
+  }
+
   &.loading-icon {
     background: var(--color-primary-100);
+
+    @media (max-width: 991px) {
+      width: vw(30, $mobile) !important;
+      height: vw(30, $mobile) !important;
+      border-radius: vw(15, $mobile);
+    }
 
     img {
       width: vw(10);
       height: vw(10);
+
+      @media (max-width: 991px) {
+        width: vw(10, $mobile) !important;
+        height: vw(10, $mobile) !important;
+      }
     }
   }
 
@@ -102,6 +128,11 @@ const handleClick = () => {
   transform: rotate(-90deg);
   z-index: 1;
   pointer-events: none;
+
+  @media (max-width: 991px) {
+    width: vw(40, $mobile);
+    height: vw(40, $mobile);
+  }
 }
 
 .progress-ring__circle {

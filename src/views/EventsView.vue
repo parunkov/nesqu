@@ -58,13 +58,14 @@ const deleteEvent = (id: number, index: number) => {
   })
 }
 
-const statusToogle = (event: EventCard) => {
+const statusToogle = (
+  event: EventCard,
+  data: { [key in keyof Pick<EventCard, 'is_hiden' | 'top'>]?: boolean },
+) => {
   eventStore.updateEventsStatus([
     {
       id: event.id,
-      is_validated: false,
-      is_hiden: event.is_hiden,
-      top: event.top,
+      ...data,
     },
   ])
 }
@@ -72,11 +73,20 @@ const statusToogle = (event: EventCard) => {
 const goTo = (name: string) => router.push({ name: name })
 
 const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id: id } })
+
+const isHiddenChange = (row: EventCard, newValue: boolean) => {
+  row.is_hiden = newValue
+  statusToogle(row, { is_hiden: newValue })
+}
 </script>
 
 <template>
   <header class="controls">
-    <SearchBar v-model:search-query="searchQuery" v-model:activeOnly="activeOnly" @search="filterEvents" />
+    <SearchBar
+      v-model:search-query="searchQuery"
+      v-model:activeOnly="activeOnly"
+      @search="filterEvents"
+    />
     <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
@@ -120,12 +130,16 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
         </td>
         <td class="table-cell--active">
           <div>
-            <AppCheckbox @click.stop="statusToogle(row)" v-model="row.is_hiden" />
+            <AppCheckbox
+              :model-value="!row.is_hiden"
+              @update:model-value="() => isHiddenChange(row, !row.is_hiden)"
+              @click.stop
+            />
           </div>
         </td>
         <td class="table-cell--top">
           <div>
-            <AppCheckbox @click.stop="statusToogle(row)" v-model="row.top" />
+            <AppCheckbox @click.stop="statusToogle(row, { top: row.top })" v-model="row.top" />
           </div>
         </td>
         <td class="table-cell--user">
@@ -256,7 +270,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   }
 }
 
-.table-cell--date>div {
+.table-cell--date > div {
   display: flex;
   justify-content: space-between;
   align-items: center;

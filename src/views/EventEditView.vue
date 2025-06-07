@@ -57,8 +57,6 @@ const publishEvent = () => {
   eventStore.updateEventsStatus([
     {
       id: Number(realId),
-      top: false,
-      is_hiden: false,
       is_validated: true,
     },
   ])

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import AppTable from '@/components/AppTable.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
@@ -16,6 +16,12 @@ const tableData = ref<EventCard[]>([])
 eventStore.getEvents().then((res) => tableData.value.push(...res))
 
 const filteredEvents = ref(tableData.value)
+
+const eventsOnModeration = computed(() =>
+  filteredEvents.value.filter((el) => el.is_validated === undefined),
+)
+const eventsBanned = computed(() => filteredEvents.value.filter((el) => el.is_validated === false))
+const eventApproved = computed(() => filteredEvents.value.filter((el) => el.is_validated === true))
 let firstCall = true
 onMounted(() => {
   setTimeout(() => {
@@ -73,16 +79,10 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
       </tr>
     </template>
     <template #tbody>
-      <tr class="sub-header">
+      <tr v-if="eventsOnModeration.length > 0" class="sub-header">
         <td colspan="4">На модерации</td>
       </tr>
-      <tr
-        v-for="(row, index) in filteredEvents.filter(
-          (el) => el.is_validated === null || el.is_validated === undefined,
-        )"
-        @click.stop="editEvent(row.id)"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in eventsOnModeration" @click.stop="editEvent(row.id)" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -101,14 +101,10 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
           </div>
         </td>
       </tr>
-      <tr class="sub-header">
+      <tr v-if="eventApproved.length > 0" class="sub-header">
         <td colspan="4">Опубликованные</td>
       </tr>
-      <tr
-        v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === true)"
-        @click.stop="editEvent(row.id)"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in eventApproved" @click.stop="editEvent(row.id)" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -127,14 +123,10 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
           </div>
         </td>
       </tr>
-      <tr class="sub-header">
+      <tr v-if="eventsBanned.length > 0" class="sub-header">
         <td colspan="4">Не прошедшие модерацию</td>
       </tr>
-      <tr
-        v-for="(row, index) in filteredEvents.filter((el) => el.is_validated === false)"
-        @click.stop="editEvent(row.id)"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in eventsBanned" @click.stop="editEvent(row.id)" :key="row.id">
         <td class="table-cell--image">
           <img :src="row.image" />
         </td>
@@ -214,7 +206,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   }
 }
 
-.table-cell--end-date>div {
+.table-cell--end-date > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -273,7 +265,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
     min-width: vw(100);
     padding: vw(10);
 
-    div>div {
+    div > div {
       font-weight: 400;
     }
 
@@ -291,7 +283,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   }
 }
 
-.table-cell--date>div {
+.table-cell--date > div {
   display: flex;
   justify-content: space-between;
   align-items: center;

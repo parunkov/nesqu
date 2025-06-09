@@ -291,9 +291,10 @@ tr {
 
     @media (max-width: 991px) {
       position: absolute;
-      bottom: 12px;
+      bottom: 13px;
       display: flex;
       align-items: center;
+      justify-content: flex-start;
       gap: 5px;
       flex-direction: row;
     }
@@ -305,7 +306,7 @@ tr {
         display: block;
         font-size: 16px;
         line-height: 20px;
-        margin-left: 5px;
+        margin-left: 2px;
       }
     }
 
@@ -314,9 +315,7 @@ tr {
     }
 
     .content-wrap {
-      justify-content: center;
       display: block !important;
-      transform: translateY(-2px);
 
       @media (max-width: 991px) {
         width: 20px;
@@ -332,7 +331,7 @@ tr {
 
   &--active {
     @media (max-width: 991px) {
-      left: 20px;
+      left: 18px;
       width: 80px;
     }
   }

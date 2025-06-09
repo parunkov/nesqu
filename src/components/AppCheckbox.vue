@@ -33,9 +33,9 @@ const model = defineModel({
   @media (max-width: 991px) {
     width: vw(20, $mobile);
     height: vw(20, $mobile);
-    margin-bottom: 0;
     border-radius: vw(4, $mobile);
     display: block !important;
+    margin: 0;
   }
 }
 

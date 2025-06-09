@@ -289,6 +289,7 @@ tr {
       display: none;
 
       @media (max-width: 991px) {
+        display: block;
         color: var(--color-gray-600);
         transform: translateY(-2px);
         flex: auto;

@@ -126,11 +126,13 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
             <AppCheckbox :model-value="!row.is_hiden" @update:model-value="() => isHiddenChange(row, !row.is_hiden)"
               @click.stop />
           </div>
+          <div class="mobile-text">Active</div>
         </td>
         <td class="table-cell--top">
           <div>
             <AppCheckbox @click.stop="statusToogle(row, { top: row.top })" v-model="row.top" />
           </div>
+          <div class="mobile-text">Топ</div>
         </td>
         <td class="table-cell--user">
           <div class="mobile-text">опубликовано </div>
@@ -219,8 +221,9 @@ tr {
     padding: vw(15, $mobile) vw(20, $mobile);
     padding-right: vw(68, $mobile);
     padding-top: vw(45, $mobile);
-    padding-bottom: vw(85, $mobile);
+    padding-bottom: vw(83, $mobile);
     border: none;
+    border-radius: 16px;
   }
 }
 
@@ -275,7 +278,22 @@ tr {
 
     @media (max-width: 991px) {
       position: absolute;
-      bottom: 10px;
+      bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-direction: row;
+    }
+
+    .mobile-text {
+      display: none;
+
+      @media (max-width: 991px) {
+        display: block;
+        font-size: 16px;
+        line-height: 20px;
+        margin-left: 5px;
+      }
     }
 
     div {
@@ -284,18 +302,32 @@ tr {
 
     .content-wrap {
       justify-content: center;
+      display: block !important;
+      transform: translateY(-2px);
+
+      @media (max-width: 991px) {
+        width: 20px;
+        height: 20px;
+
+        div {
+          margin: 0;
+          display: block !important;
+        }
+      }
     }
   }
 
   &--active {
     @media (max-width: 991px) {
       left: 20px;
+      width: 80px;
     }
   }
 
   &--top {
     @media (max-width: 991px) {
       left: 105px;
+      width: 80px;
     }
   }
 

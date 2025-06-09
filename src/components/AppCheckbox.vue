@@ -29,6 +29,14 @@ const model = defineModel({
   height: vw(20);
   margin-bottom: vw(10);
   cursor: pointer;
+
+  @media (max-width: 991px) {
+    width: vw(20, $mobile);
+    height: vw(20, $mobile);
+    margin-bottom: 0;
+    border-radius: vw(4, $mobile);
+    display: block !important;
+  }
 }
 
 .AppCheckbox--checked {
@@ -47,5 +55,13 @@ const model = defineModel({
   border: solid var(--color-primary-1);
   border-width: 0 vw(2) vw(2) 0;
   transform: rotate(45deg);
+
+  @media (max-width: 991px) {
+    top: vw(3, $mobile);
+    left: vw(7, $mobile);
+    width: vw(4, $mobile);
+    height: vw(8, $mobile);
+    border-width: 0 vw(2, $mobile) vw(2, $mobile) 0;
+  }
 }
 </style>

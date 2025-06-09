@@ -46,6 +46,11 @@ watch(
   align-items: center;
   gap: vw(20);
   justify-content: flex-start;
+
+  @media (max-width: 991px) {
+    min-width: 100%;
+    width: 100%;
+  }
 }
 
 .search-bar {
@@ -66,6 +71,16 @@ watch(
   line-height: 1;
   justify-content: center;
   width: vw(460);
+
+  @media (max-width: 991px) {
+    width: 100%;
+    font-size: vw(16, $mobile);
+    line-height: vw(20, $mobile);
+    border-radius: vw(16, $mobile);
+    padding: 0 vw(6, $mobile);
+    background-color: var(--color-gray-1);
+    border-color: var(--color-gray-300);
+  }
 }
 
 .search-bar__content {
@@ -88,6 +103,10 @@ watch(
   margin-top: auto;
   margin-bottom: auto;
   flex-shrink: 0;
+
+  @media (max-width: 991px) {
+    width: vw(20, $mobile);
+  }
 }
 
 .search-bar__input {
@@ -104,6 +123,13 @@ watch(
   color: var(--color-gray-800);
   min-width: 0;
   width: 100%;
+
+  @media (max-width: 991px) {
+    border-radius: vw(16, $mobile);
+    font-size: vw(16, $mobile);
+    line-height: vw(20, $mobile);
+    padding: vw(20, $mobile) vw(7, $mobile);
+  }
 }
 
 .toggle-label {

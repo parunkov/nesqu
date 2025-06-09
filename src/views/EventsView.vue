@@ -81,6 +81,7 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
 </script>
 
 <template>
+  <h1 class="title">Мероприятия</h1>
   <header class="controls">
     <SearchBar v-model:search-query="searchQuery" v-model:activeOnly="activeOnly" @search="filterEvents" />
     <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
@@ -160,6 +161,18 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
 </template>
 
 <style scoped lang="scss">
+.title {
+  display: none;
+
+  @media (max-width: 991px) {
+    display: block;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
 .table-header {
   font-size: vw(15);
   font-weight: 500;
@@ -432,6 +445,10 @@ tr {
   align-items: center;
   flex-wrap: wrap;
   gap: vw(20);
+
+  @media (max-width: 991px) {
+    padding: 0;
+  }
 }
 
 .search-bar {
@@ -460,6 +477,10 @@ tr {
   justify-content: center;
   align-items: center;
   white-space: nowrap;
+
+  @media (max-width: 991px) {
+    display: none;
+  }
 
   &:hover {
     opacity: 0.9;

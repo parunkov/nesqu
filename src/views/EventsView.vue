@@ -117,7 +117,9 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
         'is-error': row.is_validated === false,
       }" :key="row.id">
         <td class="table-cell--id">
+          <div class="mobile-text">ID:</div>
           <div>{{ row.id }}</div>
+          <div class="mobile-text mobile-text--separator">|</div>
         </td>
         <td class="table-cell--active">
           <div>
@@ -131,7 +133,9 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
           </div>
         </td>
         <td class="table-cell--user">
+          <div class="mobile-text">опубликовано </div>
           <div>{{ row.user_id }}</div>
+          <div class="mobile-text"> часа. назад</div>
         </td>
         <td class="table-cell--email">
           <div>{{ row.user_name }}</div>
@@ -214,7 +218,8 @@ tr {
     min-height: vw(160, $mobile);
     padding: vw(15, $mobile) vw(20, $mobile);
     padding-right: vw(68, $mobile);
-    padding-bottom: vw(10, $mobile);
+    padding-top: vw(45, $mobile);
+    padding-bottom: vw(85, $mobile);
     border: none;
   }
 }
@@ -239,6 +244,26 @@ tr {
     text-align: center;
     width: vw(73);
 
+    @media (max-width: 991px) {
+      position: absolute;
+      bottom: 49px;
+      left: 20px;
+      width: 71px;
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+      font-size: 16px;
+      line-height: 20px;
+      color: var(--color-gray-700);
+    }
+
+    .mobile-text--separator {
+      color: var(--color-gray-600);
+      transform: translateY(-2px);
+      flex: auto;
+      text-align: right;
+    }
+
     div {
       margin: 0;
     }
@@ -247,6 +272,11 @@ tr {
   &--active,
   &--top {
     width: vw(66);
+
+    @media (max-width: 991px) {
+      position: absolute;
+      bottom: 10px;
+    }
 
     div {
       margin: 0;
@@ -257,6 +287,18 @@ tr {
     }
   }
 
+  &--active {
+    @media (max-width: 991px) {
+      left: 20px;
+    }
+  }
+
+  &--top {
+    @media (max-width: 991px) {
+      left: 105px;
+    }
+  }
+
   &--user {
     text-align: center;
     width: vw(84);
@@ -264,10 +306,40 @@ tr {
     div {
       margin: 0;
     }
+
+    @media (max-width: 991px) {
+      position: absolute;
+      top: 15px;
+      left: 114px;
+      width: 180px;
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      line-height: 20px;
+      gap: 4px;
+      color: var(--color-gray-600);
+    }
+
+    .mobile-text {
+      display: none;
+
+      @media (max-width: 991px) {
+        display: block;
+      }
+    }
   }
 
   &--email {
     width: 20%;
+
+    @media (max-width: 991px) {
+      position: absolute;
+      bottom: 47px;
+      left: 101px;
+      font-size: 20px;
+      line-height: 30px;
+      color: var(--color-gray-700);
+    }
 
     div {
       margin: 0;

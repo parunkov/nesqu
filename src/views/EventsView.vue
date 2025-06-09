@@ -82,11 +82,7 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
 
 <template>
   <header class="controls">
-    <SearchBar
-      v-model:search-query="searchQuery"
-      v-model:activeOnly="activeOnly"
-      @search="filterEvents"
-    />
+    <SearchBar v-model:search-query="searchQuery" v-model:activeOnly="activeOnly" @search="filterEvents" />
     <button @click="goTo('event-create')" class="create-button">+ Создать Мероприятие</button>
   </header>
   <AppTable class="event-table">
@@ -116,25 +112,17 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
       </tr>
     </template>
     <template #tbody>
-      <tr
-        v-for="(row, index) in filteredEvents"
-        @click.stop="editEvent(row.id)"
-        :class="{
-          'is-warning': row.is_validated === null || row.is_validated === undefined,
-          'is-error': row.is_validated === false,
-        }"
-        :key="row.id"
-      >
+      <tr v-for="(row, index) in filteredEvents" @click.stop="editEvent(row.id)" :class="{
+        'is-warning': row.is_validated === null || row.is_validated === undefined,
+        'is-error': row.is_validated === false,
+      }" :key="row.id">
         <td class="table-cell--id">
           <div>{{ row.id }}</div>
         </td>
         <td class="table-cell--active">
           <div>
-            <AppCheckbox
-              :model-value="!row.is_hiden"
-              @update:model-value="() => isHiddenChange(row, !row.is_hiden)"
-              @click.stop
-            />
+            <AppCheckbox :model-value="!row.is_hiden" @update:model-value="() => isHiddenChange(row, !row.is_hiden)"
+              @click.stop />
           </div>
         </td>
         <td class="table-cell--top">
@@ -153,7 +141,7 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
         </td>
         <td class="table-cell--date">
           <div>
-            <div>{{ formatDate(row.date_from) }}</div>
+            <div class="date-text">{{ formatDate(row.date_from) }}</div>
             <div class="cell action-cell">
               <DeleteButton @delete="deleteEvent(row.id, index)" class="delete" />
             </div>
@@ -219,7 +207,34 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
   }
 }
 
+tr {
+  @media (max-width: 991px) {
+    position: relative;
+    height: auto;
+    min-height: vw(160, $mobile);
+    padding: vw(15, $mobile) vw(20, $mobile);
+    padding-right: vw(68, $mobile);
+    padding-bottom: vw(10, $mobile);
+    border: none;
+  }
+}
+
 .table-cell {
+  &--title {
+    @media (max-width: 991px) {
+      order: 2;
+      font-size: vw(22, $mobile);
+      line-height: vw(30, $mobile);
+      font-weight: 600;
+      padding: 0;
+      border: none;
+
+      div {
+        margin: 0;
+      }
+    }
+  }
+
   &--id {
     text-align: center;
     width: vw(73);
@@ -270,7 +285,28 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
   }
 }
 
-.table-cell--date > div {
+.date-text {
+  @media (max-width: 991px) {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.delete-button {
+  @media (max-width: 991px) {
+    position: absolute;
+    right: vw(20, $mobile);
+    top: 50%;
+    transform: translateY(-50%);
+    width: vw(40, $mobile);
+    height: vw(40, $mobile);
+  }
+}
+
+.table-cell--date>div {
   display: flex;
   justify-content: space-between;
   align-items: center;

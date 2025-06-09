@@ -62,9 +62,9 @@ export type Event = {
 
 export type EventStatus = {
   id: number
-  top: boolean
-  is_hiden: boolean
-  is_validated: boolean
+  top?: boolean
+  is_hiden?: boolean
+  is_validated?: boolean
 }
 
 export type EventInfo = {

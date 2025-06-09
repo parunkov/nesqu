@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import AppTable from '@/components/AppTable.vue'
 import { useEventsStore } from '@/stores/events.ts'
 import type { EventCard } from '@/types/events.ts'
@@ -16,6 +16,12 @@ const tableData = ref<EventCard[]>([])
 eventStore.getEvents().then((res) => tableData.value.push(...res))
 
 const filteredEvents = ref(tableData.value)
+
+const eventsOnModeration = computed(() =>
+  filteredEvents.value.filter((el) => el.is_validated === undefined),
+)
+const eventsBanned = computed(() => filteredEvents.value.filter((el) => el.is_validated === false))
+const eventApproved = computed(() => filteredEvents.value.filter((el) => el.is_validated === true))
 let firstCall = true
 onMounted(() => {
   setTimeout(() => {
@@ -357,7 +363,7 @@ const editEvent = (id: number) => router.push({ name: 'event-edit', params: { id
   }
 }
 
-.table-cell--date>div {
+.table-cell--date > div {
   display: flex;
   justify-content: space-between;
   align-items: center;

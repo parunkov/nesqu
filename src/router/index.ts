@@ -17,6 +17,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
       component: DashboardLayout,
       meta: {
         authRequired: true,
@@ -146,8 +147,8 @@ router.beforeEach((to, from, next) => {
     authStore.currentUser &&
     !requiredRoles.includes(authStore.currentUser.role)
   ) {
-    if (to.name !== 'events') {
-      return next({ name: 'events' })
+    if (to.name !== 'home') {
+      return next({ name: 'home' })
     } else {
       return next()
     }

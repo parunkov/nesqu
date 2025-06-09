@@ -166,10 +166,10 @@ const isHiddenChange = (row: EventCard, newValue: boolean) => {
 
   @media (max-width: 991px) {
     display: block;
-    font-size: 30px;
-    line-height: 40px;
+    font-size: vw(30, $mobile);
+    line-height: vw(40, $mobile);
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: vw(20, $mobile);
   }
 }
 
@@ -236,7 +236,7 @@ tr {
     padding-top: vw(45, $mobile);
     padding-bottom: vw(83, $mobile);
     border: none;
-    border-radius: 16px;
+    border-radius: vw(16, $mobile);
   }
 }
 
@@ -262,26 +262,38 @@ tr {
 
     @media (max-width: 991px) {
       position: absolute;
-      bottom: 49px;
-      left: 20px;
-      width: 71px;
+      bottom: vw(49, $mobile);
+      left: vw(20, $mobile);
+      width: vw(71, $mobile);
       display: flex;
       flex-direction: row;
-      gap: 4px;
-      font-size: 16px;
-      line-height: 20px;
+      gap: vw(4, $mobile);
+      font-size: vw(16, $mobile);
+      line-height: vw(20, $mobile);
       color: var(--color-gray-700);
-    }
-
-    .mobile-text--separator {
-      color: var(--color-gray-600);
-      transform: translateY(-2px);
-      flex: auto;
-      text-align: right;
     }
 
     div {
       margin: 0;
+    }
+
+    .mobile-text {
+      display: none;
+
+      @media (max-width: 991px) {
+        display: block;
+      }
+    }
+
+    .mobile-text--separator {
+      display: none;
+
+      @media (max-width: 991px) {
+        color: var(--color-gray-600);
+        transform: translateY(-2px);
+        flex: auto;
+        text-align: right;
+      }
     }
   }
 
@@ -291,11 +303,11 @@ tr {
 
     @media (max-width: 991px) {
       position: absolute;
-      bottom: 13px;
+      bottom: vw(13, $mobile);
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 5px;
+      gap: vw(5, $mobile);
       flex-direction: row;
     }
 
@@ -304,9 +316,9 @@ tr {
 
       @media (max-width: 991px) {
         display: block;
-        font-size: 16px;
-        line-height: 20px;
-        margin-left: 2px;
+        font-size: vw(16, $mobile);
+        line-height: vw(20, $mobile);
+        margin-left: vw(2, $mobile);
       }
     }
 
@@ -318,8 +330,8 @@ tr {
       display: block !important;
 
       @media (max-width: 991px) {
-        width: 20px;
-        height: 20px;
+        width: vw(20, $mobile);
+        height: vw(20, $mobile);
 
         div {
           margin: 0;
@@ -331,15 +343,15 @@ tr {
 
   &--active {
     @media (max-width: 991px) {
-      left: 18px;
-      width: 80px;
+      left: vw(18, $mobile);
+      width: vw(80, $mobile);
     }
   }
 
   &--top {
     @media (max-width: 991px) {
-      left: 105px;
-      width: 80px;
+      left: vw(105, $mobile);
+      width: vw(80, $mobile);
     }
   }
 
@@ -353,14 +365,14 @@ tr {
 
     @media (max-width: 991px) {
       position: absolute;
-      top: 15px;
-      left: 114px;
-      width: 180px;
+      top: vw(15, $mobile);
+      left: vw(114, $mobile);
+      width: vw(180, $mobile);
       display: flex;
       flex-direction: row;
-      font-size: 12px;
-      line-height: 20px;
-      gap: 4px;
+      font-size: vw(12, $mobile);
+      line-height: vw(20, $mobile);
+      gap: vw(4, $mobile);
       color: var(--color-gray-600);
     }
 
@@ -378,10 +390,10 @@ tr {
 
     @media (max-width: 991px) {
       position: absolute;
-      bottom: 47px;
-      left: 101px;
-      font-size: 20px;
-      line-height: 30px;
+      bottom: vw(47, $mobile);
+      left: vw(101, $mobile);
+      font-size: vw(20, $mobile);
+      line-height: vw(30, $mobile);
       color: var(--color-gray-700);
     }
 
@@ -404,10 +416,10 @@ tr {
 .date-text {
   @media (max-width: 991px) {
     position: absolute;
-    top: 15px;
-    left: 20px;
-    font-size: 16px;
-    line-height: 20px;
+    top: vw(15, $mobile);
+    left: vw(20, $mobile);
+    font-size: vw(16, $mobile);
+    line-height: vw(20, $mobile);
   }
 }
 
